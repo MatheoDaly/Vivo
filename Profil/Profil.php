@@ -4,13 +4,26 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="Profil.css" rel="stylesheet">
     <title>Profil</title>
 
 </head>
 
 <body>
 
+    <div id="PhotoProfil"></div>
 
+    <div class="container m-3 bg-primary roundded d-flex flex-row" id="TableProfil">
+        <div class="flex-fill">
+            <div></div>
+            <div></div>
+        </div>
+
+        <div>
+            <div>
+            </div>
+        </div>
+    </div>
 
 
 
