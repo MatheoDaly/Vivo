@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link href="Profil.css" rel="stylesheet">
     <title>Profil</title>
 
@@ -13,7 +13,7 @@
 
     <div id="PhotoProfil" class="d-block justify-content-center"><img src="../Image/avatar-1295406_640.png"></div>
 
-    <div class="m-3 d-flex flex-column" id="TableProfil">
+    <div class="d-flex" id="TableProfil">
         <div class="d-flex flex-fill bg-ligth">
             <div class="d-flex flex-fill bg-white">
                 <div>Profil : didier de la compté des pres jolie
