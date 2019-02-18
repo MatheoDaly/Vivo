@@ -8,10 +8,13 @@ html {
 body {
 
     background: url(../Image/mountains-1985027_1920.jpg);
+    background-size:auto;
+    background-attachment: fixed;
     margin: 0px;
 }
 
 #TableProfil {
+    margin: 100px 50px 0px 50px;
     background: url(../Image/wallpaper-2116949_960_720.jpg);
 }
 
@@ -20,6 +23,7 @@ body {
 */
 img {
     height: 100px;
+    margin-left: -50px;
 }
 
 
@@ -27,6 +31,7 @@ img {
 
 #PhotoProfil {
     position: absolute;
+    margin: -10% 50% 0% 50%;
 
 }
 
@@ -37,5 +42,6 @@ img {
 #ProgMenue {
     background: url('../Image/menu-3167859_1920.jpg');
     background-size:auto;
+    background-p
 
 }
