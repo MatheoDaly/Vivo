@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.css">
     <link href="Profil.css" rel="stylesheet">
     <title>Profil</title>
 
@@ -11,22 +11,36 @@
 
 <body>
 
-    <div id="PhotoProfil"></div>
+    <div id="PhotoProfil" class="d-block justify-content-center"><img src="../Image/avatar-1295406_640.png"></div>
 
-    <div class="container m-3 bg-primary roundded d-flex flex-row" id="TableProfil">
-        <div class="flex-fill">
-            <div></div>
-            <div></div>
-        </div>
-
-        <div>
+    <div class="m-3 d-flex flex-column" id="TableProfil">
+        <div class="d-flex flex-fill bg-ligth">
+            <div class="d-flex flex-fill bg-white">
+                <div>Profil : didier de la compté des pres jolie
+                    <br> il a 29 ans et il est pas très beau... desolé didier</div>
+                <div>Ajout de logo</div>
+                <div>Objectif perdre 50 kg</div>
+            </div>
+            <!--  Intermediare !-->
             <div>
+                <div>
+                    <input type="button" class="btn" value="Consultation des mes statistique">
+                </div>
+            </div>
+            <hr>
+            <!-- menue  personnaliser des profil !-->
+
+            <div id="menue"><img src="../Image/food-304597_640.png"></div>
+
+            <div id="ProgMenue">
+                <div>Menue perso
+                    <img src="../Image/menu-3167859_1920.jpg"></div>
+                <div></div>
             </div>
         </div>
+
+
     </div>
-
-
-
 
 
 
