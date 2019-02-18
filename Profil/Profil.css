@@ -1,0 +1,20 @@
+/* -------------- Dépendante ---------
+*/
+
+html {}
+
+body {
+
+    background: url(../Image/mountains-1985027_1920.jpg);
+}
+
+/*--------- indépendant ------------
+*/
+#PhotoProfil {
+    position: absolute;
+
+}
+
+img {
+    height: 10px;
+}
