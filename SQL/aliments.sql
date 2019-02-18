@@ -1,8 +1,8 @@
 CREATE TABLE aliments(
-   alim_grp_code                                  INTEGER  NOT NULL 
+   alim_grp_code                                  INTEGER  NOT NULL
   ,alim_ssgrp_code                                INTEGER  NOT NULL
   ,alim_ssssgrp_code                              INTEGER  NOT NULL
-  ,alim_code                                      INTEGER  NOT NULL PRIMARY KEY 
+  ,alim_code                                      INTEGER  NOT NULL PRIMARY KEY
   ,alim_nom_eng                                   VARCHAR(150) NOT NULL
   ,alim_nom_fr                                    VARCHAR(149) NOT NULL
   ,Energie_Règlement_UE_N°_11692011_kcal100g      VARCHAR(6)

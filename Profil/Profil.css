@@ -1,0 +1,39 @@
+/* -------------- Dépendante ---------
+*/
+
+html {
+    margin: 0px;
+}
+
+body {
+
+    background: url(../Image/mountains-1985027_1920.jpg);
+    margin: 0px;
+}
+
+#TableProfil {
+    background: url(../Image/wallpaper-2116949_960_720.jpg);
+}
+
+
+/*--------- indépendant ------------
+*/
+img {
+    height: 100px;
+}
+
+
+/* Introduction du profil */
+
+#PhotoProfil {
+    position: absolute;
+
+}
+
+/* Intermediaire */
+
+/* Prog Menu */
+
+#ProgMenue {
+    background: url('../Image/menu-3167859_1920.jpg');
+}
