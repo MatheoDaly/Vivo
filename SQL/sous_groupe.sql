@@ -1,5 +1,5 @@
 CREATE TABLE sous_groupe(
-   alim_grp_code     INTEGER  NOT NULL PRIMARY KEY 
+   alim_grp_code     INTEGER  NOT NULL PRIMARY KEY
   ,alim_grp_nom_fr   VARCHAR(43) NOT NULL
 );
 INSERT INTO sous_groupe(alim_grp_code,alim_grp_nom_fr) VALUES (101,'salades composées et crudités');

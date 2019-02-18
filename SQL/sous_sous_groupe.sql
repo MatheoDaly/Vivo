@@ -1,5 +1,5 @@
 CREATE TABLE sous_sous_groupe(
-   alim_ssssgrp_code   INTEGER  NOT NULL PRIMARY KEY 
+   alim_ssssgrp_code   INTEGER  NOT NULL PRIMARY KEY
   ,alim_ssssgrp_nom_fr VARCHAR(44)
 );
 INSERT INTO sous_sous_groupe(alim_ssssgrp_code,alim_ssssgrp_nom_fr) VALUES (0,NULL);
