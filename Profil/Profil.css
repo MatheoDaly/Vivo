@@ -35,13 +35,17 @@ img {
 
 }
 
+#intro{
+    height: 200px;
+}
+
 /* Intermediaire */
 
-/* Prog Menu */
-
+/* Prog Menu 
+*/
 #ProgMenue {
-    background: url('../Image/menu-3167859_1920.jpg');
-    background-size:auto;
-    background-p
+    height: 200px;
+    background-image:url('../Image/menu-3167859_1920.jpg');
+    background-size: cover;
 
 }
