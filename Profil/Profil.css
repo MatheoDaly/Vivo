@@ -32,10 +32,11 @@ body {
 */
 
 .independant {
+    /*
+    A finir
+    */
     height: 100px;
-    display: block;
     margin: auto;
-    margin-top: -50px;
     z-index: 1;
 }
 
