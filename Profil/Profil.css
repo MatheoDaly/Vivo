@@ -3,14 +3,23 @@
 
 html {
     margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    border-style: dotted;
+
 }
 
 body {
 
     background: url(../Image/mountains-1985027_1920.jpg);
-    background-size:auto;
+    background-size: auto;
     background-attachment: fixed;
     margin: 0px;
+    height: 100%;
+    width: 100%;
 }
 
 #TableProfil {
@@ -21,22 +30,26 @@ body {
 
 /*--------- indépendant ------------
 */
-img {
+
+.independant {
     height: 100px;
-    margin-left: -50px;
+    display: block;
+    margin: auto;
+    margin-top: -50px;
+    z-index: 1;
 }
+
 
 
 /* Introduction du profil */
 
-#PhotoProfil {
-    position: absolute;
-    margin: -10% 50% 0% 50%;
-
+#intro {
+    height: 200px;
 }
 
-#intro{
-    height: 200px;
+.icon {
+    height: 50px;
+    width: 50px;
 }
 
 /* Intermediaire */
@@ -45,7 +58,7 @@ img {
 */
 #ProgMenue {
     height: 200px;
-    background-image:url('../Image/menu-3167859_1920.jpg');
+    background-image: url('../Image/menu-3167859_1920.jpg');
     background-size: cover;
 
 }
