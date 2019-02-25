@@ -1,0 +1,20 @@
+.padding-left{
+    transition: padding 0.5s; 
+}
+
+.padding-left:hover{
+    padding-left: 25px;
+}
+
+.padding-right{
+    transition: padding 0.5s; 
+}
+
+.padding-right:hover{
+    padding-right: 25px;
+}
+
+.center-div{
+    display: block;
+    margin: auto;
+}
