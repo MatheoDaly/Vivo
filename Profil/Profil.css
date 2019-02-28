@@ -7,10 +7,6 @@ html {
     width: 100%;
 }
 
-* {
-    border-style: dotted;
-
-}
 
 body {
 
@@ -38,6 +34,7 @@ body {
     height: 100px;
     margin: auto;
     z-index: 1;
+    margin-top: -25px;
 }
 
 
@@ -46,6 +43,7 @@ body {
 
 #intro {
     height: 200px;
+    background: rgb(0, 0, 0, 0.3);
 }
 
 .icon {
