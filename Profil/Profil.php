@@ -65,7 +65,7 @@ $cheminIcon='../Image/IconProgess/';
         <!--  Intermediare !-->
         <div>
             <div>
-                <input type="button" class="btn btn-primary" value="Consultation des mes statistique">
+                <input type="button" class="btn btn-primary" id="Stat" value="Consultation de mes statistiques">
             </div>
         </div>
         <hr>
