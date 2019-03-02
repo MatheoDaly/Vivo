@@ -11,7 +11,6 @@ $(function () {
             $.post("verification.php",
                 $('form').serialize(),
                 function (data) {
-                    alert(data);
                     if (data == 'Connecter') {
                         //redirection vers profil
                         alert('Vous etes connecter !');
