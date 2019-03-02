@@ -1,13 +1,17 @@
 body {
     text-align: center;
-
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
 }
 
 p {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-input[pla]
+hr {
+    margin: 10px;
+}

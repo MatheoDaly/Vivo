@@ -1,6 +1,10 @@
 //-------------------------------Partie evennement
 
 $(function () {
+    // detail id : user/p/m/poids/t/mdp1
+    // detail name : prenom/utilisateur/email/genre/poids/taille/mdp/mdp2
+
+
     // on prend de prendre directement un element sans devoir appele document
 
     $('#mdp1').keyup(function () {
@@ -34,13 +38,28 @@ $(function () {
     });
 
     $('form').on('submit', function () {
-        // a remplir lorsque le formulaire est fait
-        var mdp = $('mdp');
-        var mdp = $('mdp');
-        var mdp = $('mdp');
-        var mdp = $('mdp');
+        // detail name et id : user/p/m/poids/t/mdp1
+        var mdp = $('#mdp1');
+        var taille = $('#t');
+        var prenom = $('#p');
+        var mail = $('#m');
+        var poids = $('#poids');
+        var user = $('#user');
 
-        if (verifier(mdp) && verifier(mdp)) { // si tous les inputs sont remplit
+        if (verifier(mdp) && verifier(taille) && verifier(prenom) && verifier(mail) && verifier(poids) &&
+            verifier(user)) { // si tous les inputs sont remplit
+            // verifier la correspondance -> transformer en fonction
+            $.post("Reception.php",
+                $('form').serialize(),
+                function (data, status) {
+                    if (status == 'succes') {
+                        //redirection vers profil
+                        $(location).attr('href', "../Profil/Profil.php");
+                    } else {
+                        alert("Inscription compromise !");
+                    }
+                }
+            )
 
         }
     });
