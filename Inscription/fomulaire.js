@@ -46,7 +46,7 @@ $(function () {
         var poids = $('#poids');
         var user = $('#user');
         if (verifier(mdp) && verifier(taille) && verifier(prenom) && verifier(mail) && verifier(poids) &&
-            verifier(user)) { // si tous les inputs sont remplit
+            verifier(user) && (mdp.val().length > 8)) { // si tous les inputs sont remplit
             // verifier la correspondance -> transformer en fonction
             $.post("Reception.php",
                 $('form').serialize(),
@@ -65,6 +65,8 @@ $(function () {
                 }
             )
 
+        } else {
+            alert('veuillez remplir les champs correctement !');
         }
     });
 
