@@ -1,28 +1,36 @@
-<!DOCTYPE html>
-<html>
+<?php
+// Ici ce fichier des infos du java script formulaire.js
 
-<head>
-    <title>vivo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="index.css" type="text/css" media="screen" />
-    <?php
-    $BD= new PDO('mysql:host=localhost;dbname=vivo;charset=utf8', 'root', 'root');
+//   Detaille variable post : email/mdp
+include('../Outil/Php/AccesBd.php');
+if(isset($_POST['email'])
+  && isset($_POST['mdp'])){
 
-    $rep= $BD->query('select * from profil');
-     while($ligne = $rep->fetch()) {
-        if($ligne['utilisateur']==$_GET['utilisateur'] and $ligne['mdp']==$_GET['mdp']){
-            echo $ligne['utilisateur'].$_GET['utilisateur'];
-            echo '<meta http-equiv="refresh" content="0; url=profil.php"/>';
+
+    $BD = getBD();
+    $req = $BD->query("Select * from profil where email='".$_POST['email']."' AND mdp='".$_POST['mdp']"'");
+
+    echo "Select email from profil where email='".$_POST['email']."' AND mdp='".$_POST['mdp']"' limit 1";
+
+    $Profil= $req->fetch();
+    if($Profil==false){// verifier que son mail n'existe pas
+        session_start();
+        if ($Profil['url_photo']!=''){
+            $_SESSION['profil']=array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], $Profil['url_photo']);
+        }else {
+            $_SESSION['profil']=array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
         }
-     }
+            setcookie('email', $_POST['email'], time()*(3600*24*24));
+            setcookie('mdp', $_POST['mdp'], time()*(3600*24*24));
+        echo 'Connecter';
 
-    ?>
-    <meta http-equiv="refresh" content="0; url=connection.php?err=1"/>
+    } else {
 
-</head>
+        echo 'Non inscrit';
 
-<body>
-    <h1>Verification</h1>
-</body>
+    }
+}
 
-</html>
+
+
+?>

@@ -51,12 +51,13 @@ $(function () {
             $.post("Reception.php",
                 $('form').serialize(),
                 function (data) {
-                    alert(data);
                     if (data == 'Inscrit') {
                         //redirection vers profil
                         alert('Vous etes inscrit !');
+                        $(location).attr('href', '../Profil/Profil.php');
                     } else if (data == 'Existe') {
                         alert("Inscription compromise, vous avez un profil !");
+                        $(location).attr('href', '../Connection/connexion.html');
                     } else {
                         alert('Inscription compromise');
                     }
