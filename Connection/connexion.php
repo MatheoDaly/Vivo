@@ -12,24 +12,26 @@
 <body>
     <div id="Table" class="d-flex flex-column rounded">
         <h1>Connection</h1>
-        <form id="Table" method="get" action="verification.php" autocomplete="off">
+        <form method="get" action="verification.php" autocomplete="off">
             <div>
                 <div>
                     <p>
-                        Mail :<input type="email" name="email" value="<?php if(isset($_COOKIE['email']){echo $_COOKIE['email'];})
+                        Mail :<input type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}
                             ?>" />
                     </p>
                     <p>
-                        Mot de passe :<input type="password" name="mdp" value="<?php if(isset($_COOKIE['mdp']){echo $_COOKIE['mdp'];})
+                        Mot de passe :<input type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}
                             ?>" />
                     </p>
                 </div>
                 <p>
-                    <input type="submit" value="Envoyer" />
+                    <input type="button" id='submit' class="btn btn-primary" value="Envoyer" />
                 </p>
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="connexion.js" type="text/javascript"></script>
 </body>
 
 </html>

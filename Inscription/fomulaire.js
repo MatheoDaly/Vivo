@@ -57,7 +57,7 @@ $(function () {
                         $(location).attr('href', '../Profil/Profil.php');
                     } else if (data == 'Existe') {
                         alert("Inscription compromise, vous avez un profil !");
-                        $(location).attr('href', '../Connection/connexion.html');
+                        $(location).attr('href', '../Connection/connexion.php');
                     } else {
                         alert('Inscription compromise');
                     }
