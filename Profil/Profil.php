@@ -3,10 +3,12 @@ session_start();
 include('../Outil/Php/AccesBD.php');
 
 // Variable :
-if(isset($_SESSION['Profil'])){
-    $Profil=$_SESSION['Profil'];
+if(isset($_SESSION['profil'])){
+    $Profil=$_SESSION['profil'];
     }
+//$Profil = array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
 $cheminPhoto='../Image/PhotoProfil/';
+$cheminIcon='../Image/IconProgess/';
 
 ?>
 <!Doctype HTML>
@@ -16,7 +18,10 @@ $cheminPhoto='../Image/PhotoProfil/';
     <meta charset="utf-8">
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="Profil.css" rel="stylesheet">
-    <title>Profil</title>
+    <title>Profil <?php if(isset($Profil)){
+    echo ' de '.$Profil[0];
+    }
+        ?></title>
 
 </head>
 
@@ -80,11 +85,11 @@ $cheminPhoto='../Image/PhotoProfil/';
     </div>
 
 
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="ProfilMenue.js" type="text/javascript"></script>
+    <script src="ModificationProfil.js" type="text/javascript"></script>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
 
 </html>
