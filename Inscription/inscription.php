@@ -37,10 +37,10 @@
                     Taille (cm) : <br><input type="number" name="taille" placeholder="170 cm" />
                 </p>
                 <p>
-                    Mot de passe :<br><input type="password" name="mdp" />
+                    Mot de passe :<br><input id="mdp1" type="password" name="mdp" />
                 </p>
                 <p>
-                    Confirmation du passe :<br><input type="password" name="mdp2" value="" />
+                    Confirmation du passe :<br><input id="mdp2" type="password" name="mdp2" value="" />
                 </p>
                 <p>
                     <input type="submit" value="Envoyer" class="btn btn-primary" />
@@ -48,6 +48,8 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="fomulaire.js" type="text/javascript"></script>
 </body>
 
 </html>
