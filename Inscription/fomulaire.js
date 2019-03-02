@@ -37,7 +37,7 @@ $(function () {
         }
     });
 
-    $('form').on('submit', function () {
+    $('#submit').on('click', function () {
         // detail name et id : user/p/m/poids/t/mdp1
         var mdp = $('#mdp1');
         var taille = $('#t');
@@ -45,21 +45,22 @@ $(function () {
         var mail = $('#m');
         var poids = $('#poids');
         var user = $('#user');
-
         if (verifier(mdp) && verifier(taille) && verifier(prenom) && verifier(mail) && verifier(poids) &&
             verifier(user)) { // si tous les inputs sont remplit
             // verifier la correspondance -> transformer en fonction
             $.post("Reception.php",
                 $('form').serialize(),
-                function (data, status) {
+                function (data) {
+                    alert(data);
                     if (data == 'Inscrit') {
                         //redirection vers profil
-                        $(location).attr('href', "../Profil/Profil.php");
+                        alert('Vous etes inscrit !');
                     } else if (data == 'Existe') {
                         alert("Inscription compromise, vous avez un profil !");
                     } else {
                         alert('Inscription compromise');
                     }
+
                 }
             )
 

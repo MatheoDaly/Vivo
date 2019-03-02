@@ -15,7 +15,7 @@
         <h1>Inscription</h1>
         <hr>
 
-        <form method="get" action="profil.php">
+        <form method="post" action="../Profil/Profil.php">
             <div>
                 <p>
                     <label for="utilisateur">
@@ -62,7 +62,7 @@
                     <input id="mdp2" type="password" name="mdp2" value="" />
                 </p>
                 <p>
-                    <input type="submit" value="Envoyer" class="btn btn-primary" />
+                    <input type="button" id="submit" value="Envoyer" class="btn btn-primary" />
                 </p>
             </div>
         </form>

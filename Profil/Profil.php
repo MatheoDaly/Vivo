@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    include('../Outil/Php/AccesBDClient.php');
+    include('../Outil/Php/AccesBD.php');
     
     ?>
 
