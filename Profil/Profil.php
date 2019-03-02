@@ -1,3 +1,14 @@
+<?php
+session_start();
+include('../Outil/Php/AccesBD.php');
+
+// Variable :
+if(isset($_SESSION['Profil'])){
+    $Profil=$_SESSION['Profil'];
+    }
+$cheminPhoto='../Image/PhotoProfil/';
+
+?>
 <!Doctype HTML>
 <html>
 
@@ -10,14 +21,17 @@
 </head>
 
 <body>
-    <?php
-    include('../Outil/Php/AccesBD.php');
-    
-    ?>
+
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
 
-        <div class="independant"><img class="independant" src="../Image/avatar-1295406_640.png" alt="profil"></div>
+        <div class="independant"><img class="independant" src="../Image/<?php if(isset($Profil[7]) && $Profil[7]!='NoPic')
+{
+            echo $cheminPhoto.$Profil[7];
+} else {
+    echo $cheminPhoto.'avatar-1295406_640.png';
+}
+    ?>" alt="profil"></div>
 
         <!-- introduction !-->
 
