@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+
+}
+
+p {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+input[pla]
