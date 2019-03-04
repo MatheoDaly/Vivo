@@ -14,8 +14,9 @@ En php :
 */
 
 $(function () {
-    $('#Stat').click(function () {
+    $('#BtnStat').click(function () {
         $(location).attr('href', '../Statistique/Statistique.php');
-    })
+    });
+
 
 });

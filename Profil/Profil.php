@@ -18,8 +18,8 @@ $cheminIcon='../Image/IconProgess/';
     <meta charset="utf-8">
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="Profil.css" rel="stylesheet">
-    <title>Profil <?php if(isset($Profil)){
-    echo ' de '.$Profil[0];
+    <title><?php if(isset($Profil)){
+    echo $Profil[0];
     }
         ?></title>
 
@@ -65,7 +65,7 @@ $cheminIcon='../Image/IconProgess/';
         <!--  Intermediare !-->
         <div>
             <div>
-                <input type="button" class="btn btn-primary" id="Stat" value="Consultation de mes statistiques">
+                <input type="button" class="btn btn-primary" id="BtnStat" value="Consultation de mes statistiques">
             </div>
         </div>
         <hr>
