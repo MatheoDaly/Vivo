@@ -34,7 +34,7 @@ $cheminIcon='../Image/IconProgess/';
         <div id="graphique">
             <canvas id="lineChart"></canvas>
         </div>
-        <div id="Rond">
+        <div id="Ronds" width="400" height="400">
             <canvas id="Rond"></canvas>
         </div>
     </div>

@@ -1,4 +1,5 @@
 // https://easings.net/fr#
+// http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
 
 //line
 var ctxL = document.getElementById("lineChart").getContext('2d');
@@ -52,22 +53,21 @@ function adapt() {
 }
 */
 //------------------------------------------------------------
-var ctx = document.getElementById("Rond").getContext('2d');
-var myPieChart = new Chart(ctx, {
+
+new Chart(document.getElementById("Rond"), {
     type: 'pie',
     data: {
+        labels: ["Sirot d'érable", "Rotie de poulet", "Chips", "Donut", "Beurre"],
         datasets: [{
-            data: [10, 20, 70]
-    }],
-
-        // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-        'Red',
-        'Yellow',
-        'Blue'
-    ]
-    };,
+            label: "En pourcentage (%)",
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+            data: [20, 20, 10, 30, 20]
+      }]
+    },
     options: {
-        responsive: true
+        title: {
+            display: true,
+            text: 'Mon alimentation'
+        }
     }
 });
