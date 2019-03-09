@@ -31,9 +31,11 @@ $cheminIcon='../Image/IconProgess/';
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <h1>Mon graphique jean philipe !</h1>
+        <hr>
         <div id="graphique">
             <canvas id="lineChart"></canvas>
         </div>
+        <hr>
         <div id="Ronds" width="400" height="400">
             <canvas id="Rond"></canvas>
         </div>

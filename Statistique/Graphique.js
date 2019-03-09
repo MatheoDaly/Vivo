@@ -2,9 +2,8 @@
 // http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
 
 //line
-var ctxL = document.getElementById("lineChart").getContext('2d');
 
-var myLineChart = new Chart(ctxL, {
+new Chart(document.getElementById("lineChart").getContext('2d'), {
     type: 'line',
     data: {
         labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
