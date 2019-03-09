@@ -1,6 +1,5 @@
 /* -------------- Dépendante ---------
 */
-
 html {
     margin: 0px;
     height: 100%;
@@ -23,8 +22,10 @@ body {
 }
 
 #TableProfil {
-    margin: 100px 50px 0px 50px;
+    margin: 100px 25px 0px 25px;
     background: url(../Image/wallpaper-2116949_960_720.jpg);
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -35,9 +36,8 @@ body {
     /*
     A finir
     */
-    height: 100px;
+    display: block;
     margin: auto;
-    z-index: 1;
 }
 
 
@@ -45,7 +45,8 @@ body {
 /* Introduction du profil */
 
 #intro {
-    height: 200px;
+    height: 360px;
+    margin-top: 270px;
 }
 
 .icon {
@@ -57,9 +58,9 @@ body {
 
 /* Prog Menu 
 */
-#ProgMenue {
-    height: 200px;
-    background-image: url('../Image/menu-3167859_1920.jpg');
-    background-size: cover;
+#ProgMenu {
+    background-image: url(../Image/table-3219660_1920.jpg);
+    background-repeat: no-repeat;
+    margin: 0px;
 
 }
