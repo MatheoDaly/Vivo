@@ -1,4 +1,11 @@
 <?php
+/*
+Idée est de faire parvenir tous les aliment issu d'un historique aliment, mais il y aura un historique regime aussi, ou au boud de semaine on ne garde plus les repas recu mais la moyenne des taux de glucose, etc par semaine...
+
+Plus effectuer quand aliment est apprecier faire qu'il passe en preferance..
+
+
+*/
 session_start();
 include('../Outil/Php/AccesBD.php');
 
