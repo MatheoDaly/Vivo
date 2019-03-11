@@ -1,3 +1,8 @@
+//---------------------- Envoie de données-----------------------------------------
+
+// Je recupere le nom via la span id #nom
+
+
 // https://easings.net/fr#
 // http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
 

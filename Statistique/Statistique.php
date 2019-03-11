@@ -37,8 +37,21 @@ $cheminIcon='../Image/IconProgess/';
 <body>
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
-        <h1>Mon graphique jean philipe !</h1>
+        <h1>Mon graphique
+            <span id="nom">
+                <?php if(isset($Profil)){
+    echo $Profil[0];
+    }?>
+            </span></h1>
         <hr>
+        <label for="type">Mon graphique selon :</label>
+        <select name='type'>
+            <option value='1' selected>Mes repas du jours</option>
+            <option value='1'>Mes différentes concentration durant les 15 derniers jours</option>
+            <option value='1'>Mes différentes concentration durant les 5 derniers semaines</option>
+            <option value='1'>Mes différentes concentration durant les 6 derniers mois</option>
+            <option value='1'>Mes différentes concentration durant les 5 derniers années</option>
+        </select>
         <div id="graphique">
             <canvas id="lineChart"></canvas>
         </div>
