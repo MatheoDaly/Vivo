@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 25 fév. 2019 à 15:03
+-- Généré le :  lun. 11 mars 2019 à 14:53
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -2982,6 +2982,23 @@ INSERT INTO `groupe` (`alim_grp_code`, `alim_grp_nom_fr`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `historique_aliment`
+--
+
+DROP TABLE IF EXISTS `historique_aliment`;
+CREATE TABLE IF NOT EXISTS `historique_aliment` (
+  `Repas` int(11) NOT NULL,
+  `ID_ingredient` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `ID_Profil` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  KEY `ID_Profil` (`ID_Profil`),
+  KEY `ID_ingredient` (`ID_ingredient`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `preferance`
 --
 
@@ -3010,18 +3027,21 @@ CREATE TABLE IF NOT EXISTS `profil` (
   `url_photo` varchar(255) NOT NULL,
   `utilisateur` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `mdp` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `genre` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `profil`
 --
 
-INSERT INTO `profil` (`id`, `prenom`, `email`, `poids`, `taille`, `url_photo`, `utilisateur`, `mdp`) VALUES
-(1, '', '', 0, 0, '', 'Juan', 'mdp'),
-(2, '', '', 0, 0, '', 'romain', 'mdp2'),
-(3, '', '', 0, 0, '', 'rom', 'mdp3'),
-(4, '', '', 0, 0, '', 'rom', 'mdp3');
+INSERT INTO `profil` (`id`, `prenom`, `email`, `poids`, `taille`, `url_photo`, `utilisateur`, `mdp`, `genre`) VALUES
+(1, 'p', 'e@h.fr', 0, 0, '', 'u', 'm', 'M'),
+(2, '', '', 0, 0, '', 'romain', 'mdp2', ''),
+(3, '', '', 0, 0, '', 'rom', 'mdp3', ''),
+(4, '', '', 0, 0, '', 'rom', 'mdp3', ''),
+(5, 'J', 'romain@hotmail.fr', 1, 1, '', 'J', 'm', 'M'),
+(6, 'sdf', 'moa@hotmail.fr', 1, 1, '', 'e@h.fr', 'motsdepasse', 'M');
 
 -- --------------------------------------------------------
 
@@ -3242,6 +3262,22 @@ INSERT INTO `sous_sous_groupe` (`alim_ssssgrp_code`, `alim_ssssgrp_nom_fr`) VALU
 (100103, 'sauces sucrées'),
 (100601, 'herbes fraîches'),
 (100602, 'herbes séchées');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `statistique`
+--
+
+DROP TABLE IF EXISTS `statistique`;
+CREATE TABLE IF NOT EXISTS `statistique` (
+  `type` int(11) NOT NULL,
+  `Nom` int(11) NOT NULL,
+  `TauxCumule` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `ID_Profil` int(11) NOT NULL,
+  KEY `ID_Profil` (`ID_Profil`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
