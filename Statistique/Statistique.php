@@ -26,7 +26,7 @@ $cheminIcon='../Image/IconProgess/';
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Profil/Profil.css" rel="stylesheet">
     <link href="Statistique.css" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur du graphique !-->
     <title>Statistique <?php if(isset($Profil)){
     echo ' de '.$Profil[0];
     }
