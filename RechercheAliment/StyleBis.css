@@ -1,0 +1,39 @@
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+
+    background: url(../Image/mountains-1985027_1920.jpg);
+    background-size: auto;
+    background-attachment: fixed;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.creaRecette{
+  border: 4px red solid;
+  float: right;
+  border:3px;
+  border-color:red;
+  border-style:solid;
+  margin-top:-400px;
+  margin-right:400px;
+}
+
+textarea {
+   border: blue 2px solid;
+   position: fixed;
+   top: 100px;
+   bottom: 100px;
+   right: 300px;
+   left: 600px;
+}
+
+#Table {
+    margin: 100px 50px 100px 50px;
+    background: url(../Image/wallpaper-2116949_960_720.jpg);
+}
