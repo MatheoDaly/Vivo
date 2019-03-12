@@ -13,7 +13,7 @@ include('../Outil/Php/AccesBD.php');
 if(isset($_SESSION['profil'])){
     $Profil=$_SESSION['profil'];
     }
-//$Profil = array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
+// Cela sert de reperage ! => $Profil = array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
 $cheminPhoto='../Image/PhotoProfil/';
 $cheminIcon='../Image/IconProgess/';
 
@@ -26,7 +26,7 @@ $cheminIcon='../Image/IconProgess/';
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Profil/Profil.css" rel="stylesheet">
     <link href="Statistique.css" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur du graphique !-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
     <title>Statistique <?php if(isset($Profil)){
     echo ' de '.$Profil[0];
     }
@@ -35,22 +35,23 @@ $cheminIcon='../Image/IconProgess/';
 </head>
 
 <body>
+    <!-- Attention mathéo ne modifie pas l'input !-->
+    <input type="hidden" value="<?php if(isset($Profil)){
+    echo $Profil[0];
+    }?>" name="nom" id="nom">
+    <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <h1>Mon graphique
-            <span id="nom">
-                <?php if(isset($Profil)){
-    echo $Profil[0];
-    }?>
-            </span></h1>
+        </h1>
         <hr>
         <label for="type">Mon graphique selon :</label>
         <select name='type'>
             <option value='1' selected>Mes repas du jours</option>
-            <option value='1'>Mes différentes concentration durant les 15 derniers jours</option>
-            <option value='1'>Mes différentes concentration durant les 5 derniers semaines</option>
-            <option value='1'>Mes différentes concentration durant les 6 derniers mois</option>
-            <option value='1'>Mes différentes concentration durant les 5 derniers années</option>
+            <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
+            <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
+            <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
+            <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
         </select>
         <div id="graphique">
             <canvas id="lineChart"></canvas>

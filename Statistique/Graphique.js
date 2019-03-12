@@ -2,10 +2,23 @@
 
 // Je recupere le nom via la span id #nom
 
+$(function () {
+    // Jquery pour graphique
+    $('select').on('change', function () {
+        if ($('#nom').val() != '' && !(isNaN($('#nom').val()))) {
+            $.post('CalculTaux.php', {
+                type: $(this).val(),
+                id: $('#nom').val()
+            }, function (data) {
+                // verifie si c'est une liste et de quoi
+            });
+        }
+    });
+});
 
 // https://easings.net/fr#
 // http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
-
+//------------------------------------------------------------------------------------
 //line
 
 new Chart(document.getElementById("lineChart").getContext('2d'), {

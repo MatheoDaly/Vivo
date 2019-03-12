@@ -16,9 +16,9 @@ if(isset($_POST['email'])
 
         session_start();
         if ($Profil['url_photo']!=''){
-            $_SESSION['profil']=array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], $Profil['url_photo']);
+            $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], $Profil['url_photo']);
         }else {
-            $_SESSION['profil']=array($Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
+            $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
         echo 'Connecter';
         }
             setcookie('email', $_POST['email'], time()*(3600*24*24));
