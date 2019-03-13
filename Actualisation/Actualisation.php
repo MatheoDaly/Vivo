@@ -14,9 +14,19 @@ if(isset($_SESSION['profil'])){
     // fonction Statistique -> Statistique
     //`Repas``ID_ingredient``quantite```Unite_Mesure_Quantite```ID_Profil``Date`
     $ListeConcentration = array(array());
-    $req->query('');
+    // ne marche pas mais a structuré et non a recommencer !
+    $req->query('SELECT AVG(aliments.Energie_Règlement_UE_N°_11692011_kcal100g*historique_aliment.quantite),
+AVG(aliments.Protéines_g100g*historique_aliment.quantite), 
+AVG(aliments.Glucides_g100g*historique_aliment.quantite),
+AVG(aliments.Lipides_g100g*historique_aliment.quantite), 
+AVG(aliments.Sucres_g100g*historique_aliment.quantite), AVG(aliments.Cholestérol_mg100g*historique_aliment.quantite), 
+AVG(aliments.Alcool_g100g*historique_aliment.quantite) 
+FROM historique_aliment 
+INNER JOIN aliments ON aliments.alim_code = historique_aliment.ID_ingredient
+INNER JOIN profil ON historique_aliment.ID_Profil = profil.id
+GROUP BY historique_aliment.Date');
     
-    // Suite des fonction -> recupere une liste d'aliment et historique aliment pour un profil donnee 
+    // Suite des fonction : recupere une liste d'aliment et historique aliment pour un profil donnee 
     //-> prepare une liste de liste pour chaque jour, il y a des concentrations donnees,
     // -> Calcul des concentration et integrations dans la liste
 }
