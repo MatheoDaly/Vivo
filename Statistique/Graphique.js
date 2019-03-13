@@ -1,10 +1,12 @@
 //---------------------- Envoie de données-----------------------------------------
 
 // Je recupere le nom via la span id #nom
+//https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
 $(function () {
     // Jquery pour graphique
     $('select').on('change', function () {
+        //verifie s'il existe et si c'est un nombre
         if ($('#nom').val() != '' && !(isNaN($('#nom').val()))) {
             $.post('CalculTaux.php', {
                 type: $(this).val(),

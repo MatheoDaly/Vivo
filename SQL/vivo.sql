@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 11 mars 2019 à 14:53
+-- Généré le :  mer. 13 mars 2019 à 08:38
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -2990,11 +2990,20 @@ CREATE TABLE IF NOT EXISTS `historique_aliment` (
   `Repas` int(11) NOT NULL,
   `ID_ingredient` int(11) NOT NULL,
   `quantite` int(11) NOT NULL,
+  `Unite_Mesure_Quantite` varchar(10) NOT NULL,
   `ID_Profil` int(11) NOT NULL,
   `Date` date NOT NULL,
   KEY `ID_Profil` (`ID_Profil`),
   KEY `ID_ingredient` (`ID_ingredient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `historique_aliment`
+--
+
+INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `Unite_Mesure_Quantite`, `ID_Profil`, `Date`) VALUES
+(1, 25600, 3, '', 1, '2019-03-13'),
+(1, 25600, 3, 'g', 1, '2019-03-13');
 
 -- --------------------------------------------------------
 
