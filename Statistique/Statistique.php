@@ -38,7 +38,9 @@ $cheminIcon='../Image/IconProgess/';
     <!-- Attention mathéo ne modifie pas l'input !-->
     <input type="hidden" value="<?php if(isset($Profil)){
     echo $Profil[0];
-    }?>" name="nom" id="nom">
+    }else {
+    echo 1;
+}?>" name="nom" id="nom">
     <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">

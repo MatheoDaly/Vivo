@@ -1,9 +1,20 @@
  //---------------------- Envoie de données-----------------------------------------
-
+ var commence = true;
  // Je recupere le nom via la span id #nom
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
  $(function () {
+
+     if (commence) {
+         $.post('CalculTaux.php', {
+             type: $('select').val(),
+             id: $('#nom').val()
+         }, function (data) {
+             // verifie si c'est une liste et de quoi
+             var concentration = data;
+         });
+         commence = false;
+     }
      // Jquery pour graphique
      $('select').on('change', function () {
          //verifie s'il existe et si c'est un nombre
@@ -13,7 +24,42 @@
                  id: $('#nom').val()
              }, function (data) {
                  // verifie si c'est une liste et de quoi
+                 var concentration = data;
+                 alert(data);
              });
+         }
+     });
+
+     new Chart(document.getElementById("lineChart").getContext('2d'), {
+         type: 'line',
+         data: {
+             labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+             datasets: [{
+                     label: "Concentration glucose",
+                     data: concentration, // utiliser une fonction get de ajax pour permettre la capture des données
+                     backgroundColor: [
+            'rgba(100, 00, 100, .2)',
+          ],
+                     borderColor: [
+            'rgba(200, 00, 200, .7)',
+          ],
+                     borderWidth: 3
+        },
+                 {
+                     label: "Concentration en sel",
+                     data: [28, 48, 40, 19, 86, 27, 90],
+                     backgroundColor: [
+            'rgba(0, 100, 100, .2)',
+          ],
+                     borderColor: [
+            'rgba(0, 200, 200, .7)',
+          ],
+                     borderWidth: 3
+        }
+      ]
+         },
+         options: {
+             responsive: true
          }
      });
  });
@@ -23,38 +69,7 @@
  //------------------------------------------------------------------------------------
  //line
 
- new Chart(document.getElementById("lineChart").getContext('2d'), {
-     type: 'line',
-     data: {
-         labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
-         datasets: [{
-                 label: "Concentration glucose",
-                 data: [65, 59, 80, 81, 56, 55, 40], // utiliser une fonction get de ajax pour permettre la capture des données
-                 backgroundColor: [
-            'rgba(100, 00, 100, .2)',
-          ],
-                 borderColor: [
-            'rgba(200, 00, 200, .7)',
-          ],
-                 borderWidth: 3
-        },
-             {
-                 label: "Concentration en sel",
-                 data: [28, 48, 40, 19, 86, 27, 90],
-                 backgroundColor: [
-            'rgba(0, 100, 100, .2)',
-          ],
-                 borderColor: [
-            'rgba(0, 200, 200, .7)',
-          ],
-                 borderWidth: 3
-        }
-      ]
-     },
-     options: {
-         responsive: true
-     }
- });
+
  /*
  function moyenne() {
      // prends une liste d'ingredient en parametre recupere
