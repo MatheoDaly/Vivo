@@ -13,8 +13,8 @@ if(isset($_SESSION['profil'])){
     
     // fonction Statistique -> Statistique
     //`Repas``ID_ingredient``quantite```Unite_Mesure_Quantite```ID_Profil``Date`
-    $Liste = array(array());
-    $req->query();
+    $ListeConcentration = array(array());
+    $req->query('');
     
     // Suite des fonction -> recupere une liste d'aliment et historique aliment pour un profil donnee 
     //-> prepare une liste de liste pour chaque jour, il y a des concentrations donnees,
