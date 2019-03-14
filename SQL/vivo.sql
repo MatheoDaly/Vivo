@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 13 mars 2019 à 08:38
+-- Généré le :  jeu. 14 mars 2019 à 17:32
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -2990,7 +2990,6 @@ CREATE TABLE IF NOT EXISTS `historique_aliment` (
   `Repas` int(11) NOT NULL,
   `ID_ingredient` int(11) NOT NULL,
   `quantite` int(11) NOT NULL,
-  `Unite_Mesure_Quantite` varchar(10) NOT NULL,
   `ID_Profil` int(11) NOT NULL,
   `Date` date NOT NULL,
   KEY `ID_Profil` (`ID_Profil`),
@@ -3001,9 +3000,9 @@ CREATE TABLE IF NOT EXISTS `historique_aliment` (
 -- Déchargement des données de la table `historique_aliment`
 --
 
-INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `Unite_Mesure_Quantite`, `ID_Profil`, `Date`) VALUES
-(1, 25600, 3, '', 1, '2019-03-13'),
-(1, 25600, 3, 'g', 1, '2019-03-13');
+INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `ID_Profil`, `Date`) VALUES
+(1, 25600, 3, 1, '2019-03-13'),
+(2, 25600, 3, 1, '2019-03-13');
 
 -- --------------------------------------------------------
 
@@ -3281,12 +3280,44 @@ INSERT INTO `sous_sous_groupe` (`alim_ssssgrp_code`, `alim_ssssgrp_nom_fr`) VALU
 DROP TABLE IF EXISTS `statistique`;
 CREATE TABLE IF NOT EXISTS `statistique` (
   `type` int(11) NOT NULL,
-  `Nom` int(11) NOT NULL,
+  `NumRepas` tinyint(4) DEFAULT NULL,
+  `Nom` varchar(20) NOT NULL,
   `TauxCumule` int(11) NOT NULL,
   `date` date NOT NULL,
   `ID_Profil` int(11) NOT NULL,
   KEY `ID_Profil` (`ID_Profil`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `statistique`
+--
+
+INSERT INTO `statistique` (`type`, `NumRepas`, `Nom`, `TauxCumule`, `date`, `ID_Profil`) VALUES
+(1, NULL, 'Cumuler glucide', 400, '2019-03-13', 1),
+(1, 1, 'Proteine', 200, '2019-03-13', 1),
+(1, 1, 'Glucose', 200, '2019-03-13', 1),
+(1, 1, 'Calorie', 200, '2019-03-13', 1),
+(1, 1, 'Lipide', 200, '2019-03-13', 1),
+(1, 3, 'Proteine', 200, '2019-03-13', 1),
+(1, 3, 'Glucose', 200, '2019-03-13', 1),
+(1, 3, 'Calorie', 200, '2019-03-13', 1),
+(1, 3, 'Lipide', 200, '2019-03-13', 1),
+(1, 2, 'Proteine', 200, '2019-03-13', 1),
+(1, 2, 'Glucose', 200, '2019-03-13', 1),
+(1, 2, 'Calorie', 200, '2019-03-13', 1),
+(1, 2, 'Lipide', 200, '2019-03-13', 1),
+(1, 1, 'Proteine', 200, '2019-03-12', 1),
+(1, 1, 'Glucose', 200, '2019-03-12', 1),
+(1, 1, 'Calorie', 200, '2019-03-12', 1),
+(1, 1, 'Lipide', 200, '2019-03-12', 1),
+(1, 2, 'Proteine', 200, '2019-03-12', 1),
+(1, 2, 'Glucose', 200, '2019-03-12', 1),
+(1, 2, 'Calorie', 200, '2019-03-12', 1),
+(1, 2, 'Lipide', 200, '2019-03-12', 1),
+(1, 3, 'Proteine', 200, '2019-03-12', 1),
+(1, 3, 'Glucose', 200, '2019-03-12', 1),
+(1, 3, 'Calorie', 200, '2019-03-12', 1),
+(1, 3, 'Lipide', 200, '2019-03-12', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

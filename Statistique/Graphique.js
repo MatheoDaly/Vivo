@@ -11,7 +11,7 @@
              id: $('#nom').val()
          }, function (data) {
              // verifie si c'est une liste et de quoi
-             var concentration = data;
+             return data;
          });
          commence = false;
      }
@@ -24,8 +24,7 @@
                  id: $('#nom').val()
              }, function (data) {
                  // verifie si c'est une liste et de quoi
-                 var concentration = data;
-                 alert(data);
+                 return data;
              });
          }
      });
