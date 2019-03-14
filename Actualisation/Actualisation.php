@@ -35,15 +35,10 @@ if(isset($_SESSION['profil'])){
         SUM(aliments.Alcool_g100g*historique_aliment.quantite) AS 'Alcool' 
         FROM historique_aliment 
         INNER JOIN aliments ON aliments.alim_code = historique_aliment.ID_ingredient
-        WHERE historique_aliment.ID_Profil = ".$_SESSION['profil'][0]."
-        AND Date < NOW()
+        WHERE historique_aliment.ID_Profil = ".$_SESSION['profil']["ID"]."
+        AND Date BETWEEN ".$_SESSION['profil']["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas");
     while($ligne = $req->fetch()){
-        /*
-        A faire :
-        - Ici verifier que l'ont n'integre pas deux fois les meme stats !
-        - Verfier que le menue a ete pris et qu'il n'est pas à une date future
-        */
         
         
         // Fait une nouvelle array selon la date et le repas et sommes les repartitons en macro-nutriments
@@ -186,17 +181,20 @@ if(isset($_SESSION['profil'])){
     // Faire une fonction php pour qu'elle ne s'active qu'en debut de mois + prendre en compte la derniere connexion
     
     // Supprimes les statistiques des deux derniers mois pour les repas et jours
-    $BD->query("DELETE FROM statistique WHERE type IN(1, 2) AND (MONTH(SUBDATE(NOW(), INTERVAL 1 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 2 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil'][0]);
+    $BD->query("DELETE FROM statistique WHERE type IN(1, 2) AND (MONTH(SUBDATE(NOW(), INTERVAL 1 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 2 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil']['ID']);
     
     // Six mois apres on supprime les semaines
-    $BD->query("DELETE FROM statistique WHERE type = 3 AND (MONTH(SUBDATE(NOW(), INTERVAL 6 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 6 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil'][0]);
+    $BD->query("DELETE FROM statistique WHERE type = 3 AND (MONTH(SUBDATE(NOW(), INTERVAL 6 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 6 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil']['ID']);
     
     
     // Suite des fonction : recupere une liste d'aliment et historique aliment pour un profil donnee 
     //-> prepare une liste de liste pour chaque jour, il y a des concentrations donnees,
     // -> Calcul des concentration et integrations dans la liste
     ################# N'actualisera pas pour le prochain retour d'include ! Mise a par ajout de menue !
-    $_SESSION['profil'][9]=FALSE;
+    $BD->query("UPDATE profil SET DateActue = CURRENT_TIMESTAMP() WHERE id =".$_SESSION['profil']['ID']);
+    $req=$BD->query("SELECT DateActue FROM profil where id =".$_SESSION['profil']['ID'])
+    $ligne = $req->fetch();    
+    $_SESSION['profil']["actualisation"]=$ligne['DateActue'] ;
 }
 
 ?>
