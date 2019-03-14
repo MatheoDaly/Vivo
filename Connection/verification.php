@@ -17,13 +17,14 @@ if(isset($_POST['email'])
         session_start();
         // Le true en fin d'array permet de savoir si le profil est a actualiser pour la BD, ainsi permet d'actualiser au moment de chaque connexion !
         if ($Profil['url_photo']!=''){
-            $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], $Profil['url_photo'], TRUE);
+            $_SESSION['profil']=array('ID'=>$Profil['id'], 'prenom'=>$Profil['prenom'], 'mail'=>$Profil['email'], 'poids'=>$Profil['poids'], 'taille'=>$Profil['taille'], 'user'=>$Profil['utilisateur'], 'genre'=>$Profil['genre'], 'mdp'=>$Profil['mdp'], 'photo'=>$Profil['url_photo'], 'actualisation'=>$Profil['DateActue']);
         }else {
-            $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', TRUE);
-        echo 'Connecter';
+            $_SESSION['profil']=array('ID'=>$Profil['id'], 'prenom'=>$Profil['prenom'], 'mail'=>$Profil['email'], 'poids'=>$Profil['poids'], 'taille'=>$Profil['taille'], 'user'=>$Profil['utilisateur'], 'genre'=>$Profil['genre'], 'mdp'=>$Profil['mdp'], 'photo'=>'NoPic', 'actualisation'=>$Profil['DateActue']);
         }
             setcookie('email', $_POST['email'], time()*(3600*24*24));
             setcookie('mdp', $_POST['mdp'], time()*(3600*24*24));
+        
+        echo 'Connecter';
 
     } else {
 

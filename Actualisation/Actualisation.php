@@ -10,13 +10,13 @@ Type :
 
 */
 ###############################################################################################################################
-####### Probleme actuel : Ne pas integre en statistique deux fois les menue !############
+####### Probleme actuel : Ne pas integre en statistique deux fois les menue !-> Prendre en compte la date de la dernier actualisation !############
 ###############################################################################################################################
 
 //Aide mémoire : $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
 
 session_start();
-if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
+if(isset($_SESSION['profil'])){
 
     include('../Outil/Php/AccesBD.php');
     $BD = getBD();
