@@ -1,6 +1,9 @@
 <?php
 // pas bseoin de js on utilisera une inclusion du code php via la fonction include !
 /*
+############################### Minimiser le nombre d'appelle de la page
+
+
 Type :
 1 -> repas -> Somme des concentration
 2 -> jour -> Somme des concentration des repas durant le jour
@@ -115,7 +118,7 @@ if(isset($_SESSION['profil'])){
         'Nom'=>$ligne['Nom'],
         'Date'=>$ligne['date'],
         'concentration'=>$ligne['concentration'],
-        'ID'=>1));
+        'ID'=>$_SESSION['profil'][0]));
         $req1->closeCursor();
     }
     $req->closeCursor();
@@ -133,7 +136,7 @@ if(isset($_SESSION['profil'])){
         'Nom'=>$ligne['Nom'],
         'Date'=>$ligne['date'],
         'concentration'=>$ligne['concentration'],
-        'ID'=>1));
+        'ID'=>$_SESSION['profil'][0]));
         $req1->closeCursor();
     }
     $req->closeCursor();
@@ -151,7 +154,7 @@ if(isset($_SESSION['profil'])){
         'Nom'=>$ligne['Nom'],
         'Date'=>$ligne['date'],
         'concentration'=>$ligne['concentration'],
-        'ID'=>1));
+        'ID'=>$_SESSION['profil'][0]));
         $req1->closeCursor();
     }
     $req->closeCursor();
@@ -169,7 +172,7 @@ if(isset($_SESSION['profil'])){
         'Nom'=>$ligne['Nom'],
         'Date'=>$ligne['date'],
         'concentration'=>$ligne['concentration'],
-        'ID'=>1));
+        'ID'=>$_SESSION['profil'][0]));
         $req1->closeCursor();
     }
     $req->closeCursor();

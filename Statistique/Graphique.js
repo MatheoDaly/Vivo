@@ -29,38 +29,7 @@
          }
      });
 
-     new Chart(document.getElementById("lineChart").getContext('2d'), {
-         type: 'line',
-         data: {
-             labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
-             datasets: [{
-                     label: "Concentration glucose",
-                     data: concentration, // utiliser une fonction get de ajax pour permettre la capture des données
-                     backgroundColor: [
-            'rgba(100, 00, 100, .2)',
-          ],
-                     borderColor: [
-            'rgba(200, 00, 200, .7)',
-          ],
-                     borderWidth: 3
-        },
-                 {
-                     label: "Concentration en sel",
-                     data: [28, 48, 40, 19, 86, 27, 90],
-                     backgroundColor: [
-            'rgba(0, 100, 100, .2)',
-          ],
-                     borderColor: [
-            'rgba(0, 200, 200, .7)',
-          ],
-                     borderWidth: 3
-        }
-      ]
-         },
-         options: {
-             responsive: true
-         }
-     });
+
  });
 
  // https://easings.net/fr#
@@ -104,3 +73,54 @@
          }
      }
  });
+
+ AfficheGraph([["Glucide", [0, 1, 2]]["Calorie", [0, 1, 2]]["Lipide", [0, 1, 2]]]);
+
+ function AfficheGraph(liste) {
+     return new Chart(document.getElementById("lineChart").getContext('2d'), {
+         type: 'line',
+         data: {
+             labels: ListeCalendrier($(this).val()),
+             datasets: GenereTraitGraph(liste)
+         },
+         options: {
+             responsive: true
+         }
+     });
+ }
+ //-----------------------------------------------Fonction de construction du graphique
+
+ function GenereTraitGraph(listeDeListe) {
+     dataset = [];
+     for (var i = 0; i < listeDeListe.length; i++) {
+         dataset += TraitGraph(listeDeListe[i][0], listeDeListe[i][1]);
+     }
+     return dataset;
+ }
+
+ function TraitGraph(Label, data) {
+     return {
+         label: Label,
+         data: data,
+         backgroundColor: [
+            'rgba(0, 100, 100, .2)',
+          ],
+         borderColor: [
+            'rgba(0, 200, 200, .7)',
+          ],
+         borderWidth: 3
+     };
+ }
+
+ function ListeCalendrier(Choix) {
+     if (Choix == 1)
+         return ["Matin", "Midi", "Soir"];
+     else if (Choix == 2)
+         return ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+     else if (Choix == 3)
+         return ["10", "11", "12", "13", "14", "15"];
+     else if (Choix == 4)
+         return ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin"];
+     else if (Choix == 5)
+         return ["2017", "2018", "2019"];
+ }
