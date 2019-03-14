@@ -10,7 +10,7 @@ Type :
 
 */
 ###############################################################################################################################
-####### Attention pensez que quand on creer des menue c'est a l'avenir et donc ne pas integre au statistique passe!############
+####### Probleme actuel : Ne pas integre en statistique deux fois les menue !############
 ###############################################################################################################################
 
 //Aide mémoire : $_SESSION['profil']=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
@@ -36,6 +36,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         FROM historique_aliment 
         INNER JOIN aliments ON aliments.alim_code = historique_aliment.ID_ingredient
         WHERE historique_aliment.ID_Profil = ".$_SESSION['profil'][0]."
+        AND Date < NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas");
     while($ligne = $req->fetch()){
         /*
@@ -181,11 +182,14 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
 
 
 
-    ########################################### Ici on trie les derniere information ###########################################
-
-
-
-
+    ########################################### Ici on supprimes les derniere information ###########################################
+    // Faire une fonction php pour qu'elle ne s'active qu'en debut de mois + prendre en compte la derniere connexion
+    
+    // Supprimes les statistiques des deux derniers mois pour les repas et jours
+    $BD->query("DELETE FROM statistique WHERE type IN(1, 2) AND (MONTH(SUBDATE(NOW(), INTERVAL 1 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 2 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil'][0]);
+    
+    // Six mois apres on supprime les semaines
+    $BD->query("DELETE FROM statistique WHERE type = 3 AND (MONTH(SUBDATE(NOW(), INTERVAL 6 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 6 MONTH))<YEAR(date)) AND ID_Profil = ".$_SESSION['profil'][0]);
     
     
     // Suite des fonction : recupere une liste d'aliment et historique aliment pour un profil donnee 
