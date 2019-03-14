@@ -47,7 +47,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         
         // Fait une nouvelle array selon la date et le repas et sommes les repartitons en macro-nutriments
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Calorie', :Calorie, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Calorie'=>$ligne['Calorie'],
@@ -55,7 +55,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Alcool', :Alcool, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Alcool'=>$ligne['Alcool'],
@@ -63,7 +63,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Cholesterol', :Cholesterol, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Cholesterol'=>$ligne['Cholesterol'],
@@ -71,7 +71,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Sucre', :Sucre, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Sucre'=>$ligne['Sucre'],
@@ -79,7 +79,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Lipide', :Lipide, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Lipide'=>$ligne['Lipide'],
@@ -87,7 +87,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Glucide', :Glucide, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Glucide'=>$ligne['Glucide'],
@@ -95,7 +95,7 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
         
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, 'Proteine', :Proteine, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'NumeroRepas'=>$ligne['NumeroRepas'],
         'Date'=>$ligne['Date'],
         'Proteine'=>$ligne['Proteine'],
@@ -103,24 +103,89 @@ if(isset($_SESSION['profil']) && $_SESSION['profil'][9]==TRUE){
         $req1->closeCursor();
     }
     $req->closeCursor();
+
+###################################### Ne s'occupe que de SUM pour jour mais Moyenne apresv #######################################
 ##################################### fonction Statistique repas -> Statistique jours##############################################
+
     $repas = 1;// pour plus de lisibilité !
-    $req->query("SELECT Nom, date, SUM(TauxCumule) AS concentration
+    $req = $BD->query("SELECT Nom, date, SUM(TauxCumule) AS concentration
         FROM statistique
         WHERE ID_Profil = ".$_SESSION['profil'][0]."
         AND type = ".$repas."
         GROUP BY date, Nom ");
     while($ligne = $req->fetch()){
         $req1 = $BD->prepare("INSERT INTO statistique VALUES (2, null, :Nom, :concentration, :Date, :ID)");
-        $req1->exec(array(
+        $req1->execute(array(
         'Nom'=>$ligne['Nom'],
         'Date'=>$ligne['date'],
         'concentration'=>$ligne['concentration'],
-        'ID'=>$_SESSION['profil'][0]));
+        'ID'=>1));
         $req1->closeCursor();
     }
     $req->closeCursor();
 ##################################### fonction Statistique jour -> Statistique semaines##############################################
+    $jour = 2;// pour plus de lisibilité !
+    $req = $BD->query("SELECT Nom, AVG(TauxCumule) AS concentration, MIN(date) AS date
+    FROM statistique
+    WHERE type=".$jour."
+    AND ID_Profil = ".$_SESSION['profil'][0]."
+    GROUP BY WEEK(date), MONTH(date), YEAR(date), Nom");
+
+    while($ligne = $req->fetch()){
+        $req1 = $BD->prepare("INSERT INTO statistique VALUES (3, null, :Nom, :concentration, :Date, :ID)");
+        $req1->execute(array(
+        'Nom'=>$ligne['Nom'],
+        'Date'=>$ligne['date'],
+        'concentration'=>$ligne['concentration'],
+        'ID'=>1));
+        $req1->closeCursor();
+    }
+    $req->closeCursor();
+##################################### fonction Statistique semaine -> Statistique mois##############################################
+    $semaine = 3;// pour plus de lisibilité !
+    $req = $BD->query("SELECT Nom, AVG(TauxCumule) AS concentration, MIN(date) AS date
+    FROM statistique
+    WHERE type=".$semaine."
+    AND ID_Profil = ".$_SESSION['profil'][0]."
+    GROUP BY MONTH(date), YEAR(date), Nom");
+
+    while($ligne = $req->fetch()){
+        $req1 = $BD->prepare("INSERT INTO statistique VALUES (4, null, :Nom, :concentration, :Date, :ID)");
+        $req1->execute(array(
+        'Nom'=>$ligne['Nom'],
+        'Date'=>$ligne['date'],
+        'concentration'=>$ligne['concentration'],
+        'ID'=>1));
+        $req1->closeCursor();
+    }
+    $req->closeCursor();
+##################################### fonction Statistique mois -> Statistique annees##############################################
+    $mois = 4;// pour plus de lisibilité !
+    $req = $BD->query("SELECT Nom, AVG(TauxCumule) AS concentration, MIN(date) AS date
+    FROM statistique
+    WHERE type=".$mois."
+    AND ID_Profil = ".$_SESSION['profil'][0]."
+    GROUP BY YEAR(date), Nom");
+
+    while($ligne = $req->fetch()){
+        $req1 = $BD->prepare("INSERT INTO statistique VALUES (5, null, :Nom, :concentration, :Date, :ID)");
+        $req1->execute(array(
+        'Nom'=>$ligne['Nom'],
+        'Date'=>$ligne['date'],
+        'concentration'=>$ligne['concentration'],
+        'ID'=>1));
+        $req1->closeCursor();
+    }
+    $req->closeCursor();
+    ################################################################################################################################
+
+
+
+    ########################################### Ici on trie les derniere information ###########################################
+
+
+
+
     
     
     // Suite des fonction : recupere une liste d'aliment et historique aliment pour un profil donnee 
