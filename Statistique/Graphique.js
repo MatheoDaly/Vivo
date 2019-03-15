@@ -5,7 +5,6 @@
 
  $(function () {
      var Graphique;
-     liste = [["glucide", [0, 6, 2]], ["calorie", [0, 4, 2]], ["lipide", [0, 26, 2]]];
      if (commence) {
          $.post('CalculTaux.php', {
              type: $('select').val(),
@@ -35,29 +34,7 @@
 
  });
 
- // https://easings.net/fr#
- // http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
- //------------------------------------------------------------------------------------
- //line
-
-
- /*
- function moyenne() {
-     // prends une liste d'ingredient en parametre recupere
-     // Recupere des datas issues des consommation habitutuelle
-     // des clients
-
-
-
-
-     return moy;
- }
-
- function adapt() {
-     // s'adapte au client sur le mois semaine jour et s'il est premium ou non
- }
- */
- //------------------------------------------------------------
+ //---------------------------------------------Objet Chart----------------------------------------------------------------
 
  new Chart(document.getElementById("Rond"), {
      type: 'pie',
