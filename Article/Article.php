@@ -1,12 +1,1 @@
-INSERT INTO statistique VALUES (1, 1, 'Proteine', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 1, 'Glucose', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 1, 'Calorie', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 1, 'Lipide', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 2, 'Proteine', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 2, 'Glucose', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 2, 'Calorie', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 2, 'Lipide', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 3, 'Proteine', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 3, 'Glucose', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 3, 'Calorie', 200, '2019-03-12', 1);
-INSERT INTO statistique VALUES (1, 3, 'Lipide', 200, '2019-03-12', 1);
+

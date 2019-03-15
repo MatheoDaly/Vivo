@@ -12,7 +12,7 @@
              id: $('#nom').val()
          }, function (data) {
              // verifie si c'est une liste et de quoi
-             Graphique = AfficheGraph(data, $("select").val());
+             Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
          });
          commence = false;
@@ -26,7 +26,8 @@
                  id: $('#nom').val()
              }, function (data) {
                  // verifie si c'est une liste et de quoi
-                 Graphique = AfficheGraph(data, $("select").val());
+
+                 Graphique = AfficheGraph(JSON.parse(data), $("select").val());
              });
          }
      });
@@ -75,8 +76,6 @@
          }
      }
  });
- //-------------------------Partie teste
-
 
 
  //----------------------------------------
