@@ -4,14 +4,16 @@
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
  $(function () {
-
+     var Graphique;
+     liste = [["glucide", [0, 6, 2]], ["calorie", [0, 4, 2]], ["lipide", [0, 26, 2]]];
      if (commence) {
          $.post('CalculTaux.php', {
              type: $('select').val(),
              id: $('#nom').val()
          }, function (data) {
              // verifie si c'est une liste et de quoi
-             return data;
+             Graphique = AfficheGraph(data, $("select").val());
+
          });
          commence = false;
      }
@@ -24,7 +26,7 @@
                  id: $('#nom').val()
              }, function (data) {
                  // verifie si c'est une liste et de quoi
-                 return data;
+                 Graphique = AfficheGraph(data, $("select").val());
              });
          }
      });
@@ -59,7 +61,7 @@
  new Chart(document.getElementById("Rond"), {
      type: 'pie',
      data: {
-         labels: ["Sirot d'érable", "Rotie de poulet", "Chips", "Donut", "Beurre"],
+         labels: ["Gras", "Gras", "Gras", "Un peu gras", "Gras"],
          datasets: [{
              label: "En pourcentage (%)",
              backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
@@ -73,14 +75,16 @@
          }
      }
  });
+ //-------------------------Partie teste
 
- AfficheGraph([["Glucide", [0, 1, 2]]["Calorie", [0, 1, 2]]["Lipide", [0, 1, 2]]]);
 
- function AfficheGraph(liste) {
+
+ //----------------------------------------
+ function AfficheGraph(liste, type) {
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
          data: {
-             labels: ListeCalendrier($(this).val()),
+             labels: ListeCalendrier(type),
              datasets: GenereTraitGraph(liste)
          },
          options: {
@@ -91,14 +95,15 @@
  //-----------------------------------------------Fonction de construction du graphique
 
  function GenereTraitGraph(listeDeListe) {
-     dataset = [];
+     dataset = Array();
      for (var i = 0; i < listeDeListe.length; i++) {
-         dataset += TraitGraph(listeDeListe[i][0], listeDeListe[i][1]);
+         dataset.push(TraitGraph(listeDeListe[i][0], listeDeListe[i][1]));
      }
      return dataset;
  }
 
  function TraitGraph(Label, data) {
+     // voir pour genere des couleur alea
      return {
          label: Label,
          data: data,
