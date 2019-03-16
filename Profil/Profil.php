@@ -28,7 +28,7 @@ $cheminIcon='../Image/IconProgess/';
 <body>
 
 
-    <div class="d-flex flex-column justify-content-center rounded" id="TableProfil">
+    <div class="d-flex flex-column justify-content-center" id="TableProfil">
 
         <div class="independant"><img class="independant" src="../Image/<?php if(isset($Profil[7]) && $Profil[7]!='NoPic')
 {

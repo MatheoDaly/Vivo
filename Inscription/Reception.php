@@ -13,7 +13,7 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
     
     if(($req->fetch())==false){// verifier que son mail n'existe pas
         $req->closeCursor();
-        // ----------------------------------------------------------------------------------------------------------------------
+        // --------------------------------------Une couille se passe à ce niveau--------------------------------------------------------------------------------
         $rep = $BD->prepare('INSERT INTO profil (prenom, utilisateur, email, genre, poids, taille, mdp, url_photo) VALUES(:prenom, :utilisateur, :email, :genre, :poids, :taille, :mdp, "")');
 
         $rep->execute(array(
@@ -26,7 +26,7 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
         'mdp' => $_POST['mdp']
         ));
         $rep->closeCursor();
-            // ----------------------------------------------------------------------------------------------------------------------
+                // ----------------------------------------------------------------------------------------------------------------------
         echo 'Inscrit';
 
     } else {

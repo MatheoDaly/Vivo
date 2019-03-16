@@ -1,6 +1,5 @@
 /* -------------- Dépendante ---------
 */
-
 html {
     margin: 0px;
     height: 100%;
@@ -19,8 +18,14 @@ body {
 }
 
 #TableProfil {
+//HEAD
+    margin: 100px 25px 0px 25px;
+=======
     margin: 100px 50px 100px 50px;
+>>>>>>> b782df488e3f35ada3415cef373fca2371f51645
     background: url(../Image/wallpaper-2116949_960_720.jpg);
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -31,10 +36,11 @@ body {
     /*
     A finir
     */
-    height: 100px;
+    display: block;
     margin: auto;
-    z-index: 1;
-    margin-top: -25px;
+<<<<<<< HEAD
+=======
+>>>>>>> b782df488e3f35ada3415cef373fca2371f51645
 }
 
 
@@ -42,8 +48,12 @@ body {
 /* Introduction du profil */
 
 #intro {
+<<<<<<< HEAD
+    height: 360px;
+=======
     height: 200px;
     background: rgb(0, 0, 0, 0.3);
+>>>>>>> b782df488e3f35ada3415cef373fca2371f51645
 }
 
 .icon {
@@ -55,9 +65,9 @@ body {
 
 /* Prog Menu 
 */
-#ProgMenue {
-    height: 200px;
-    background-image: url('../Image/menu-3167859_1920.jpg');
-    background-size: cover;
+#ProgMenu {
+    background-image: url(../Image/table-3219660_1920.jpg);
+    background-repeat: no-repeat;
+    margin: 0px;
 
 }
