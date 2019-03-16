@@ -34,23 +34,47 @@ session_start();
       </span>
     </div>
   </nav>
-
-  <form method="get" action="recherche aliment.php" autocomplete="off">
-    <br/>
-    Recherche:
-    <input type="text" name="Alim">
-    Options de recherche:
-    Populiarité:
-    <input type="radio" name="option" value="Popularité" checked>
-    Lipide (croissant):
-    <input type="radio" name="option" value="Lipide">
-    Calorie (croissant):
-    <input type="radio" name="option" value="Calorie">
-  </form>
+  <div class="partie_recherche">
+    <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
+      <br/>
+      Recherche:
+      <input type="text" name="Alim">
+      <br/>
+      Options de recherche:
+      Populiarité:
+      <input type="radio" name="option" value="Popularité" checked>
+      Lipide (croissant):
+      <input type="radio" name="option" value="Lipide">
+      Calorie (croissant):
+      <input type="radio" name="option" value="Calorie">
+      <br/>
+      Ou bien cherchez par catégorie:
+      <select name="categorie" form="optionForm">
+        <option value="">Sans catégorie</option>
+        <option value="entrees et plats composes">Entrées et plats composés</option> <!-- il y en a 308 dans la base -->
+        <option value="fruits, legumes, legumineuses et oleagineux">Fruits, légumes, légumineuses et oléagineux</option>
+        <option value="produits cerealiers">Produits céréaliers</option>
+        <option value="viandes, œufs, poissons">Viandes, œufs, poissons</option>
+        <option value="lait et produits laitiers">Lait et produits laitiers</option>
+        <option value="boissons">Boissons</option>
+        <option value="produits sucrés">Produits sucrés</option>
+        <option value="glaces et sorbets">Glaces et sorbets</option>
+        <option value="matières grasses">Matières grasses</option>
+        <option value="aides culinaires et ingrédients divers">Aides culinaires et ingrédients divers</option>
+        <option value="aliments infantiles">Aliments infantiles</option> <!-- il y en a 36 dans la base -->
+      </select>
+      <input type="submit" name="submit" />
+    </form>
+  </div>
 
   <?php
   $bd = getBD();
-  if(isset($_GET['Alim'])){
+  // Recherche pour les option 1 et deux
+  //$bd = exec("SET NAMES 'UTF8'"); marche pas
+  $categorie = $_GET['categorie'];
+  if(isset($_GET['submit'])){
+    if(isset($_GET['Alim'])){
+
     $input = $_GET['Alim'];
     //$input = preg_replace("#[^0-9a-z]#i","",$input);
     $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
@@ -59,6 +83,10 @@ session_start();
     }elseif ($_GET['option']== "Calorie") {
       $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
     }
+  }elseif (isset($_GET['categorie'])) {
+      $ajoutcat = $_GET['categorie'];
+      $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE groupe = $ajoutcat LIMIT 10");
+  }
     while($result = $reponse->fetch()){
       echo(utf8_encode($result['alim_nom_fr']));
       echo('<br />');

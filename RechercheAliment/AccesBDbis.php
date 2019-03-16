@@ -3,7 +3,7 @@
 function getBD(){
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=aliments;charset=utf8','root','root');
+    $bdd = new PDO('mysql:host=localhost;dbname=vivo;charset=utf8','root','root');
     return $bdd;
 }
 catch (Exception $e){
