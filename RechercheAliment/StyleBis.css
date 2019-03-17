@@ -14,15 +14,6 @@ body {
     width: 100%;
 }
 
-.creaRecette{
-  border: 4px red solid;
-  float: right;
-  border:3px;
-  border-color:red;
-  border-style:solid;
-  margin-top:-400px;
-  margin-right:400px;
-}
 
 textarea {
    border: blue 2px solid;
