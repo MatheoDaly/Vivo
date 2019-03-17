@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!Doctype HTML>
 <html>
 
@@ -75,6 +79,7 @@
                     
                     Adapter le fais que des menue pour aujourd'hui ne sont pas obliger
                     */
+                    
                     $i=0; // moduler le $i pour adapter le moment des menues
                     $fin=10;//-> recupere l'intervale de jour en maintenant et le menue le plus tardif !'
                     while($ligne= $req->fetch()){
