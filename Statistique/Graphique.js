@@ -10,7 +10,6 @@
              type: $('select').val(),
              id: $('#nom').val()
          }, function (data) {
-             // verifie si c'est une liste et de quoi
              Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
          });
@@ -24,8 +23,6 @@
                  type: $(this).val(),
                  id: $('#nom').val()
              }, function (data) {
-                 // verifie si c'est une liste et de quoi
-
                  Graphique = AfficheGraph(JSON.parse(data), $("select").val());
              });
          }
