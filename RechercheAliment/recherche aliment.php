@@ -82,13 +82,7 @@ session_start();
     }
 
   }
-  echo('<div class="creaRecette">');
-  echo('<form method="POST" action="planification.html" id="instr">');
-  echo('<textarea name="instructions" form="instr" rows="4" cols="85">');
-  echo('Composer votre recette: ');
-  echo('</textarea>');
-  echo('</form>');
-  echo('</div>');
+
 
   ?>
 </body>
