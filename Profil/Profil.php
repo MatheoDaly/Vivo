@@ -8,6 +8,7 @@ $id=1;
 }
 include("../Outil/php/AccesBD.php");
 $BD=getBD();
+//https://github.com/STAT545-UBC/Discussion/issues/387 ->resoudre pb git !
 ?>
 
 <!Doctype HTML>
