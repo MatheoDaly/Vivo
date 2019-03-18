@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(isset($_SESSION["profil"])){
+$id=$_SESSION["profil"]['ID'];
+include("../Actualisation/Actualisation.php");
+} else {
+$id=1;
+}
+include("../Outil/php/AccesBD.php");
+$BD=getBD();
+//https://github.com/STAT545-UBC/Discussion/issues/387 ->resoudre pb git !
 ?>
 
 <!Doctype HTML>
@@ -73,17 +82,17 @@ session_start();
                     <!-- Automatiser la gestion du tableau!-->
                     <?php 
                     /* j'execute ma requete, je recupere le nombre de ligne pour ferme le tableau
-                    Je ferme et ouvre ma ligne toute les deux cellule -> $i%2 == 0 et si different de la fin
-                    je ferme si count == $i !
-                    pour compter -> execute; rowCount()
+                    Je ferme et ouvre ma ligne toute les deux cellule -> $i%2 == 0
+                    je ferme la div si entre est true !
+                    
                     
                     Adapter le fais que des menue pour aujourd'hui ne sont pas obliger
                     */
-                    if(isset($_SESSION["profil"])){
+                    
                     $entre=false;
-                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas' from historique_aliment where Date>=NOW() AND ID_Profil=".$_SESSION["profil"]["ID"]." GROUP BY Date");
+                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$id." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
                     $i=0; // moduler le $i pour adapter le moment des menues
-                    while($ligne = $req->fetch()){
+                    while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
                     <div class="row">
                         <?php } else if ($i%2==0){ ?>
@@ -92,10 +101,10 @@ session_start();
                         <?php } ?>
                         <div class="col-12 col-lg-6">
                             <h3 class="text-center" style="text-decoration:underline;">
-                                <?php switch($i){
+                                <?php switch($ligne["DiffDate"]){
                             case 0: echo "Aujourd'hui"; break;
                             case 1: echo "Demain"; break;
-                            default: echo "Dans ".$i." jours"; break;} ?>
+                            default: echo "Dans ".$ligne["DiffDate"]." jours"; break;} ?>
                             </h3>
                             <div class="row">
                                 <?php for($j=0; $j<$ligne["NbRepas"]; $j++){ ?>
@@ -107,29 +116,33 @@ session_start();
                                             default: echo $i." e Repas"; break;} 
                                         ?>
                                     </h4>
-                                    <?php
+                                    <ul class="liste">
+                                        <?php
                                     
                                     $req1=$BD->query("SELECT aliments.alim_nom_fr AS 'Nom', quantite 
                                         FROM historique_aliment
                                         INNER JOIN aliments ON aliments.alim_code = ID_ingredient
                                         WHERE Repas=".($j+1)."
-                                        AND Date='".$ligne["Date"]."' AND
-                                        AND ID_Profil=".$_SESSION["profil"]["ID"]); // requete archi lourd -> integre le nomà la table historique_aliment ?
+                                        AND Date='".$ligne["Date"]."'
+                                        AND ID_Profil=".$id); // requete archi lourd -> integre le nom à la table historique_aliment ?
                                     while($ligne1 = $req1->fetch()){
-                                        echo $ligne1["Nom"]." :".$ligne1["quantite"];
+                                        echo "<li>".$ligne1["Nom"]." :".$ligne1["quantite"]."</li>";
                                     }
+                                    $req1->closeCursor();
                                     ?>
+                                    </ul>
                                 </div>
                                 <?php } ?>
                             </div>
                         </div>
                         <?php
-                        i++;
+                        $i++;
                         }
+                    $req->closeCursor();
                     if ($entre){
                         ?> </div>
                     <?php           
-                    }}
+                    }
                     ?>
 
                 </div>
@@ -138,6 +151,20 @@ session_start();
 
             <div class="col-10 col-lg-4 bg-light" style="margin: 25px;">
                 <h3 class="text-center">Liste de courses</h3>
+                <ul>
+                    <?php 
+                $req = $BD->query("SELECT aliments.alim_nom_fr AS 'Nom', SUM(quantite) AS 'Quant'
+                                        FROM historique_aliment
+                                        INNER JOIN aliments ON aliments.alim_code = ID_ingredient
+                                        WHERE Date >= NOW() AND
+                                        ID_Profil = ".$id." GROUP BY Nom
+                                        ");
+                while($ligne = $req->fetch()){
+                    echo "<li>".$ligne["Nom"]." :".$ligne["Quant"]."</li>";
+                }
+                $req->closeCursor();
+                ?>
+                </ul>
             </div>
         </div>
 
@@ -148,7 +175,9 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <?php
     if(isset($_SESSION["profil"])){
+        echo'<script>';
         include("ProfilMenue.js");
+        echo'</script>';
     }
     ?>
 </body>
