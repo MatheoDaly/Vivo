@@ -65,7 +65,7 @@ $BD=getBD();
 
         <!--  Intermediare !-->
         <div>
-            <input type="button" class="btn btn-primary" value="Consultation des mes statistique">
+            <input type="button" class="btn btn-primary" id="BtnStat" value="Consultation des mes statistique">
         </div>
         <hr>
         <!-- menue  personnaliser des profil !-->

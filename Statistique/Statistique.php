@@ -42,7 +42,6 @@ $cheminIcon='../Image/IconProgess/';
     echo 1;
 }?>" name="nom" id="nom">
     <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
-
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <h1>Mon graphique
         </h1>
