@@ -1,23 +1,32 @@
 <?php
 
-
+session_start();
+if(isset($_SESSION["profil"])){
+$id=$_SESSION["profil"]['ID'];
+include("../Actualisation/Actualisation.php");
+} else {
+$id=1;
+}
 ## J'ai fini la dynamique du tableau !
 // Cela me sert seulement pour teste ma fonction en js
 // je veux un format retour tel que echo json_ecode(array(array("Ma concentration", array(Valeur1, Valeur2, Valeur3, etc))))
 // Retourne moi bien le meme nombre de donnees pour chaque types !
 include('../Outil/Php/AccesBd.php');
-$BD = getBD();
+$BD = getBDWAMPP();
+
+
 
 
 if(isset($_POST['type']) & $_POST['type'] == 1){
-    $req = $BD->query("SELECT DATE( NOW() ),Nom,NumRepas,sum(TauxCumule) from statistique where ID_Profil=".$_POST['id']." AND type=".$_POST['type']." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
+    // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
+    $req = $BD->query("SELECT DATE( NOW() ),Nom,NumRepas,sum(TauxCumule) from statistique where ID_Profil=".$id." AND type=".$_POST['type']." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
 
     $taux=array();
     $valeur=array();
     $molecule=array();
     while ($ligne= $req->fetch()){
         array_push($valeur, $ligne['sum(TauxCumule)']);
-        if($ligne['NumRepas']==3){
+        if($ligne['NumRepas']==3){ // bizarre comme if ?
             array_push($molecule, $ligne['Nom']);
             array_push($molecule, $valeur);
             array_push($taux, $molecule);
@@ -47,7 +56,8 @@ else if(isset($_POST['type']) & $_POST['type'] == 4) {
     //echo json_encode(array(array("Calorie", array(1, 2, 3))));
 } 
 
-$req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil=".$_POST['id']." AND type=".$_POST['type']." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
+if(isset($_POST['type']) & $_POST['type']>1){
+$req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil=".$id." AND type=".$_POST['type']." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
     $taux=array();
     $valeur=array();
     $molecule=array();
@@ -63,7 +73,8 @@ $req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil="
             $molecule=array();
         }
     }
+// Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
     echo json_encode($taux);
-
-$rep->closeCursor();
+$req->closeCursor();
+}
 ?>

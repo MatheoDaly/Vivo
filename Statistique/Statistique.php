@@ -12,7 +12,9 @@ include('../Outil/Php/AccesBD.php');
 // Variable :
 if(isset($_SESSION['profil'])){
     $Profil=$_SESSION['profil'];
-    }
+    } else {
+    $Profil=array(1,'Paul','Paul@jeMangeTrop.com', 120, 170, 'GrosPaul','M','CestPasDeMaFaute','NoPic');
+}
 // Cela sert de reperage ! => $Profil = array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
 $cheminPhoto='../Image/PhotoProfil/';
 $cheminIcon='../Image/IconProgess/';
@@ -28,7 +30,7 @@ $cheminIcon='../Image/IconProgess/';
     <link href="Statistique.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
     <title>Statistique <?php if(isset($Profil)){
-    echo ' de '.$Profil[0];
+    echo ' de '.$Profil[1];
     }
         ?></title>
 
@@ -36,12 +38,12 @@ $cheminIcon='../Image/IconProgess/';
 
 <body>
     <!-- Attention mathéo ne modifie pas l'input !-->
-    <input type="hidden" value="<?php if(isset($Profil)){
-    echo $Profil[0];
-    }else {
-    echo 1;
-}?>" name="nom" id="nom">
+    <input type="hidden" value="<?php 
+                                if(isset($Profil)){echo $Profil[0];
+                                }
+                                ?>" name="nom" id="nom">
     <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
+
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <h1>Mon graphique
         </h1>

@@ -5,15 +5,12 @@
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
  $(function () {
-     alert(GenereTraitGraph(liste));
      var Graphique;
      if (commence) {
          $.post('CalculTaux.php', {
-             type: $('select').val(),
-             id: $('#nom').val()
+             type: $('select').val()
          }, function (data) {
-             alert(data);
-             Graphique = AfficheGraph(liste, $("select").val());
+             Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
          });
          commence = false;
@@ -23,14 +20,12 @@
          //verifie s'il existe et si c'est un nombre
          if ($('#nom').val() != '' && !(isNaN($('#nom').val()))) {
              $.post('CalculTaux.php', {
-                 type: $(this).val(),
-                 id: $('#nom').val()
+                 type: $(this).val()
              }, function (data) {
                  Graphique = AfficheGraph(JSON.parse(data), $("select").val());
              });
          }
      });
-
 
  });
 
@@ -100,9 +95,9 @@
      else if (Choix == 2)
          return ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
      else if (Choix == 3)
-         return ["10", "11", "12", "13", "14", "15"];
+         return ["10", "11", "12", "13", "14"];
      else if (Choix == 4)
          return ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin"];
      else if (Choix == 5)
-         return ["2017", "2018", "2019"];
+         return ["2015", "2016", "2017", "2018", "2019"];
  }

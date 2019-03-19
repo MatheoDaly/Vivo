@@ -1,5 +1,5 @@
 <?php
-// pas bseoin de js on utilisera une inclusion du code php via la fonction include !
+// pas besoin de js on utilisera une inclusion du code php via la fonction include !
 /*
 ############################### Minimiser le nombre d'appelle de la page
 
