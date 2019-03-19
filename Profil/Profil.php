@@ -7,7 +7,7 @@ include("../Actualisation/Actualisation.php");
 $id=1;
 }
 include("../Outil/php/AccesBD.php");
-$BD=getBD();
+$BD=getBDWAMPP();
 //https://github.com/STAT545-UBC/Discussion/issues/387 ->resoudre pb git !
 ?>
 
@@ -142,6 +142,8 @@ $BD=getBD();
                     if ($entre){
                         ?> </div>
                     <?php           
+                    } else {
+                        echo "Vous n'avez aucun menue c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'>Menue</a>";
                     }
                     ?>
 

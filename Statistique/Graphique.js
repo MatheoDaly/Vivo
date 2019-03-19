@@ -1,7 +1,6 @@
  //---------------------- Envoie de données-----------------------------------------
  var commence = true;
  var liste = [["concentration", [1, 2, 3, 3]]];
- // Je recupere le nom via la span id #nom
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
  $(function () {
