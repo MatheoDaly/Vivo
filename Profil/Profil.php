@@ -1,14 +1,17 @@
 <?php
 session_start();
-if(isset($_SESSION["profil"])){
-$id=$_SESSION["profil"]['ID'];
-include("../Actualisation/Actualisation.php");
+if(isset($_SESSION['profil'])){
+    include("../Actualisation/Actualisation.php");
+    $Profil=$_SESSION['profil'];
 } else {
-$id=1;
+    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0)
 }
+####################################################################################################################################
+#################################################Changer la BD par MAPP ou WAMPP depend de votre serveur !##########################
+####################################################################################################################################
+############################################# Attention Session -> Array = $Profil !################################################
 include("../Outil/php/AccesBD.php");
 $BD=getBDWAMPP();
-//https://github.com/STAT545-UBC/Discussion/issues/387 ->resoudre pb git !
 ?>
 
 <!Doctype HTML>
@@ -18,7 +21,7 @@ $BD=getBDWAMPP();
     <meta charset="utf-8">
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="Profil.css" rel="stylesheet">
-    <title>Profil</title>
+    <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
 
@@ -28,7 +31,7 @@ $BD=getBDWAMPP();
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <div class="row justify-content-center">
             <div class="col-sm-10" style="width: 100px;">
-                <img class="independant" src="../Image/avatar-1295406_640.png" alt="profil">
+                <img class="independant" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
             </div>
         </div>
 
@@ -45,8 +48,18 @@ $BD=getBDWAMPP();
                 </div>
                 <div class="col-12 col-sm-3 d-flex flex-column">
                     <div>
-                        <strong>Objectif perdre 50 kg
+                        <strong>Objectifs :
                         </strong>
+                        <ul> <?php
+                            $req=$BD->query("SELECT objectif.type AS 'Type', objectif_profil.valeur_type AS 'Valeur' 
+                                            FROM objectif_profil
+                                            INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
+                                            WHERE objectif_profil.id_Profil=".$Profil['ID']);
+                            while($ligne = $req->fetch()){
+                                echo '<li>'.$ligne['Type'].' '.$ligne['Valeur'].'</li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                     <div class="row">
                         <div class=" col-xs-12 ">
@@ -150,7 +163,7 @@ $BD=getBDWAMPP();
                 </div>
 
             </div>
-
+            <?php if($entre){ ?>
             <div class="col-10 col-lg-4 bg-light" style="margin: 25px;">
                 <h3 class="text-center">Liste de courses</h3>
                 <ul>
@@ -168,6 +181,7 @@ $BD=getBDWAMPP();
                 ?>
                 </ul>
             </div>
+            <?php } ?>
         </div>
 
 

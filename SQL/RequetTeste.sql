@@ -1,3 +1,6 @@
+INSERT INTO objectif_profil VALUES (1, 1, 67)
+
+
 INSERT INTO historique_aliment VALUES (1, 25600, 2, 1, DATE_ADD(NOW(), INTERVAL 1 DAY));
 INSERT INTO historique_aliment VALUES (1, 25601, 2, 1, DATE_ADD(NOW(), INTERVAL 1 DAY));
 INSERT INTO historique_aliment VALUES (1, 25602, 2, 1, DATE_ADD(NOW(), INTERVAL 1 DAY));
