@@ -10,30 +10,31 @@ session_start();
   <title></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="#">Vivo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Statistique</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
+<header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="../index.html">Vivo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Profil/Profil.html">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
         Pour une bonne santé vivez VIVO !
       </span>
-    </div>
-  </nav>
+            </div>
+        </nav>
+    </header>
+<body>
   <div class="partie_recherche">
     <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
       <br/>
