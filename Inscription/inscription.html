@@ -20,7 +20,7 @@
                         <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Profil/Profil.html">Profil</a>
+                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
