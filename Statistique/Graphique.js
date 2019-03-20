@@ -30,6 +30,17 @@
 
  //---------------------------------------------Objet Chart----------------------------------------------------------------
 
+ var li = [["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 40000]];
+
+ function pourcentage(listeDeListe) {
+     sum = 0;
+     for (i = 0; i < listeDeListe.length; i++) {
+         sum += li[3][i];
+     }
+     return sum;
+ }
+ alert(pourcentage(li));
+
  new Chart(document.getElementById("Rond"), {
      type: 'pie',
      data: {
@@ -49,7 +60,10 @@
  });
 
 
- //----------------------------------------
+
+
+
+ //############################################################## Partie AfficheGraph ###########################################
  function AfficheGraph(liste, type) {
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
@@ -62,7 +76,7 @@
          }
      });
  }
- //-----------------------------------------------Fonction de construction du graphique
+ //-----------------------------------------------Fonction de construction du graphique----------------------------------
 
  function GenereTraitGraph(listeDeListe) {
      //Ne veux pas recevoir de tableau mais effectue, un tableau pour les caracter et un pour les nombres

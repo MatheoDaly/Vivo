@@ -4,7 +4,7 @@ if(isset($_SESSION['profil'])){
     include("../Actualisation/Actualisation.php");
     $Profil=$_SESSION['profil'];
 } else {
-    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0)
+    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
 ####################################################################################################################################
 #################################################Changer la BD par MAPP ou WAMPP depend de votre serveur !##########################
@@ -41,15 +41,29 @@ $BD=getBDWAMPP();
 
         <div class="d-flex flex-fill bg-white justify-content-between" id="intro">
             <div class="row">
-                <div class="col-12 col-sm-5">Profil : didier de la compté des pres jolie
-                    <br> il a 29 ans et il est pas très beau... desolé didier
+                <div class="col-12 col-sm-5">
+                    <?php 
+                    // refaire le vrai calculde l'IMC
+                    echo "C'est moi, ".$Profil['prenom']."</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg, </br>Soit un IMC de : ".($Profil["taille"]*$Profil["poids"])." </br>  Je possede : ".$Profil["point"]." points";
+                    
+                    
+                    ?>
                 </div>
-                <div class="col-12 col-sm-4">Ajout de logo
+                <div id='logo' class="col-12 col-sm-4">
+                    <?php
+                    $req=$BD->query("SELECT  regime.Nom AS 'Nom', regime.urlRegime AS 'url' 
+                                    FROM regime
+                                    INNER JOIN regime_profil ON regime_profil.id_Regime= regime.id
+                                    WHERE regime_profil.id_Profil =".$Profil['ID']);
+                            while($ligne = $req->fetch()){?>
+
+                    <img src="../Image/Regime/<?php echo $ligne['url']; ?>" alt="<?php echo $ligne['Nom']; ?>">
+
+                    <?php } $req->closeCursor(); ?>
                 </div>
                 <div class="col-12 col-sm-3 d-flex flex-column">
                     <div>
-                        <strong>Objectifs :
-                        </strong>
+                        <strong>Objectifs :</strong>
                         <ul> <?php
                             $req=$BD->query("SELECT objectif.type AS 'Type', objectif_profil.valeur_type AS 'Valeur' 
                                             FROM objectif_profil
@@ -58,6 +72,7 @@ $BD=getBDWAMPP();
                             while($ligne = $req->fetch()){
                                 echo '<li>'.$ligne['Type'].' '.$ligne['Valeur'].'</li>';
                             }
+                            $req->closeCursor();
                             ?>
                         </ul>
                     </div>
@@ -69,6 +84,9 @@ $BD=getBDWAMPP();
                     <div class="row">
                         <h3 class="col-md-6">
                             Ordi
+                            <?php 
+                            // ici on introduit le concepte de point !
+                            ?>
                         </h3>
                     </div>
 
@@ -78,7 +96,7 @@ $BD=getBDWAMPP();
 
         <!--  Intermediare !-->
         <div>
-            <input type="button" class="btn btn-primary" id="BtnStat" value="Consultation des mes statistique">
+            <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation des mes statistique">
         </div>
         <hr>
         <!-- menue  personnaliser des profil !-->
@@ -103,7 +121,7 @@ $BD=getBDWAMPP();
                     */
                     
                     $entre=false;
-                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$id." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
+                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
                     $i=0; // moduler le $i pour adapter le moment des menues
                     while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
@@ -126,7 +144,7 @@ $BD=getBDWAMPP();
                                         <?php switch($j){
                                             case 0: echo "Midi"; break;
                                             case 1: echo "Soir"; break;
-                                            default: echo $i." e Repas"; break;} 
+                                            default: echo $i."e Repas"; break;} 
                                         ?>
                                     </h4>
                                     <ul class="liste">
@@ -137,7 +155,7 @@ $BD=getBDWAMPP();
                                         INNER JOIN aliments ON aliments.alim_code = ID_ingredient
                                         WHERE Repas=".($j+1)."
                                         AND Date='".$ligne["Date"]."'
-                                        AND ID_Profil=".$id); // requete archi lourd -> integre le nom à la table historique_aliment ?
+                                        AND ID_Profil=".$Profil['ID']); // requete archi lourd -> integre le nom à la table historique_aliment ?
                                     while($ligne1 = $req1->fetch()){
                                         echo "<li>".$ligne1["Nom"]." :".$ligne1["quantite"]."</li>";
                                     }
@@ -156,7 +174,7 @@ $BD=getBDWAMPP();
                         ?> </div>
                     <?php           
                     } else {
-                        echo "Vous n'avez aucun menue c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'>Menue</a>";
+                        echo "Vous n'avez aucun menue c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
                     }
                     ?>
 
@@ -172,7 +190,7 @@ $BD=getBDWAMPP();
                                         FROM historique_aliment
                                         INNER JOIN aliments ON aliments.alim_code = ID_ingredient
                                         WHERE Date >= NOW() AND
-                                        ID_Profil = ".$id." GROUP BY Nom
+                                        ID_Profil = ".$Profil['ID']." GROUP BY Nom
                                         ");
                 while($ligne = $req->fetch()){
                     echo "<li>".$ligne["Nom"]." :".$ligne["Quant"]."</li>";
