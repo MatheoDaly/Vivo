@@ -17,7 +17,7 @@
      // Jquery pour graphique
      $('select').on('change', function () {
          //verifie s'il existe et si c'est un nombre
-         if ($('#nom').val() != '' && !(isNaN($('#nom').val()))) {
+         if ($(this).val() != '' && !(isNaN($(this).val()))) {
              $.post('CalculTaux.php', {
                  type: $(this).val()
              }, function (data) {
@@ -30,16 +30,18 @@
 
  //---------------------------------------------Objet Chart----------------------------------------------------------------
 
- var li = [["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 40000]];
+ var li = ['Consommation calorie', ["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 40000]];
 
- function pourcentage(listeDeListe) {
+ function pourcentage(lis) {
      sum = 0;
-     for (i = 0; i < listeDeListe.length; i++) {
-         sum += li[3][i];
+     for (var i in lis) {
+         sum = sum + lis[i];
      }
      return sum;
  }
- alert(pourcentage(li));
+ alert(pourcentage(li["2"]));
+
+
 
  new Chart(document.getElementById("Rond"), {
      type: 'pie',
