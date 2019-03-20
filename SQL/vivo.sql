@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 17 mars 2019 à 15:33
+-- Généré le :  mer. 20 mars 2019 à 09:22
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -3042,7 +3042,31 @@ INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `ID_Prof
 (1, 25600, 3, 1, '2019-03-13'),
 (2, 25600, 3, 1, '2019-03-13'),
 (1, 25600, 3, 1, '2019-03-13'),
-(2, 25600, 3, 1, '2019-03-13');
+(2, 25600, 3, 1, '2019-03-13'),
+(1, 25600, 2, 1, '2019-03-18'),
+(1, 25601, 2, 1, '2019-03-18'),
+(1, 25602, 2, 1, '2019-03-18'),
+(1, 25603, 2, 1, '2019-03-18'),
+(1, 25600, 2, 1, '2019-03-19'),
+(1, 25601, 2, 1, '2019-03-19'),
+(1, 25602, 2, 1, '2019-03-19'),
+(1, 25603, 2, 1, '2019-03-19'),
+(2, 25600, 2, 1, '2019-03-18'),
+(2, 25601, 2, 1, '2019-03-18'),
+(2, 25602, 2, 1, '2019-03-18'),
+(2, 25603, 2, 1, '2019-03-18'),
+(1, 25600, 2, 1, '2019-03-18'),
+(1, 25601, 2, 1, '2019-03-18'),
+(1, 25602, 2, 1, '2019-03-18'),
+(1, 25603, 2, 1, '2019-03-18'),
+(1, 25600, 2, 1, '2019-03-19'),
+(1, 25601, 2, 1, '2019-03-19'),
+(1, 25602, 2, 1, '2019-03-19'),
+(1, 25603, 2, 1, '2019-03-19'),
+(2, 25600, 2, 1, '2019-03-18'),
+(2, 25601, 2, 1, '2019-03-18'),
+(2, 25602, 2, 1, '2019-03-18'),
+(2, 25603, 2, 1, '2019-03-18');
 
 -- --------------------------------------------------------
 
@@ -3057,6 +3081,48 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `Type` varchar(20) DEFAULT NULL,
   `Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif`
+--
+
+DROP TABLE IF EXISTS `objectif`;
+CREATE TABLE IF NOT EXISTS `objectif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `objectif`
+--
+
+INSERT INTO `objectif` (`id`, `type`) VALUES
+(1, 'poids');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif_profil`
+--
+
+DROP TABLE IF EXISTS `objectif_profil`;
+CREATE TABLE IF NOT EXISTS `objectif_profil` (
+  `id_Profil` int(11) NOT NULL,
+  `id_Objectif` int(11) NOT NULL,
+  `valeur_type` int(11) NOT NULL,
+  KEY `fk_profil_Dbl` (`id_Profil`),
+  KEY `fk_objectif_Dbl` (`id_Objectif`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `objectif_profil`
+--
+
+INSERT INTO `objectif_profil` (`id_Profil`, `id_Objectif`, `valeur_type`) VALUES
+(1, 1, 67);
 
 -- --------------------------------------------------------
 
@@ -3144,10 +3210,17 @@ CREATE TABLE IF NOT EXISTS `recette_plat` (
 DROP TABLE IF EXISTS `regime`;
 CREATE TABLE IF NOT EXISTS `regime` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` int(11) NOT NULL,
-  `urlRegime` int(11) NOT NULL,
+  `Nom` varchar(20) NOT NULL,
+  `urlRegime` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `regime`
+--
+
+INSERT INTO `regime` (`id`, `Nom`, `urlRegime`) VALUES
+(1, 'Sans Gluten', 'gluten.png');
 
 -- --------------------------------------------------------
 
@@ -3162,6 +3235,13 @@ CREATE TABLE IF NOT EXISTS `regime_profil` (
   KEY `id_Regime` (`id_Regime`),
   KEY `id_Profil` (`id_Profil`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `regime_profil`
+--
+
+INSERT INTO `regime_profil` (`id_Profil`, `id_Regime`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
