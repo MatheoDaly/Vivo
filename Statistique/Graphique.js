@@ -30,7 +30,7 @@
 
  //---------------------------------------------Objet Chart----------------------------------------------------------------
 
- var li = ['Consommation calorie', ["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 40000]];
+ var li = ['Consommation calorie', ["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
 
 
 
@@ -106,14 +106,31 @@
 
  function TraitGraph(Label, data) {
      // voir pour genere des couleur alea
+     var st = Math.round(Math.random() * 155);
+     switch (Math.round(Math.random() * 2)) {
+         case 0:
+             st1 = st.toString() + ',' + st.toString() + ', 0';
+             st2 = (st + 100).toString() + ',' + (st + 100).toString() + ', 0';
+             break;
+         case 1:
+             st1 = '0,' + st.toString() + ',' + st.toString();
+             st2 = '0,' + (st + 100).toString() + ',' + (st + 100).toString();
+             break;
+         case 2:
+             st1 = st.toString() + ',0,' + st.toString();
+             st2 = (st + 100).toString() + ',0,' + (st + 100).toString();
+             break;
+
+     }
+     alert(st1);
      return {
          label: Label,
          data: data,
          backgroundColor: [
-            'rgba(0, 100, 100, .2)',
+            'rgba(' + st1 + ', .2)',
           ],
          borderColor: [
-            'rgba(0, 200, 200, .7)',
+            'rgba(' + st2 + ', .7)',
           ],
          borderWidth: 3
      };
