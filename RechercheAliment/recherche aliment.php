@@ -27,6 +27,9 @@ session_start();
                     <li class="nav-item">
                         <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                    </li>
                 </ul>
                 <span class="navbar-text">
         Pour une bonne santé vivez VIVO !
