@@ -106,23 +106,23 @@
 
  function TraitGraph(Label, data) {
      // voir pour genere des couleur alea
-     var st = Math.round(Math.random() * 155);
-     switch (Math.round(Math.random() * 2)) {
-         case 0:
-             st1 = st.toString() + ',' + st.toString() + ', 0';
-             st2 = (st + 100).toString() + ',' + (st + 100).toString() + ', 0';
-             break;
+     var rd = Math.round(Math.random() * 155);
+     var rd1 = Math.round(Math.random() * 155);
+     switch (Math.round(Math.random() * 2.49)) {
          case 1:
-             st1 = '0,' + st.toString() + ',' + st.toString();
-             st2 = '0,' + (st + 100).toString() + ',' + (st + 100).toString();
+             st1 = rd.toString() + ',' + rd1.toString() + ', 0';
+             st2 = (rd + 100).toString() + ',' + (rd1 + 100).toString() + ', 0';
              break;
          case 2:
-             st1 = st.toString() + ',0,' + st.toString();
-             st2 = (st + 100).toString() + ',0,' + (st + 100).toString();
+             st1 = '0,' + rd.toString() + ',' + rd1.toString();
+             st2 = '0,' + (rd + 100).toString() + ',' + (rd1 + 100).toString();
+             break;
+         case 0:
+             st1 = rd.toString() + ',0,' + rd1.toString();
+             st2 = (rd + 100).toString() + ',0,' + (rd1 + 100).toString();
              break;
 
      }
-     alert(st1);
      return {
          label: Label,
          data: data,
