@@ -32,35 +32,50 @@
 
  var li = ['Consommation calorie', ["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 40000]];
 
- function pourcentage(lis) {
-     sum = 0;
+
+
+
+ function sum(lis) {
+     var sum = 0;
      for (var i in lis) {
          sum = sum + lis[i];
      }
      return sum;
  }
- alert(pourcentage(li["2"]));
 
+ function Newtab(liste) {
+     var sum1 = sum(liste["2"]);
+     liste.push(new Array(liste["2"].length));
+     for (var i in liste) {
+         liste["2"][i] = liste["2"][i] / sum1;
+         liste["3"][i] = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 
-
- new Chart(document.getElementById("Rond"), {
-     type: 'pie',
-     data: {
-         labels: ["Gras", "Gras", "Gras", "Un peu gras", "Gras"],
-         datasets: [{
-             label: "En pourcentage (%)",
-             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-             data: [20, 20, 10, 30, 20]
-      }]
-     },
-     options: {
-         title: {
-             display: true,
-             text: 'Mon alimentation'
-         }
      }
- });
+     return liste;
+ }
 
+ afficheCamebert(li);
+
+ function afficheCamebert(listeDeListe) {
+     liste = Newtab(listeDeListe);
+     return new Chart(document.getElementById("Rond"), {
+         type: 'pie',
+         data: {
+             labels: liste[1],
+             datasets: [{
+                 label: "En pourcentage (%)",
+                 backgroundColor: liste[3],
+                 data: liste[2]
+      }]
+         },
+         options: {
+             title: {
+                 display: true,
+                 text: liste[0]
+             }
+         }
+     });
+ }
 
 
 
