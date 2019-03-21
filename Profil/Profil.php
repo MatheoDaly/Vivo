@@ -32,16 +32,16 @@ $BD=getBDWAMPP();
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
                     </li>
                 </ul>
