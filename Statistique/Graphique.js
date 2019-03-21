@@ -30,7 +30,7 @@
 
  //---------------------------------------------Objet Chart----------------------------------------------------------------
 
- var li = ['Consommation calorie', ["Chips", "casoulet", "frite", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
+ var li = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
 
 
 

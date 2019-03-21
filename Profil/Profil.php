@@ -24,7 +24,10 @@ $BD=getBDWAMPP();
     <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
-<header>
+
+<body>
+    <!-- ################NavBar############### !-->
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
             <a class="navbar-brand" href="../index.html">Vivo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,24 +49,24 @@ $BD=getBDWAMPP();
                     </li>
                 </ul>
                 <span class="navbar-text">
-        Pour une bonne santé vivez VIVO !
-      </span>
+                    Pour une bonne santé vivez VIVO !
+                </span>
             </div>
         </nav>
     </header>
-<body>
 
+    <!-- ################ Entete Photo ############### !-->
 
     <div class="d-flex flex-column justify-content-center" id="TableProfil">
         <div class="row justify-content-center">
-            <div class="col-sm-10" style="width: 100px;">
+            <div id="avatar" class="col-sm-10" style="width: 100px;">
                 <img class="independant" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
             </div>
         </div>
 
 
 
-        <!-- introduction !-->
+        <!-- ################ Bandeau presentation ############### !-->
 
         <div class="d-flex flex-fill bg-white justify-content-between" id="intro">
             <div class="row">
@@ -233,6 +236,7 @@ $BD=getBDWAMPP();
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="ModificationProfil.js" type="text/javascript"></script>
     <?php
     if(isset($_SESSION["profil"])){
         echo'<script>';
