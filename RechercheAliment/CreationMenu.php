@@ -54,9 +54,11 @@ session_start();
                                 <input type='number' class="form-control" name='nbMenu'>
                                 <input type='submit' class="btn btn-primary" name='valNbMenu'>
                             </div>
-                        </form>
+
 
                         <?php
+                        $bd=getBD();
+                        $data=$bd->query('SELECT * FROM recette_plat');
                         if(isset($_GET['nbMenu']) && isset($_GET['valNbMenu'])){
                         $i=1;
                         echo('<ul class="list-group">');
@@ -68,9 +70,25 @@ session_start();
                             $i+=1;
 
                         }
+                        echo("<input type='submit' class='btn btn-primary' name='valNbMenu2'>"); // On valide le nombre de plats
                         echo('</ul>');
                         }
+                        if(isset($_GET['valNbMenu2'])){
+                          while($res = $data->fetch()){
+                              echo($res['nom']);
+                              echo('<a href="page_recette.php?id_recette=');
+                              echo($res['Id_Recette']);
+                              echo('">');
+                              echo(' Voir recette');
+                              echo('</a>');
+                          }
+                          echo('<br/>');
+                          echo('<a href="recherche aliment.php">Créer une recette</a>');
+                        }
+
+
             ?>
+            </form>
                     </div>
                 </div>
                 <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
