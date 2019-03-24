@@ -1,4 +1,4 @@
-/* -------------- Dépendante ---------
+﻿/* -------------- Dépendante ---------
 */
 html {
     margin: 0px;
@@ -46,9 +46,8 @@ body {
 /* Introduction du profil */
 
 #intro {
-    height: 360px;
-    height: 200px;
-    background: rgb(0, 0, 0, 0.3);
+
+    display: table;
 }
 
 .icon {

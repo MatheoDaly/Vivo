@@ -57,7 +57,7 @@ $BD=getBDWAMPP();
 
     <!-- ################ Entete Photo ############### !-->
 
-    <div class="d-flex flex-column justify-content-center" id="TableProfil">
+    <div class="d-flex flex-column justify-content-center rounded" id="TableProfil">
         <div class="row justify-content-center">
             <div id="avatar" class="col-sm-10" style="width: 100px;">
                 <img class="independant" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
@@ -106,17 +106,33 @@ $BD=getBDWAMPP();
                         </ul>
                     </div>
                     <div class="row">
-                        <div class=" col-xs-12 ">
-                            <img class=" w-50" name="ordi" src="../Image/mac-1784459_640.png" alt="mac">
+                        <div class=" col-xs-12">
+                           <?php
+                                $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type
+                                            FROM objectif_profil
+                                            INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
+                                            WHERE objectif_profil.id_Profil=".$Profil['ID']);
+                                $objectif_poids = $objectif_poids ->fetch();
+                                $objectif_poids= $objectif_poids[0];
+                                if($Profil['poids'] > $objectif_poids && $Profil['genre'] == 'M'){
+                                    echo '<img class=" w-50" name="ordi" src="../Image/diet-3556961_640.jpg" alt="mac">';
+                                    echo '<h3>Perte de poids</h3>';
+                                }else if($Profil['poids'] > $objectif_poids && $Profil['genre'] == 'F'){
+                                    echo '<img class=" w-50" name="ordi" src="../Image/diet-3117938_640.jpg" alt="mac">';
+                                    echo '<h3>Perte de poids</h3>';
+                                }else if ($Profil['poids'] < $objectif_poids){
+                                    echo '<img class=" w-50" name="ordi" src="../Image/dumbbell-3160788_640.png" alt="mac">';
+                                    echo '<h3>Prise de poids</h3>';
+                                }
+                                
+                            ?>
                         </div>
                     </div>
                     <div class="row">
-                        <h3 class="col-md-6">
-                            Ordi
                             <?php 
                             // ici on introduit le concepte de point !
                             ?>
-                        </h3>
+  
                     </div>
 
                 </div>
@@ -128,13 +144,13 @@ $BD=getBDWAMPP();
             <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation des mes statistique">
         </div>
         <hr>
-        <!-- menue  personnaliser des profil !-->
+        <!-- menu  personnaliser des profil !-->
 
         <div class="independant">
             <img class="independant" src="../Image/food-304597_640.png" style="width: 100px;" />
         </div>
 
-        <!-- Programation des menue !-->
+        <!-- Programation des menu !-->
         <div id="ProgMenu" class=" row d-flex justify-content-between">
             <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
                 <h1 class="text-light text-center border border-warning">Menu</h1>
@@ -146,12 +162,12 @@ $BD=getBDWAMPP();
                     je ferme la div si entre est true !
                     
                     
-                    Adapter le fais que des menue pour aujourd'hui ne sont pas obliger
+                    Adapter le fais que des menu pour aujourd'hui ne sont pas obliger
                     */
                     
                     $entre=false;
                     $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
-                    $i=0; // moduler le $i pour adapter le moment des menues
+                    $i=0; // moduler le $i pour adapter le moment des menus
                     while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
                     <div class="row">
@@ -203,7 +219,7 @@ $BD=getBDWAMPP();
                         ?> </div>
                     <?php           
                     } else {
-                        echo "Vous n'avez aucun menue c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
+                        echo "Vous n'avez aucun menu c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
                     }
                     ?>
 
