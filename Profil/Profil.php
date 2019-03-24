@@ -11,7 +11,7 @@ if(isset($_SESSION['profil'])){
 ####################################################################################################################################
 ############################################# Attention Session -> Array = $Profil !################################################
 include("../Outil/php/AccesBD.php");
-$BD=getBDWAMPP();
+$BD=getBDWAMPP(); 
 ?>
 
 <!Doctype HTML>
@@ -24,38 +24,38 @@ $BD=getBDWAMPP();
     <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
-  <!-- ################NavBar############### !-->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <a class="navbar-brand" href="../index.html">Vivo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Pour une bonne santé vivez VIVO !
-                </span>
-            </div>
-        </nav>
-    </header>
+<!-- ################NavBar############### !-->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="../index.html">Vivo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Pour une bonne santé vivez VIVO !
+            </span>
+        </div>
+    </nav>
+</header>
 
 
 <body>
-  
+
     <!-- ################ Entete Photo ############### !-->
 
     <div class=" container  justify-content-center rounded" id="TableProfil">
@@ -80,7 +80,7 @@ $BD=getBDWAMPP();
                     ?>
                 </div>
                 <div id='logo' class="col-12 col-sm-4">
-                   
+
                     <?php
                     $req=$BD->query("SELECT  regime.Nom AS 'Nom', regime.urlRegime AS 'url' 
                                     FROM regime
@@ -107,8 +107,8 @@ $BD=getBDWAMPP();
                             ?>
                         </ul>
                     </div>
-                        <div class=" col-12">
-                           <?php
+                    <div class=" col-12">
+                        <?php
                                 $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type
                                             FROM objectif_profil
                                             INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
@@ -127,12 +127,12 @@ $BD=getBDWAMPP();
                                 }
                                 
                             ?>
-                        </div>
+                    </div>
                     <div class="row">
-                            <?php 
+                        <?php 
                             // ici on introduit le concepte de point !
                             ?>
-  
+
                     </div>
 
                 </div>
@@ -251,7 +251,7 @@ $BD=getBDWAMPP();
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="ModificationProfil.js" type="text/javascript"></script>
     <?php
     if(isset($_SESSION["profil"])){
