@@ -15,13 +15,17 @@ body {
 }
 
 
-textarea {
-   border: blue 2px solid;
+.creaRecette {
+
    position: fixed;
    top: 100px;
    bottom: 100px;
    right: 300px;
    left: 600px;
+}
+
+.creaRecette textarea{
+  border: blue 2px solid;  
 }
 
 #Table {

@@ -1,5 +1,6 @@
 <?php
 include_once "AccesBDbis.php";
+include_once "Fonctions_alim.php";
 session_start();
 ?>
 
@@ -57,6 +58,7 @@ session_start();
 
 
                         <?php
+                        //print_r($_SESSION['Menu']);
                         $bd=getBD();
                         $data=$bd->query('SELECT * FROM recette_plat');
                         if(isset($_GET['nbMenu']) && isset($_GET['valNbMenu'])){
@@ -73,7 +75,18 @@ session_start();
                         echo("<input type='submit' class='btn btn-primary' name='valNbMenu2'>"); // On valide le nombre de plats
                         echo('</ul>');
                         }
+                        echo($_GET['nbMenu']);
                         if(isset($_GET['valNbMenu2'])){
+                          /*if(!isset($_SESSION['Menu'])){
+                            $_SESSION['Menu']=array('numRecPlat'=>1);
+                            $j=2;
+
+                            while($j!=$_GET['nbMenu']){
+
+                              ajoutRecPlat($j);
+                              $j=$j+1;
+                            }
+                          }*/
                           while($res = $data->fetch()){
                               echo($res['nom']);
                               echo('<a href="page_recette.php?id_recette=');
@@ -83,7 +96,11 @@ session_start();
                               echo('</a>');
                           }
                           echo('<br/>');
+                          echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
+                          echo('<br/>');
                           echo('<a href="recherche aliment.php">Créer une recette</a>');
+                          //print_r($_SESSION['Menu']);
+                          echo('<a href="tempo_stop.php">stop</a>');
                         }
 
 

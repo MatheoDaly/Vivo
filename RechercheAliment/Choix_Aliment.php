@@ -78,7 +78,7 @@ session_start();
         echo('<div class="rechAlim">');
         echo('<form method="GET" action="ajouter.php">');
         echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout" value="Choisir pour la recette">');
+        echo('<input type="submit" name="ajout2" value="Choisir">');
         echo('</form>');
         echo('</div>');
 
@@ -87,15 +87,6 @@ session_start();
     }
 
   }
-  echo('<div class="creaRecette">');
-  echo('<form method="POST" action="planification.html" id="instr">');
-  echo('<input type="text" name="nomRecette" placeholder="Nom de la recette>"');
-  echo('</form>');
-  echo('<textarea name="instructions" form="instr" rows="10" cols="85">');
-  echo('Composer votre recette: ');
-  echo('</textarea>');
-  echo('</div>');
-
 
   ?>
 </body>
