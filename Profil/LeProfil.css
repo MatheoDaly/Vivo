@@ -18,9 +18,7 @@ body {
 }
 
 #TableProfil {
-    margin: 100px 25px 0px 25px;
-    margin: 100px 50px 100px 50px;
-
+    margin: auto;
     background: url(../Image/wallpaper-2116949_960_720.jpg);
     position: relative;
     z-index: 1;
@@ -48,6 +46,7 @@ body {
 #intro {
 
     display: table;
+
 }
 
 .icon {

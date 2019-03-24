@@ -20,13 +20,11 @@ $BD=getBDWAMPP();
 <head>
     <meta charset="utf-8">
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Profil.css" rel="stylesheet">
+    <link href="LeProfil.css" rel="stylesheet">
     <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
-
-<body>
-    <!-- ################NavBar############### !-->
+  <!-- ################NavBar############### !-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
             <a class="navbar-brand" href="../index.html">Vivo</a>
@@ -55,9 +53,12 @@ $BD=getBDWAMPP();
         </nav>
     </header>
 
+
+<body>
+  
     <!-- ################ Entete Photo ############### !-->
 
-    <div class="d-flex flex-column justify-content-center rounded" id="TableProfil">
+    <div class=" container  justify-content-center rounded" id="TableProfil">
         <div class="row justify-content-center">
             <div id="avatar" class="col-sm-10" style="width: 100px;">
                 <img class="independant" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
@@ -79,6 +80,7 @@ $BD=getBDWAMPP();
                     ?>
                 </div>
                 <div id='logo' class="col-12 col-sm-4">
+                   
                     <?php
                     $req=$BD->query("SELECT  regime.Nom AS 'Nom', regime.urlRegime AS 'url' 
                                     FROM regime
@@ -105,8 +107,7 @@ $BD=getBDWAMPP();
                             ?>
                         </ul>
                     </div>
-                    <div class="row">
-                        <div class=" col-xs-12">
+                        <div class=" col-12">
                            <?php
                                 $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type
                                             FROM objectif_profil
@@ -127,7 +128,6 @@ $BD=getBDWAMPP();
                                 
                             ?>
                         </div>
-                    </div>
                     <div class="row">
                             <?php 
                             // ici on introduit le concepte de point !
