@@ -9,7 +9,7 @@ session_start();
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="StyleBis.css" type="text/css">
-  <title>Creation de menu</title>
+  <title>menuuuuuu</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <header>
@@ -49,29 +49,35 @@ session_start();
         <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
         <div class="col-10 bg-light mx-auto text-dark rounded" style="padding:20px;">
 
-          <form method='get' action="CreationMenuSuite.php">
-            <div class="form-group">
-              <label for="nbMenu">Veuillez indiquer le nombre de plat pour votre menu</label>
-              <input type='number' class="form-control" name='nbMenu'>
-
-            </div>
-
-
+          <form method='get' action="CreationMenu.php">
             <?php
             //print_r($_SESSION['Menu']);
+            $bd=getBD();
+            $data=$bd->query('SELECT * FROM recette_plat');
+            if(isset($_GET['nbMenu']) && isset($_GET['valNbMenu2'])){
+              $i=1;
+              echo('<ul class="list-group">');
+              while($i<=$_GET['nbMenu']){
+                echo('<li class="list-group-item">');
+                echo "Recette ".$i;
+                echo('</li>');
 
+                $i+=1;
+
+              }
               //global $n;
-              //echo('<form method="get" action="CreationMenu.php">');
-              echo("<input type='submit' class='btn btn-primary' name='valNbMenu2' value='Continuer'>"); // On valide le nombre de plats
-              echo('</form>');
+
+              echo("<input type='submit' class='btn btn-primary' name='valNbMenu3'>"); // On valide le nombre de plats
               echo('</ul>');
+            }
 
-            //if(isset($_GET['valNbMenu2'])){
-            //  echo('<meta http-equiv="refresh" content="0; URL=CreationMenuSuite.php">');
-            //}
+              $_SESSION['Menu']=1;// On déclare qu'un menu se définit
 
-              /*while($res = $data->fetch()){
+              while($res = $data->fetch()){
+                echo('<br/>');
+                echo('<strong>');
                 echo($res['nom']);
+                echo('</strong>');
                 echo('<a href="page_recette.php?id_recette=');
                 echo($res['Id_Recette']);
                 echo('">');
@@ -83,21 +89,20 @@ session_start();
               echo('<br/>');
               echo('<a href="recherche aliment.php">Créer une recette</a>');
               echo('<a href="tempo_stop.php">stop</a>');
-              */
 
 
 
-            ?>
-          </form>
+              ?>
+            </form>
+          </div>
+        </div>
+        <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
+          <h1 class="border border-warning text-center">Statistiques</h1>
         </div>
       </div>
-      <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
-        <h1 class="border border-warning text-center">Statistiques</h1>
-      </div>
     </div>
-  </div>
 
 
-</body>
+  </body>
 
-</html>
+  </html>
