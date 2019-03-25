@@ -130,7 +130,6 @@ $BD=getBD();
                                     echo '<img class=" w-50" name="ordi" src="../Image/dumbbell-3160788_640.png" alt="mac">';
                                     echo '<h3>Prise de poids</h3>';
                                 }
-                                $objectif_poids->closeCursor();
                             ?>
                     </div>
                     <div class="row">
