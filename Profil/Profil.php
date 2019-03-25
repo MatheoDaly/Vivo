@@ -130,7 +130,7 @@ $BD=getBDWAMPP();
                                     echo '<img class=" w-50" name="ordi" src="../Image/dumbbell-3160788_640.png" alt="mac">';
                                     echo '<h3>Prise de poids</h3>';
                                 }
-                                
+                                $objectif_poids->closeCursor();
                             ?>
                     </div>
                     <div class="row">
@@ -149,19 +149,19 @@ $BD=getBDWAMPP();
             <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation des mes statistique">
         </div>
     </div>
-        <!-- menu  personnaliser des profil !-->
+    <!-- menu  personnaliser des profil !-->
 
-        <div>
-            <img class="independant rounded-circle" src="../Image/food-304597_640.png" style="width: 100px;" />
-        </div>
+    <div>
+        <img class="independant rounded-circle" src="../Image/food-304597_640.png" style="width: 100px;" />
+    </div>
 
-        <!-- Programation des menu !-->
-        <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
-            <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
-                <h1 class="text-light text-center border border-warning">Menu</h1>
-                <div class="col-10 bg-light mx-auto">
-                    <!-- Automatiser la gestion du tableau!-->
-                    <?php 
+    <!-- Programation des menu !-->
+    <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
+        <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
+            <h1 class="text-light text-center border border-warning">Menu</h1>
+            <div class="col-10 bg-light mx-auto">
+                <!-- Automatiser la gestion du tableau!-->
+                <?php 
                     /* j'execute ma requete, je recupere le nombre de ligne pour ferme le tableau
                     Je ferme et ouvre ma ligne toute les deux cellule -> $i%2 == 0
                     je ferme la div si entre est true !
@@ -175,30 +175,30 @@ $BD=getBDWAMPP();
                     $i=0; // moduler le $i pour adapter le moment des menus
                     while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
-                    <div class="row">
-                        <?php } else if ($i%2==0){ ?>
-                    </div>
-                    <div class="row">
-                        <?php } ?>
-                        <div class="col-12 col-lg-6">
-                            <h3 class="text-center" style="text-decoration:underline;">
-                                <?php switch($ligne["DiffDate"]){
+                <div class="row">
+                    <?php } else if ($i%2==0){ ?>
+                </div>
+                <div class="row">
+                    <?php } ?>
+                    <div class="col-12 col-lg-6">
+                        <h3 class="text-center" style="text-decoration:underline;">
+                            <?php switch($ligne["DiffDate"]){
                             case 0: echo "Aujourd'hui"; break;
                             case 1: echo "Demain"; break;
                             default: echo "Dans ".$ligne["DiffDate"]." jours"; break;} ?>
-                            </h3>
-                            <div class="row">
-                                <?php for($j=0; $j<$ligne["NbRepas"]; $j++){ ?>
-                                <div class="col-12 col-lg-6">
-                                    <h4 class="text-center" style="text-decoration:underline;">
-                                        <?php switch($j){
+                        </h3>
+                        <div class="row">
+                            <?php for($j=0; $j<$ligne["NbRepas"]; $j++){ ?>
+                            <div class="col-12 col-lg-6">
+                                <h4 class="text-center" style="text-decoration:underline;">
+                                    <?php switch($j){
                                             case 0: echo "Midi"; break;
                                             case 1: echo "Soir"; break;
                                             default: echo $i."e Repas"; break;} 
                                         ?>
-                                    </h4>
-                                    <ul class="liste">
-                                        <?php
+                                </h4>
+                                <ul class="liste">
+                                    <?php
                                     
                                     $req1=$BD->query("SELECT aliments.alim_nom_fr AS 'Nom', quantite 
                                         FROM historique_aliment
@@ -211,31 +211,31 @@ $BD=getBDWAMPP();
                                     }
                                     $req1->closeCursor();
                                     ?>
-                                    </ul>
-                                </div>
-                                <?php } ?>
+                                </ul>
                             </div>
+                            <?php } ?>
                         </div>
-                        <?php
+                    </div>
+                    <?php
                         $i++;
                         }
                     $req->closeCursor();
                     if ($entre){
                         ?> </div>
-                    <?php           
+                <?php           
                     } else {
                         echo "Vous n'avez aucun menu c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
                     }
                     ?>
 
-                </div>
-
             </div>
-            <?php if($entre){ ?>
-            <div class="col-10 col-lg-4 bg-light" style="margin: 25px;">
-                <h3 class="text-center">Liste de courses</h3>
-                <ul>
-                    <?php 
+
+        </div>
+        <?php if($entre){ ?>
+        <div class="col-10 col-lg-4 bg-light" style="margin: 25px;">
+            <h3 class="text-center">Liste de courses</h3>
+            <ul>
+                <?php 
                 $req = $BD->query("SELECT aliments.alim_nom_fr AS 'Nom', SUM(quantite) AS 'Quant'
                                         FROM historique_aliment
                                         INNER JOIN aliments ON aliments.alim_code = ID_ingredient
@@ -247,10 +247,10 @@ $BD=getBDWAMPP();
                 }
                 $req->closeCursor();
                 ?>
-                </ul>
-            </div>
-            <?php } ?>
+            </ul>
         </div>
+        <?php } ?>
+    </div>
 
 
 
