@@ -66,9 +66,7 @@ $BD=getBD();
         </div>
 
         <div id="ModifPhoto">
-            <form method="post" action="IntegrationPhoto.php" enctype="multipart/form-data">
-                <input type="file" name="photo">
-            </form>
+
         </div>
 
 
