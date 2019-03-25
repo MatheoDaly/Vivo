@@ -65,34 +65,60 @@ session_start();
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
-      $_SESSION['Rec_Plat']="haha";
+      if(!isset($_SESSION['Rec_Plat'])){
+        $_SESSION['Rec_Plat'] = array();
+      }
+
+      echo('<form method="GET" action="ajoutAlimInd.php">');
       while($result = $reponse->fetch()){
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
-        echo('<form method="GET" action="Choix_Aliment.php">');
+        echo('<input type="hidden" name="aliment" value="');
+        $a = $result['alim_code'];
+        echo($a);
+        echo('">');
         echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout2" value="Choisir">');
-        if(isset($_SESSION['Rec_Plat'])){
-          ajoutAlimInd($result['alim_nom_fr']);
-        }else{
-          $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
-        }
-        echo('</form>');
+        echo('<input type="submit" name="choix" value="Choisir">');
         echo('</div>');
-
       }
       $reponse-> closeCursor();
+      /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
+        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
+      }
+      elseif(!isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
+        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
+        print_r($_SESSION['Rec_Plat']);
+      }elseif(!isset($_GET['aliment']) && !isset($_SESSION['Rec_Plat'])){
+        $_SESSION['Rec_Plat'] = array('début');
+      }*/
     }
-print_r($_SESSION['Rec_Plat']);
-  }
 
+    }
+
+
+
+
+  /*if(isset($result['alim_nom_fr'])){ //isset($_SESSION['Rec_Plat']) && isset($_GET['ajout2'])
+    ajoutAlimInd($result['alim_nom_fr']);
+  }else{
+    $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
+print_r($_SESSION['Rec_Plat']);
+}*/
+print_r($_SESSION['Rec_Plat']);
+echo('Vous avez choisi');
+$i=0;
+while($i<sizeof($_SESSION['Rec_Plat'])){
+  echo $_SESSION['Rec_Plat'][$i];
+  echo('<br/>');
+  $i=$i+1;
+}
   ?>
 </body>
 </html>
