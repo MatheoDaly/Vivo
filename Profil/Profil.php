@@ -74,7 +74,7 @@ $BD=getBDWAMPP();
                 <div class="col-12 col-sm-5">
                     <?php 
                     // refaire le vrai calculde l'IMC
-                    echo "C'est moi, ".$Profil['prenom']."</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg, </br>Soit un IMC de : ".($Profil["taille"]*$Profil["poids"])." </br>  Je possede : ".$Profil["point"]." points";
+                    echo "C'est moi, ".$Profil['prenom']."</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg, </br>Soit un IMC de : ".($Profil["poids"]/(($Profil["taille"]/100)^2))." </br>  Je possede : ".$Profil["point"]." points";
                     
                     
                     ?>
