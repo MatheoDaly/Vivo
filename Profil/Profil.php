@@ -20,7 +20,7 @@ $BD=getBDWAMPP();
 <head>
     <meta charset="utf-8">
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="LeProfil.css" rel="stylesheet">
+    <link href="Profil.css" rel="stylesheet">
     <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
@@ -59,9 +59,9 @@ $BD=getBDWAMPP();
     <!-- ################ Entete Photo ############### !-->
 
     <div class=" container  justify-content-center rounded" id="TableProfil">
-        <div class="row justify-content-center">
-            <div id="avatar" class="col-sm-10" style="width: 100px;">
-                <img class="independant" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
+        <div class="row">
+            <div id="avatar" class="col-sm-10" style="display:block; margin:auto;">
+                <img class="independant w-20 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
             </div>
         </div>
 
@@ -69,7 +69,7 @@ $BD=getBDWAMPP();
 
         <!-- ################ Bandeau presentation ############### !-->
 
-        <div class="d-flex flex-fill bg-white justify-content-between" id="intro">
+        <div class="d-flex flex-fill border border-secondary bg-white justify-content-between rounded" id="intro">
             <div class="row">
                 <div class="col-12 col-sm-5">
                     <?php 
@@ -143,15 +143,15 @@ $BD=getBDWAMPP();
         <div>
             <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation des mes statistique">
         </div>
-        <hr>
+    </div>
         <!-- menu  personnaliser des profil !-->
 
-        <div class="independant">
-            <img class="independant" src="../Image/food-304597_640.png" style="width: 100px;" />
+        <div>
+            <img class="independant rounded-circle" src="../Image/food-304597_640.png" style="width: 100px;" />
         </div>
 
         <!-- Programation des menu !-->
-        <div id="ProgMenu" class=" row d-flex justify-content-between">
+        <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
             <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
                 <h1 class="text-light text-center border border-warning">Menu</h1>
                 <div class="col-10 bg-light mx-auto">
@@ -248,7 +248,6 @@ $BD=getBDWAMPP();
         </div>
 
 
-    </div>
 
 
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
