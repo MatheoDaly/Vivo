@@ -3,16 +3,16 @@ include_once "AccesBDbis.php"; // pas forcément besoin
 
 //Pour menu
 //
-/*function ajoutRecPlat($numRecPlat){
-  array_push($_SESSION['Menu'],array('numMenu'=>$numRecPlat));
-}*/
+function ajoutRecPlat($numRecPlat){
+  array_push($_SESSION['Menu'],$numRecPlat);
+}
 
 
 // pour recette_plat
 
 //Ajout d'un aliment indépendant d'une recette_plat
-function ajoutAlimInd($numPlat,$alim){
-  array_push($_SESSION['Rec_Plat'],array('numPlat'=>$numPlat,'aliment'=>$alim));
+function ajoutAlimInd($alim){
+  array_push($_SESSION['Rec_Plat'],$alim);
 }
 
 //Ajout d'aliments pour une recette

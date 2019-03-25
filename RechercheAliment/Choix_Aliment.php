@@ -40,7 +40,7 @@ session_start();
     </header>
 <body>
   <div class="partie_recherche">
-    <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
+    <form method="get" action="Choix_Aliment.php" autocomplete="on" id="optionForm">
       <br/>
       <input type="text" name="Alim">
       <br/>
@@ -61,7 +61,7 @@ session_start();
 
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
     if(empty($_GET['Alim'])){
-      echo('<meta http-equiv="refresh" content="0;URL=recherche aliment.php">');
+      echo('<meta http-equiv="refresh" content="0;URL=Choix_Aliment.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
@@ -71,21 +71,26 @@ session_start();
       }elseif ($_GET['option']== "Calorie") {
         $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
-
+      $_SESSION['Rec_Plat']="haha";
       while($result = $reponse->fetch()){
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
-        echo('<form method="GET" action="ajouter.php">');
+        echo('<form method="GET" action="Choix_Aliment.php">');
         echo('<input type="number" name="nbArt">');
         echo('<input type="submit" name="ajout2" value="Choisir">');
+        if(isset($_SESSION['Rec_Plat'])){
+          ajoutAlimInd($result['alim_nom_fr']);
+        }else{
+          $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
+        }
         echo('</form>');
         echo('</div>');
 
       }
       $reponse-> closeCursor();
     }
-
+print_r($_SESSION['Rec_Plat']);
   }
 
   ?>
