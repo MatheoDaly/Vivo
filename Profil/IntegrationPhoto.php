@@ -1,6 +1,8 @@
 <?php
+session_start();
+
 //https://openclassrooms.com/fr/courses/1085676-upload-de-fichiers-par-formulaire
-function upload($index,$destination,$maxsize,$extensions)
+function upload($index,$destination,$maxsize,$extensions, $id)
 {
    //Test1: fichier correctement uploadé
      if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0) return FALSE;
@@ -10,14 +12,11 @@ function upload($index,$destination,$maxsize,$extensions)
      $ext = substr(strrchr($_FILES[$index]['name'],'.'),1);
      if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
    //Déplacement
-     return move_uploaded_file($_FILES[$index]['tmp_name'],$destination);
+     return move_uploaded_file($_FILES[$index]['tmp_name'],$destination.$id.$ext);
 }
- 
-//EXEMPLES
-  $upload1 = upload('photo','../Image/PhotoProfil/test',1048576, array('png','gif','jpg','jpeg') );
-  //$upload2 = upload('mon_fichier','uploads/file112',1048576, FALSE );
- 
-  if ($upload1) echo "Upload de l'icone réussi!<br />";
-      else echo 'false';
-  //if ($upload2) echo "Upload du fichier réussi!<br />";
+
+  $upload1 = upload('photo','../Image/PhotoProfil/',1048576, array('png','gif','jpg','jpeg'),1        /*$_SESSION['profil']['ID']*/
+                   );
+   if ($upload1) echo "Upload de l'icone réussi!<br />";
+      else echo 'Image, non télécharger !';
 ?>

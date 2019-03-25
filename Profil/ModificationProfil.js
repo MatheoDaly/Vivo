@@ -1,13 +1,21 @@
-$(function () {});
+$(function () {
+    $('#avatar').click(function () {
+        $('.hidden input').css({
+            visibility: 'visible',
+            backgroundColor: 'white'
+        });
+    });
 
-$('#avatar').click(function () {
-        $('img').animate({
-            width: '300px',
-            height: '300px'
-        }, 1000);
-    }
+    $('.hidden input').submit(function () {
+
+    });
+
+});
+
+$(function () {
+    $('input[name=BtnStat]').click(function () {
+        $(location).attr('href', '../Statistique/Statistique.php');
+    });
 
 
-
-
-);
+});

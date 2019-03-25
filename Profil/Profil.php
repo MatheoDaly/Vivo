@@ -24,49 +24,76 @@ $BD=getBD();
     <title><?php echo $Profil["prenom"]; ?></title>
 
 </head>
-<!-- ################NavBar############### !-->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="../index.html">Vivo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                Pour une bonne santé vivez VIVO !
-            </span>
-        </div>
-    </nav>
-</header>
 
 
 <body>
+    <!-- ################NavBar############### !-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="../index.html">Vivo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Pour une bonne santé vivez VIVO !
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ########################## Modification profil, il suffit de transformer .hidden dans visibility en visible pour voir le resultat####################################### !-->
+    <div class="hidden container-fluid">
+        <form method="post" action="IntegrationPhoto.php" class="" enctype="multipart/form-data">
+            <label for="photo">
+                <strong>
+                    Télécharger une nouvelle photo de profil :
+                </strong>
+            </label>
+            <input type="file" name="photo">
+            <input type="submit">
+        </form>
+        <form>
+            <div class="row">
+                <div class="col-6 d-flex flex-column">
+                    Pseudo :
+                    <input type="text" name="pseudo" value="<?php $Profil["user"]; ?>">
+                    Prenom :
+                    <input type="text" name="prenom" value="<?php $Profil["prenom"]; ?>">
+                </div>
+                <div class="col-6 d-flex flex-column">
+                    Poids :
+                    <input type="number" name="poids" value="<?php $Profil["poids"]; ?>">
+                    Taille :
+                    <input type="number" name="taille" value="<?php $Profil["taille"]; ?>">
+                </div>
+                <input type="submit" value="Validez">
+            </div>
+
+        </form>
+    </div>
 
     <!-- ################ Entete Photo ############### !-->
 
     <div class=" container  justify-content-center rounded" id="TableProfil">
         <div class="row">
             <div id="avatar" class="col-sm-10" style="display:block; margin:auto;">
-                <img class="independant w-20 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar-1295406_640.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
+                <img class="independant w-20 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
             </div>
-        </div>
-
-        <div id="ModifPhoto">
-
         </div>
 
 
