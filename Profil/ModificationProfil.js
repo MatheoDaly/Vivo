@@ -6,16 +6,8 @@ $(function () {
         });
     });
 
-    $('.hidden input').submit(function () {
+    $('.hidden form').submit(function () {
 
     });
-
-});
-
-$(function () {
-    $('input[name=BtnStat]').click(function () {
-        $(location).attr('href', '../Statistique/Statistique.php');
-    });
-
 
 });

@@ -1,7 +1,8 @@
 <?php
 // pas besoin de js on utilisera une inclusion du code php via la fonction include !
 /*
-############################### Minimiser le nombre d'appelle de la page
+
+############################### Minimiser le nombre d'appelle de la page En attente de racordement !
 
 
 Type :
@@ -34,6 +35,8 @@ if(isset($Profil)|| true){
     // met à jout les données statistique, c'est ici que la magie opère !
     
 ############################# fonction Historique_Aliment -> Statistique ###########################################################
+##################################
+    
     
     $req = $BD->query("SELECT historique_aliment.Repas AS 'NumeroRepas',
         historique_aliment.Date AS 'Date',
@@ -50,28 +53,28 @@ if(isset($Profil)|| true){
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas");
     
+    function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
+        // A revoir l'optimisation
+        echo "INSERT INTO statistique VALUES (1, :NumeroRepas, '".$type."', :".$type.", :Date, :ID)";
+        $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas,'".$type."', :$type, :Date, :ID)");
+        $req1->execute(array(
+                'NumeroRepas'=>Repas,
+                'Date'=>$date,
+                $type=>$concentration,
+                'ID'=>$id));
+        $req1->closeCursor();
+    }
+    
     while($ligne = $req->fetch()){
-        
-        ajoutConcentration ('Proteine');
-        ajoutConcentration ('Glucide');
-        ajoutConcentration ('Lipide');
-        ajoutConcentration ('Sucre');
-        ajoutConcentration ('Cholesterol');
-        ajoutConcentration ('Alcool');
-        ajoutConcentration ('Calorie');
+
+    ajoutConcentration('Proteine', $BD, $ligne['NumeroRepas'], ,$ligne['Proteine'],$ligne['Date'], $Profil[0]);
+    ajoutConcentration('Glucide', $BD, $ligne['NumeroRepas'], ,$ligne['Glucide'],$ligne['Date'], $Profil[0]);
+    ajoutConcentration('Alcool', $BD, $ligne['NumeroRepas'], ,$ligne['Alcool'],$ligne['Date'], $Profil[0]);
+    ajoutConcentration('Calorie', $BD, $ligne['NumeroRepas'], ,$ligne['Calorie'],$ligne['Date'], $Profil[0]);
     }
     $req->closeCursor();
     
-    function ajoutConcentration ($type){
-        $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas, '".$type."', :".$type.", :Date, :ID)");
-        $req1->execute(array(
-        'NumeroRepas'=>$ligne['NumeroRepas'],
-        'Date'=>$ligne['Date'],
-        $type=>$ligne[$type],
-        'ID'=>$Profil[0]));
-        $req1->closeCursor();
-    }
-
+    
 ###################################### Ne s'occupe que de SUM pour jour mais Moyenne apresv #######################################
     
     for($i =1; $i<5; $i++){
@@ -80,9 +83,9 @@ if(isset($Profil)|| true){
             $temps="date";
         } else if ($i>1){
             $calcul = "AVG(TauxCumule)";
-            if ($i==2)$temps="WEEK(date), MONTH(date), YEAR(date)";
-            if ($i==3)$temps="MONTH(date), YEAR(date)";
-            if ($i==4)$temps="YEAR(date)";
+            if ($i==2) $temps="WEEK(date), MONTH(date), YEAR(date)";
+            if ($i==3) $temps="MONTH(date), YEAR(date)";
+            if ($i==4) $temps="YEAR(date)";
         }
     $req = $BD->query("SELECT Nom, date, ".$calcul." AS concentration
     FROM statistique
@@ -115,10 +118,13 @@ if(isset($Profil)|| true){
     //-> prepare une liste de liste pour chaque jour, il y a des concentrations donnees,
     // -> Calcul des concentration et integrations dans la liste
     ################# N'actualisera pas pour le prochain retour d'include ! Mise a par ajout de menue !
+    /*
+    
     $BD->query("UPDATE profil SET DateActue = CURRENT_TIMESTAMP() WHERE id =".$Profil['ID']);
     $req=$BD->query("SELECT DateActue FROM profil where id =".$Profil['ID'])
     $ligne = $req->fetch();    
     $Profil["actualisation"]=$ligne['DateActue'] ;
+    */
 }
 
 ?>
