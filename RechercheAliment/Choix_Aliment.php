@@ -71,11 +71,15 @@ session_start();
       }elseif ($_GET['option']== "Calorie") {
         $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
+<<<<<<< HEAD
+      $_SESSION['Rec_Plat']=array();
+=======
       if(!isset($_SESSION['Rec_Plat'])){
         $_SESSION['Rec_Plat'] = array();
       }
 
       echo('<form method="GET" action="ajoutAlimInd.php">');
+>>>>>>> c849b6de0652862963f47b71dc32152662fd2f8a
       while($result = $reponse->fetch()){
         echo($result['alim_nom_fr']);
         echo('<br />');
