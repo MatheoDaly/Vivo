@@ -39,35 +39,50 @@ session_start();
         </nav>
     </header>
 <body>
+<h1 class="text-center">Nos menus au top !</h1>
+<div class="row text-center p-3 mx-auto">
  <?php
     $bd = getBD();
     $top5 = $bd->query("SELECT * FROM menu ORDER BY menu.Popularité LIMIT 5");
+    $i = 1;
     while($ligne = $top5 ->fetch()){
-        echo('<div class= "row">');
-        echo($ligne['Nom']);
-        echo('<br />');
+        if($i == 1){
+            echo '<div class="col-2 bg-primary text-light p-3  rounded">';
+        }else if($i ==2){
+            echo '<div class="col-2 bg-info text-light p-3 rounded">';
+        }else if($i ==3){
+            echo '<div class="col-2 bg-light p-3 rounded">';
+        }else if($i ==4){
+            echo '<div class="col-2 bg-secondary text-light p-3 rounded">';
+        }else if($i ==5){
+            echo '<div class="col-2 bg-dark text-light p-3 rounded">';
+        }
+        echo '#'.$i;
         echo('<form method="GET" action="Choix_Aliment.php">');
-        echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout2" value="Choisir"></div>');
+        echo('<div class="form-group"><label for ="nbMenu">'.$ligne['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
+        $i++;
     }
     $top5 ->CloseCursor();
  ?>
- 
-  <div class="partie_recherche">
+</div>
+  <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
     <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
-      <br/>
-      <input type="text" name="Menu">
-      <br/>
-      Options de recherche:
-      Populiarité:
-      <input type="radio" name="option" value="Popularité" checked>
-      Calorie (croissant):
-      <input type="radio" name="option" value="Calorie">
-      <br/>
-      <input type="submit" name="submit" value="Rechercher">
+     <div class="form-group col-6 mx-auto">
+      <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
+    </div>
+    <div class="form-check">
+        <p>Options de recherche : </p>
+      <label class="form-ckeck-label" for="popularite">Popularité : </label>
+      <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
+        <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+      <input type="radio" name="option" id="calorie"value="Calorie">
+    </div>
+      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
     </form>
   </div>
-
+    <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+    <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
   <?php
   
 
@@ -85,26 +100,22 @@ session_start();
       }
       $_SESSION['Rec_Plat']=array();
       while($result = $reponse->fetch()){
-        echo($result['alim_nom_fr']);
-        echo('<br />');
-        echo('<div class="rechAlim">');
         echo('<form method="GET" action="Choix_Aliment.php">');
-        echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout2" value="Choisir">');
+        echo('<div class="form-group col-3 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir">');
         if(isset($_SESSION['Rec_Plat'])){
           ajoutAlimInd($result['alim_nom_fr']);
         }else{
           $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
         }
         echo('</form>');
-        echo('</div>');
 
       }
       $reponse-> closeCursor();
     }
-print_r($_SESSION['Rec_Plat']);
   }
 
   ?>
+    </div>
 </body>
 </html>
