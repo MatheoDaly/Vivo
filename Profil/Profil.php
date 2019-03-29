@@ -78,7 +78,7 @@ $BD=getBD();
             </button>
             <div id="ZoneModif" class="collapse">
                 <div class="card card-body">
-                    <form method="post" action="IntegrationPhoto.php" enctype="multipart/form-data">
+                    <form method="post" action="IntegrationPhoto.php" id="TelePhoto" enctype="multipart/form-data">
                         <label for="photo">
                             <strong>
                                 Télécharger une nouvelle photo de profil :
@@ -87,19 +87,19 @@ $BD=getBD();
                         <input type="file" name="photo">
                         <input type="submit">
                     </form>
-                    <form>
+                    <form id="VariableProfil">
                         <div class="row">
                             <div class="col-6 d-flex flex-column">
                                 Pseudo :
-                                <input type="text" name="pseudo" value="<?php $Profil["user"]; ?>">
+                                <input type="text" name="pseudo" value="<?php echo $Profil["user"]; ?>">
                                 Prenom :
-                                <input type="text" name="prenom" value="<?php $Profil["prenom"]; ?>">
+                                <input type="text" name="prenom" value="<?php echo $Profil["prenom"]; ?>">
                             </div>
                             <div class="col-6 d-flex flex-column">
                                 Poids :
-                                <input type="number" name="poids" value="<?php $Profil["poids"]; ?>">
+                                <input type="number" name="poids" value="<?php echo $Profil["poids"]; ?>">
                                 Taille :
-                                <input type="number" name="taille" value="<?php $Profil["taille"]; ?>">
+                                <input type="number" name="taille" value="<?php echo $Profil["taille"]; ?>">
                             </div>
                             <input type="submit" value="Validez">
                         </div>
