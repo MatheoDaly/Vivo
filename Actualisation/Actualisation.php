@@ -65,8 +65,9 @@ if(isset($Profil)|| true){
         $req1->closeCursor();
     }
     
-    while($ligne = $req->fetch()){
-
+    while($ligne = $req->fetch())
+    {
+        // obliger d'ajout les variables car cela ne s'affecte pas ! Donc c'est juste.
     ajoutConcentration('Proteine', $BD, $ligne['NumeroRepas'], ,$ligne['Proteine'],$ligne['Date'], $Profil[0]);
     ajoutConcentration('Glucide', $BD, $ligne['NumeroRepas'], ,$ligne['Glucide'],$ligne['Date'], $Profil[0]);
     ajoutConcentration('Alcool', $BD, $ligne['NumeroRepas'], ,$ligne['Alcool'],$ligne['Date'], $Profil[0]);
@@ -118,13 +119,13 @@ if(isset($Profil)|| true){
     //-> prepare une liste de liste pour chaque jour, il y a des concentrations donnees,
     // -> Calcul des concentration et integrations dans la liste
     ################# N'actualisera pas pour le prochain retour d'include ! Mise a par ajout de menue !
-    /*
+    
     
     $BD->query("UPDATE profil SET DateActue = CURRENT_TIMESTAMP() WHERE id =".$Profil['ID']);
     $req=$BD->query("SELECT DateActue FROM profil where id =".$Profil['ID'])
-    $ligne = $req->fetch();    
+    $ligne = $req->fetch();
     $Profil["actualisation"]=$ligne['DateActue'] ;
-    */
+    
 }
 
 ?>

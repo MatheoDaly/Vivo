@@ -57,16 +57,21 @@ $BD=getBD();
     </header>
 
     <!-- ########################## Modification profil, il suffit de transformer .hidden dans visibility en visible pour voir le resultat####################################### !-->
-    <div class="hidden container-fluid">
-        <form method="post" action="IntegrationPhoto.php" class="" enctype="multipart/form-data">
-            <label for="photo">
-                <strong>
-                    Télécharger une nouvelle photo de profil :
-                </strong>
-            </label>
-            <input type="file" name="photo">
-            <input type="submit">
-        </form>
+    <div class="hidden container-fluid bg-primary">
+        <div class="row">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <form method="post" action="IntegrationPhoto.php" class="" enctype="multipart/form-data">
+                <label for="photo">
+                    <strong>
+                        Télécharger une nouvelle photo de profil :
+                    </strong>
+                </label>
+                <input type="file" name="photo">
+                <input type="submit">
+            </form>
+        </div>
         <form>
             <div class="row">
                 <div class="col-6 d-flex flex-column">
@@ -206,19 +211,19 @@ $BD=getBD();
                     <?php } ?>
                     <div class="col-12 col-lg-6">
                         <h3 class="text-center" style="text-decoration:underline;">
-                            <?php switch($ligne["DiffDate"]){
-                            case 0: echo "Aujourd'hui"; break;
-                            case 1: echo "Demain"; break;
-                            default: echo "Dans ".$ligne["DiffDate"]." jours"; break;} ?>
+                            <?php 
+                        $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date=".$ligne['Date']);
+                            ?>
                         </h3>
                         <div class="row">
-                            <?php for($j=0; $j<$ligne["NbRepas"]; $j++){ ?>
+                            <?php while($ligne2= $req2->fetch()){ ?>
                             <div class="col-12 col-lg-6">
                                 <h4 class="text-center" style="text-decoration:underline;">
-                                    <?php switch($j){
-                                            case 0: echo "Midi"; break;
-                                            case 1: echo "Soir"; break;
-                                            default: echo $i."e Repas"; break;} 
+                                    <?php switch($ligne2['Repas']){
+                                            case 8: echo 'Matin'; break;
+                                            case 12: echo "Midi"; break;
+                                            case 19: echo "Soir"; break;
+                                            default: echo "Repas de ".$ligne2['Repas']." heures"; break;} 
                                         ?>
                                 </h4>
                                 <ul class="liste">
@@ -227,17 +232,17 @@ $BD=getBD();
                                     $req1=$BD->query("SELECT aliments.alim_nom_fr AS 'Nom', quantite 
                                         FROM historique_aliment
                                         INNER JOIN aliments ON aliments.alim_code = ID_ingredient
-                                        WHERE Repas=".($j+1)."
+                                        WHERE Repas=".($ligne2['Repas'])."
                                         AND Date='".$ligne["Date"]."'
                                         AND ID_Profil=".$Profil['ID']); // requete archi lourd -> integre le nom à la table historique_aliment ?
                                     while($ligne1 = $req1->fetch()){
-                                        echo "<li>".$ligne1["Nom"]." :".$ligne1["quantite"]."</li>";
+                                        echo "<li>".$ligne1["Nom"]." :".$ligne1["quantite"]." grammes</li>";
                                     }
                                     $req1->closeCursor();
                                     ?>
                                 </ul>
                             </div>
-                            <?php } ?>
+                            <?php } $req2->closeCursor(); ?>
                         </div>
                     </div>
                     <?php
@@ -280,7 +285,7 @@ $BD=getBD();
 
 
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
-    <script src="ModificationProfil.js" type="text/javascript"></script>
+    <script src="ModificationProfil/ModificationProfil.js" type="text/javascript"></script>
     <?php
     if(isset($_SESSION["profil"])){
         echo'<script>';
