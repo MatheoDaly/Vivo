@@ -23,13 +23,14 @@ $BD=getBD();
     <link href="Profil.css" rel="stylesheet">
     <title><?php echo $Profil["prenom"]; ?></title>
 
+
 </head>
 
 
 <body>
     <!-- ################NavBar############### !-->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="../index.html">Vivo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -57,50 +58,56 @@ $BD=getBD();
     </header>
 
     <!-- ########################## Modification profil, il suffit de transformer .hidden dans visibility en visible pour voir le resultat####################################### !-->
-    <div class="hidden container-fluid bg-primary">
-        <div class="row">
-            <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <form method="post" action="IntegrationPhoto.php" class="" enctype="multipart/form-data">
-                <label for="photo">
-                    <strong>
-                        Télécharger une nouvelle photo de profil :
-                    </strong>
-                </label>
-                <input type="file" name="photo">
-                <input type="submit">
-            </form>
-        </div>
-        <form>
-            <div class="row">
-                <div class="col-6 d-flex flex-column">
-                    Pseudo :
-                    <input type="text" name="pseudo" value="<?php $Profil["user"]; ?>">
-                    Prenom :
-                    <input type="text" name="prenom" value="<?php $Profil["prenom"]; ?>">
-                </div>
-                <div class="col-6 d-flex flex-column">
-                    Poids :
-                    <input type="number" name="poids" value="<?php $Profil["poids"]; ?>">
-                    Taille :
-                    <input type="number" name="taille" value="<?php $Profil["taille"]; ?>">
-                </div>
-                <input type="submit" value="Validez">
-            </div>
 
-        </form>
-    </div>
+
+
 
     <!-- ################ Entete Photo ############### !-->
 
-    <div class=" container  justify-content-center rounded" id="TableProfil">
+    <div class="container justify-content-center rounded" id="TableProfil">
         <div class="row">
             <div id="avatar" class="col-sm-10" style="display:block; margin:auto;">
                 <img class="independant w-20 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
             </div>
         </div>
 
+        <!-- ################ Modification profil ############### !-->
+        <div id="ModificationProfil">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
+                Modifiez mon profil
+            </button>
+            <div id="ZoneModif" class="collapse">
+                <div class="card card-body">
+                    <form method="post" action="IntegrationPhoto.php" enctype="multipart/form-data">
+                        <label for="photo">
+                            <strong>
+                                Télécharger une nouvelle photo de profil :
+                            </strong>
+                        </label>
+                        <input type="file" name="photo">
+                        <input type="submit">
+                    </form>
+                    <form>
+                        <div class="row">
+                            <div class="col-6 d-flex flex-column">
+                                Pseudo :
+                                <input type="text" name="pseudo" value="<?php $Profil["user"]; ?>">
+                                Prenom :
+                                <input type="text" name="prenom" value="<?php $Profil["prenom"]; ?>">
+                            </div>
+                            <div class="col-6 d-flex flex-column">
+                                Poids :
+                                <input type="number" name="poids" value="<?php $Profil["poids"]; ?>">
+                                Taille :
+                                <input type="number" name="taille" value="<?php $Profil["taille"]; ?>">
+                            </div>
+                            <input type="submit" value="Validez">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- ################ Bandeau presentation ############### !-->
 
@@ -286,6 +293,7 @@ $BD=getBD();
 
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="ModificationProfil/ModificationProfil.js" type="text/javascript"></script>
+    <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <?php
     if(isset($_SESSION["profil"])){
         echo'<script>';
