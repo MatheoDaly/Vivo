@@ -78,7 +78,7 @@ $BD=getBD();
             </button>
             <div id="ZoneModif" class="collapse">
                 <div class="card card-body">
-                    <form method="post" action="IntegrationPhoto.php" id="TelePhoto" enctype="multipart/form-data">
+                    <form method="post" id="TelePhoto" enctype="multipart/form-data">
                         <label for="photo">
                             <strong>
                                 Télécharger une nouvelle photo de profil :
@@ -219,7 +219,7 @@ $BD=getBD();
                     <div class="col-12 col-lg-6">
                         <h3 class="text-center" style="text-decoration:underline;">
                             <?php 
-                        $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date=".$ligne['Date']);
+                        $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date='".$ligne['Date']."'");
                             ?>
                         </h3>
                         <div class="row">
@@ -294,13 +294,7 @@ $BD=getBD();
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="ModificationProfil/ModificationProfil.js" type="text/javascript"></script>
     <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <?php
-    if(isset($_SESSION["profil"])){
-        echo'<script>';
-        include("ProfilMenue.js");
-        echo'</script>';
-    }
-    ?>
+    <script src="MenueProfil/ProfilMenue.js" type="text/javascript"></script>
 </body>
 
 </html>

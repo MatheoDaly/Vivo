@@ -12,13 +12,15 @@
         });
 
         $('#TelePhoto').on("submit", function () {
-            $.post("IntegrationPhoto.php", $(this).serialize(), function (data) {
-                if (data = "Ok") {
-                    $(location).attr('href', 'Profil.php');
-                } else {
-                    alert("Profil non enregistrer")
-                }
-            })
+            $.post("IntegrationPhoto.php",
+                $(this).serialize(),
+                function (data) {
+                    if (data = "Ok") {
+                        $(location).attr('href', 'Profil.php');
+                    } else {
+                        alert("Profil non enregistrer")
+                    }
+                })
 
         });
     });
