@@ -49,11 +49,14 @@ $BD=getBD();
         $b= $Regre['Y-']-($m*$Regre['X-'] );
         $coeff= $covXY/(pow($Regre['SigY'],2)*pow($Regre['SigX'],2));
         
-        echo "<br/>a=".($m/6)."<br/>b=".(($b-2500)/6)."<br/>coeff r²= ".pow($coeff,2);
+        $m/=6;
+        $b=($b-2500)/6;
+        echo "<br/>a=".($m)."<br/>b=".($b)."<br/>coeff r²= ".pow($coeff,2);
         if($m<0){
             echo 'Vous etes en voie pour perdre du poids !';
         } else {
-            
+            echo "<br/>Tu prend du poids denis";
+            echo "il te faudra si tu continue comme cela ".((3400-$b)/$m).' jours'; 
         }
     }
     

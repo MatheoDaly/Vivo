@@ -35,61 +35,65 @@ $cheminIcon='../Image/IconProgess/';
         ?></title>
 
 </head>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="../index.html">Vivo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                Pour une bonne santé vivez VIVO !
-            </span>
-        </div>
-    </nav>
-</header>
 
 <body>
-    <!-- Attention mathéo ne modifie pas l'input !-->
-    <input type="hidden" value="<?php 
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand" href="../index.html">Vivo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Pour une bonne santé vivez VIVO !
+                </span>
+            </div>
+        </nav>
+    </header>
+    <div class="container justify-content-center rounded">
+
+        <!-- Attention mathéo ne modifie pas l'input !-->
+        <input type="hidden" value="<?php 
                                 if(isset($Profil)){echo $Profil[0];
                                 }
                                 ?>" name="nom" id="nom">
-    <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
+        <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
 
-    <div class="d-flex flex-column justify-content-center" id="TableProfil">
-        <h1>Mon graphique
-        </h1>
-        <hr>
-        <label for="type">Mon graphique selon :</label>
-        <select name='type'>
-            <option value='1' selected>Mes repas du jours</option>
-            <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
-            <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
-            <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
-            <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
-        </select>
-        <div id="graphique">
-            <canvas id="lineChart"></canvas>
+        <div class="d-flex flex-column justify-content-center" id="TableProfil">
+            <h1>Mon graphique
+            </h1>
+            <hr>
+            <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
+            <label for="type">Mon graphique selon :</label>
+            <select name='type'>
+                <option value='1' selected>Mes repas du jours</option>
+                <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
+                <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
+                <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
+                <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
+            </select>
+            <div id="graphique">
+                <canvas id="lineChart"></canvas>
+            </div>
+            <hr>
+            <div id="Ronds" width="400" height="400">
+                <canvas id="Rond"></canvas>
+            </div>
         </div>
-        <hr>
-        <div id="Ronds" width="400" height="400">
-            <canvas id="Rond"></canvas>
-        </div>
+
     </div>
-
-
+    <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="Graphique.js" type="text/javascript"></script>

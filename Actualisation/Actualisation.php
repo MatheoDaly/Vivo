@@ -106,12 +106,10 @@ if(isset($Profil)|| true){
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
     AND type = ".$i." GROUP BY ".$temps." , Nom ";
-        echo $q."<br/>";
     $req = $BD->query($q);
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
-            echo $q.'<br/>';
             $req1 = $BD->prepare($q);
             $req1->execute(array(
             'Nom'=>$ligne['Nom'],

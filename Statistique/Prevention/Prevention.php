@@ -18,7 +18,6 @@ Ce qui reste à faire
 Fin ajax modification profil
 Donut a finir dans statitisques -> juan
 prevention
-Article
 Bulle js des repas et menue
 
 
@@ -36,6 +35,7 @@ if(isset($_SESSION['profil'])){
 }
 
 include('../../Outil/Php/AccesBD.php');
+$BD=GetBD();
 ?>
 <!Doctype HTML>
 <html>
@@ -44,9 +44,8 @@ include('../../Outil/Php/AccesBD.php');
     <meta charset="utf-8">
     <link href="../../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../Profil/Profil.css" rel="stylesheet">
-    <link href="Statistique.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
-    <title>Statistique <?php 
+    <title>Prevention <?php 
     echo ' de '.$Profil["prenom"];
     
         ?></title>
@@ -61,13 +60,13 @@ include('../../Outil/Php/AccesBD.php');
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                    <a class="nav-link" href="../../Profil/Profil.php">Profil</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                    <a class="nav-link" href="../../Statistique/Statistique.php">Statistique</a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -83,7 +82,6 @@ include('../../Outil/Php/AccesBD.php');
     <div class="container justify-content-center rounded" id="TableProfil">
         <div>
             <h1>Ma prevention</h1>
-            Si je remarque une baisse moyenne je peut faire une prevision d'atteinte de poids idéal dans tel nombre de jours sinon je dis que il est dans un mauvais chemin
             <div id="graphique" class="row bg-white rounded">
                 <div class="col-8">
                     <canvas id="lineChart"></canvas>
@@ -91,13 +89,17 @@ include('../../Outil/Php/AccesBD.php');
                 <div class="col-4">
                     <div class="row">Mon nombre de jours avant mon poids idéal est :</div>
                     <div class="row">Je pese actuellement <?php echo $Profil['poids']." kg"; ?> </div>
-                    <div class="row">Je veux atteindre </div>
+                    <div class="row">Je veux atteindre <?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
+                                            FROM objectif_profil
+                                            INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
+                                            WHERE objectif.type='poids'
+                                            AND objectif_profil.id_Profil=".$Profil['ID']);
+                                            $val = $objectif_poids-> fetch();
+                                            echo $val['val']." kg";
+                        $objectif_poids->closeCursor();
+                        ?></div>
                 </div>
             </div>
-            <?php
-            $BD=getBD();
-
-            ?>
 
             <h2>Mes exces</h2>
             <div class="row bg-white rounded">
@@ -150,13 +152,11 @@ include('../../Outil/Php/AccesBD.php');
                 ?>
             </div>
         </div>
-
     </div>
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="Graphique.js" type="text/javascript"></script>
     <script src="../../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 

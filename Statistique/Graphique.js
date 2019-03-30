@@ -2,7 +2,6 @@
  var commence = true;
  var list = [["concentration", [1, 2, 3, 3]]];
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
- alert('1');
 
  $(function () {
      var Graphique;
@@ -30,7 +29,7 @@
  });
  //############################################################## Partie AfficheGraph ###########################################
  function AfficheGraph(list, type) {
-     alert(list);
+
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
          data: {
