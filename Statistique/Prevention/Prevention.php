@@ -16,10 +16,9 @@ Avec intervale de confiance à exploiter
 
 Ce qui reste à faire 
 Fin ajax modification profil
-Donut a finir dans statitisques
+Donut a finir dans statitisques -> juan
 prevention
 Article
-Actualisation
 Bulle js des repas et menue
 Notion de seuil -> concentration
 
@@ -105,8 +104,16 @@ include('../../Outil/Php/AccesBD.php');
                     <div class="row">Je veux </div>
                 </div>
             </div>
+            <?php
+            //include("../CalculTaux.php");
+            $ListeConcentration = array(array("Calorie", array(1,2, 3, 3, 7)));
+            //CalculTaux($Profil['ID'], $BD, 1);
+            //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
+            ?>
+
             <h2>Mes exces</h2>
             <div class="row bg-white rounded">
+                Ce que nous remarquons :
                 <div class="col-8">
                     Concentration de sel</div>
                 <div class="col-4">
@@ -114,6 +121,7 @@ include('../../Outil/Php/AccesBD.php');
             </div>
             <h2>Mes manques</h2>
             <div class="row bg-white rounded">
+                Ce que nous remarquons :
                 <div class="col-8">
                     Concentration de sel: le manque peut induire des douleur d'estomac etc..</div>
                 <div class="col-4">

@@ -16,15 +16,8 @@ $BD=getBD();
 // Permet de crée un set de donnée a etudier !    
 
 if($test==true){
-            $j=0;
-        for($i=0;$i<100;$i++){
-            if($i%3 == 0){
-                $j++;
-            } 
-            echo $j;
-            $BD->query("INSERT INTO statistique VALUES (1, ".(($i%3)+1).", 'Calorie', ".rand(2000,3000).", SUBDATE(NOW(), INTERVAL ".$j." DAY), 1)");
-            
-        }
+        include("../../Outil/Php/CreationSet.php");
+        setJour(1, "P");
     }
 
     // Partie statistique : ici moindres carrées de l'évolution de la masse graisseuse

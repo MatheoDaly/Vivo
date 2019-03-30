@@ -1,10 +1,14 @@
 <?php
+
+//################################ Permet de genere un set de donnée aleatoire
+$test=true;
+
+
 // pas besoin de js on utilisera une inclusion du code php via la fonction include !
 /*
 
+
 ############################### Minimiser le nombre d'appelle de la page En attente de racordement !
-
-
 Type :
 1 -> repas -> Somme des concentration
 2 -> jour -> Somme des concentration des repas durant le jour
@@ -28,11 +32,29 @@ if(isset($Profil)){
     $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
 
+function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
+        // A revoir l'optimisation
+        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
+        $req1 = $BD->query($q);
+        $req1->closeCursor();
+    }
+
 if(isset($Profil)|| true){
 
     include('../Outil/Php/AccesBD.php');
     $BD = getBD();
     // met à jout les données statistique, c'est ici que la magie opère !
+    
+    if($test==true){
+        for($i=0;$i<100;$i++){
+            $j=0;
+            if($i%3 == 0){
+                $j++;
+            } 
+            
+            $BD->query("INSERT INTO statistique VALUES (1, ".(($i%3)+1).", 'Calorie', ".rand(2000,3000).", SUBDATE(NOW(), INTERVAL ".$j." DAY), 1)");
+        }
+    }
     
 ############################# fonction Historique_Aliment -> Statistique ###########################################################
 ##################################
@@ -53,25 +75,17 @@ if(isset($Profil)|| true){
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas");
     
-    function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
-        // A revoir l'optimisation
-        echo "INSERT INTO statistique VALUES (1, :NumeroRepas, '".$type."', :".$type.", :Date, :ID)";
-        $req1 = $BD->prepare("INSERT INTO statistique VALUES (1, :NumeroRepas,'".$type."', :$type, :Date, :ID)");
-        $req1->execute(array(
-                'NumeroRepas'=>Repas,
-                'Date'=>$date,
-                $type=>$concentration,
-                'ID'=>$id));
-        $req1->closeCursor();
-    }
     
     while($ligne = $req->fetch())
     {
         // obliger d'ajout les variables car cela ne s'affecte pas ! Donc c'est juste.
-    ajoutConcentration('Proteine', $BD, $ligne['NumeroRepas'], ,$ligne['Proteine'],$ligne['Date'], $Profil[0]);
-    ajoutConcentration('Glucide', $BD, $ligne['NumeroRepas'], ,$ligne['Glucide'],$ligne['Date'], $Profil[0]);
-    ajoutConcentration('Alcool', $BD, $ligne['NumeroRepas'], ,$ligne['Alcool'],$ligne['Date'], $Profil[0]);
-    ajoutConcentration('Calorie', $BD, $ligne['NumeroRepas'], ,$ligne['Calorie'],$ligne['Date'], $Profil[0]);
+    ajoutConcentration('Proteine', $BD, $ligne['NumeroRepas'] ,$ligne['Proteine'],$ligne['Date'],$Profil["ID"]);
+        
+    ajoutConcentration('Glucide', $BD, $ligne['NumeroRepas'] ,$ligne['Glucide'],$ligne['Date'], $Profil["ID"]);
+    
+    ajoutConcentration('Alcool', $BD, $ligne['NumeroRepas'] ,$ligne['Alcool'],$ligne['Date'], $Profil["ID"]);
+        
+    ajoutConcentration('Calorie', $BD, $ligne['NumeroRepas'] ,$ligne['Calorie'],$ligne['Date'], $Profil["ID"]);
     }
     $req->closeCursor();
     
@@ -88,18 +102,22 @@ if(isset($Profil)|| true){
             if ($i==3) $temps="MONTH(date), YEAR(date)";
             if ($i==4) $temps="YEAR(date)";
         }
-    $req = $BD->query("SELECT Nom, date, ".$calcul." AS concentration
+        $q="SELECT Nom, date, ".$calcul." AS concentration
     FROM statistique
-    WHERE ID_Profil = ".$Profil[0]."
-    AND type = ".$i."
-    GROUP BY ".$temps." ,Nom ");
+    WHERE ID_Profil = ".$Profil["ID"]."
+    AND type = ".$i." GROUP BY ".$temps." , Nom ";
+        echo $q."<br/>";
+    $req = $BD->query($q);
+        
         while($ligne = $req->fetch()){
-            $req1 = $BD->prepare("INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)");
+            $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
+            echo $q.'<br/>';
+            $req1 = $BD->prepare($q);
             $req1->execute(array(
             'Nom'=>$ligne['Nom'],
             'Date'=>$ligne['date'],
             'concentration'=>$ligne['concentration'],
-            'ID'=>$Profil[0]));
+            'ID'=>$Profil['ID']));
             $req1->closeCursor();
         }
     $req->closeCursor();
@@ -121,8 +139,8 @@ if(isset($Profil)|| true){
     ################# N'actualisera pas pour le prochain retour d'include ! Mise a par ajout de menue !
     
     
-    $BD->query("UPDATE profil SET DateActue = CURRENT_TIMESTAMP() WHERE id =".$Profil['ID']);
-    $req=$BD->query("SELECT DateActue FROM profil where id =".$Profil['ID'])
+    $BD->query("UPDATE profil SET DateActue = CURRENT_TIMESTAMP() WHERE id =".$Profil['ID']);    
+    $req=$BD->query("SELECT DateActue FROM profil where id =".$Profil['ID']);
     $ligne = $req->fetch();
     $Profil["actualisation"]=$ligne['DateActue'] ;
     
