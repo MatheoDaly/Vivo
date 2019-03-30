@@ -12,14 +12,23 @@ $id=1;
 // je veux un format retour tel que echo json_ecode(array(array("Ma concentration", array(Valeur1, Valeur2, Valeur3, etc))))
 // Retourne moi bien le meme nombre de donnees pour chaque types !
 include('../Outil/Php/AccesBd.php');
-$BD = getBDWAMPP();
+$BD = getBD();
+
+
+
+if (isset($_POST['type']) & $_POST['type']<6 & $_POST['type']>0){
+    echo json_encode CalculTaux($id, $BD, $_POST['type']);
+}
 
 
 
 
-if(isset($_POST['type']) & $_POST['type'] == 1){
+// ############################# Passage en fonction de calcul taux pour reutilisation dans d'autre fichier !
+
+function CalculTaux ($id, $BD, $type){
+    if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
-    $req = $BD->query("SELECT DATE( NOW() ),Nom,NumRepas,sum(TauxCumule) from statistique where ID_Profil=".$id." AND type=".$_POST['type']." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
+    $req = $BD->query("SELECT DATE( NOW() ),Nom,NumRepas,sum(TauxCumule) from statistique where ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
 
     $taux=array();
     $valeur=array();
@@ -34,30 +43,30 @@ if(isset($_POST['type']) & $_POST['type'] == 1){
             $molecule=array();
         }
     }
-    echo json_encode($taux);
+    return $taux;
     }
-else if(isset($_POST['type']) & $_POST['type'] == 2) {
+else if($type == 2) {
     $time="day";
     $diff="-8";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
 } 
-else if(isset($_POST['type']) & $_POST['type'] == 3) {
+else if($type == 3) {
     $time="WEEKS";
     $diff="-5";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6)),array("Glucide", array(2, 0, 5, 8, 6, 2))));
 } 
-else if(isset($_POST['type']) & $_POST['type'] == 4) {
+else if($type == 4) {
     $time="MONTH";
     $diff="-6";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6))));
-} else if(isset($_POST['type']) & $_POST['type'] == 5) {
+} else if($type == 5) {
     $time="years";
     $diff="-5";
     //echo json_encode(array(array("Calorie", array(1, 2, 3))));
 } 
 
-if(isset($_POST['type']) & $_POST['type']>1){
-$req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil=".$id." AND type=".$_POST['type']." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
+if($type>1){
+$req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
     $taux=array();
     $valeur=array();
     $molecule=array();
@@ -74,7 +83,9 @@ $req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil="
         }
     }
 // Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
-    echo json_encode($taux);
+    return $taux;
 $req->closeCursor();
 }
+}
+
 ?>

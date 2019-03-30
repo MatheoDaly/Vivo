@@ -1,6 +1,6 @@
  //---------------------- Envoie de données-----------------------------------------
  var commence = true;
- var liste = [["concentration", [1, 2, 3, 3]]];
+ var list = [["concentration", [1, 2, 3, 3]]];
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
  alert('1');
 
@@ -10,7 +10,7 @@
          $.post('CalculTaux.php', {
              type: $('select').val()
          }, function (data) {
-             Graphique = AfficheGraph( /*JSON.parse(data)*/ liste, $("select").val());
+             Graphique = AfficheGraph( /*JSON.parse(data)*/ list, $("select").val());
 
          });
          commence = false;
@@ -22,72 +22,20 @@
              $.post('CalculTaux.php', {
                  type: $(this).val()
              }, function (data) {
-                 Graphique = AfficheGraph( /*JSON.parse(data)*/ liste, $("select").val());
+                 Graphique = AfficheGraph(JSON.parse(data), $("select").val());
              });
          }
      });
 
  });
-
- //---------------------------------------------Objet Chart----------------------------------------------------------------
-
- var li = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
-
-
-
-
- function sum(lis) {
-     var sum = 0;
-     for (var i in lis) {
-         sum = sum + lis[i];
-     }
-     return sum;
- }
-
- function Newtab(liste) {
-     var sum1 = sum(liste["2"]);
-     liste.push(new Array(liste["2"].length));
-     for (var i in liste) {
-         liste["2"][i] = liste["2"][i] / sum1;
-         liste["3"][i] = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-
-     }
-     return liste;
- }
-
- afficheCamebert(li);
-
- function afficheCamebert(listeDeListe) {
-     liste = Newtab(listeDeListe);
-     return new Chart(document.getElementById("Rond"), {
-         type: 'pie',
-         data: {
-             labels: liste[1],
-             datasets: [{
-                 label: "En pourcentage (%)",
-                 backgroundColor: liste[3],
-                 data: liste[2]
-      }]
-         },
-         options: {
-             title: {
-                 display: true,
-                 text: liste[0]
-             }
-         }
-     });
- }
-
-
-
-
  //############################################################## Partie AfficheGraph ###########################################
- function AfficheGraph(liste, type) {
+ function AfficheGraph(list, type) {
+     alert(list);
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
          data: {
              labels: ListeCalendrier(type),
-             datasets: GenereTraitGraph(liste)
+             datasets: GenereTraitGraph(list)
          },
          options: {
              responsive: true
@@ -100,8 +48,8 @@
      //Ne veux pas recevoir de tableau mais effectue, un tableau pour les caracter et un pour les nombres
      dataset = Array();
      for (var i = 0; i < listeDeListe.length; i++) {
-         alert('hey');
          dataset.push(TraitGraph(listeDeListe[i][0], listeDeListe[i][1]));
+
      }
      return dataset;
  }
@@ -150,4 +98,53 @@
          return ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin"];
      else if (Choix == 5)
          return ["2015", "2016", "2017", "2018", "2019"];
+ }
+
+
+ //---------------------------------------------Objet Donut ----------------------------------------------------------------
+
+ var l = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
+
+
+ function sum(lis) {
+     var sum = 0;
+     for (var i in lis) {
+         sum = sum + lis[i];
+     }
+     return sum;
+ }
+
+ function Newtab(liste) {
+     var sum1 = sum(liste["2"]);
+     liste.push(new Array(liste["2"].length));
+     for (var i in liste) {
+         liste["2"][i] = liste["2"][i] / sum1;
+         liste["3"][i] = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+
+     }
+     return liste;
+ }
+
+ afficheCamebert(l);
+
+ function afficheCamebert(listeDeListe) {
+     // Fonction qui avec une liste de liste  resort un obj json avec des couleurs aleas, et les données associer, et le label de la liste
+     liste = Newtab(listeDeListe);
+     return new Chart(document.getElementById("Rond"), {
+         type: 'pie',
+         data: {
+             labels: liste[1],
+             datasets: [{
+                 label: "En pourcentage (%)",
+                 backgroundColor: liste[3],
+                 data: liste[2]
+      }]
+         },
+         options: {
+             title: {
+                 display: true,
+                 text: liste[0]
+             }
+         }
+     });
  }
