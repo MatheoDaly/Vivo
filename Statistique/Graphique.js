@@ -2,6 +2,7 @@
  var commence = true;
  var liste = [["concentration", [1, 2, 3, 3]]];
  //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
+ alert('1');
 
  $(function () {
      var Graphique;
@@ -9,7 +10,7 @@
          $.post('CalculTaux.php', {
              type: $('select').val()
          }, function (data) {
-             Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+             Graphique = AfficheGraph( /*JSON.parse(data)*/ liste, $("select").val());
 
          });
          commence = false;
@@ -21,7 +22,7 @@
              $.post('CalculTaux.php', {
                  type: $(this).val()
              }, function (data) {
-                 Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+                 Graphique = AfficheGraph( /*JSON.parse(data)*/ liste, $("select").val());
              });
          }
      });
@@ -99,6 +100,7 @@
      //Ne veux pas recevoir de tableau mais effectue, un tableau pour les caracter et un pour les nombres
      dataset = Array();
      for (var i = 0; i < listeDeListe.length; i++) {
+         alert('hey');
          dataset.push(TraitGraph(listeDeListe[i][0], listeDeListe[i][1]));
      }
      return dataset;
@@ -123,6 +125,7 @@
              break;
 
      }
+
      return {
          label: Label,
          data: data,
