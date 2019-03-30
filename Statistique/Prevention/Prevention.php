@@ -20,17 +20,7 @@ Donut a finir dans statitisques -> juan
 prevention
 Article
 Bulle js des repas et menue
-Notion de seuil -> concentration
 
-    
-    Lien statstistique et 
-    prevention -> prevision; alerte pour des taux moyens grands
-    Si grands 
-
-
-Idée est de faire parvenir tous les aliment issu d'un historique aliment, mais il y aura un historique regime aussi, ou au boud de semaine on ne garde plus les repas recu mais la moyenne des taux de glucose, etc par semaine...
-
-Plus effectuer quand aliment est apprecier faire qu'il passe en preferance..
 
 Moindre carre !
 
@@ -56,9 +46,9 @@ include('../../Outil/Php/AccesBD.php');
     <link href="../../Profil/Profil.css" rel="stylesheet">
     <link href="Statistique.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
-    <title>Statistique <?php if(isset($Profil)){
-    echo ' de '.$Profil[1];
-    }
+    <title>Statistique <?php 
+    echo ' de '.$Profil["prenom"];
+    
         ?></title>
 
 </head>
@@ -93,39 +83,71 @@ include('../../Outil/Php/AccesBD.php');
     <div class="container justify-content-center rounded" id="TableProfil">
         <div>
             <h1>Ma prevention</h1>
-            Si je remarque une baisse moyenne je peut faire une prevision d'atteinte de pois idéal dans tel nombre de jours sinon je dis que il est dans un mauvais chemin
+            Si je remarque une baisse moyenne je peut faire une prevision d'atteinte de poids idéal dans tel nombre de jours sinon je dis que il est dans un mauvais chemin
             <div id="graphique" class="row bg-white rounded">
                 <div class="col-8">
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="col-4">
                     <div class="row">Mon nombre de jours avant mon poids idéal est :</div>
-                    <div class="row">Je pese actuellement :<?php echo $Profil['poids']; ?> </div>
-                    <div class="row">Je veux </div>
+                    <div class="row">Je pese actuellement <?php echo $Profil['poids']." kg"; ?> </div>
+                    <div class="row">Je veux atteindre </div>
                 </div>
             </div>
             <?php
-            //include("../CalculTaux.php");
-            $ListeConcentration = array(array("Calorie", array(1,2, 3, 3, 7)));
-            //CalculTaux($Profil['ID'], $BD, 1);
-            //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
+            $BD=getBD();
+
             ?>
 
             <h2>Mes exces</h2>
             <div class="row bg-white rounded">
-                Ce que nous remarquons :
+                <?php
+                $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MAX(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
+                FROM statistique
+                INNER JOIN seuil ON seuil.Nom = statistique.Nom
+                INNER JOIN article ON seuil.Nom = article.LienSeuil
+                WHERE seuil.InfSup='S'
+                AND seuil.Taux<statistique.TauxCumule
+                AND statistique.type=2
+                AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
+                AND statistique.ID_Profil=".$Profil['ID']);
+                while($ligne= $req->fetch()){
+                    
+                ?>
+                Ce que nous remarquons que cette semaine :
                 <div class="col-8">
-                    Concentration de sel</div>
+                    La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
                 <div class="col-4">
-                    Plus d'infos via <a href="#">article</a></div>
+                    Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
+                <?php 
+                }
+                $req->closeCursor();
+                ?>
             </div>
             <h2>Mes manques</h2>
             <div class="row bg-white rounded">
-                Ce que nous remarquons :
+                <?php
+                $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
+                FROM statistique
+                INNER JOIN seuil ON seuil.Nom = statistique.Nom
+                INNER JOIN article ON seuil.Nom = article.LienSeuil
+                WHERE seuil.InfSup='I'
+                AND seuil.Taux>statistique.TauxCumule
+                AND statistique.type=2
+                AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
+                AND statistique.ID_Profil=".$Profil['ID']);
+                while($ligne= $req->fetch()){
+                    
+                ?>
+                Ce que nous remarquons que cette semaine :
                 <div class="col-8">
-                    Concentration de sel: le manque peut induire des douleur d'estomac etc..</div>
+                    La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
                 <div class="col-4">
-                    Plus d'infos via <a href="#">article</a></div>
+                    Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
+                <?php 
+                }
+                $req->closeCursor();
+                ?>
             </div>
         </div>
 
