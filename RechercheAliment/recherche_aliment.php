@@ -59,35 +59,42 @@ session_start();
   
   <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
     <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
-
   <?php
   $bd = getBD();
-
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
     if(empty($_GET['Alim'])){
       echo('<meta http-equiv="refresh" content="0;URL=recherche aliment.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
 
       while($result = $reponse->fetch()){
+        echo '<div class="row"><div class="col-6">';
         echo('<form method="GET" action="ajouter.php">');
-        echo('<div class="form-group col-3 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<div class="form-group col-6 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir pour la recette">');
-        echo('</form>');
-
+        echo('</form></div>');
+        echo '<div class="col-">';
+        $regime = $bd ->query('SELECT DISTINCT regime.Nom, regime.urlRegime FROM regime_sans_aliment, regime WHERE regime_sans_aliment.id_Aliment ='.$result['alim_code']);
+        while($ligne = $regime ->fetch()){
+            echo '<img src="../Image/Regime/'.$ligne['urlRegime'].'">';
+            echo $ligne['Nom'];
+        }
+         echo '</div></div>' ;
+          $regime->closeCursor();
       }
       $reponse-> closeCursor();
+        
     }
 
   }
-  echo('<div class="creaRecette rounded">');
+  /*echo('<div class="creaRecette rounded">');
   echo('<form method="POST" action="planification.html" id="instr"><div class="form-group rounded">');
   echo('<input class="form-control" type="text" name="nomRecette" placeholder="Nom de la recette"></div>');
   echo('</form>');
@@ -95,7 +102,7 @@ session_start();
   echo('<textarea  class ="form_control" name="instructions" form="instr" rows="10" cols="85">');
   echo('Composez votre recette: ');
   echo('</textarea></div>');
-  echo('</div>');
+  echo('</div>');*/
 
 
   ?>
