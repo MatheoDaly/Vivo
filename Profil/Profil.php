@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if(isset($_SESSION['profil'])){
     include("../Actualisation/Actualisation.php");
     $Profil=$_SESSION['profil'];
@@ -7,10 +8,14 @@ if(isset($_SESSION['profil'])){
     $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
 
-####################################################################################################################################
-############################################# Attention Session -> Array = $Profil !################################################
 include("../Outil/php/AccesBD.php");
 $BD=getBD();
+
+if(isset($_POST['change']) && $_POST['change']=='yes'){
+ include("ModificationProfil/IntegrationPhoto.php");
+}
+####################################################################################################################################
+############################################# Attention Session -> Array = $Profil !################################################
 ?>
 
 <!Doctype HTML>
@@ -72,14 +77,15 @@ $BD=getBD();
             </button>
             <div id="ZoneModif" class="collapse">
                 <div class="card card-body">
-                    <form method="post" id="TelePhoto" enctype="multipart/form-data">
+                    <form method="post" id="TelePhoto" action="Profil.php" enctype="multipart/form-data">
                         <label for="photo">
                             <strong>
                                 Télécharger une nouvelle photo de profil :
                             </strong>
                         </label>
                         <input type="file" name="photo">
-                        <input type="button" class="submit" value="Validez">
+                        <input type="hidden" name="change" value="yes">
+                        <input type="submit">
                     </form>
                     <form id="VariableProfil">
                         <div class="row">
