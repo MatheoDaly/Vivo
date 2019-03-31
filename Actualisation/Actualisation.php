@@ -1,7 +1,7 @@
 <?php
 
 //################################ Permet de genere un set de donnée aleatoire
-$test=true;
+$test=false;
 
 
 // pas besoin de js on utilisera une inclusion du code php via la fonction include !
@@ -23,13 +23,15 @@ Type :
 
 //Aide mémoire : $Profil=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
 
+if($test==true){
+    
 session_start();
-
 if(isset($Profil)){
     include("../Actualisation/Actualisation.php");
     $Profil=$Profil;
 } else {
     $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
+}
 }
 
 function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
@@ -39,22 +41,12 @@ function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
         $req1->closeCursor();
     }
 
-if(isset($Profil)|| true){
+if(isset($Profil)){
 
     include('../Outil/Php/AccesBD.php');
     $BD = getBD();
     // met à jout les données statistique, c'est ici que la magie opère !
     
-    if($test==true){
-        for($i=0;$i<100;$i++){
-            $j=0;
-            if($i%3 == 0){
-                $j++;
-            } 
-            
-            $BD->query("INSERT INTO statistique VALUES (1, ".(($i%3)+1).", 'Calorie', ".rand(2000,3000).", SUBDATE(NOW(), INTERVAL ".$j." DAY), 1)");
-        }
-    }
     
 ############################# fonction Historique_Aliment -> Statistique ###########################################################
 ##################################

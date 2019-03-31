@@ -6,8 +6,7 @@ if(isset($_SESSION['profil'])){
 } else {
     $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
-####################################################################################################################################
-#################################################Changer la BD par MAPP ou WAMPP depend de votre serveur !##########################
+
 ####################################################################################################################################
 ############################################# Attention Session -> Array = $Profil !################################################
 include("../Outil/php/AccesBD.php");
@@ -57,11 +56,6 @@ $BD=getBD();
         </nav>
     </header>
 
-    <!-- ########################## Modification profil, il suffit de transformer .hidden dans visibility en visible pour voir le resultat####################################### !-->
-
-
-
-
     <!-- ################ Entete Photo ############### !-->
 
     <div class="container justify-content-center rounded" id="TableProfil">
@@ -85,7 +79,7 @@ $BD=getBD();
                             </strong>
                         </label>
                         <input type="file" name="photo">
-                        <input type="submit">
+                        <input type="button" class="submit" value="Validez">
                     </form>
                     <form id="VariableProfil">
                         <div class="row">
@@ -101,7 +95,7 @@ $BD=getBD();
                                 Taille :
                                 <input type="number" name="taille" value="<?php echo $Profil["taille"]; ?>">
                             </div>
-                            <input type="submit" value="Validez">
+                            <input type="button" class="submit" value="Validez">
                         </div>
 
                     </form>
@@ -227,8 +221,8 @@ $BD=getBD();
                             <div class="col-12 col-lg-6">
                                 <h4 class="text-center" style="text-decoration:underline;">
                                     <?php switch($ligne2['Repas']){
-                                            case 8: echo 'Matin'; break;
-                                            case 12: echo "Midi"; break;
+                                            case 9: echo 'Matin'; break;
+                                            case 13: echo "Midi"; break;
                                             case 19: echo "Soir"; break;
                                             default: echo "Repas de ".$ligne2['Repas']." heures"; break;} 
                                         ?>
