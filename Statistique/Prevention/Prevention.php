@@ -15,9 +15,7 @@ Avec intervale de confiance à exploiter
 
 
 Ce qui reste à faire 
-Fin ajax modification profil
 Donut a finir dans statitisques -> juan
-prevention
 Bulle js des repas et menue
 
 
@@ -101,56 +99,58 @@ $BD=GetBD();
                 </div>
             </div>
 
-            <h2>Mes exces</h2>
-            <div class="row bg-white rounded">
-                <?php
+            <?php
                 $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MAX(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
                 INNER JOIN seuil ON seuil.Nom = statistique.Nom
-                INNER JOIN article ON seuil.Nom = article.LienSeuil
+                INNER JOIN article ON statistique.Nom = article.LienSeuil
                 WHERE seuil.InfSup='S'
                 AND seuil.Taux<statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
-                AND statistique.ID_Profil=".$Profil['ID']);
+                AND statistique.ID_Profil=".$Profil['ID']."
+                GROUP BY statistique.Nom");
                 while($ligne= $req->fetch()){
                     
                 ?>
+            <h2>Mes exces</h2>
+            <div class="row bg-white rounded">
                 Ce que nous remarquons que cette semaine :
                 <div class="col-8">
                     La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
                 <div class="col-4">
                     Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
-                <?php 
+            </div>
+            <?php 
                 }
                 $req->closeCursor();
                 ?>
-            </div>
-            <h2>Mes manques</h2>
-            <div class="row bg-white rounded">
-                <?php
+            <?php
                 $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
                 INNER JOIN seuil ON seuil.Nom = statistique.Nom
-                INNER JOIN article ON seuil.Nom = article.LienSeuil
+                INNER JOIN article ON statistique.Nom = article.LienSeuil
                 WHERE seuil.InfSup='I'
                 AND seuil.Taux>statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
-                AND statistique.ID_Profil=".$Profil['ID']);
+                AND statistique.ID_Profil=".$Profil['ID']."
+                GROUP BY statistique.Nom");
                 while($ligne= $req->fetch()){
                     
                 ?>
+            <h2>Mes manques</h2>
+            <div class="row bg-white rounded">
                 Ce que nous remarquons que cette semaine :
                 <div class="col-8">
                     La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
                 <div class="col-4">
                     Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
-                <?php 
+            </div>
+            <?php 
                 }
                 $req->closeCursor();
                 ?>
-            </div>
         </div>
     </div>
 

@@ -9,7 +9,8 @@
          $.post('CalculTaux.php', {
              type: $('select').val()
          }, function (data) {
-             Graphique = AfficheGraph( /*JSON.parse(data)*/ list, $("select").val());
+             alert(data);
+             Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
          });
          commence = false;
@@ -21,6 +22,7 @@
              $.post('CalculTaux.php', {
                  type: $(this).val()
              }, function (data) {
+                 alert(data);
                  Graphique = AfficheGraph(JSON.parse(data), $("select").val());
              });
          }

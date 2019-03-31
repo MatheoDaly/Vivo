@@ -19,7 +19,6 @@ if ($num==1){
     $q="UPDATE profil SET ".$champs."  = '".$post."' WHERE id =".$id;
     $BD->query("UPDATE profil SET ".$champs."  = '".$post."' WHERE id =".$id);
 }
-    $existe=$post;
     return 1;
     }
 }

@@ -186,8 +186,8 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
         <!--  Intermediare !-->
         <div>
-            <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation des mes statistique">
-        </div>
+            <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation de mes statistiques">
+        </div>s
     </div>
     <!-- menu  personnaliser des profil !-->
 

@@ -3,7 +3,6 @@
 session_start();
 if(isset($_SESSION["profil"])){
 $id=$_SESSION["profil"]['ID'];
-include("../Actualisation/Actualisation.php");
 } else {
 $id=1;
 }
@@ -42,7 +41,6 @@ function CalculTaux ($id, $BD, $type){
             $molecule=array();
         }
     }
-    echo $taux;
     return $taux;
     }
 else if($type == 2) {
@@ -83,7 +81,6 @@ $req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil="
         }
     }
 // Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
-    echo $taux;
     return $taux;
 $req->closeCursor();
 }
