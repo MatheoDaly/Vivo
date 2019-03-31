@@ -12,8 +12,8 @@ session_start();
 // Variable :
 if(isset($_SESSION['profil'])){
     $Profil=$_SESSION['profil'];
-    } else {
-    $Profil=array(1,'Paul','Paul@jeMangeTrop.com', 120, 170, 'GrosPaul','M','CestPasDeMaFaute','NoPic');
+} else {
+    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
 // Cela sert de reperage ! => $Profil = array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
 $cheminPhoto='../Image/PhotoProfil/';
@@ -30,7 +30,7 @@ $cheminIcon='../Image/IconProgess/';
     <link href="Statistique.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
     <title>Statistique <?php if(isset($Profil)){
-    echo ' de '.$Profil[1];
+    echo ' de '.$Profil["prenom"];
     }
         ?></title>
 
@@ -61,38 +61,31 @@ $cheminIcon='../Image/IconProgess/';
             </div>
         </nav>
     </header>
-    <div class="container justify-content-center rounded">
+    <div class="container d-flex flex-column justify-content-center rounded" id="TableProfil">
 
-        <!-- Attention mathéo ne modifie pas l'input !-->
-        <input type="hidden" value="<?php 
-                                if(isset($Profil)){echo $Profil[0];
-                                }
-                                ?>" name="nom" id="nom">
-        <!-- Ici ca va tu peux modifier sauf id et modification/ suppression des nom de class  !-->
 
-        <div class="d-flex flex-column justify-content-center" id="TableProfil">
-            <h1>Mon graphique
-            </h1>
-            <hr>
-            <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
-            <label for="type">Mon graphique selon :</label>
-            <select name='type'>
-                <option value='1' selected>Mes repas du jours</option>
-                <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
-                <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
-                <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
-                <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
-            </select>
-            <div id="graphique">
-                <canvas id="lineChart"></canvas>
-            </div>
-            <hr>
-            <div id="Ronds" width="400" height="400">
-                <canvas id="Rond"></canvas>
-            </div>
+        <h1>Mon graphique
+        </h1>
+        <hr>
+        <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
+        <label for="type">Mon graphique selon :</label>
+        <select name='type'>
+            <option value='1' selected>Mes repas du jours</option>
+            <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
+            <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
+            <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
+            <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
+        </select>
+        <div id="graphique">
+            <canvas id="lineChart"></canvas>
         </div>
-
+        <hr>
+        <div id="Ronds" width="400" height="400">
+            <canvas id="Rond"></canvas>
+        </div>
     </div>
+
+
     <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>

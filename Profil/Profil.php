@@ -71,6 +71,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
         </div>
 
         <!-- ################ Modification profil ############### !-->
+        <?php 
+        if(isset($_SESSION['profil'])){
+        ?>
         <div id="ModificationProfil">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
                 Modifiez mon profil
@@ -108,6 +111,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 </div>
             </div>
         </div>
+        <?php } ?>
 
         <!-- ################ Bandeau presentation ############### !-->
 
@@ -116,7 +120,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <div class="col-12 col-sm-5">
                     <?php 
                     // refaire le vrai calculde l'IMC
-                    echo "C'est moi, ".$Profil['prenom']."</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg, </br>Soit un IMC de : ".($Profil["poids"]/(($Profil["taille"]/100)^2))." </br>  Je possede : ".$Profil["point"]." points";
+                    echo "C'est moi, ".$Profil['prenom']." !</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg ! </br>J'ai un IMC de : ".($Profil["poids"]/(($Profil["taille"]/100)^2))." </br>  Je possede : ".$Profil["point"]." points";
                     
                     
                     ?>
