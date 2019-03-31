@@ -40,7 +40,7 @@ session_start();
     </header>
 <body>
   <div class="partie_recherche">
-    <form method="get" action="Choix_Aliment.php" autocomplete="off" id="optionForm">
+    <form method="get" action="recherche_aliment.php" autocomplete="on" id="optionForm">
       <br/>
       <input type="text" name="Alim">
       <br/>
@@ -54,76 +54,49 @@ session_start();
       <br/>
       <input type="submit" name="submit" value="Rechercher">
     </form>
-    <a href="CreationMenuSuite.php">Retour</a>
   </div>
 
   <?php
   $bd = getBD();
+
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
     if(empty($_GET['Alim'])){
-      echo('<meta http-equiv="refresh" content="0;URL=Choix_Aliment.php">');
+      echo('<meta http-equiv="refresh" content="0;URL=recherche aliment.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
-      if(!isset($_SESSION['Rec_Plat'])){
-        $_SESSION['Rec_Plat'] = array();
-      }
-      echo('<form method="GET" action="ajoutAlimInd.php">');
+
       while($result = $reponse->fetch()){
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
-        echo('<input type="hidden" name="id_aliment" value="');
-        $a = $result['alim_code'];
-        echo($a);
-        echo('">');
-        echo('<input type="hidden" name="nom_aliment" value="');
-        $nom = $result['alim_nom_fr'];
-        echo($nom);
-        echo('">');
-        echo('<input type="number" name="nbAl">');
-        echo('<input type="submit" name="choix" value="Choisir">');
-
+        echo('<form method="GET" action="ajouter.php">');
+        echo('<input type="number" name="nbArt">');
+        echo('<input type="submit" name="ajout" value="Choisir pour la recette">');
+        echo('</form>');
         echo('</div>');
+
       }
       $reponse-> closeCursor();
-      echo('</form>');
-      /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-      }
-      elseif(!isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-        print_r($_SESSION['Rec_Plat']);
-      }elseif(!isset($_GET['aliment']) && !isset($_SESSION['Rec_Plat'])){
-        $_SESSION['Rec_Plat'] = array('début');
-      }*/
     }
-    }
-  /*if(isset($result['alim_nom_fr'])){ //isset($_SESSION['Rec_Plat']) && isset($_GET['ajout2'])
-    ajoutAlimInd($result['alim_nom_fr']);
-  }else{
-    $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
-print_r($_SESSION['Rec_Plat']);
-}*/
-print_r($_SESSION['Rec_Plat']);
-echo('Vous avez choisi');
-$i=0;
-while($i<sizeof($_SESSION['Rec_Plat'])){
-  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
-  echo $panier;
-  echo('<br/>');
-  $i=$i+1;
-}
 
-echo $_SESSION['nbRP'];
+  }
+  echo('<div class="creaRecette">');
+  echo('<form method="POST" action="planification.html" id="instr">');
+  echo('<input type="text" name="nomRecette" placeholder="Nom de la recette>"');
+  echo('</form>');
+  echo('<textarea name="instructions" form="instr" rows="10" cols="85">');
+  echo('Composer votre recette: ');
+  echo('</textarea>');
+  echo('</div>');
+
 
   ?>
-<a href="CreationMenuSuite.php">Valider</a>
 </body>
 </html>

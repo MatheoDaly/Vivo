@@ -21,6 +21,6 @@ function ajoutAlimRec($numRecette,$alim){
 }
 
 function arCalorie($food,$val){
-  $ar = array('mes calories' => ,array('food' => $food ),array('$val' => $val));
+  $ar = array('mes calories' => array('food' => $food ),array('$val' => $val));
 }
  ?>
