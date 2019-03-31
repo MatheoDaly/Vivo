@@ -19,4 +19,8 @@ function ajoutAlimInd($alim){
 function ajoutAlimRec($numRecette,$alim){
   array_push($_SESSION['Rec_Plat'],array('numRecette'=>$numRecette,'aliment'=>$alim));
 }
+
+function arCalorie($food,$val){
+  $ar = array('mes calories' => ,array('food' => $food ),array('$val' => $val));
+}
  ?>
