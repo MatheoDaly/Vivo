@@ -72,18 +72,31 @@ session_start();
         $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
 
+      if(!isset($_SESSION['Recette'])){
+        $_SESSION['Recette'] = array();
+      }
+
       while($result = $reponse->fetch()){
+        echo('<form method="GET" action="ajoutAlimInd.php">');
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
-        echo('<form method="GET" action="ajouter.php">');
-        echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout" value="Choisir pour la recette">');
-        echo('</form>');
-        echo('</div>');
+        echo('<input type="hidden" name="id_aliment" value="');
+        $a = $result['alim_code'];
+        echo($a);
+        echo('">');
+        echo('<input type="hidden" name="nom_aliment" value="');
+        $nom = $result['alim_nom_fr'];
+        echo($nom);
+        echo('">');
+        echo('<input type="number" name="nbAl">');
+        echo('<input type="submit" name="choix" value="Choisir">');
 
+        echo('</div>');
+        echo('</form>');
       }
       $reponse-> closeCursor();
+
     }
 
   }
@@ -96,7 +109,18 @@ session_start();
   echo('</textarea>');
   echo('</div>');
 
+  print_r($_SESSION['Recette']);
+  echo('Vous avez choisi');
+  $i=0;
+  while($i<sizeof($_SESSION['Recette'])){
+    $panier = $_SESSION['Recette'][$i]['nom'];
+    echo $panier;
+    echo('<br/>');
+    $i=$i+1;
+  }
+
 
   ?>
+  <a href="crea_recette_suite.php">Valider</a>
 </body>
 </html>
