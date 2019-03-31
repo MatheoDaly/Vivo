@@ -39,22 +39,26 @@ session_start();
         </nav>
     </header>
 <body>
-  <div class="partie_recherche">
+  <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
     <form method="get" action="recherche_aliment.php" autocomplete="on" id="optionForm">
-      <br/>
-      <input type="text" name="Alim">
-      <br/>
-      Options de recherche:
-      Populiarité:
-      <input type="radio" name="option" value="Popularité" checked>
-      Lipide (croissant):
-      <input type="radio" name="option" value="Lipide">
-      Calorie (croissant):
-      <input type="radio" name="option" value="Calorie">
-      <br/>
-      <input type="submit" name="submit" value="Rechercher">
+     <div class="form-group col-6 mx-auto">
+      <input type="text"  class="form-control" name="Alim" placeholder="Laissez-vous guider par vos envies !">
+      </div>
+      <div class="form-check">
+        <p>Options de recherche : </p>
+      <label class="form-ckeck-label" for="popularite">Popularité : </label>
+      <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
+      <label class="form-ckeck-label" for="calorie">Lipides (croissant) : </label>
+      <input type="radio" name="option" id="calorie"value="Lipide">
+      <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+      <input type="radio" name="option" id="calorie"value="Calorie">
+        </div>
+      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
     </form>
   </div>
+  
+  <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+    <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
 
   <?php
   $bd = getBD();
@@ -73,30 +77,28 @@ session_start();
       }
 
       while($result = $reponse->fetch()){
-        echo($result['alim_nom_fr']);
-        echo('<br />');
-        echo('<div class="rechAlim">');
         echo('<form method="GET" action="ajouter.php">');
-        echo('<input type="number" name="nbArt">');
-        echo('<input type="submit" name="ajout" value="Choisir pour la recette">');
+        echo('<div class="form-group col-3 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir pour la recette">');
         echo('</form>');
-        echo('</div>');
 
       }
       $reponse-> closeCursor();
     }
 
   }
-  echo('<div class="creaRecette">');
-  echo('<form method="POST" action="planification.html" id="instr">');
-  echo('<input type="text" name="nomRecette" placeholder="Nom de la recette>"');
+  echo('<div class="creaRecette rounded">');
+  echo('<form method="POST" action="planification.html" id="instr"><div class="form-group rounded">');
+  echo('<input class="form-control" type="text" name="nomRecette" placeholder="Nom de la recette"></div>');
   echo('</form>');
-  echo('<textarea name="instructions" form="instr" rows="10" cols="85">');
-  echo('Composer votre recette: ');
-  echo('</textarea>');
+  echo('<div class="form-group">');
+  echo('<textarea  class ="form_control" name="instructions" form="instr" rows="10" cols="85">');
+  echo('Composez votre recette: ');
+  echo('</textarea></div>');
   echo('</div>');
 
 
   ?>
+    </div>
 </body>
 </html>
