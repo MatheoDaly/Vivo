@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php";
+include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
 session_start();
 ?>
@@ -40,7 +40,7 @@ session_start();
     </header>
 <body>
   <div class="partie_recherche">
-    <form method="get" action="Choix_Aliment.php" autocomplete="on" id="optionForm">
+    <form method="get" action="Choix_Aliment.php" autocomplete="off" id="optionForm">
       <br/>
       <input type="text" name="Alim">
       <br/>
@@ -54,6 +54,7 @@ session_start();
       <br/>
       <input type="submit" name="submit" value="Rechercher">
     </form>
+    <a href="CreationMenuSuite.php">Retour</a>
   </div>
 
   <?php
@@ -78,15 +79,21 @@ session_start();
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
-        echo('<input type="hidden" name="aliment" value="');
+        echo('<input type="hidden" name="id_aliment" value="');
         $a = $result['alim_code'];
         echo($a);
         echo('">');
-        echo('<input type="number" name="nbArt">');
+        echo('<input type="hidden" name="nom_aliment" value="');
+        $nom = $result['alim_nom_fr'];
+        echo($nom);
+        echo('">');
+        echo('<input type="number" name="nbAl">');
         echo('<input type="submit" name="choix" value="Choisir">');
+
         echo('</div>');
       }
       $reponse-> closeCursor();
+      echo('</form>');
       /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
         array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
       }
@@ -108,10 +115,15 @@ print_r($_SESSION['Rec_Plat']);
 echo('Vous avez choisi');
 $i=0;
 while($i<sizeof($_SESSION['Rec_Plat'])){
-  echo $_SESSION['Rec_Plat'][$i];
+  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
+  echo $panier;
   echo('<br/>');
   $i=$i+1;
 }
+
+echo $_SESSION['nbRP'];
+
   ?>
+<a href="CreationMenuSuite.php">Valider</a>
 </body>
 </html>

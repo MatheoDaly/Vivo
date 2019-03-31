@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php"; // pas forcément besoin
+include_once "AccesBD_rechAl.php"; // pas forcément besoin
 
 //Pour menu
 //

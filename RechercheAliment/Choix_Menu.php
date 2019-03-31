@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php";
+include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
 session_start();
 ?>
@@ -84,7 +84,7 @@ session_start();
     <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
     <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
   <?php
-  
+
 
   if(isset($_GET['submit']) || isset($_GET['Menu'])){
     if(empty($_GET['Menu'])){

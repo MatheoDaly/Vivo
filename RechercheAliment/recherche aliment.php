@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php";
+include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
 session_start();
 ?>

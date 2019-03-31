@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php";
+include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
 session_start();
 ?>
@@ -52,12 +52,13 @@ session_start();
           <form method='get' action="CreationMenuSuite.php">
             <div class="form-group">
               <label for="nbMenu">Veuillez indiquer le nombre de plat pour votre menu</label>
-              <input type='number' class="form-control" name='nbMenu'>
+              <input type='number' class="form-control" name='nbRP'>
 
             </div>
 
 
             <?php
+
             //print_r($_SESSION['Menu']);
 
               //global $n;

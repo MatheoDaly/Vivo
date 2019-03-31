@@ -1,5 +1,5 @@
 <?php
-include_once "AccesBDbis.php";
+include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
 session_start();
 ?>
@@ -52,12 +52,16 @@ session_start();
           <form method='get' action="CreationMenu.php">
             <?php
             //print_r($_SESSION['Menu']);
+            if(!isset($_SESSION['nbRP'])){
+              $_SESSION['nbRP']=$_GET['nbRP'];
+            }
             $bd=getBD();
             $data=$bd->query('SELECT * FROM recette_plat');
-            if(isset($_GET['nbMenu']) && isset($_GET['valNbMenu2'])){
+            if(isset($_SESSION['nbRP'])){
               $i=1;
               echo('<ul class="list-group">');
-              while($i<=$_GET['nbMenu']){
+              $nbRP=$_SESSION['nbRP'];
+              while($i<=$nbRP){
                 echo('<li class="list-group-item">');
                 echo "Recette ".$i;
                 echo('</li>');
@@ -88,7 +92,19 @@ session_start();
               echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
               echo('<br/>');
               echo('<a href="recherche aliment.php">Créer une recette</a>');
-              echo('<a href="tempo_stop.php">stop</a>');
+              echo('<br/>');
+              echo('<a href="tempo_stop.php">Annuler</a>');
+
+              if(isset($_SESSION['Rec_Plat'])){
+                echo('Vous avez choisi');
+                $i=0;
+                while($i<sizeof($_SESSION['Rec_Plat'])){
+                  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
+                  echo $panier;
+                  echo('<br/>');
+                  $i=$i+1;
+                }
+              }
 
 
 
