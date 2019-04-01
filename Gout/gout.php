@@ -3,23 +3,39 @@ include("../Outil/php/AccesBD.php");
 //include_once "Fonctions_alim.php";
 session_start();
 $BD=getBD();
-if(isset($_GET['cmd'])){
-    if($_GET['cmd']==1){
-            $i=0;
-            while(isset($_GET[$i])){
-            $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`) VALUES ('1', '".$_GET[$i]."')");
-            $i+=1;
+if(isset($_GET['submit'])){
+    if($_GET['submit']=="Ajouter"){
+        $i=0;
+        $j=0;
+        while($i<count($_GET)-2) {
+            $fin=false;
+            while(!$fin){
+                if(isset($_GET[$j])){
+                    $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`) VALUES ('1', '".$_GET[$j]."')");
+                    $fin=true;
+                }
+                $j+=1;
             }
             $req->closeCursor();
+            $i+=1;
+        }
     }
     else{
         if($_GET['type']==1){
             $i=0;
-            while(isset($_GET[$i])){
-            $req=$BD->query("DELETE FROM regime_profil WHERE id_Profil=1 and id_Regime=".$_GET[$i]);
-            $i+=1;
+            $j=0;
+            while($i<count($_GET)-2) {
+                $fin=false;
+                while(!$fin){
+                    if(isset($_GET[$j])){
+                        $req=$BD->query("DELETE FROM regime_profil WHERE id_Profil=1 and id_Regime=".$_GET[$j]);
+                        $fin=true;
+                    }
+                    $j+=1;
+                }
+                $req->closeCursor();
+                $i+=1;
             }
-            $req->closeCursor();
         }
         else{
             $i=0;
@@ -80,12 +96,11 @@ if(isset($_GET['cmd'])){
                     <?php $req=$BD->query("SELECT * FROM regime WHERE id in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
-                                echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>';
-                                $i+=1;
-                            }
+                        echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>';
+                        $i+=1;
+                    }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="cmd" value="2">
                     <input type="hidden" name="type" value="1">
                     <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
@@ -98,12 +113,11 @@ if(isset($_GET['cmd'])){
                     <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
-                                echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>';
+                        echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>';
                         $i+=1;
                         }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="cmd" value="2">
                     <input type="hidden" name="type" value="3">
                     <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
@@ -121,7 +135,6 @@ if(isset($_GET['cmd'])){
                             }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="cmd" value="2">
                     <input type="hidden" name="type" value="2">
                     <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
@@ -140,7 +153,6 @@ if(isset($_GET['cmd'])){
                             }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="cmd" value="1">
                     <input type="hidden" name="type" value="1">
                     <input type="submit" class="btn btn-primary" name="submit" value="Ajouter">
                     </form>
