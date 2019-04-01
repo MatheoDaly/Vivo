@@ -97,7 +97,7 @@ session_start();
       </div>
     </div>
   </div>
-  
+
   <h1 class="text-center">Nos recettes au top !</h1>
 <div class="row text-center p-3 mx-auto">
  <?php

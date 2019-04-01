@@ -45,7 +45,7 @@ session_start();
       <input type="text" name="Alim">
       <br/>
       Options de recherche:
-      Populiarité:
+      Popularité:
       <input type="radio" name="option" value="Popularité" checked>
       Lipide (croissant):
       <input type="radio" name="option" value="Lipide">
