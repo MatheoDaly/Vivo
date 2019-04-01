@@ -1,0 +1,21 @@
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+
+    background: url(../Image/mountains-1985027_1920.jpg);
+    background-size: auto;
+    background-attachment: fixed;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    display: inline;
+}
+
+#Table {
+    margin: 100px 50px 100px 50px;
+    background: url(../Image/wallpaper-2116949_960_720.jpg);
+}
