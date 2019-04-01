@@ -74,8 +74,9 @@ session_start();
       if(!isset($_SESSION['Rec_Plat'])){
         $_SESSION['Rec_Plat'] = array();
       }
-      echo('<form method="GET" action="ajoutAlimInd.php">');
+
       while($result = $reponse->fetch()){
+        echo('<form method="GET" action="ajoutAlimInd.php">');
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
@@ -91,9 +92,10 @@ session_start();
         echo('<input type="submit" name="choix" value="Choisir">');
 
         echo('</div>');
+        echo('</form>');
       }
       $reponse-> closeCursor();
-      echo('</form>');
+
       /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
         array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
       }
