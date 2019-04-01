@@ -11,11 +11,11 @@ while($i<sizeof($_SESSION['Recette'])){
     $kcal = $ligne['Energie_Règlement_UE_N°_11692011_kcal100g'];
     $prot = $ligne['Protéines_g100g'];
   }
-  
+
 
 }
 
 
-$data = $bd->query("SELECT * FROM recette_plat ");
+$data = $bd->query("INSERT INTO `recette_plat`(`Id_Recette`, `nom`, `instructions`, `kcal`, `protéines`) VALUES (3,)");
 
  ?>

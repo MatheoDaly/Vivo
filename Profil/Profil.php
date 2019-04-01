@@ -53,6 +53,10 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                     <li class="nav-item">
                         <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Inscription/inscription.html">Deconnexion</a>
+                    </li>
+
                 </ul>
                 <span class="navbar-text">
                     Pour une bonne santé vivez VIVO !

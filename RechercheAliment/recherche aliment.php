@@ -77,7 +77,7 @@ session_start();
       }
 
       while($result = $reponse->fetch()){
-        echo('<form method="GET" action="ajoutAlimInd.php">');
+        echo('<form method="GET" action="ajoutAlimRecette.php">');
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
