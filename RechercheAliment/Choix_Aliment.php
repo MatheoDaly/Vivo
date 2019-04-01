@@ -121,7 +121,6 @@ while($i<sizeof($_SESSION['Rec_Plat'])){
   $i=$i+1;
 }
 
-echo $_SESSION['nbRP'];
 
   ?>
 <a href="CreationMenuSuite.php">Valider</a>
