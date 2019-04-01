@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 01 avr. 2019 à 12:30
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Généré le :  lun. 01 avr. 2019 à 13:28
+-- Version du serveur :  5.7.21
+-- Version de PHP :  5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -3219,22 +3219,22 @@ INSERT INTO `profil` (`id`, `prenom`, `email`, `poids`, `taille`, `NiveauSportif
 
 DROP TABLE IF EXISTS `recette_plat`;
 CREATE TABLE IF NOT EXISTS `recette_plat` (
-  `Id_Recette` int(11) NOT NULL,
+  `Id_Recette` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) DEFAULT NULL,
   `instructions` text,
   `kcal` float DEFAULT NULL,
   `protéines` float DEFAULT NULL,
   PRIMARY KEY (`Id_Recette`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `recette_plat`
 --
 
 INSERT INTO `recette_plat` (`Id_Recette`, `nom`, `instructions`, `kcal`, `protéines`) VALUES
-(0, 'Oeuf au plat', '1. Mettre de l\'huile dans une poêle à feu moyen 2. Casser un oeuf et le mettre dans la poêle 3. Attendre 3 minutes et c\'est prêt !', 180, 13.8),
-(1, 'Tomates farcies', '1.Préchauffer pendant 10 minutes le four a 200° 2.Découper les tomates sur le dessus en forme de rond et les vider. 1.Garnir les tomates avec la viande hachée et de l\'ail 3.Enfourner les tomates garnies pendant 30 à 40 minutes 4.Assaisoner, c\'est prêt !,', 123, 5.84),
-(2, 'Salade de concombre', '1.Laver le concombre et l\'éplucher en rondelle 2.Versez la crème dans un saladier. 3. Ajoutez du jus de citron, de lhuile d\'olive et du persil. 4.Salez, poivrez et mélangez. 5. Incorporez les rondelles de concombre 6.Mélangez à nouveau le tout de façon à ce que la sauce enveloppe bien le concombre. 7. Réserver au frais et c\'est prêt', 27, 16.26);
+(4, 'Oeuf au plat', '1. Mettre de l\'huile dans une poêle à feu moyen 2. Casser un oeuf et le mettre dans la poêle 3. Attendre 3 minutes et c\'est prêt !', 180, 13.8),
+(5, 'Tomates farcies', '1.Préchauffer pendant 10 minutes le four a 200° 2.Découper les tomates sur le dessus en forme de rond et les vider. 1.Garnir les tomates avec la viande hachée et de l\'ail 3.Enfourner les tomates garnies pendant 30 à 40 minutes 4.Assaisoner, c\'est prêt !,', 123, 5.84),
+(6, 'Salade de concombre', '1.Laver le concombre et l\'éplucher en rondelle 2.Versez la crème dans un saladier. 3. Ajoutez du jus de citron, de lhuile d\'olive et du persil. 4.Salez, poivrez et mélangez. 5. Incorporez les rondelles de concombre 6.Mélangez à nouveau le tout de façon à ce que la sauce enveloppe bien le concombre. 7. Réserver au frais et c\'est prêt', 27, 16.26);
 
 -- --------------------------------------------------------
 
@@ -14480,7 +14480,7 @@ INSERT INTO `statistique` (`type`, `NumRepas`, `Nom`, `TauxCumule`, `date`, `ID_
 -- Contraintes pour la table `compose`
 --
 ALTER TABLE `compose`
-  ADD CONSTRAINT `compose_ibfk_1` FOREIGN KEY (`id_recette`) REFERENCES `recette_plat` (`Id_Recette`),
+  ADD CONSTRAINT `FK_Recette_Compose` FOREIGN KEY (`id_recette`) REFERENCES `recette_plat` (`Id_Recette`),
   ADD CONSTRAINT `compose_ibfk_2` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`Id_Menu`);
 COMMIT;
 
