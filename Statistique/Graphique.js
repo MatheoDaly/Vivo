@@ -9,7 +9,10 @@
          $.post('CalculTaux.php', {
              type: $('select').val()
          }, function (data) {
-             alert(data);
+             if (JSON.parse(data).length == 0) {
+                 alert("Pas de repas encore effectuer !");
+                 $(location).attr('href', '../Profil/Profil.php')
+             }
              Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
          });
