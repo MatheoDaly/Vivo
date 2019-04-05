@@ -53,95 +53,65 @@ session_start();
             <div class="form-group">
               <label for="nbMenu">Veuillez indiquer le nombre de recettes pour votre menu</label>
               <input type='number' class="form-control" name='nbRP'>
-
             </div>
-
-
             <?php
-
-            //print_r($_SESSION['Menu']);
-
-              //global $n;
-              //echo('<form method="get" action="CreationMenu.php">');
-              echo("<input type='submit' class='btn btn-primary' name='valNbMenu2' value='Continuer'>"); // On valide le nombre de plats
-              echo('</form>');
-              echo('</ul>');
-
-            //if(isset($_GET['valNbMenu2'])){
-            //  echo('<meta http-equiv="refresh" content="0; URL=CreationMenuSuite.php">');
-            //}
-
-              /*while($res = $data->fetch()){
-                echo($res['nom']);
-                echo('<a href="page_recette.php?id_recette=');
-                echo($res['Id_Recette']);
-                echo('">');
-                echo(' Voir recette');
-                echo('</a>');
-              }
-              echo('<br/>');
-              echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
-              echo('<br/>');
-              echo('<a href="recherche aliment.php">Créer une recette</a>');
-              echo('<a href="tempo_stop.php">stop</a>');
-              */
-
-
-
-            ?>
-          </form>
-        </div>
-      </div>
-      <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
-        <h1 class="border border-warning text-center">Statistiques</h1>
+            echo("<input type='submit' class='btn btn-primary' name='valNbMenu2' value='Continuer'>"); // On valide le nombre de plats
+            echo('</form>');
+            echo('</ul>');
+          ?>
+        </form>
       </div>
     </div>
+    <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
+      <h1 class="border border-warning text-center">Statistiques</h1>
+    </div>
   </div>
-
-  <h1 class="text-center">Nos recettes au top !</h1>
-<div class="row text-center p-3 mx-auto">
- <?php
-    $bd = getBD();
-    $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");
-    $i = 1;
-    while($ligne = $top5 ->fetch()){
-        if($i == 1){
-            echo '<div class="col-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
-        }else if($i ==2){
-            echo '<div class="col-2 bg-info text-light p-3 mx-auto m-2 rounded">';
-        }else if($i ==3){
-            echo '<div class="col-2 bg-light p-3 m-2 mx-auto rounded">';
-        }else if($i ==4){
-            echo '<div class="col-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
-        }else if($i ==5){
-            echo '<div class="col-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
-        }
-        echo '#'.$i;
-        echo('<form method="GET" action="CreationMenu.php">');
-        echo('<div class="form-group"><label for ="nbMenu">'.$ligne['nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
-        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
-        $i++;
-    }
-    $top5 ->CloseCursor();
- ?>
 </div>
-  <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
-    <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
-     <div class="form-group col-6 mx-auto">
+
+<h1 class="text-center">Nos recettes au top !</h1>
+<div class="row text-center p-3 mx-auto">
+  <?php
+  $bd = getBD();
+  $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");
+  $i = 1;
+  while($ligne = $top5 ->fetch()){
+    if($i == 1){
+      echo '<div class="col-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
+    }else if($i ==2){
+      echo '<div class="col-2 bg-info text-light p-3 mx-auto m-2 rounded">';
+    }else if($i ==3){
+      echo '<div class="col-2 bg-light p-3 m-2 mx-auto rounded">';
+    }else if($i ==4){
+      echo '<div class="col-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
+    }else if($i ==5){
+      echo '<div class="col-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
+    }
+    echo '#'.$i;
+    echo('<form method="GET" action="CreationMenu.php">');
+    echo('<div class="form-group"><label for ="nbMenu">'.$ligne['nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+    echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
+    $i++;
+  }
+  $top5 ->CloseCursor();
+  ?>
+</div>
+<div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
+  <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
+    <div class="form-group col-6 mx-auto">
       <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
     </div>
     <div class="form-check">
-        <p>Options de recherche : </p>
+      <p>Options de recherche : </p>
       <label class="form-ckeck-label" for="popularite">Popularité : </label>
       <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
-        <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+      <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
       <input type="radio" name="option" id="calorie"value="Calorie">
     </div>
-      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
-    </form>
-  </div>
-    <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
-    <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
+    <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
+  </form>
+</div>
+<div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+  <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
   <?php
 
 
@@ -175,7 +145,7 @@ session_start();
   }
 
   ?>
-    </div>
+</div>
 
 
 </body>

@@ -9,8 +9,15 @@ session_start();
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="StyleBis.css" type="text/css">
-  <title>menuuuuuu</title>
+  <title></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script>
+  function ajoutRecette(p){
+    var plat = document.getElementById('p');
+    var affichage = document.getElementsByClassName('list-group-item');
+    affichage.innerHTML = plat;
+  }
+  </script>
 </head>
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -49,7 +56,7 @@ session_start();
         <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
         <div class="col-10 bg-light mx-auto text-dark rounded" style="padding:20px;">
 
-          <form method='get' action="CreationMenu.php">
+          <form method='get' action="CreaMenuValidation.php">
             <?php
             //print_r($_SESSION['Menu']);
             if(!isset($_SESSION['nbRP'])){
@@ -63,7 +70,7 @@ session_start();
               $nbRP=$_SESSION['nbRP'];
               while($i<=$nbRP){
                 echo('<li class="list-group-item">');
-                echo "Recette ".$i;
+                echo "Plat ".$i;
                 echo('</li>');
 
                 $i+=1;
@@ -97,12 +104,41 @@ session_start();
 
               if(isset($_SESSION['Rec_Plat'])){
                 echo('Vous avez choisi');
+                echo('<br/>');
                 $i=0;
+                echo('<ul>');
                 while($i<sizeof($_SESSION['Rec_Plat'])){
+                  echo('<li id="p');
+                  echo($i);
+                  echo('">');
                   $panier = $_SESSION['Rec_Plat'][$i]['nom'];
                   echo $panier;
+                  echo('<select>');
+                  $j=1;
+                  for ($j=1; $j <= $nbRP ; $j++) {
+                    echo('<option');
+                    echo(' value="');
+                    echo($j);
+                    echo('">');
+                    echo(' Plat ');
+                    echo($j);
+                    echo('</option>');
+                  }
+                  echo('</select>');
+                  echo('<button id="conf');
+                  echo $i ;
+                  echo('"');
+                  echo(' type="button" onclick="ajoutRecette(conf');
+                  echo $i ;
+                  echo(')"');
+                  echo(' value ="confirmer">');
+                  echo('confirmer');
+                  echo('</button>');
+                  echo('</li>');
+
                   echo('<br/>');
                   $i=$i+1;
+                echo('</ul>');
                 }
               }
 
