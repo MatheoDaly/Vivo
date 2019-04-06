@@ -4,13 +4,22 @@ include_once "AccesBD_rechAl.php";
 
 $bd = getBD();
 
+$test=true;
+if($test && !isset($_POST['nomRecette']) && !isset($_POST['instructions'])){
+    
+$nomR='Oeuf au plat'; 
+$instr ='faire chauffer blablabla....'; 
+} else {
+    
+$nomR= $_POST['nomRecette'];
+$instr = $_POST['instructions'];
+}
 
-$nomR= $_GET['nomRecette'];
-$instr = $_GET['instructions'];
 
 $q = $bd->query("INSERT INTO `recette_plat`(`nom`, `instructions`,`Id_User`) VALUES ($nomR,$instr,1)");
 
-$idr1= $bd->query("SELECT * FROM recette_plat WHERE nom = $nomR ");
+echo "SELECT * FROM recette_plat WHERE nom = '$nomR '";
+$idr1= $bd->query("SELECT * FROM recette_plat WHERE nom = '$nomR '");
 $rep = $idr1->fetch();
 
 $idr2 = $rep['Id_Recette'];

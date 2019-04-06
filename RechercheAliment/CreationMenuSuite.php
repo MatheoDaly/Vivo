@@ -98,7 +98,7 @@ session_start();
               echo('<br/>');
               echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
               echo('<br/>');
-              echo('<a href="recherche aliment.php">Créer une recette</a>');
+              echo('<a href="rechercheAliment.php">Créer une recette</a>');
               echo('<br/>');
               echo('<a href="tempo_stop.php">Annuler</a>');
 
