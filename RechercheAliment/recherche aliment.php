@@ -5,58 +5,60 @@ session_start();
 ?>
 
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="StyleBis.css" type="text/css">
-  <title></title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="StyleBis.css" type="text/css">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <a class="navbar-brand" href="../index.html">Vivo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-        Pour une bonne santé vivez VIVO !
-      </span>
-            </div>
-        </nav>
-    </header>
-<body>
-  <div class="partie_recherche">
-    <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
-      <br/>
-      <input type="text" name="Alim">
-      <br/>
-      Options de recherche:
-      Popularité:
-      <input type="radio" name="option" value="Popularité" checked>
-      Lipide (croissant):
-      <input type="radio" name="option" value="Lipide">
-      Calorie (croissant):
-      <input type="radio" name="option" value="Calorie">
-      <br/>
-      <input type="submit" name="submit" value="Rechercher">
-    </form>
-  </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="../index.html">Vivo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Pour une bonne santé vivez VIVO !
+            </span>
+        </div>
+    </nav>
+</header>
 
-  <?php
+<body>
+    <div class="partie_recherche">
+        <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
+            <br />
+            <input type="text" name="Alim">
+            <br />
+            Options de recherche:
+            Popularité:
+            <input type="radio" name="option" value="Popularité" checked>
+            Lipide (croissant):
+            <input type="radio" name="option" value="Lipide">
+            Calorie (croissant):
+            <input type="radio" name="option" value="Calorie">
+            <br />
+            <input type="submit" name="submit" value="Rechercher">
+        </form>
+    </div>
+
+    <?php
   $bd = getBD();
 
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
@@ -101,12 +103,12 @@ session_start();
 
   }
   echo('<div class="creaRecette">');
-  echo('<form method="GET" action="crea_recette_suite.php" id="instr">');
-  echo('<input type="text" name="nomRecette" placeholder="Nom de la recette>"');
-  echo('</form>');
-  echo('<textarea name="instructions" form="instr" rows="10" cols="85">');
-  echo('Composer votre recette: ');
-  echo('</textarea>');
+  echo('<input type="text" name="nomRecette" id="nomRecette" placeholder="Nom de la recette>"');
+  ?><textarea name="instructions" rows="10" id="instructions" cols="85">');
+  Composer votre recette: 
+  </textarea>
+    <input type='button' id='submit' value='Valider la recette'>
+    <?php    
   echo('</div>');
 
   print_r($_SESSION['Recette']);
@@ -121,6 +123,11 @@ session_start();
 
 
   ?>
-  <a href="crea_recette_suite.php">Valider</a>
+    <textarea name="instructions" rows="10" id="instructions" cols="85">
+      Composer votre recette:   </textarea>
+    <a href="crea_recette_suite.php">Valider</a>
+    <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="recherche%20aliment.js" type="text/javascript"></script>
 </body>
+
 </html>

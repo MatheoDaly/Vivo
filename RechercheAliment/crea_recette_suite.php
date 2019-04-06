@@ -5,8 +5,8 @@ include_once "AccesBD_rechAl.php";
 $bd = getBD();
 
 
-$nomR= $_GET['nomRecette'];
-$instr = $_GET['instructions'];
+$nomR= $_POST['nomRecette'];
+$instr = $_POST['instructions'];
 
 $q = $bd->query("INSERT INTO `recette_plat`(`nom`, `instructions`,`Id_User`) VALUES ($nomR,$instr,1)");
 
