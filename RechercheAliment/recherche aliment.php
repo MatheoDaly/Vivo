@@ -101,7 +101,7 @@ session_start();
 
   }
   echo('<div class="creaRecette">');
-  echo('<form method="POST" action="planification.html" id="instr">');
+  echo('<form method="GET" action="crea_recette_suite.php" id="instr">');
   echo('<input type="text" name="nomRecette" placeholder="Nom de la recette>"');
   echo('</form>');
   echo('<textarea name="instructions" form="instr" rows="10" cols="85">');
