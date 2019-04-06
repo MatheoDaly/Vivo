@@ -103,12 +103,16 @@ session_start();
 
   }
   echo('<div class="creaRecette">');
+    ?>
+    <form action="crea_recette_suite.php" method="post">
+        <?php
   echo('<input type="text" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
   ?>
-    <textarea name="instructions" rows="10" id="instructions" cols="85">
-  Composer votre recette: 
-  </textarea>
-    <input type='button' id='submit' value='Valider la recette'>
+        <textarea name="instructions" rows="10" id="instructions" cols="85">
+ Composer votre recette:
+        </textarea>
+        <input type='submit' value='Valider la recette'>
+    </form>
     <?php
   echo('</div>');
 
