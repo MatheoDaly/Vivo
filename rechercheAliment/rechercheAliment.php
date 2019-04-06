@@ -42,7 +42,7 @@ session_start();
 
 <body>
     <div class="partie_recherche">
-        <form method="get" action="recherche aliment.php" autocomplete="on" id="optionForm">
+        <form method="get" action="rechercheAliment.php" autocomplete="on" id="optionForm">
             <br />
             <input type="text" name="Alim">
             <br />
@@ -63,15 +63,15 @@ session_start();
 
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
     if(empty($_GET['Alim'])){
-      echo('<meta http-equiv="refresh" content="0;URL=recherche aliment.php">');
+      echo('<meta http-equiv="refresh" content="0;URL=rechercheAliment.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
 
       if(!isset($_SESSION['Recette'])){
