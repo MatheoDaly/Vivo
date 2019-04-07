@@ -89,6 +89,7 @@ session_start();
                     
 
                         <?php
+                    //ça c'est la fonction
     function ajouter($date, $heure, $id_menu, $id_profil){
         $q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
         $bdd = getBD();
@@ -126,7 +127,7 @@ session_start();
            echo '<div class="input-group-addon">';
            echo '<span class="glyphicon glyphicon-th"></span>';
            echo '</div>';
-           echo '<input type="submit" class="btn btn-primary" name="ajout3" value="Choisir"></div></div></div>';
+           echo '<input type="submit" class="btn btn-primary" name="ajout3" value="Choisir"></div></div></div>'; //Là c'est le bouton 
       }
       $reponse-> closeCursor();
     }
