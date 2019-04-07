@@ -19,6 +19,7 @@ $instr = $_POST['instructions'];
 $q = $bd->query("INSERT INTO `recette_plat`(`nom`, `instructions`,`Id_User`) VALUES ($nomR,$instr,1)");
 
 echo "SELECT * FROM recette_plat WHERE nom = '$nomR '";
+
 $idr1= $bd->query("SELECT * FROM recette_plat WHERE nom = '$nomR '");
 $rep = $idr1->fetch();
 

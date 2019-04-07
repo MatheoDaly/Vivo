@@ -15,9 +15,9 @@ $BD = getBD();
 
 
 
-if (isset($_POST['type']) & $_POST['type']<6 & $_POST['type']>0){
+if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
+    echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-    echo json_encode(CalculTaux($id, $BD, 1));
 
 
 
