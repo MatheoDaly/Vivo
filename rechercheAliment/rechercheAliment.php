@@ -8,12 +8,12 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
+    <link rel="stylesheet" href="StyleBis.css" type="text/css">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <a class="navbar-brand" href="../index.html">Vivo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,12 +42,12 @@ session_start();
 
 <body>
     <div class="partie_recherche">
-        <form method="get" action="Choix_Aliment.php" autocomplete="off" id="optionForm">
+        <form method="get" action="rechercheAliment.php" autocomplete="on" id="optionForm">
             <br />
             <input type="text" name="Alim">
             <br />
             Options de recherche:
-            Populiarité:
+            Popularité:
             <input type="radio" name="option" value="Popularité" checked>
             Lipide (croissant):
             <input type="radio" name="option" value="Lipide">
@@ -56,29 +56,30 @@ session_start();
             <br />
             <input type="submit" name="submit" value="Rechercher">
         </form>
-        <a href="CreationMenuSuite.php">Retour</a>
     </div>
 
     <?php
   $bd = getBD();
+
   if(isset($_GET['submit']) || isset($_GET['Alim'])){
     if(empty($_GET['Alim'])){
-      echo('<meta http-equiv="refresh" content="0;URL=Choix_Aliment.php">');
+      echo('<meta http-equiv="refresh" content="0;URL=rechercheAliment.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
-      if(!isset($_SESSION['Rec_Plat'])){
-        $_SESSION['Rec_Plat'] = array();
+
+      if(!isset($_SESSION['Recette'])){
+        $_SESSION['Recette'] = array();
       }
 
       while($result = $reponse->fetch()){
-        echo('<form method="GET" action="ajoutAlimInd.php">');
+        echo('<form method="GET" action="ajoutAlimRecette.php">');
         echo($result['alim_nom_fr']);
         echo('<br />');
         echo('<div class="rechAlim">');
@@ -98,38 +99,38 @@ session_start();
       }
       $reponse-> closeCursor();
 
-      /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-      }
-      elseif(!isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-        print_r($_SESSION['Rec_Plat']);
-      }elseif(!isset($_GET['aliment']) && !isset($_SESSION['Rec_Plat'])){
-        $_SESSION['Rec_Plat'] = array('début');
-      }*/
     }
-    }
-  /*if(isset($result['alim_nom_fr'])){ //isset($_SESSION['Rec_Plat']) && isset($_GET['ajout2'])
-    ajoutAlimInd($result['alim_nom_fr']);
-  }else{
-    $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
-print_r($_SESSION['Rec_Plat']);
-}*/
-print_r($_SESSION['Rec_Plat']);
-echo('Vous avez choisi');
-echo('<br/>');
-$i=0;
-while($i<sizeof($_SESSION['Rec_Plat'])){
-  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
-  echo $panier;
-  echo('<br/>');
-  $i=$i+1;
-}
 
+  }
+  echo('<div class="creaRecette">');
+    ?>
+    <form action="crea_recette_suite.php" method="post">
+        <?php
+  echo('<input type="text" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
+  ?>
+        <textarea name="instructions" rows="10" id="instructions" cols="85">
+ Composer votre recette:
+        </textarea>
+        <input type='submit' value='Valider la recette'>
+    </form>
+    <?php
+  echo('</div>');
+
+  print_r($_SESSION['Recette']);
+  echo('Vous avez choisi');
+  $i=0;
+  while($i<sizeof($_SESSION['Recette'])){
+    $panier = $_SESSION['Recette'][$i]['nom'];
+    echo $panier;
+    echo('<br/>');
+    $i=$i+1;
+  }
 
 
   ?>
-    <a href="CreationMenuSuite.php">Valider</a>
+    <a href="crea_recette_suite.php">Valider</a>
+    <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="rechercheAliment.js" type="text/javascript"></script>
 </body>
 
 </html>
