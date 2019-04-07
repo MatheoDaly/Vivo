@@ -49,15 +49,15 @@ session_start();
     $i = 1;
     while($ligne = $top5 ->fetch()){
         if($i == 1){
-            echo '<div class="col-2 bg-primary text-light p-3  rounded">';
+            echo '<div class="col-6 col-md-2 bg-primary text-light p-3  rounded">';
         }else if($i ==2){
-            echo '<div class="col-2 bg-info text-light p-3 rounded">';
+            echo '<div class="col-6 col-md-2 bg-info text-light p-3 rounded">';
         }else if($i ==3){
-            echo '<div class="col-2 bg-light p-3 rounded">';
+            echo '<div class="col-6 col-md-2 bg-light p-3 rounded">';
         }else if($i ==4){
-            echo '<div class="col-2 bg-secondary text-light p-3 rounded">';
+            echo '<div class="col-6 col-md-2 bg-secondary text-light p-3 rounded">';
         }else if($i ==5){
-            echo '<div class="col-2 bg-dark text-light p-3 rounded">';
+            echo '<div class="col-6 col-md-2 bg-dark text-light p-3 rounded">';
         }
         echo '#'.$i;
         echo('<form method="GET" action="Choix_Aliment.php">');
@@ -85,11 +85,10 @@ session_start();
         </div>
         <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
             <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
-            <div class="row">
-            <form method="GET" action="Choix_Aliment.php">
-            <div class="col-6">
-               
-                <?php
+                <form method="GET" action="Choix_Aliment.php">
+                    
+
+                        <?php
     function ajouter($date, $heure, $id_menu, $id_profil){
         $q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
         $bdd = getBD();
@@ -112,30 +111,30 @@ session_start();
       }
       $_SESSION['Rec_Plat']=array();
       while($result = $reponse->fetch()){
-        echo('<div class="form-group col-3 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
-        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir">');
+        echo '<div class ="row">';
+        echo '<div class="col-6">';
+        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
         if(isset($_SESSION['Rec_Plat'])){
           ajoutAlimInd($result['Nom']);
         }else{
           $_SESSION['Rec_Plat']= $result['Nom'];
         }
+           echo '<div class="col-6">';
+           echo '<div class="input-group date p-2" data-provide="datepicker">';
+           echo '<input type="text" class="form-control">';
+           echo '<div class="input-group-addon">';
+           echo '<span class="glyphicon glyphicon-th"></span>';
+           echo '</div>';
+           echo '<input type="submit" class="btn btn-primary" name="ajout3" value="Choisir"></div></div></div>';
       }
       $reponse-> closeCursor();
     }
   }
 
   ?>
-            </div>
-            <div class="col-6">
-          <div class="input-group date" data-provide="datepicker">
-    <input type="text" class="form-control">
-    <div class="input-group-addon">
-        <span class="glyphicon glyphicon-th"></span>
-    </div>
-</div>
-            </div>
+                   
                 </form>
-        </div>
         </div>
     </body>
 
