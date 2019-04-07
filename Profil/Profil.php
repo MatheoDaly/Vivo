@@ -54,7 +54,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                         <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Inscription/inscription.html">Deconnexion</a>
+                        <a class="nav-link" id="disconnect" href="../index.html">Deconnexion</a>
                     </li>
 
                 </ul>

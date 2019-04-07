@@ -8,7 +8,7 @@
                 } else {
                     alert("Profil non enregistrer");
                 }
-            })
+            });
 
         });
     });
