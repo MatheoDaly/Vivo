@@ -117,6 +117,7 @@ print_r($_SESSION['Rec_Plat']);
 }*/
 print_r($_SESSION['Rec_Plat']);
 echo('Vous avez choisi');
+echo('<br/>');
 $i=0;
 while($i<sizeof($_SESSION['Rec_Plat'])){
   $panier = $_SESSION['Rec_Plat'][$i]['nom'];
@@ -124,6 +125,7 @@ while($i<sizeof($_SESSION['Rec_Plat'])){
   echo('<br/>');
   $i=$i+1;
 }
+
 
 
   ?>

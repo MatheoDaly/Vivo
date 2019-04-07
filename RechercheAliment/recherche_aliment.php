@@ -80,8 +80,8 @@ session_start();
         echo('<div class="form-group col-6 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir pour la recette">');
         echo('</form></div>');
-        echo '<div class="col-">';
-        $regime = $bd ->query('SELECT DISTINCT regime.Nom, regime.urlRegime FROM regime_sans_aliment, regime WHERE regime_sans_aliment.id_Aliment ='.$result['alim_code']);
+        echo '<div class="col-6">';
+        $regime = $bd ->query('SELECT DISTINCT regime.Nom, regime.urlRegime FROM regime_sans_aliment, regime WHERE regime_sans_aliment.id_Aliment ='.$result['alim_code'].' AND regime.id = regime_sans_aliment.id_Regime');
         while($ligne = $regime ->fetch()){
             echo '<img src="../Image/Regime/'.$ligne['urlRegime'].'">';
             echo $ligne['Nom'];
