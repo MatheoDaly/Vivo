@@ -71,7 +71,7 @@ $proteine = $bd -> query('SELECT * FROM `aliments` WHERE aliments.Protéines_g10
     while($ligne = $proteine ->fetch()){
         $add = 'INSERT INTO est_riche_en(id_aliment, id_nutriment) VALUES('.$ligne['alim_code'].', 3)';
         echo $add;
-        $bd -> query($add);
+        //$bd -> query($add);
     }
 $proteine ->  closeCursor();
 ?>

@@ -120,7 +120,7 @@ echo('Vous avez choisi');
 echo('<br/>');
 $i=0;
 while($i<sizeof($_SESSION['Rec_Plat'])){
-  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
+  $panier = $_SESSION['Rec_Plat'][$i]['Nom'];
   echo $panier;
   echo('<br/>');
   $i=$i+1;

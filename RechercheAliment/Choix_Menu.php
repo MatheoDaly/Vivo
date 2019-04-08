@@ -123,11 +123,10 @@ session_start();
           $_SESSION['Rec_Plat']= $result['Nom'];
         }
            echo '<div class="col-6">';
-           echo '<div class="input-group date p-2" data-provide="datepicker">';
-           echo '<input type="date" class="form-control">';
-           echo '<div class="input-group-addon">';
-           echo '<span class="glyphicon glyphicon-th"></span>';
-           echo '</div>';
+           echo '<label for="date">Choisissez un jour où le manger !</label>';
+           echo '<div class="input-group date p-2" data-provide="datepicker">';  
+           echo '<input type="date" name ="date" class="form-control"></div>';
+           echo '<div class = "p-2"><label for ="nbMenu">Choisissez une heure !</label><input type="number" class="form-control" name="nbMenu" placeholder="Format européen (e.g., 13, 18, 09, 24)"/>';
            echo '<input type="submit" class="btn btn-primary" name="ajout3" value="Choisir"></div></div></div>'; //Là c'est le bouton 
       }
       $reponse-> closeCursor();
