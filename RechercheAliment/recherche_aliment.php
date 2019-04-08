@@ -67,10 +67,11 @@ session_start();
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
+        //MODIFIER PROFIL ID POUR QUE CA CORRESPONDE A LA SESSION CLIENT
       $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
                             WHERE regime_profil.id_Profil=profil.id 
                             AND regime_profil.id_Regime=regime.id 
-                            AND profil.id = 1 
+                            AND profil.id = 1  
                             AND regime_sans_aliment.id_Regime = regime.id
                             AND regime_sans_aliment.id_Aliment = aliments.alim_code
                             AND alim_nom_fr LIKE '%$input%'");
