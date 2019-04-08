@@ -67,11 +67,30 @@ session_start();
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+        //MODIFIER PROFIL ID POUR QUE CA CORRESPONDE A LA SESSION CLIENT
+      $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                            WHERE regime_profil.id_Profil=profil.id 
+                            AND regime_profil.id_Regime=regime.id 
+                            AND profil.id = 1  
+                            AND regime_sans_aliment.id_Regime = regime.id
+                            AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                            AND alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                                WHERE regime_profil.id_Profil=profil.id 
+                                AND regime_profil.id_Regime=regime.id 
+                                AND profil.id = 1 
+                                AND regime_sans_aliment.id_Regime = regime.id
+                                AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                                AND alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                                WHERE regime_profil.id_Profil=profil.id 
+                                AND regime_profil.id_Regime=regime.id 
+                                AND profil.id = 1 
+                                AND regime_sans_aliment.id_Regime = regime.id
+                                AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                                AND alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
 
       while($result = $reponse->fetch()){

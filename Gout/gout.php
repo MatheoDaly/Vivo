@@ -196,7 +196,7 @@ if(isset($_GET['submit'])){
                       <input type="submit" name="submit" value="Rechercher">
                     </form>
                     <?php
-                      if(isset($_GET['submit']=="Rechercher") || isset($_GET['Alim'])){
+                      if(isset($_GET['Alim'])){
                         if(empty($_GET['Alim'])){
                           echo('<meta http-equiv="refresh" content="0;URL=Gout.php">');
                         }else {

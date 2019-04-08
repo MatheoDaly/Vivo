@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 06 avr. 2019 à 15:17
+-- Généré le :  lun. 08 avr. 2019 à 13:10
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -2627,47 +2627,6 @@ INSERT INTO `aliments` (`alim_grp_code`, `alim_ssgrp_code`, `alim_ssssgrp_code`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `allergie`
---
-
-DROP TABLE IF EXISTS `allergie`;
-CREATE TABLE IF NOT EXISTS `allergie` (
-  `Nom` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `allergie_aliment`
---
-
-DROP TABLE IF EXISTS `allergie_aliment`;
-CREATE TABLE IF NOT EXISTS `allergie_aliment` (
-  `id_Aliment` int(11) NOT NULL,
-  `id_Allergie` int(11) NOT NULL,
-  KEY `id_Allergie` (`id_Allergie`),
-  KEY `id_aliment` (`id_Aliment`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `allergie_profil`
---
-
-DROP TABLE IF EXISTS `allergie_profil`;
-CREATE TABLE IF NOT EXISTS `allergie_profil` (
-  `id_Profil` int(11) NOT NULL,
-  `id_Allergie` int(11) NOT NULL,
-  KEY `id_Allergie` (`id_Allergie`),
-  KEY `id_Profil` (`id_Profil`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `article`
 --
 
@@ -4305,9 +4264,7 @@ INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `ID_Prof
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `Id_Menu` int(11) NOT NULL,
-  `Id_Profil` int(11) DEFAULT NULL,
-  `Type` varchar(20) DEFAULT NULL,
-  `Date` date DEFAULT NULL,
+  `Id_Profil_Crea` int(11) DEFAULT NULL,
   `Popularité` int(11) NOT NULL,
   `Nom` text NOT NULL,
   PRIMARY KEY (`Id_Menu`)
@@ -4317,8 +4274,8 @@ CREATE TABLE IF NOT EXISTS `menu` (
 -- Déchargement des données de la table `menu`
 --
 
-INSERT INTO `menu` (`Id_Menu`, `Id_Profil`, `Type`, `Date`, `Popularité`, `Nom`) VALUES
-(1, 1, 'Midi', '2015-12-17', 1, 'Midi Printamnier');
+INSERT INTO `menu` (`Id_Menu`, `Id_Profil_Crea`, `Popularité`, `Nom`) VALUES
+(1, 1, 1, 'Midi Printamnier');
 
 -- --------------------------------------------------------
 
@@ -4419,19 +4376,6 @@ CREATE TABLE IF NOT EXISTS `preferance` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `preference`
---
-
-DROP TABLE IF EXISTS `preference`;
-CREATE TABLE IF NOT EXISTS `preference` (
-  `id_Aliment` int(11) NOT NULL,
-  `id_Profil` int(11) NOT NULL,
-  `pref` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `profil`
 --
 
@@ -4477,7 +4421,7 @@ CREATE TABLE IF NOT EXISTS `recette_plat` (
   `instructions` text,
   `kcal` float DEFAULT NULL,
   `protéines` float DEFAULT NULL,
-  `Id_User` int(11) DEFAULT NULL,
+  `Id_User_Crea` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id_Recette`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -4485,7 +4429,7 @@ CREATE TABLE IF NOT EXISTS `recette_plat` (
 -- Déchargement des données de la table `recette_plat`
 --
 
-INSERT INTO `recette_plat` (`Id_Recette`, `nom`, `instructions`, `kcal`, `protéines`, `Id_User`) VALUES
+INSERT INTO `recette_plat` (`Id_Recette`, `nom`, `instructions`, `kcal`, `protéines`, `Id_User_Crea`) VALUES
 (4, 'Oeuf au plat', '1. Mettre de l\'huile dans une poêle à feu moyen 2. Casser un oeuf et le mettre dans la poêle 3. Attendre 3 minutes et c\'est prêt !', 180, 13.8, 1),
 (5, 'Tomates farcies', '1.Préchauffer pendant 10 minutes le four a 200° 2.Découper les tomates sur le dessus en forme de rond et les vider. 1.Garnir les tomates avec la viande hachée et de l\'ail 3.Enfourner les tomates garnies pendant 30 à 40 minutes 4.Assaisoner, c\'est prêt !,', 123, 5.84, 1),
 (6, 'Salade de concombre', '1.Laver le concombre et l\'éplucher en rondelle 2.Versez la crème dans un saladier. 3. Ajoutez du jus de citron, de lhuile d\'olive et du persil. 4.Salez, poivrez et mélangez. 5. Incorporez les rondelles de concombre 6.Mélangez à nouveau le tout de façon à ce que la sauce enveloppe bien le concombre. 7. Réserver au frais et c\'est prêt', 27, 16.26, 2);
