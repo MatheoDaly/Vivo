@@ -1,50 +1,60 @@
 <?php
+session_start();
+
+if (isset($_POST['date'])&&isset($_POST['heure'])&&isset($_POST['id_menue'])){
+    //($date, $heure, $id_menu, $id_profil)
+    for($i=0; $_POST["nbtypeMenue"]>$i; $i++){
+        ajouter($_POST['date'], $_POST['heure'],$_SESSION['profil']['ID'], $_POST['date']);
+         
+    }
+ 
+    echo ('check');
+} else if (!isset($_POST['date'])&&!isset($_POST['id_profil'])&&!isset($_POST['heure'])&&!isset($_POST['id_menue'])) {
+
 include_once "AccesBD_rechAl.php";
 include_once "Fonctions_alim.php";
-session_start();
 ?>
 
-    <html>
+<html>
 
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
-        <title></title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    </head>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <a class="navbar-brand" href="../index.html">Vivo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-        Pour une bonne santé vivez VIVO !
-      </span>
-            </div>
-        </nav>
-    </header>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="../index.html">Vivo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Pour une bonne santé vivez VIVO !
+            </span>
+        </div>
+    </nav>
+</header>
 
-    <body>
-        <h1 class="text-center">Nos menus au top !</h1>
-        <div class="row text-center p-3 mx-auto">
-            <?php
+<body>
+    <h1 class="text-center">Nos menus au top !</h1>
+    <div class="row text-center p-3 mx-auto">
+        <?php
     $bd = getBD();
     $top5 = $bd->query("SELECT * FROM menu ORDER BY menu.Popularité LIMIT 5");
     $i = 1;
@@ -68,35 +78,30 @@ session_start();
     }
     $top5 ->CloseCursor();
  ?>
-        </div>
-        <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
-            <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
-                <div class="form-group col-6 mx-auto">
-                    <input type="text" class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
-                </div>
-                <div class="form-check">
-                    <p>Options de recherche : </p>
-                    <label class="form-ckeck-label" for="popularite">Popularité : </label>
-                    <input class="form-check-label" type="radio" name="option" id="popularite" value="Popularité" checked>
-                    <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
-                    <input type="radio" name="option" id="calorie" value="Calorie">
-                </div>
-                <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
-            </form>
-        </div>
-        <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
-            <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
-                <form method="GET" action="Choix_Aliment.php">
-                    
+    </div>
+    <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
+        <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
+            <div class="form-group col-6 mx-auto">
+                <input type="text" class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
+            </div>
+            <div class="form-check">
+                <p>Options de recherche : </p>
+                <label class="form-ckeck-label" for="popularite">Popularité : </label>
+                <input class="form-check-label" type="radio" name="option" id="popularite" value="Popularité" checked>
+                <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+                <input type="radio" name="option" id="calorie" value="Calorie">
+            </div>
+            <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
+        </form>
+    </div>
+    <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+        <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
+        <form method="GET" action="Choix_Aliment.php">
 
-                        <?php
+
+            <?php
                     //ça c'est la fonction
-    function ajouter($date, $heure, $id_menu, $id_profil){
-        $q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
-        $bdd = getBD();
-        $bdd->query($q);
-           
-        }
+    
 
 
   if(isset($_GET['submit']) || isset($_GET['Menu'])){
@@ -112,31 +117,58 @@ session_start();
         $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
       $_SESSION['Rec_Plat']=array();
+        $i=0;
       while($result = $reponse->fetch()){
         echo '<div class ="row">';
         echo '<div class="col-6">';
-        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="number" class="form-control" name="nbMenu'.$i.'" value="'.$result["Id_Menu"].'" placeholder="Combien en voulez-vous ?"></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
         if(isset($_SESSION['Rec_Plat'])){
           ajoutAlimInd($result['Nom']);
         }else{
           $_SESSION['Rec_Plat']= $result['Nom'];
+        } 
+          ?>
+            <form id='ajoutMenue' class="col-6">
+                <label for="date">Choisissez un jour où le manger !</label>
+                <div class="input-group date p-2" data-provide="datepicker">
+                    <input type="date" name="date<?php echo $i; ?>" required value="<?php echo date('Y-m-d', strtotime(date('Y-m-d')));?>" class="form-control"></div>
+                <div class="p-2"><label for="nbMenu">Choisissez une heure !</label><input type="number" class="form-control" name="nbMenu<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
+                    <input type="button" id="ajout3" class="btn btn-primary" value="Choisir"></div>
+            </form>
+            <?php
+            echo '</div>'; 
+          $i++;
         }
-           echo '<div class="col-6">';
-           echo '<label for="date">Choisissez un jour où le manger !</label>';
-           echo '<div class="input-group date p-2" data-provide="datepicker">';  
-           echo '<input type="date" name ="date" class="form-control"></div>';
-           echo '<div class = "p-2"><label for ="nbMenu">Choisissez une heure !</label><input type="number" class="form-control" name="nbMenu" placeholder="Format européen (e.g., 13, 18, 09, 24)"/>';
-           echo '<input type="submit" class="btn btn-primary" name="ajout3" value="Choisir"></div></div></div>'; //Là c'est le bouton 
-      }
+        echo '<input type="hidden" name="nbtypeMenue" value="'.$i'">';
       $reponse-> closeCursor();
     }
   }
 
   ?>
-                   
-                </form>
-        </div>
-    </body>
 
-    </html>
+        </form>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="Choix_Menu.js" type="text/javascript"></script>
+</body>
+
+</html>
+<?php } else {
+    
+
+ echo ('No check');
+}
+//--------------------------------------------Partie fonction
+
+function ajouter($date, $heure, $id_menu, $id_profil){
+
+$q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
+$bdd = getBD();
+$bdd->query($q);
+
+}
+
+
+?>
