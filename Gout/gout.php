@@ -21,6 +21,39 @@ if(isset($_GET['submit'])){
             $req->closeCursor();
             $i+=1;
         }
+    }elseif($_GET['submit']=="pref"){
+        $i=0;
+        $j=0;
+        while($i<count($_GET)-2) {
+            $fin=false;
+            while(!$fin){
+                if(isset($_GET[$j])){
+                    $pref=0;
+                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES ('1', '".$_GET[$j]."', ".$pref.")");
+                    $fin=true;
+                }
+                $j+=1;
+            }
+            $req->closeCursor();
+            $i+=1;
+        }
+    }
+    elseif($_GET['submit']=="deteste"){
+        $i=0;
+        $j=0;
+        while($i<count($_GET)-2) {
+            $fin=false;
+            while(!$fin){
+                if(isset($_GET[$j])){
+                    $pref=1;
+                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES ('1', '".$_GET[$j]."', ".$pref.")");
+                    $fin=true;
+                }
+                $j+=1;
+            }
+            $req->closeCursor();
+            $i+=1;
+        }
     }
     //Eliminer
     elseif($_GET['submit']=="Eliminer"){
@@ -49,12 +82,11 @@ if(isset($_GET['submit'])){
                 while(!$fin){
                     if(isset($_GET[$j])){
                         $pref=$_GET['type']-2;
-                        $req=$BD->query("DELETE FROM regime_profil WHERE id_Profil=1 and id_Aliment=".$_GET[$j]." and pref=".$pref.")");
+                        $req=$BD->query("DELETE FROM preference WHERE id_Profil=1 and id_Aliment=".$_GET[$j]." and pref=".$pref."");
                         $fin=true;
                     }
                     $j+=1;
                 }
-                $req->closeCursor();
                 $i+=1;
             }
         }
@@ -140,15 +172,15 @@ if(isset($_GET['submit'])){
                     <h1>Aliment Préférét</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=1)");
+                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=0)");
                     $i=0;
                     while($ligne = $req->fetch()){
-                        echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>'."\n";
+                        echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
                         $i+=1;
                         }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="3">
+                    <input type="hidden" name="type" value="2">
                     <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
 
@@ -157,15 +189,15 @@ if(isset($_GET['submit'])){
                     <h1>Aliment detesté</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=0)");
+                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
-                                echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>'."\n";
+                                echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
                         $i+=1;
                             }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="2">
+                    <input type="hidden" name="type" value="3">
                     <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
 
@@ -213,8 +245,9 @@ if(isset($_GET['submit'])){
                               }
                               $reponse-> closeCursor();
                             ?>
-                            <input type="hidden" name="type" value="1">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Ajouter">
+                            <input type="hidden" name="type" value="2">
+                            <input type="submit" class="btn btn-primary" name="submit" value="pref">
+                            <input type="submit" class="btn btn-primary" name="submit" value="deteste">
                             </form>
                             <?php
                             }
