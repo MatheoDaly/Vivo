@@ -24,9 +24,11 @@ if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
 // ############################# Passage en fonction de calcul taux pour reutilisation dans d'autre fichier !
 
 function CalculTaux ($id, $BD, $type){
+    
+    //Probleme avec semaine et années
     if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
-    $req = $BD->query("SELECT DATE( NOW() ),Nom,NumRepas,sum(TauxCumule) from statistique where ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
+    $req = $BD->query("SELECT DATE( NOW() ),concentration.Nom,NumRepas,sum(TauxCumule) from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
 
     $taux=array();
     $valeur=array();
@@ -64,7 +66,7 @@ else if($type == 4) {
 } 
 
 if($type>1){
-$req = $BD->query("SELECT date,Nom,TauxCumule from statistique where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
+$req = $BD->query("SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
     $taux=array();
     $valeur=array();
     $molecule=array();

@@ -1,15 +1,14 @@
 <?php
-session_start();
 
-if(isset($_SESSION['profil'])){
-    include("../Actualisation/Actualisation.php");
-    $Profil=$_SESSION['profil'];
-} else {
-    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
-}
+include("../Outil/IsTest.php");
 
+if($test==true){
+ include("../Actualisation/Actualisation.php");
+} else {    
 include("../Outil/php/AccesBD.php");
 $BD=getBD();
+}
+
 
 if(isset($_POST['change']) && $_POST['change']=='yes'){
  include("ModificationProfil/IntegrationPhoto.php");

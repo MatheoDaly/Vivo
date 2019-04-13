@@ -63,26 +63,31 @@ $cheminIcon='../Image/IconProgess/';
     </header>
     <div class="container d-flex flex-column justify-content-center rounded" id="TableProfil">
 
-
-        <h1>Mon graphique
-        </h1>
-        <hr>
-        <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
-        <label for="type">Mon graphique selon :</label>
-        <select name='type'>
-            <option value='1' selected>Mes repas du jours</option>
-            <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
-            <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
-            <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
-            <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
-        </select>
-        <hr>
-        <div id="graphique">
-            <canvas id="lineChart"></canvas>
+        <div class="container-fluid bg-light rounded">
+            <h1>Mon graphique
+            </h1>
+            <hr>
+            <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
+            <br>
+            <label for="type">Mon graphique selon :</label>
+            <select name='type' class="custom-select">
+                <option value='1' selected>Mes repas du jours</option>
+                <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
+                <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
+                <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
+                <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
+            </select>
+            <br>
         </div>
         <hr>
-        <div id="Ronds" width="400" height="400">
-            <canvas id="Rond"></canvas>
+        <div class="container-fluid bg-light rounded">
+            <div id="graphique" class="row">
+                <canvas id="lineChart"></canvas>
+            </div>
+            <hr>
+            <div id="Ronds" width="400" height="400" class="row">
+                <canvas id="Rond"></canvas>
+            </div>
         </div>
     </div>
 
