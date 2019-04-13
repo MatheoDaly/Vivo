@@ -100,16 +100,17 @@ $BD=GetBD();
             </div>
 
             <?php
-                $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MAX(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
+                $req = $BD->query("SELECT concentration.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
-                INNER JOIN seuil ON seuil.Nom = statistique.Nom
-                INNER JOIN article ON statistique.Nom = article.LienSeuil
+                INNER JOIN concentration ON statistique.id_Concentration= concentration.id
+                INNER JOIN seuil ON seuil.Id_Concentration =  concentration.id
+                INNER JOIN article ON concentration.Nom = article.LienSeuil
                 WHERE seuil.InfSup='S'
                 AND seuil.Taux<statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
                 AND statistique.ID_Profil=".$Profil['ID']."
-                GROUP BY statistique.Nom");
+                GROUP BY statistique.id_Concentration");
                 while($ligne= $req->fetch()){
                     
                 ?>
@@ -126,19 +127,21 @@ $BD=GetBD();
                 $req->closeCursor();
                 ?>
             <?php
-                $req = $BD->query("SELECT statistique.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
+                $req = $BD->query("SELECT concentration.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
-                INNER JOIN seuil ON seuil.Nom = statistique.Nom
-                INNER JOIN article ON statistique.Nom = article.LienSeuil
+                INNER JOIN concentration ON statistique.id_Concentration= concentration.id
+                INNER JOIN seuil ON seuil.Id_Concentration =  concentration.id
+                INNER JOIN article ON concentration.Nom = article.LienSeuil
                 WHERE seuil.InfSup='I'
                 AND seuil.Taux>statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
                 AND statistique.ID_Profil=".$Profil['ID']."
-                GROUP BY statistique.Nom");
+                GROUP BY statistique.id_Concentration");
                 while($ligne= $req->fetch()){
                     
                 ?>
+            <!-- ######################################## Debut Manque et exces ######################################### !-->
             <h2>Mes manques</h2>
             <div class="row bg-white rounded">
                 Ce que nous remarquons que cette semaine :

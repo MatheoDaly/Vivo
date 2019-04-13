@@ -86,4 +86,31 @@ $req->closeCursor();
 }
 }
 
+
+if(isset($_SESSION['Rec_Plat'])){
+echo json_encode(graph("calorie")); 
+}
+
+//-------------Fonction qui prends type 
+
+
+function graph($type, $BD){
+$stats = array();
+$nom = array();
+
+$q='';
+    echo $q;
+$req = $BD->query($q);
+    
+    while($ligne=$req->fetch()){
+        
+     array_push($nom, $_SESSION['Rec_Plat'][$i]["nom"]);
+     array_push($stats, $_SESSION['Rec_Plat'][$i][$type]*$_SESSION['Rec_Plat'][$i]["nbAli"]);
+    
+    }
+    
+    return $graph=array('calorie',$nom, $stats);
+    
+}
+
 ?>
