@@ -1,5 +1,6 @@
 $(function () {
     $('#ajout3').click(function () {
+
         alert($('#date').val());
         $.post('Choix_Menu.js',
             $('#ajoutMenue').serialize(),
@@ -10,3 +11,14 @@ $(function () {
             });
     });
 });
+
+function creationSet() {
+    data = {};
+    for (var i = 0; i < $('#nbtypeMenue')) {
+        //($date, $heure, $id_menu, $id_profil)
+        data.push({
+
+        });
+    }
+    return data;
+}

@@ -1,7 +1,6 @@
 <?php
 
 //################################ Permet de genere un set de donnée aleatoire
-$test=false;
 
 
 // pas besoin de js on utilisera une inclusion du code php via la fonction include !
@@ -22,18 +21,7 @@ Type :
 ###############################################################################################################################
 
 //Aide mémoire : $Profil=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
-
-if($test==true){
-    
-session_start();
-if(isset($Profil)){
-    include("../Actualisation/Actualisation.php");
-    $Profil=$Profil;
-} else {
-    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
-}
-}
-
+if(!isset($test)) {include("../Outil/IsTest.php");}
 function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
@@ -41,26 +29,32 @@ function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
         $req1->closeCursor();
     }
 
+
+
 if(isset($Profil)){
 
-    include('../Outil/Php/AccesBD.php');
-    $BD = getBD();
     // met à jout les données statistique, c'est ici que la magie opère !
     
     
 ############################# fonction Historique_Aliment -> Statistique ###########################################################
 ##################################
     
+    include('../Outil/Php/AccesBD.php');
+    $BD = getBD();
+    
+    // Ici génération de deux array et une str pour effectuer automatiquement l'ajout de concentration voulu 
+    $req = $BD->query('SELECT * From concentration');
+    $AjoutAutoQuery ="";
+    $NomConcentration = array('Nom'=>array(),'id'=>array());
+    while($ligne = $req->fetch()){
+        $AjoutAutoQuery .= "SUM(".$ligne['ChampsAliment']."*historique_aliment.quantite) AS '".$ligne['Nom']."', ";
+        array_push($NomConcentration['Nom'], $ligne['Nom']);
+        array_push($NomConcentration['id'], $ligne['id']);
+    } $req->closeCursor();
     
     $req = $BD->query("SELECT historique_aliment.Repas AS 'NumeroRepas',
-        historique_aliment.Date AS 'Date',
-        SUM(aliments.Energie_Règlement_UE_N°_11692011_kcal100g*historique_aliment.quantite) AS 'Calorie',
-        SUM(aliments.Protéines_g100g*historique_aliment.quantite) AS 'Proteine', 
-        SUM(aliments.Glucides_g100g*historique_aliment.quantite) AS 'Glucide',
-        SUM(aliments.Lipides_g100g*historique_aliment.quantite) AS 'Lipide', 
-        SUM(aliments.Sucres_g100g*historique_aliment.quantite) AS 'Sucre', 
-        SUM(aliments.Cholestérol_mg100g*historique_aliment.quantite) AS 'Cholesterol', 
-        SUM(aliments.Alcool_g100g*historique_aliment.quantite) AS 'Alcool' 
+        ".$AjoutAutoQuery."
+        historique_aliment.Date AS 'Date'
         FROM historique_aliment 
         INNER JOIN aliments ON aliments.alim_code = historique_aliment.ID_ingredient
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
@@ -70,14 +64,10 @@ if(isset($Profil)){
     
     while($ligne = $req->fetch())
     {
-        // obliger d'ajout les variables car cela ne s'affecte pas ! Donc c'est juste.
-    ajoutConcentration('Proteine', $BD, $ligne['NumeroRepas'] ,$ligne['Proteine'],$ligne['Date'],$Profil["ID"]);
-        
-    ajoutConcentration('Glucide', $BD, $ligne['NumeroRepas'] ,$ligne['Glucide'],$ligne['Date'], $Profil["ID"]);
-    
-    ajoutConcentration('Alcool', $BD, $ligne['NumeroRepas'] ,$ligne['Alcool'],$ligne['Date'], $Profil["ID"]);
-        
-    ajoutConcentration('Calorie', $BD, $ligne['NumeroRepas'] ,$ligne['Calorie'],$ligne['Date'], $Profil["ID"]);
+        // ajout automatiser des concentrations
+    for($i=0;$i<sizeof($NomConcentration['Nom']); $i++){   
+        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'][$i],$ligne[$NomConcentration['Nom'][$i]], ligne['Date'],$Profil["ID"]);
+    }
     }
     $req->closeCursor();
     
@@ -94,7 +84,7 @@ if(isset($Profil)){
             if ($i==3) $temps="MONTH(date), YEAR(date)";
             if ($i==4) $temps="YEAR(date)";
         }
-        $q="SELECT Nom, date, ".$calcul." AS concentration
+        $q="SELECT id_Concentration AS 'Nom', date, ".$calcul." AS concentration
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
     AND type = ".$i." GROUP BY ".$temps." , Nom ";

@@ -37,9 +37,10 @@
 </header>
 
 <body>
+    <h1>Connection</h1>
     <div id="Table" class="container rounded">
-        <div class="">
-            <h1>Connection</h1>
+        <br>
+        <div class="container bg-white rounded">
             <form class="row">
 
                 <p class="col-6">
@@ -61,6 +62,7 @@
                 </p>
             </form>
         </div>
+        <br>
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
