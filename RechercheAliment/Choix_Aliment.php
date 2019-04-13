@@ -98,23 +98,6 @@ session_start();
       }
       $reponse-> closeCursor();
 
-      /*if(isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-      }
-      elseif(!isset($_GET['aliment']) && isset($_SESSION['Rec_Plat'])){
-        array_push($_SESSION['Rec_Plat'],$_GET['aliment']);
-        print_r($_SESSION['Rec_Plat']);
-      }elseif(!isset($_GET['aliment']) && !isset($_SESSION['Rec_Plat'])){
-        $_SESSION['Rec_Plat'] = array('début');
-      }*/
-    }
-    }
-  /*if(isset($result['alim_nom_fr'])){ //isset($_SESSION['Rec_Plat']) && isset($_GET['ajout2'])
-    ajoutAlimInd($result['alim_nom_fr']);
-  }else{
-    $_SESSION['Rec_Plat']= $result['alim_nom_fr'];
-print_r($_SESSION['Rec_Plat']);
-}*/
 print_r($_SESSION['Rec_Plat']);
 echo('Vous avez choisi');
 echo('<br/>');

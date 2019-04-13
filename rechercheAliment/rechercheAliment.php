@@ -104,7 +104,7 @@ session_start();
   }
   echo('<div class="creaRecette">');
     ?>
-    <form action="crea_recette_suite.php" method="post">
+    <form action="crea_recette_suite.php" method="get">
         <?php
   echo('<input type="text" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
   ?>

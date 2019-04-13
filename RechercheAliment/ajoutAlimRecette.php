@@ -10,5 +10,5 @@ if(isset($_GET['id_aliment']) && isset($_SESSION['Recette'])){
   $_SESSION['Recette'] = array(array('id'=>$_GET['id_aliment'],'nom'=>$_GET['nom_aliment'],'nb'=>$_GET['nbAl']));
 }
 
-echo('<meta http-equiv="refresh" content="0; URL=recherche aliment.php">');
+echo('<meta http-equiv="refresh" content="0; URL=rechercheAliment.php">');
  ?>
