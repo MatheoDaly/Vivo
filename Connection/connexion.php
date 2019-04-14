@@ -38,17 +38,17 @@
 
 <body>
     <h1>Connection</h1>
-    <div id="Table" class="container rounded">
+    <div id="Table" class="container rounded mx-auto">
         <br>
-        <div class="container bg-white rounded">
-            <form class="row">
+        <div class="container bg-white rounded text-center">
+            <form class="row p-2">
 
-                <p class="col-6">
+                <p class="col-5">
                     <strong>
                         Mail :
                     </strong>
                 </p>
-                <p class="col-6">
+                <p class="col-5">
                     <strong>
                         Mot de passe :
                     </strong>
@@ -57,7 +57,7 @@
                 <input class="col-6 rounded" type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" />
                 <input class="col-6 rounded" type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}?>" />
 
-                <p>
+                <p class="col-12 m-2">
                     <input type="button" id='submit' class="btn btn-primary" value="Envoyer" />
                 </p>
             </form>
