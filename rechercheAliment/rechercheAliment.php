@@ -41,22 +41,26 @@ session_start();
 </header>
 
 <body>
-    <div class="partie_recherche">
-        <form method="get" action="rechercheAliment.php" autocomplete="on" id="optionForm">
-            <br />
-            <input type="text" name="Alim">
-            <br />
-            Options de recherche:
-            Popularité:
-            <input type="radio" name="option" value="Popularité" checked>
-            Lipide (croissant):
-            <input type="radio" name="option" value="Lipide">
-            Calorie (croissant):
-            <input type="radio" name="option" value="Calorie">
-            <br />
-            <input type="submit" name="submit" value="Rechercher">
-        </form>
-    </div>
+   <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
+    <form method="get" action="recherche_aliment.php" autocomplete="on" id="optionForm">
+     <div class="form-group col-6 mx-auto">
+      <input type="text"  class="form-control" name="Alim" placeholder="Laissez-vous guider par vos envies !">
+      </div>
+      <div class="form-check">
+        <p>Options de recherche : </p>
+      <label class="form-ckeck-label" for="popularite">Popularité : </label>
+      <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
+      <label class="form-ckeck-label" for="calorie">Lipides (croissant) : </label>
+      <input type="radio" name="option" id="calorie"value="Lipide">
+      <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+      <input type="radio" name="option" id="calorie"value="Calorie">
+        </div>
+      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
+    </form>
+  </div>
+  
+  <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+    <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
 
     <?php
   $bd = getBD();
@@ -67,11 +71,29 @@ session_start();
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                            WHERE regime_profil.id_Profil=profil.id 
+                            AND regime_profil.id_Regime=regime.id 
+                            AND profil.id = 1  
+                            AND regime_sans_aliment.id_Regime = regime.id
+                            AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                            AND alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
-        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
+        $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                                WHERE regime_profil.id_Profil=profil.id 
+                                AND regime_profil.id_Regime=regime.id 
+                                AND profil.id = 1 
+                                AND regime_sans_aliment.id_Regime = regime.id
+                                AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                                AND alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
-        $reponse = $bd->query("SELECT alim_nom_fr, alim_code FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+        $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
+                                WHERE regime_profil.id_Profil=profil.id 
+                                AND regime_profil.id_Regime=regime.id 
+                                AND profil.id = 1 
+                                AND regime_sans_aliment.id_Regime = regime.id
+                                AND regime_sans_aliment.id_Aliment = aliments.alim_code
+                                AND alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
 
       if(!isset($_SESSION['Recette'])){
@@ -79,23 +101,19 @@ session_start();
       }
 
       while($result = $reponse->fetch()){
-        echo('<form method="GET" action="ajoutAlimRecette.php">');
-        echo($result['alim_nom_fr']);
-        echo('<br />');
-        echo('<div class="rechAlim">');
-        echo('<input type="hidden" name="id_aliment" value="');
-        $a = $result['alim_code'];
-        echo($a);
-        echo('">');
-        echo('<input type="hidden" name="nom_aliment" value="');
-        $nom = $result['alim_nom_fr'];
-        echo($nom);
-        echo('">');
-        echo('<input type="number" name="nbAl">');
-        echo('<input type="submit" name="choix" value="Choisir">');
-
-        echo('</div>');
-        echo('</form>');
+        echo '<div class="row"><div class="col-6">';
+        echo('<form method="GET" action="ajouter.php">');
+        echo('<div class="form-group col-6 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir pour la recette">');
+        echo('</form></div>');
+        echo '<div class="col-6">';
+        $regime = $bd ->query('SELECT DISTINCT regime.Nom, regime.urlRegime FROM regime_sans_aliment, regime WHERE regime_sans_aliment.id_Aliment ='.$result['alim_code'].' AND regime.id = regime_sans_aliment.id_Regime');
+        while($ligne = $regime ->fetch()){
+            echo '<img src="../Image/Regime/'.$ligne['urlRegime'].'">';
+            echo $ligne['Nom'];
+        }
+         echo '</div></div>' ;
+          $regime->closeCursor();
       }
       $reponse-> closeCursor();
 
