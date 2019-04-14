@@ -147,8 +147,10 @@ session_start();
 
   ?>
     <a href="crea_recette_suite.php">Valider</a>
+    </div>
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="rechercheAliment.js" type="text/javascript"></script>
+    
 </body>
 
 </html>
