@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 13 avr. 2019 à 14:15
--- Version du serveur :  5.7.21
--- Version de PHP :  5.6.35
+-- Généré le :  Dim 14 avr. 2019 à 20:28
+-- Version du serveur :  5.7.24
+-- Version de PHP :  7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -2685,7 +2685,8 @@ INSERT INTO `concentration` (`id`, `Nom`, `ChampsAliment`) VALUES
 DROP TABLE IF EXISTS `est_ingredient_de`;
 CREATE TABLE IF NOT EXISTS `est_ingredient_de` (
   `id_recette` int(11) NOT NULL,
-  `alim_code` int(11) NOT NULL
+  `id_aliment` int(11) NOT NULL,
+  KEY `id_recette` (`id_recette`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2697,7 +2698,9 @@ CREATE TABLE IF NOT EXISTS `est_ingredient_de` (
 DROP TABLE IF EXISTS `est_riche_en`;
 CREATE TABLE IF NOT EXISTS `est_riche_en` (
   `id_aliment` int(11) NOT NULL,
-  `id_nutriment` int(11) NOT NULL
+  `id_nutriment` int(11) NOT NULL,
+  KEY `id_aliment` (`id_aliment`),
+  KEY `id_nutriment` (`id_nutriment`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -4384,11 +4387,11 @@ INSERT INTO `objectif_profil` (`id_Profil`, `id_Objectif`, `valeur_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `preferance`
+-- Structure de la table `preference`
 --
 
-DROP TABLE IF EXISTS `preferance`;
-CREATE TABLE IF NOT EXISTS `preferance` (
+DROP TABLE IF EXISTS `preference`;
+CREATE TABLE IF NOT EXISTS `preference` (
   `id_Aliment` int(11) NOT NULL,
   `id_Profil` int(11) NOT NULL,
   `pref` int(11) NOT NULL,
@@ -4441,7 +4444,7 @@ CREATE TABLE IF NOT EXISTS `recette_plat` (
   `instructions` text,
   `kcal` float DEFAULT NULL,
   `protéines` float DEFAULT NULL,
-  `Id_User_Crea` int(11) DEFAULT NULL,
+  `Id_User_Crea` int(11) NOT NULL,
   PRIMARY KEY (`Id_Recette`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -16182,6 +16185,12 @@ INSERT INTO `statistique` (`type`, `NumRepas`, `id_Concentration`, `TauxCumule`,
 ALTER TABLE `compose`
   ADD CONSTRAINT `FK_Recette_Compose` FOREIGN KEY (`id_recette`) REFERENCES `recette_plat` (`Id_Recette`),
   ADD CONSTRAINT `compose_ibfk_2` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`Id_Menu`);
+
+--
+-- Contraintes pour la table `est_ingredient_de`
+--
+ALTER TABLE `est_ingredient_de`
+  ADD CONSTRAINT `est_ingredient_de_ibfk_1` FOREIGN KEY (`id_recette`) REFERENCES `recette_plat` (`Id_Recette`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
