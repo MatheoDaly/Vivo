@@ -1,15 +1,6 @@
 <?php
 session_start();
 
-if (isset($_POST['date'])&&isset($_POST['heure'])&&isset($_POST['id_menue'])){
-    //($date, $heure, $id_menu, $id_profil)
-    for($i=0; $_POST["nbtypeMenue"]>$i; $i++){
-        ajouter($_POST['date'.((string)$i)], $_POST['heure'.((string)$i)], $_POST['idMenu'.((string)$i)],$_SESSION['profil']['ID']);
-    }
- 
-    echo ('check');
-} else if (!isset($_POST['date'])&&!isset($_POST['id_profil'])&&!isset($_POST['heure'])&&!isset($_POST['id_menue'])) {
-
 include_once "../Outil/PHP/AccesBD.php";
 include_once "Fonctions_alim.php";
 ?>
@@ -21,6 +12,9 @@ include_once "Fonctions_alim.php";
     <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="Choix_Menu.js" type="text/javascript"></script>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -75,8 +69,7 @@ include_once "Fonctions_alim.php";
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
         $i++;
     }
-    $top5 ->CloseCursor();
- ?>
+    $top5 ->CloseCursor(); ?>
     </div>
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
         <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
@@ -95,74 +88,60 @@ include_once "Fonctions_alim.php";
     </div>
     <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
         <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
-        <form method="GET" action="Choix_Aliment.php">
 
+        <form id='EnvoieMenue'>
 
-            <?php
-                    //ça c'est la fonction
+            <?php if(isset($_GET['submit']) || isset($_GET['Menu'])){
     
-
-
-  if(isset($_GET['submit']) || isset($_GET['Menu'])){
-    if(empty($_GET['Menu'])){
+     if(empty($_GET['Menu'])){
       echo('<meta http-equiv="refresh" content="0;URL=Choix_Menu.php">');
     }else {
-      $input=$_GET['Menu'];
+     
+         $input=$_GET['Menu'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
       $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
         $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%' ORDER BY Lipides_g100g");
-      }elseif ($_GET['option']== "Calorie") {
+      }else if ($_GET['option']== "Calorie") {
         $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
       $_SESSION['Rec_Plat']=array();
         $i=0;
-      while($result = $reponse->fetch()){
-        echo '<div class ="row">';
-        echo '<div class="col-6">';
-        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="checkbox" class="form-control" id="Menu'.$i.'" name="Menu'.$i.'" value="'.$result["Id_Menu"].'" ></div>');
-        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
-        if(isset($_SESSION['Rec_Plat'])){
-          ajoutAlimInd($result['Nom']);
-        }else{
-          $_SESSION['Rec_Plat']= $result['Nom'];
-        } 
-          ?>
-            <label for="date">Choisissez un jour où le manger !</label>
-            <div class="input-group date p-2" data-provide="datepicker">
-                <input type="date" name="date<?php echo $i; ?>" id="date<?php echo $i; ?>" value="" class="form-control"></div>
-            <div class="p-2">
-                <label for="nbMenu">Choisissez une heure !</label>
-                <input type="number" class="form-control" name="heureMenu<?php echo $i; ?>" id="heure<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
-                <input type="button" id="ajout3" class="btn btn-primary" value="Choisir"></div>
+         
+         
+      while($result = $reponse->fetch()){?>
+            <!--##########################################################!-->
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group col-10 border border-warning p-2 rounded">
+                        <label for="nbMenu"><?php echo $result['Nom'];?></label>
+                        <input type="checkbox" class="form-control" name="Menu<?php echo $i; ?>" value="<?php echo $result["Id_Menu"]; ?>">
+                    </div>
+                </div>
 
-            <?php echo '</div>'; $i++; } ?>
+                <?php if(isset($_SESSION['Rec_Plat'])){ ajoutAlimInd($result['Nom']); }else{  $_SESSION['Rec_Plat']= $result['Nom'];  }  ?>
+
+                <label for="date">Choisissez un jour où le manger !</label>
+                <div class="input-group date p-2" data-provide="datepicker">
+                    <input type="date" name="date<?php echo $i; ?>" value="" class="form-control"></div>
+                <div class="p-2">
+                    <label for="nbMenu">Choisissez une heure !</label>
+                    <input type="number" class="form-control" name="heure<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
+                </div>
+                <?php $i++; } ?>
+                <!--##########################################################!-->
+
+
+            </div>
+            <input type="button" id="ajout3" class="btn btn-primary" value="Choisir">
+
             <input type="hidden" name="nbtypeMenue" id="nbtypeMenue" value="<?php echo $i; ?>">
 
             <?php $reponse-> closeCursor(); } } ?>
 
         </form>
     </div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="Choix_Menu.js" type="text/javascript"></script>
+
 </body>
 
 </html>
-<?php } else {
-    
-
- echo ('No check');
-}
-//--------------------------------------------Partie fonction
-
-function ajouter($date, $heure, $id_menu, $id_profil){
-
-$q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
-$bdd = getBD();
-$bdd->query($q);
-
-}
-
-
-?>
