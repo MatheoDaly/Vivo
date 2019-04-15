@@ -113,7 +113,7 @@ include_once "Fonctions_alim.php";
             <!--##########################################################!-->
             <div class="row">
                 <div class="col-6">
-                    <div class="form-group col-10 border border-warning p-2 rounded">
+                    <div class="form-group col-10 border bg-primary p-2 rounded">
                         <label for="nbMenu"><?php echo $result['Nom'];?></label>
                         <input type="checkbox" class="form-control" name="Menu<?php echo $i; ?>" value="<?php echo $result["Id_Menu"]; ?>">
                     </div>
