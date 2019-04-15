@@ -1,19 +1,19 @@
 <?php
 
 
-include("../../Outil/IsTest.php");
 
+include("../../Outil/IsTest.php");
 // Variable :
 
-$test1=false;
+$testStats=false;
 
 
     
 // Permet de crée un set de donnée a etudier !    
 
-if($test1){
+if($testStats){
     include("../../Outil/Php/CreationSet.php");
-    setJour($BD, 2, null);
+    setJour($BD, 1, 'P'); //include('../../Actualisation/Actualisation.php');
     }else{
     
 include('../../Outil/Php/AccesBD.php');
@@ -53,13 +53,16 @@ $BD=getBD();
         
         $m/=9;
         $b=($b-2500)/9;
-        echo "<br/>a=".($m)."<br/>b=".($b)."<br/>coeff r²= ".pow($coeff,2);
-        if($m<0){
+            
+        echo json_encode(array($m, $b,pow($coeff,2)));
+            /*
+            if($m<0){
             echo 'Vous etes en voie pour perdre du poids !';
         } else {
             echo "<br/>Tu prend du poids denis";
             echo "il te faudra si tu continue comme cela ".((3400-$b)/$m).' jours'; 
         }
+            */
         }
     }
     

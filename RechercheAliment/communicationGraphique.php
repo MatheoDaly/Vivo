@@ -25,4 +25,6 @@ $nom = array();
     return $graph=array('calorie',$nom, $stats);
     
 }
+
+
 ?>

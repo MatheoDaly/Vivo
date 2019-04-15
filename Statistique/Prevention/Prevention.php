@@ -43,10 +43,11 @@ $BD=GetBD();
     <link href="../../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../Profil/Profil.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
-    <title>Prevention <?php 
-    echo ' de '.$Profil["prenom"];
-    
-        ?></title>
+    <title>Prevention <?php echo ' de '.$Profil["prenom"];?></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="../../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="GraphiquePoids.js" type="text/javascript"></script>
 
 </head>
 <header>
@@ -81,11 +82,11 @@ $BD=GetBD();
         <div>
             <h1>Ma prevention</h1>
             <div id="graphique" class="row bg-white rounded">
-                <div class="col-8">
+                <div class="col-8" id='graph'>
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="col-4">
-                    <div class="row">Mon nombre de jours avant mon poids idéal est :</div>
+                    <div class="row">Mon nombre de jours avant mon poids idéal est :<span id='poidsJr'></span></div>
                     <div class="row">Je pese actuellement <?php echo $Profil['poids']." kg"; ?> </div>
                     <div class="row">Je veux atteindre <?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
                                             FROM objectif_profil
@@ -158,9 +159,7 @@ $BD=GetBD();
     </div>
 
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="../../Outil/bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
 </body>
 
 

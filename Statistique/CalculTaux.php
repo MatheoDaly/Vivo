@@ -89,25 +89,25 @@ $req->closeCursor();
 }
 
 
-if(isset($_SESSION['Rec_Plat'])){
-echo json_encode(graph("calorie")); 
-}
+if(isset($_POST['today'])){
+echo json_encode(camembert("calorie", $BD, $id)); 
+} 
 
 //-------------Fonction qui prends type 
 
 
-function graph($type, $BD){
+function camembert($type, $BD, $id){
 $stats = array();
 $nom = array();
 
-$q='';
-    echo $q;
+$q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_grp_code=historique_aliment.ID_ingredient
+WHERE historique_aliment.Date = NOW() AND historique_aliment.ID_Profil=".$id;
 $req = $BD->query($q);
     
     while($ligne=$req->fetch()){
         
-     array_push($nom, $_SESSION['Rec_Plat'][$i]["nom"]);
-     array_push($stats, $_SESSION['Rec_Plat'][$i][$type]*$_SESSION['Rec_Plat'][$i]["nbAli"]);
+     array_push($nom, $ligne['Nom'] );
+     array_push($stats, $ligne['calorie'] );
     
     }
     

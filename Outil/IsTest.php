@@ -1,6 +1,7 @@
 <?php
 
 $test=true;
+$testStats=true;
 session_start();
 
 if(isset($_SESSION['profil'])){

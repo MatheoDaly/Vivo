@@ -38,9 +38,10 @@ if(isset($Profil)){
     
 ############################# fonction Historique_Aliment -> Statistique ###########################################################
 ##################################
-    
+    if(isset($testStats)){   
     include('../Outil/Php/AccesBD.php');
     $BD = getBD();
+    }
     
     // Ici génération de deux array et une str pour effectuer automatiquement l'ajout de concentration voulu 
     $req = $BD->query('SELECT * From concentration');

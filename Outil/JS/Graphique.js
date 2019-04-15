@@ -72,7 +72,7 @@
 
  //---------------------------------------------Objet Donut ----------------------------------------------------------------
 
- var l = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
+
 
 
  function sum(lis) {
@@ -94,7 +94,7 @@
      return liste;
  }
 
- afficheCamebert(l);
+
 
  function afficheCamebert(listeDeListe) {
      // Fonction qui avec une liste de liste  resort un obj json avec des couleurs aleas, et les données associer, et le label de la liste

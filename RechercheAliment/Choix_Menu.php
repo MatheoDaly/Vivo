@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['date'])&&isset($_POST['heure'])&&isset($_POST['id_menue'])){
     //($date, $heure, $id_menu, $id_profil)
     for($i=0; $_POST["nbtypeMenue"]>$i; $i++){
-        ajouter($_POST['date'.toString($i)], $_POST['heure'.toString($i)],$_POST[''.toString($i)], ,$_SESSION['profil']['ID']);
+        ajouter($_POST['date'.((string)$i)], $_POST['heure'.((string)$i)], $_POST['idMenu'.((string)$i)],$_SESSION['profil']['ID']);
     }
  
     echo ('check');
@@ -120,7 +120,7 @@ include_once "Fonctions_alim.php";
       while($result = $reponse->fetch()){
         echo '<div class ="row">';
         echo '<div class="col-6">';
-        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="checkbox" class="form-control" name="Menu'.$i.'" value="'.$result["Id_Menu"].'" ></div>');
+        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="checkbox" class="form-control" id="Menu'.$i.'" name="Menu'.$i.'" value="'.$result["Id_Menu"].'" ></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
         if(isset($_SESSION['Rec_Plat'])){
           ajoutAlimInd($result['Nom']);
@@ -130,10 +130,10 @@ include_once "Fonctions_alim.php";
           ?>
             <label for="date">Choisissez un jour où le manger !</label>
             <div class="input-group date p-2" data-provide="datepicker">
-                <input type="date" name="date<?php echo $i; ?>" value="" class="form-control"></div>
+                <input type="date" name="date<?php echo $i; ?>" id="date<?php echo $i; ?>" value="" class="form-control"></div>
             <div class="p-2">
                 <label for="nbMenu">Choisissez une heure !</label>
-                <input type="number" class="form-control" name="nbMenu<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
+                <input type="number" class="form-control" name="heureMenu<?php echo $i; ?>" id="heure<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
                 <input type="button" id="ajout3" class="btn btn-primary" value="Choisir"></div>
 
             <?php echo '</div>'; $i++; } ?>

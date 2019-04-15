@@ -77,14 +77,14 @@ $cheminIcon='../Image/IconProgess/';
                 <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
                 <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
             </select>
-            <br>
+            <br />
         </div>
         <hr>
         <div class="container-fluid bg-light rounded">
             <div id="graphique" class="row">
                 <canvas id="lineChart"></canvas>
             </div>
-            <hr>
+            <hr id="1">
             <div id="Ronds" width="400" height="400" class="row">
                 <canvas id="Rond"></canvas>
             </div>

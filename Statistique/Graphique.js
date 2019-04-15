@@ -6,6 +6,7 @@ include("../Outil/JS/Graphique.js");
 //---------------------- Envoie de données-----------------------------------------
 var commence = true;
 var list = [["concentration", [1, 2, 3, 3]]];
+var l = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Chien-Chaud"], [1600, 2000, 2000, 4000]];
 //https://www.digicomp.ch/blognews/2017/07/07/chart-js-une-evaluation-graphique-des-donnees-en-un-tour-de-main-grace-javascript
 
 $(function () {
@@ -16,10 +17,19 @@ $(function () {
         }, function (data) {
             if (JSON.parse(data).length == 0) {
                 alert("Pas de repas encore effectuer !");
-                $(location).attr('href', '../Profil/Profil.php')
+                $(location).attr('href', '../Profil/Profil.php');
             }
             Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
+        });
+        $.post('CalculTaux.php', {
+            today: 1
+        }, function (data) {
+            if (JSON.parse(data)[1].length == 0) {
+                $("#Ronds").remove();
+                $("#1").remove();
+            }
+            afficheCamebert(data);
         });
         commence = false;
     }
