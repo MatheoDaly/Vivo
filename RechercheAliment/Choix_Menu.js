@@ -1,16 +1,12 @@
-$(function () {
+$(document).ready(function () {
     $('#ajout3').click(function () {
-
-        alert($('#date').val());
-        $.post('Choix_Menu.php', {
-                test: 1
-            },
+        $.post('Planification.php',
+            $('#EnvoieMenue').serialize(),
             function (data) {
-                if (data == "check") {
-                    //$('#ajout3').animate({backgroundColor: green}, 1000);
-                }
+                alert(data); //$('#ajout3').animate({backgroundColor: green}, 1000);
+                if (data == "check") {}
             });
-        alert(creationSet());
+
     });
 });
 
@@ -26,7 +22,7 @@ function creationSet() {
     for (var i = 0; i < $('#nbtypeMenue').val(); i++) {
         //($date, $heure, $id_menu, $id_profil)
         data.push({
-            name[i]: $("#date" + i).val(),
+            'name': $("#date" + i).val(),
             "heure": $("#heure" + i).val(),
             "idMenu": $("#Menu" + i).val()
         });
