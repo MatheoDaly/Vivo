@@ -1,7 +1,21 @@
 <?php
 session_start();
 
+<<<<<<< Updated upstream
 include_once "../Outil/PHP/AccesBD.php";
+=======
+if (isset($_POST['date'])&&isset($_POST['heure'])&&isset($_POST['id_menue'])){
+    //($date, $heure, $id_menu, $id_profil)
+    for($i=0; $_POST["nbtypeMenue"]>$i; $i++){
+        ajouter($_POST['date'.toString($i)], $_POST['heure'.toString($i)],$_POST[''.toString($i)] ,$_SESSION['profil']['ID']);
+    }
+
+    echo ('check');
+} else if (!isset($_POST['date'])&&!isset($_POST['id_profil'])&&!isset($_POST['heure'])&&!isset($_POST['id_menue'])) {
+
+//include_once "../Outil/PHP/AccesBD.ph";
+include_once "AccesBD_rechAl.php";
+>>>>>>> Stashed changes
 include_once "Fonctions_alim.php";
 ?>
 
@@ -65,7 +79,7 @@ include_once "Fonctions_alim.php";
         }
         echo '#'.$i;
         echo('<form method="GET" action="Choix_Aliment.php">');
-        echo('<div class="form-group"><label for ="nbMenu">'.$ligne['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
+        echo('<div class="form-group"><label for ="nbMenu">'.$ligne['Nom'].'</label><input type="number" min="0" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
         $i++;
     }
@@ -91,9 +105,19 @@ include_once "Fonctions_alim.php";
 
         <form id='EnvoieMenue'>
 
+<<<<<<< Updated upstream
             <?php if(isset($_GET['submit']) || isset($_GET['Menu'])){
     
      if(empty($_GET['Menu'])){
+=======
+            <?php
+                    //ça c'est la fonction
+
+
+
+  if(isset($_GET['submit']) || isset($_GET['Menu'])){
+    if(empty($_GET['Menu'])){
+>>>>>>> Stashed changes
       echo('<meta http-equiv="refresh" content="0;URL=Choix_Menu.php">');
     }else {
      
@@ -107,6 +131,7 @@ include_once "Fonctions_alim.php";
       }
       $_SESSION['Rec_Plat']=array();
         $i=0;
+<<<<<<< Updated upstream
          
          
       while($result = $reponse->fetch()){?>
@@ -134,6 +159,26 @@ include_once "Fonctions_alim.php";
 
             </div>
             <input type="button" id="ajout3" class="btn btn-primary" value="Choisir">
+=======
+      while($result = $reponse->fetch()){
+        echo '<div class ="row">';
+        echo '<div class="col-6">';
+        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="checkbox" class="form-control" name="Menu'.$i.'" value="'.$result["Id_Menu"].'" ></div>');
+        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
+        if(isset($_SESSION['Rec_Plat'])){
+          ajoutAlimInd($result['Nom']);
+        }else{
+          $_SESSION['Rec_Plat']= $result['Nom'];
+        }
+          ?>
+            <label for="date">Choisissez un jour où le manger !</label>
+            <div class="input-group date p-2" data-provide="datepicker">
+                <input type="date" name="date<?php echo $i; ?>" value="" class="form-control"></div>
+            <div class="p-2">
+                <label for="nbMenu">Choisissez une heure !</label>
+                <input type="number" class="form-control" name="nbMenu<?php echo $i; ?>" min="0" max="1000" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
+                <input type="button" id="ajout3" class="btn btn-primary" value="Choisir"></div>
+>>>>>>> Stashed changes
 
             <input type="hidden" name="nbtypeMenue" id="nbtypeMenue" value="<?php echo $i; ?>">
 
@@ -144,4 +189,26 @@ include_once "Fonctions_alim.php";
 
 </body>
 
+<<<<<<< Updated upstream
+=======
+
+<?php } else {
+
+
+ echo ('No check');
+}
+//--------------------------------------------Partie fonction
+
+function ajouter($date, $heure, $id_menu, $id_profil){
+
+$q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
+$bdd = getBD();
+$bdd->query($q);
+
+}
+
+
+?>
+
+>>>>>>> Stashed changes
 </html>

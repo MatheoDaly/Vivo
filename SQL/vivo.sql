@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< Updated upstream
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
@@ -6,6 +7,15 @@
 -- Généré le :  Dim 14 avr. 2019 à 20:28
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
+=======
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Apr 13, 2019 at 05:04 PM
+-- Server version: 5.6.34-log
+-- PHP Version: 7.2.1
+>>>>>>> Stashed changes
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,17 +29,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `vivo`
+-- Database: `vivo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `aliments`
+-- Table structure for table `aliments`
 --
 
-DROP TABLE IF EXISTS `aliments`;
-CREATE TABLE IF NOT EXISTS `aliments` (
+CREATE TABLE `aliments` (
   `alim_grp_code` int(11) NOT NULL,
   `alim_ssgrp_code` int(11) NOT NULL,
   `alim_ssssgrp_code` int(11) NOT NULL,
@@ -92,12 +101,11 @@ CREATE TABLE IF NOT EXISTS `aliments` (
   `Vitamine_B5_ou_Acide_pantothénique_mg100g` varchar(6) DEFAULT NULL,
   `Vitamine_B6_mg100g` varchar(6) DEFAULT NULL,
   `Vitamine_B9_ou_Folates_totaux_µg100g` varchar(6) DEFAULT NULL,
-  `Vitamine_B12_µg100g` varchar(6) DEFAULT NULL,
-  PRIMARY KEY (`alim_code`)
+  `Vitamine_B12_µg100g` varchar(6) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `aliments`
+-- Dumping data for table `aliments`
 --
 
 INSERT INTO `aliments` (`alim_grp_code`, `alim_ssgrp_code`, `alim_ssssgrp_code`, `alim_code`, `alim_nom_fr`, `Energie_Règlement_UE_N°_11692011_kcal100g`, `Eau_g100g`, `Protéines_g100g`, `Protéines_brutes_N_x_625_g100g`, `Glucides_g100g`, `Lipides_g100g`, `Sucres_g100g`, `Amidon_g100g`, `Fibres_alimentaires_g100g`, `Polyols_totaux_g100g`, `Cendres_g100g`, `Alcool_g100g`, `Acides_organiques_g100g`, `AG_saturés_g100g`, `AG_monoinsaturés_g100g`, `AG_polyinsaturés_g100g`, `AG_40_butyrique_g100g`, `AG_60_caproïque_g100g`, `AG_80_caprylique_g100g`, `AG_100_caprique_g100g`, `AG_120_laurique_g100g`, `AG_140_myristique_g100g`, `AG_160_palmitique_g100g`, `AG_180_stéarique_g100g`, `AG_181_9c_n09_oléique_g100g`, `AG_182_9c12c_n06_linoléique_g100g`, `AG_183_c9c12c15_n03_alpha0linolénique_g100g`, `AG_204_5c8c11c14c_n06_arachidonique_g100g`, `AG_205_5c8c11c14c17c_n03_EPA_g100g`, `AG_226_4c7c10c13c16c19c_n03_DHA_g100g`, `Cholestérol_mg100g`, `Sel_chlorure_de_sodium_g100g`, `Calcium_mg100g`, `Chlorure_mg100g`, `Cuivre_mg100g`, `Fer_mg100g`, `Iode_µg100g`, `Magnésium_mg100g`, `Manganèse_mg100g`, `Phosphore_mg100g`, `Potassium_mg100g`, `Sélénium_µg100g`, `Sodium_mg100g`, `Zinc_mg100g`, `Rétinol_µg100g`, `Beta0Carotène_µg100g`, `Vitamine_D_µg100g`, `Vitamine_E_mg100g`, `Vitamine_K1_µg100g`, `Vitamine_K2_µg100g`, `Vitamine_C_mg100g`, `Vitamine_B1_ou_Thiamine_mg100g`, `Vitamine_B2_ou_Riboflavine_mg100g`, `Vitamine_B3_ou_PP_ou_Niacine_mg100g`, `Vitamine_B5_ou_Acide_pantothénique_mg100g`, `Vitamine_B6_mg100g`, `Vitamine_B9_ou_Folates_totaux_µg100g`, `Vitamine_B12_µg100g`) VALUES
@@ -2627,48 +2635,74 @@ INSERT INTO `aliments` (`alim_grp_code`, `alim_ssgrp_code`, `alim_ssssgrp_code`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article`
+-- Table structure for table `allergie`
 --
 
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE IF NOT EXISTS `article` (
-  `Nom` varchar(50) NOT NULL,
-  `Url` varchar(255) NOT NULL,
-  `LienSeuil` int(11) DEFAULT NULL,
-  KEY `fk_article_seuil` (`LienSeuil`)
+CREATE TABLE `allergie` (
+  `Nom` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `compose`
+-- Table structure for table `allergie_aliment`
 --
 
-DROP TABLE IF EXISTS `compose`;
-CREATE TABLE IF NOT EXISTS `compose` (
+CREATE TABLE `allergie_aliment` (
+  `id_Aliment` int(11) NOT NULL,
+  `id_Allergie` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allergie_profil`
+--
+
+CREATE TABLE `allergie_profil` (
+  `id_Profil` int(11) NOT NULL,
+  `id_Allergie` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article`
+--
+
+CREATE TABLE `article` (
+  `Nom` varchar(50) NOT NULL,
+  `Url` varchar(255) NOT NULL,
+  `LienSeuil` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compose`
+--
+
+CREATE TABLE `compose` (
   `id_menu` int(11) DEFAULT NULL,
   `id_recette` int(11) NOT NULL,
-  `ordre` int(11) DEFAULT NULL,
-  KEY `id_recette` (`id_recette`),
-  KEY `id_menu` (`id_menu`)
+  `ordre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `concentration`
+-- Table structure for table `concentration`
 --
 
-DROP TABLE IF EXISTS `concentration`;
-CREATE TABLE IF NOT EXISTS `concentration` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `concentration` (
+  `id` int(11) NOT NULL,
   `Nom` varchar(30) NOT NULL,
-  `ChampsAliment` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `ChampsAliment` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `concentration`
+-- Dumping data for table `concentration`
 --
 
 INSERT INTO `concentration` (`id`, `Nom`, `ChampsAliment`) VALUES
@@ -2679,24 +2713,27 @@ INSERT INTO `concentration` (`id`, `Nom`, `ChampsAliment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `est_ingredient_de`
+-- Table structure for table `est_ingredient_de`
 --
 
-DROP TABLE IF EXISTS `est_ingredient_de`;
-CREATE TABLE IF NOT EXISTS `est_ingredient_de` (
+CREATE TABLE `est_ingredient_de` (
   `id_recette` int(11) NOT NULL,
+<<<<<<< Updated upstream
   `id_aliment` int(11) NOT NULL,
   KEY `id_recette` (`id_recette`)
+=======
+  `alim_code` int(11) NOT NULL,
+  `quantite` float DEFAULT NULL
+>>>>>>> Stashed changes
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `est_riche_en`
+-- Table structure for table `est_riche_en`
 --
 
-DROP TABLE IF EXISTS `est_riche_en`;
-CREATE TABLE IF NOT EXISTS `est_riche_en` (
+CREATE TABLE `est_riche_en` (
   `id_aliment` int(11) NOT NULL,
   `id_nutriment` int(11) NOT NULL,
   KEY `id_aliment` (`id_aliment`),
@@ -2704,7 +2741,7 @@ CREATE TABLE IF NOT EXISTS `est_riche_en` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `est_riche_en`
+-- Dumping data for table `est_riche_en`
 --
 
 INSERT INTO `est_riche_en` (`id_aliment`, `id_nutriment`) VALUES
@@ -4191,18 +4228,16 @@ INSERT INTO `est_riche_en` (`id_aliment`, `id_nutriment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `groupe`
+-- Table structure for table `groupe`
 --
 
-DROP TABLE IF EXISTS `groupe`;
-CREATE TABLE IF NOT EXISTS `groupe` (
+CREATE TABLE `groupe` (
   `alim_grp_code` int(11) NOT NULL,
-  `alim_grp_nom_fr` varchar(43) NOT NULL,
-  PRIMARY KEY (`alim_grp_code`)
+  `alim_grp_nom_fr` varchar(43) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `groupe`
+-- Dumping data for table `groupe`
 --
 
 INSERT INTO `groupe` (`alim_grp_code`, `alim_grp_nom_fr`) VALUES
@@ -4221,22 +4256,19 @@ INSERT INTO `groupe` (`alim_grp_code`, `alim_grp_nom_fr`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `historique_aliment`
+-- Table structure for table `historique_aliment`
 --
 
-DROP TABLE IF EXISTS `historique_aliment`;
-CREATE TABLE IF NOT EXISTS `historique_aliment` (
+CREATE TABLE `historique_aliment` (
   `Repas` int(11) NOT NULL COMMENT 'C''est une heure ex: 15 pour le repas de 15 heures',
   `ID_ingredient` int(11) NOT NULL,
   `quantite` int(11) NOT NULL,
   `ID_Profil` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  KEY `ID_Profil` (`ID_Profil`),
-  KEY `ID_ingredient` (`ID_ingredient`)
+  `Date` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `historique_aliment`
+-- Dumping data for table `historique_aliment`
 --
 
 INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `ID_Profil`, `Date`) VALUES
@@ -4284,20 +4316,18 @@ INSERT INTO `historique_aliment` (`Repas`, `ID_ingredient`, `quantite`, `ID_Prof
 -- --------------------------------------------------------
 
 --
--- Structure de la table `menu`
+-- Table structure for table `menu`
 --
 
-DROP TABLE IF EXISTS `menu`;
-CREATE TABLE IF NOT EXISTS `menu` (
+CREATE TABLE `menu` (
   `Id_Menu` int(11) NOT NULL,
   `Id_Profil_Crea` int(11) DEFAULT NULL,
   `Popularité` int(11) NOT NULL,
-  `Nom` text NOT NULL,
-  PRIMARY KEY (`Id_Menu`)
+  `Nom` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `menu`
+-- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`Id_Menu`, `Id_Profil_Crea`, `Popularité`, `Nom`) VALUES
@@ -4306,35 +4336,30 @@ INSERT INTO `menu` (`Id_Menu`, `Id_Profil_Crea`, `Popularité`, `Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `menu_profil`
+-- Table structure for table `menu_profil`
 --
 
-DROP TABLE IF EXISTS `menu_profil`;
-CREATE TABLE IF NOT EXISTS `menu_profil` (
+CREATE TABLE `menu_profil` (
   `id_menu` int(11) NOT NULL,
   `id_profil` int(11) NOT NULL,
   `date` date NOT NULL,
-  `heure` int(11) NOT NULL,
-  KEY `id_menu` (`id_menu`),
-  KEY `id_profil` (`id_profil`)
+  `heure` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nutriment`
+-- Table structure for table `nutriment`
 --
 
-DROP TABLE IF EXISTS `nutriment`;
-CREATE TABLE IF NOT EXISTS `nutriment` (
+CREATE TABLE `nutriment` (
   `id_nutriment` int(11) NOT NULL,
   `nom` varchar(24) NOT NULL,
-  `url_nutriment` varchar(24) NOT NULL,
-  PRIMARY KEY (`id_nutriment`)
+  `url_nutriment` varchar(24) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `nutriment`
+-- Dumping data for table `nutriment`
 --
 
 INSERT INTO `nutriment` (`id_nutriment`, `nom`, `url_nutriment`) VALUES
@@ -4345,18 +4370,16 @@ INSERT INTO `nutriment` (`id_nutriment`, `nom`, `url_nutriment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `objectif`
+-- Table structure for table `objectif`
 --
 
-DROP TABLE IF EXISTS `objectif`;
-CREATE TABLE IF NOT EXISTS `objectif` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+CREATE TABLE `objectif` (
+  `id` int(11) NOT NULL,
+  `type` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `objectif`
+-- Dumping data for table `objectif`
 --
 
 INSERT INTO `objectif` (`id`, `type`) VALUES
@@ -4365,20 +4388,17 @@ INSERT INTO `objectif` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `objectif_profil`
+-- Table structure for table `objectif_profil`
 --
 
-DROP TABLE IF EXISTS `objectif_profil`;
-CREATE TABLE IF NOT EXISTS `objectif_profil` (
+CREATE TABLE `objectif_profil` (
   `id_Profil` int(11) NOT NULL,
   `id_Objectif` int(11) NOT NULL,
-  `valeur_type` int(11) NOT NULL,
-  KEY `fk_profil_Dbl` (`id_Profil`),
-  KEY `fk_objectif_Dbl` (`id_Objectif`)
+  `valeur_type` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `objectif_profil`
+-- Dumping data for table `objectif_profil`
 --
 
 INSERT INTO `objectif_profil` (`id_Profil`, `id_Objectif`, `valeur_type`) VALUES
@@ -4387,27 +4407,43 @@ INSERT INTO `objectif_profil` (`id_Profil`, `id_Objectif`, `valeur_type`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< Updated upstream
 -- Structure de la table `preference`
 --
 
 DROP TABLE IF EXISTS `preference`;
 CREATE TABLE IF NOT EXISTS `preference` (
+=======
+-- Table structure for table `preferance`
+--
+
+CREATE TABLE `preferance` (
+>>>>>>> Stashed changes
   `id_Aliment` int(11) NOT NULL,
   `id_Profil` int(11) NOT NULL,
-  `pref` int(11) NOT NULL,
-  KEY `id_aliment` (`id_Aliment`),
-  KEY `id_Profil` (`id_Profil`)
+  `pref` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `profil`
+-- Table structure for table `preference`
 --
 
-DROP TABLE IF EXISTS `profil`;
-CREATE TABLE IF NOT EXISTS `profil` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `preference` (
+  `id_Aliment` int(11) NOT NULL,
+  `id_Profil` int(11) NOT NULL,
+  `pref` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profil`
+--
+
+CREATE TABLE `profil` (
+  `id` int(11) NOT NULL,
   `prenom` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `poids` int(11) NOT NULL,
@@ -4418,12 +4454,11 @@ CREATE TABLE IF NOT EXISTS `profil` (
   `DateActue` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Prend la dernier date d''actualisation pour savoir si statistique peut etre modifier',
   `Point` mediumint(9) NOT NULL,
   `mdp` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `genre` varchar(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `genre` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `profil`
+-- Dumping data for table `profil`
 --
 
 INSERT INTO `profil` (`id`, `prenom`, `email`, `poids`, `taille`, `NiveauSportif`, `url_photo`, `utilisateur`, `DateActue`, `Point`, `mdp`, `genre`) VALUES
@@ -4434,45 +4469,49 @@ INSERT INTO `profil` (`id`, `prenom`, `email`, `poids`, `taille`, `NiveauSportif
 -- --------------------------------------------------------
 
 --
--- Structure de la table `recette_plat`
+-- Table structure for table `recette_plat`
 --
 
-DROP TABLE IF EXISTS `recette_plat`;
-CREATE TABLE IF NOT EXISTS `recette_plat` (
-  `Id_Recette` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `recette_plat` (
+  `Id_Recette` int(11) NOT NULL,
   `nom` varchar(20) DEFAULT NULL,
   `instructions` text,
   `kcal` float DEFAULT NULL,
   `protéines` float DEFAULT NULL,
+<<<<<<< Updated upstream
   `Id_User_Crea` int(11) NOT NULL,
   PRIMARY KEY (`Id_Recette`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+  `Id_User_Crea` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+>>>>>>> Stashed changes
 
 --
--- Déchargement des données de la table `recette_plat`
+-- Dumping data for table `recette_plat`
 --
 
 INSERT INTO `recette_plat` (`Id_Recette`, `nom`, `instructions`, `kcal`, `protéines`, `Id_User_Crea`) VALUES
 (4, 'Oeuf au plat', '1. Mettre de l\'huile dans une poêle à feu moyen 2. Casser un oeuf et le mettre dans la poêle 3. Attendre 3 minutes et c\'est prêt !', 180, 13.8, 1),
 (5, 'Tomates farcies', '1.Préchauffer pendant 10 minutes le four a 200° 2.Découper les tomates sur le dessus en forme de rond et les vider. 1.Garnir les tomates avec la viande hachée et de l\'ail 3.Enfourner les tomates garnies pendant 30 à 40 minutes 4.Assaisoner, c\'est prêt !,', 123, 5.84, 1),
-(6, 'Salade de concombre', '1.Laver le concombre et l\'éplucher en rondelle 2.Versez la crème dans un saladier. 3. Ajoutez du jus de citron, de lhuile d\'olive et du persil. 4.Salez, poivrez et mélangez. 5. Incorporez les rondelles de concombre 6.Mélangez à nouveau le tout de façon à ce que la sauce enveloppe bien le concombre. 7. Réserver au frais et c\'est prêt', 27, 16.26, 2);
+(6, 'Salade de concombre', '1.Laver le concombre et l\'éplucher en rondelle 2.Versez la crème dans un saladier. 3. Ajoutez du jus de citron, de lhuile d\'olive et du persil. 4.Salez, poivrez et mélangez. 5. Incorporez les rondelles de concombre 6.Mélangez à nouveau le tout de façon à ce que la sauce enveloppe bien le concombre. 7. Réserver au frais et c\'est prêt', 27, 16.26, 2),
+(9, 'Oeuf au plat 2', 'faire chauffer blablabla....', 36, 0, 1),
+(10, 'Carottes râpées', 'Prends les carottes et râpe-les, puis mets la sauce vinaigrette\r\n        ', 36, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `regime`
+-- Table structure for table `regime`
 --
 
-DROP TABLE IF EXISTS `regime`;
-CREATE TABLE IF NOT EXISTS `regime` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `regime` (
+  `id` int(11) NOT NULL,
   `Nom` varchar(20) NOT NULL,
-  `urlRegime` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `urlRegime` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `regime`
+-- Dumping data for table `regime`
 --
 
 INSERT INTO `regime` (`id`, `Nom`, `urlRegime`) VALUES
@@ -4485,19 +4524,16 @@ INSERT INTO `regime` (`id`, `Nom`, `urlRegime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `regime_profil`
+-- Table structure for table `regime_profil`
 --
 
-DROP TABLE IF EXISTS `regime_profil`;
-CREATE TABLE IF NOT EXISTS `regime_profil` (
+CREATE TABLE `regime_profil` (
   `id_Profil` int(11) NOT NULL,
-  `id_Regime` int(11) NOT NULL,
-  KEY `id_Regime` (`id_Regime`),
-  KEY `id_Profil` (`id_Profil`)
+  `id_Regime` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `regime_profil`
+-- Dumping data for table `regime_profil`
 --
 
 INSERT INTO `regime_profil` (`id_Profil`, `id_Regime`) VALUES
@@ -4506,19 +4542,16 @@ INSERT INTO `regime_profil` (`id_Profil`, `id_Regime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `regime_sans_aliment`
+-- Table structure for table `regime_sans_aliment`
 --
 
-DROP TABLE IF EXISTS `regime_sans_aliment`;
-CREATE TABLE IF NOT EXISTS `regime_sans_aliment` (
+CREATE TABLE `regime_sans_aliment` (
   `id_Regime` int(11) NOT NULL,
-  `id_Aliment` int(11) NOT NULL,
-  KEY `id_Regime` (`id_Regime`),
-  KEY `id_Aliment` (`id_Aliment`)
+  `id_Aliment` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `regime_sans_aliment`
+-- Dumping data for table `regime_sans_aliment`
 --
 
 INSERT INTO `regime_sans_aliment` (`id_Regime`, `id_Aliment`) VALUES
@@ -15378,35 +15411,31 @@ INSERT INTO `regime_sans_aliment` (`id_Regime`, `id_Aliment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `seuil`
+-- Table structure for table `seuil`
 --
 
-DROP TABLE IF EXISTS `seuil`;
-CREATE TABLE IF NOT EXISTS `seuil` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `seuil` (
+  `ID` int(11) NOT NULL,
   `ID_Groupe` int(11) NOT NULL,
   `InfSup` varchar(1) NOT NULL,
   `Taux` int(11) NOT NULL,
   `Id_Concentration` tinyint(3) NOT NULL,
-  `Risque` text NOT NULL,
-  PRIMARY KEY (`ID`)
+  `Risque` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sous_groupe`
+-- Table structure for table `sous_groupe`
 --
 
-DROP TABLE IF EXISTS `sous_groupe`;
-CREATE TABLE IF NOT EXISTS `sous_groupe` (
+CREATE TABLE `sous_groupe` (
   `alim_grp_code` int(11) NOT NULL,
-  `alim_grp_nom_fr` varchar(43) NOT NULL,
-  PRIMARY KEY (`alim_grp_code`)
+  `alim_grp_nom_fr` varchar(43) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `sous_groupe`
+-- Dumping data for table `sous_groupe`
 --
 
 INSERT INTO `sous_groupe` (`alim_grp_code`, `alim_grp_nom_fr`) VALUES
@@ -15471,18 +15500,16 @@ INSERT INTO `sous_groupe` (`alim_grp_code`, `alim_grp_nom_fr`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sous_sous_groupe`
+-- Table structure for table `sous_sous_groupe`
 --
 
-DROP TABLE IF EXISTS `sous_sous_groupe`;
-CREATE TABLE IF NOT EXISTS `sous_sous_groupe` (
+CREATE TABLE `sous_sous_groupe` (
   `alim_ssssgrp_code` int(11) NOT NULL,
-  `alim_ssssgrp_nom_fr` varchar(44) DEFAULT NULL,
-  PRIMARY KEY (`alim_ssssgrp_code`)
+  `alim_ssssgrp_nom_fr` varchar(44) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `sous_sous_groupe`
+-- Dumping data for table `sous_sous_groupe`
 --
 
 INSERT INTO `sous_sous_groupe` (`alim_ssssgrp_code`, `alim_ssssgrp_nom_fr`) VALUES
@@ -15574,22 +15601,20 @@ INSERT INTO `sous_sous_groupe` (`alim_ssssgrp_code`, `alim_ssssgrp_nom_fr`) VALU
 -- --------------------------------------------------------
 
 --
--- Structure de la table `statistique`
+-- Table structure for table `statistique`
 --
 
-DROP TABLE IF EXISTS `statistique`;
-CREATE TABLE IF NOT EXISTS `statistique` (
+CREATE TABLE `statistique` (
   `type` int(11) NOT NULL,
   `NumRepas` tinyint(4) DEFAULT NULL,
   `id_Concentration` tinyint(4) NOT NULL,
   `TauxCumule` int(11) NOT NULL,
   `date` date NOT NULL,
-  `ID_Profil` int(11) NOT NULL,
-  KEY `ID_Profil` (`ID_Profil`)
+  `ID_Profil` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `statistique`
+-- Dumping data for table `statistique`
 --
 
 INSERT INTO `statistique` (`type`, `NumRepas`, `id_Concentration`, `TauxCumule`, `date`, `ID_Profil`) VALUES
@@ -16176,11 +16201,207 @@ INSERT INTO `statistique` (`type`, `NumRepas`, `id_Concentration`, `TauxCumule`,
 (5, NULL, 1, 6413, '2019-02-23', 1);
 
 --
--- Contraintes pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Contraintes pour la table `compose`
+-- Indexes for table `aliments`
+--
+ALTER TABLE `aliments`
+  ADD PRIMARY KEY (`alim_code`);
+
+--
+-- Indexes for table `allergie`
+--
+ALTER TABLE `allergie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `allergie_aliment`
+--
+ALTER TABLE `allergie_aliment`
+  ADD KEY `id_Allergie` (`id_Allergie`),
+  ADD KEY `id_aliment` (`id_Aliment`);
+
+--
+-- Indexes for table `allergie_profil`
+--
+ALTER TABLE `allergie_profil`
+  ADD KEY `id_Allergie` (`id_Allergie`),
+  ADD KEY `id_Profil` (`id_Profil`);
+
+--
+-- Indexes for table `article`
+--
+ALTER TABLE `article`
+  ADD KEY `fk_article_seuil` (`LienSeuil`);
+
+--
+-- Indexes for table `compose`
+--
+ALTER TABLE `compose`
+  ADD KEY `id_recette` (`id_recette`),
+  ADD KEY `id_menu` (`id_menu`);
+
+--
+-- Indexes for table `concentration`
+--
+ALTER TABLE `concentration`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `groupe`
+--
+ALTER TABLE `groupe`
+  ADD PRIMARY KEY (`alim_grp_code`);
+
+--
+-- Indexes for table `historique_aliment`
+--
+ALTER TABLE `historique_aliment`
+  ADD KEY `ID_Profil` (`ID_Profil`),
+  ADD KEY `ID_ingredient` (`ID_ingredient`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`Id_Menu`);
+
+--
+-- Indexes for table `menu_profil`
+--
+ALTER TABLE `menu_profil`
+  ADD KEY `id_menu` (`id_menu`),
+  ADD KEY `id_profil` (`id_profil`);
+
+--
+-- Indexes for table `nutriment`
+--
+ALTER TABLE `nutriment`
+  ADD PRIMARY KEY (`id_nutriment`);
+
+--
+-- Indexes for table `objectif`
+--
+ALTER TABLE `objectif`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `objectif_profil`
+--
+ALTER TABLE `objectif_profil`
+  ADD KEY `fk_profil_Dbl` (`id_Profil`),
+  ADD KEY `fk_objectif_Dbl` (`id_Objectif`);
+
+--
+-- Indexes for table `preferance`
+--
+ALTER TABLE `preferance`
+  ADD KEY `id_aliment` (`id_Aliment`),
+  ADD KEY `id_Profil` (`id_Profil`);
+
+--
+-- Indexes for table `profil`
+--
+ALTER TABLE `profil`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recette_plat`
+--
+ALTER TABLE `recette_plat`
+  ADD PRIMARY KEY (`Id_Recette`);
+
+--
+-- Indexes for table `regime`
+--
+ALTER TABLE `regime`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `regime_profil`
+--
+ALTER TABLE `regime_profil`
+  ADD KEY `id_Regime` (`id_Regime`),
+  ADD KEY `id_Profil` (`id_Profil`);
+
+--
+-- Indexes for table `regime_sans_aliment`
+--
+ALTER TABLE `regime_sans_aliment`
+  ADD KEY `id_Regime` (`id_Regime`),
+  ADD KEY `id_Aliment` (`id_Aliment`);
+
+--
+-- Indexes for table `seuil`
+--
+ALTER TABLE `seuil`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `sous_groupe`
+--
+ALTER TABLE `sous_groupe`
+  ADD PRIMARY KEY (`alim_grp_code`);
+
+--
+-- Indexes for table `sous_sous_groupe`
+--
+ALTER TABLE `sous_sous_groupe`
+  ADD PRIMARY KEY (`alim_ssssgrp_code`);
+
+--
+-- Indexes for table `statistique`
+--
+ALTER TABLE `statistique`
+  ADD KEY `ID_Profil` (`ID_Profil`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `allergie`
+--
+ALTER TABLE `allergie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `concentration`
+--
+ALTER TABLE `concentration`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `objectif`
+--
+ALTER TABLE `objectif`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `profil`
+--
+ALTER TABLE `profil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `recette_plat`
+--
+ALTER TABLE `recette_plat`
+  MODIFY `Id_Recette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `regime`
+--
+ALTER TABLE `regime`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `seuil`
+--
+ALTER TABLE `seuil`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `compose`
 --
 ALTER TABLE `compose`
   ADD CONSTRAINT `FK_Recette_Compose` FOREIGN KEY (`id_recette`) REFERENCES `recette_plat` (`Id_Recette`),
