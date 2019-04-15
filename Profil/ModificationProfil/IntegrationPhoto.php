@@ -18,6 +18,7 @@ function upload($index,$destination,$maxsize,$extensions, $id)
   $upload1 = upload('photo','../Image/PhotoProfil/',1048576, array('png','gif','jpg','jpeg'),$_SESSION['profil']['ID']);
    if ($upload1) {
         $ext = substr(strrchr($_FILES['photo']['name'],'.'),1);
+       // 
         $BD->query("UPDATE profil SET url_photo  = '".$_SESSION['profil']['ID'].".".$ext."' WHERE id =".$_SESSION['profil']['ID']);
         $_SESSION['profil']['photo']=$_SESSION['profil']['ID'].".".$ext;
         $Profil['photo']=$_SESSION['profil']['ID'].".".$ext;
@@ -26,3 +27,15 @@ function upload($index,$destination,$maxsize,$extensions, $id)
        echo 'Image, non télécharger !';
    } 
 ?>
+/*
+if ($upload1) {
+$ext = substr(strrchr($_FILES['photo']['name'],'.'),1);
+//
+$BD->query("UPDATE profil SET url_photo = '".$_SESSION['profil']['ID'].".".$ext."' WHERE id =".$_SESSION['profil']['ID']);
+$_SESSION['profil']['photo']=$_SESSION['profil']['ID'].".".$ext;
+$Profil['photo']=$_SESSION['profil']['ID'].".".$ext;
+} else {
+
+echo 'Image, non télécharger !';
+}
+*/

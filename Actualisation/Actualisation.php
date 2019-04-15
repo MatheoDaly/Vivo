@@ -21,14 +21,8 @@ Type :
 ###############################################################################################################################
 
 //Aide mémoire : $Profil=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
-if(!isset($test)) {include("../Outil/IsTest.php");}
-function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
-        // A revoir l'optimisation
-        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
-        $req1 = $BD->query($q);
-        $req1->closeCursor();
-    }
-
+include("../Outil/IsTest.php");
+$testStats=false;
 
 
 if(isset($Profil)){
@@ -36,12 +30,28 @@ if(isset($Profil)){
     // met à jout les données statistique, c'est ici que la magie opère !
     
     
-############################# fonction Historique_Aliment -> Statistique ###########################################################
+############################# fonction menu_Profil -> Historique_Aliment  ###########################################################
 ##################################
-    if(isset($testStats)){   
+    if(!$testStats){   
     include('../Outil/Php/AccesBD.php');
     $BD = getBD();
     }
+    
+    $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.alim_code AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu
+INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
+INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
+WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
+    echo $q;
+    $req= $BD->query($q);
+    while($ligne = $req->fetch()){
+        $BD->query("INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )");
+        
+    } $req->closeCursor();
+    
+    
+    
+############################# fonction Historique_Aliment -> Statistique ###########################################################
+    
     
     // Ici génération de deux array et une str pour effectuer automatiquement l'ajout de concentration voulu 
     $req = $BD->query('SELECT * From concentration');
@@ -53,21 +63,25 @@ if(isset($Profil)){
         array_push($NomConcentration['id'], $ligne['id']);
     } $req->closeCursor();
     
-    $req = $BD->query("SELECT historique_aliment.Repas AS 'NumeroRepas',
+    
+    //################ Ici on integre les donne dans statistiques
+    $q="SELECT historique_aliment.Repas AS 'NumeroRepas',
         ".$AjoutAutoQuery."
         historique_aliment.Date AS 'Date'
         FROM historique_aliment 
         INNER JOIN aliments ON aliments.alim_code = historique_aliment.ID_ingredient
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
-        GROUP BY historique_aliment.Date, historique_aliment.Repas");
+        GROUP BY historique_aliment.Date, historique_aliment.Repas";
+    echo $q;
+    $req = $BD->query($q);
     
     
     while($ligne = $req->fetch())
     {
         // ajout automatiser des concentrations
     for($i=0;$i<sizeof($NomConcentration['Nom']); $i++){   
-        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'][$i],$ligne[$NomConcentration['Nom'][$i]], ligne['Date'],$Profil["ID"]);
+        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'],$ligne[$NomConcentration['Nom'][$i]], ligne['Date'],$Profil["ID"]);
     }
     }
     $req->closeCursor();
@@ -126,5 +140,23 @@ if(isset($Profil)){
     $Profil["actualisation"]=$ligne['DateActue'] ;
     
 }
+
+
+###########################################################################################################################
+
+
+function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
+        // A revoir l'optimisation
+        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
+        $req1 = $BD->query($q);
+        $req1->closeCursor();
+    }
+
+function ajoutAliment ($type, $BD, $Repas, $concentration, $date, $id){
+        // A revoir l'optimisation
+        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
+        $req1 = $BD->query($q);
+        $req1->closeCursor();
+    }
 
 ?>
