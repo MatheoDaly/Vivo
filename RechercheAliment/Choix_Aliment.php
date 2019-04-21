@@ -12,6 +12,7 @@ session_start();
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="../index.html">Vivo</a>
@@ -60,22 +61,32 @@ session_start();
     </div>
 
     <?php
-  $bd = getBD();
-  if(isset($_GET['submit']) || isset($_GET['Alim'])){
+    $bd = getBD();
+    if(isset($_GET['submit']) || isset($_GET['Alim']) ){
+
     if(empty($_GET['Alim'])){
-      echo('<meta http-equiv="refresh" content="0;URL=Choix_Aliment.php">');
+      echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
     }else {
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
-      $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%'");
+      $reponse = $bd->query( "SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' " );
+
+
+
       if ($_GET['option']== "Lipide"){
         $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
-      }elseif ($_GET['option']== "Calorie") {
+      }else if ($_GET['option']== "Calorie") {
         $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
       }
+
+
+
+
       if(!isset($_SESSION['Rec_Plat'])){
         $_SESSION['Rec_Plat'] = array();
       }
+      }
+
 
       while($result = $reponse->fetch()){
         echo('<form method="GET" action="ajoutAlimInd.php">');
@@ -97,13 +108,13 @@ session_start();
         echo('</form>');
       }
       $reponse-> closeCursor();
-
+  }
 print_r($_SESSION['Rec_Plat']);
 echo('Vous avez choisi');
 echo('<br/>');
 $i=0;
 while($i<sizeof($_SESSION['Rec_Plat'])){
-  $panier = $_SESSION['Rec_Plat'][$i]['Nom'];
+  $panier = $_SESSION['Rec_Plat'][$i]['nom'];
   echo $panier;
   echo('<br/>');
   $i=$i+1;

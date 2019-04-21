@@ -32,7 +32,7 @@ $sumProt = 0;
 $i = 0;
 while($i<sizeof($_SESSION['Recette'])){
   $id_alim = $_SESSION['Recette'][$i]['id'];
-  echo($id_alim);
+  //echo($id_alim);
   $data = $bd->query("SELECT * FROM aliments WHERE alim_code = $id_alim ");
   while($ligne = $data->fetch()){
     $kcal = (float) $ligne['Energie_Règlement_UE_N°_11692011_kcal100g'];
@@ -42,10 +42,10 @@ while($i<sizeof($_SESSION['Recette'])){
   }
   $i+=1;
 }
-echo("INSERT INTO `recette_plat`(`nom`,`instructions`,`kcal`, `protéines`,`Id_User_Crea`) VALUES ('$nomR','$instr',$sumKcal,$sumProt,1)");
+//echo("INSERT INTO `recette_plat`(`nom`,`instructions`,`kcal`, `protéines`,`Id_User_Crea`) VALUES ('$nomR','$instr',$sumKcal,$sumProt,1)");
 $insert = $bd->exec("INSERT INTO `recette_plat`(`nom`, `instructions`,`kcal`, `protéines`,`Id_User_Crea`) VALUES ('$nomR','$instr',$sumKcal,$sumProt,1)");
 
-echo('<meta http-equiv="refresh" content="10; URL=crea_recette_suite_fin.php">');
+echo('<meta http-equiv="refresh" content="0; URL=crea_recette_suite_fin.php">');
 
 
  ?>

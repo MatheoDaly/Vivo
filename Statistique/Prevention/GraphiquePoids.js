@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 function creaPrev(data) {
     data1 = Array();
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 7; i++) {
         data1.push(parseFloat(data[0]) * i + parseFloat(data[1]));
     }
     alert(data1);

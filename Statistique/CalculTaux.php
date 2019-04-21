@@ -1,6 +1,13 @@
 <?php
 
 session_start();
+
+$testStats=false;
+if($testStats){   
+include("../Outil/Php/CreationSet.php");
+setHistorique($BD, 'P');
+}
+
 if(isset($_SESSION["profil"])){
 $id=$_SESSION["profil"]['ID'];
 } else {
@@ -18,6 +25,8 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
+   // echo json_encode(CalculTaux(1, $BD, 2));
+
 
 
 
@@ -47,11 +56,11 @@ function CalculTaux ($id, $BD, $type){
     }
 else if($type == 2) {
     $time="day";
-    $diff="-8";
+    $diff="-7";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
 } 
 else if($type == 3) {
-    $time="WEEKS";
+    $time="WEEK";
     $diff="-5";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6)),array("Glucide", array(2, 0, 5, 8, 6, 2))));
 } 
@@ -60,13 +69,15 @@ else if($type == 4) {
     $diff="-6";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6))));
 } else if($type == 5) {
-    $time="years";
-    $diff="-5";
+    $time="year";
+    $diff="-3";
     //echo json_encode(array(array("Calorie", array(1, 2, 3))));
 } 
 
 if($type>1){
-$req = $BD->query("SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)>".$diff." and TIMESTAMPDIFF(".$time.",CURRENT_TIMESTAMP,date)<0 ORDER by Nom,date");
+    $q= "SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 ORDER by Nom,date";
+    //echo $q;
+$req = $BD->query($q);
     $taux=array();
     $valeur=array();
     $molecule=array();
@@ -100,8 +111,9 @@ function camembert($type, $BD, $id){
 $stats = array();
 $nom = array();
 
-$q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_grp_code=historique_aliment.ID_ingredient
-WHERE historique_aliment.Date = NOW() AND historique_aliment.ID_Profil=".$id;
+$q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_code=historique_aliment.ID_ingredient
+WHERE historique_aliment.Date = DATE(NOW()) AND historique_aliment.ID_Profil=".$id;
+    //echo $q;
 $req = $BD->query($q);
     
     while($ligne=$req->fetch()){

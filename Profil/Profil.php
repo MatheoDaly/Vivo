@@ -222,7 +222,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                     */
                     
                     $entre=false;
-                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
+                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date LIMIT 3"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
                     $i=0; // moduler le $i pour adapter le moment des menus
                     while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
