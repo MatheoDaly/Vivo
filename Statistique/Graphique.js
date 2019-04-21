@@ -12,14 +12,16 @@ var l = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Ch
 $(function () {
     var Graphique;
     if (commence) {
+        alert($('select').val());
         $.post('CalculTaux.php', {
             type: $('select').val()
         }, function (data) {
+            //alert(data);
             if (JSON.parse(data).length == 0) {
                 alert("Pas de repas encore effectuer !");
-                $(location).attr('href', '../Profil/Profil.php');
+                //$(location).attr('href', '../Profil/Profil.php');
             }
-            Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+            var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
 
         });
         $.post('CalculTaux.php', {
@@ -29,7 +31,8 @@ $(function () {
                 $("#Ronds").remove();
                 $("#1").remove();
             }
-            afficheCamebert(data);
+            //alert(data);
+            //afficheCamebert(data);
         });
         commence = false;
     }
@@ -41,7 +44,8 @@ $(function () {
                 type: $(this).val()
             }, function (data) {
                 alert(data);
-                Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+
+                var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
             });
         }
     });

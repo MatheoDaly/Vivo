@@ -1,20 +1,28 @@
 <?php
+$testStats=false;
 
 include("../Outil/IsTest.php");
 
-if($test==true){
- include("../Actualisation/Actualisation.php");
-} else {    
 include("../Outil/php/AccesBD.php");
 $BD=getBD();
+//include("../Actualisation/Actualisation.php");
+
+
+if($testGene==true){
+} else {    
 }
 
+if($testStats==true){
+        include("../Outil/Php/CreationSet.php");
+        setHistorique($BD, 'F');
+}
 
 if(isset($_POST['change']) && $_POST['change']=='yes'){
  include("ModificationProfil/IntegrationPhoto.php");
 }
 ####################################################################################################################################
 ############################################# Attention Session -> Array = $Profil !################################################
+####################################################################################################################################
 ?>
 
 <!Doctype HTML>
@@ -53,7 +61,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                         <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="disconnect" href="../index.html">Deconnexion</a>
+                        <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
                     </li>
 
                 </ul>
@@ -75,7 +83,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
         <!-- ################ Modification profil ############### !-->
         <?php 
-        if(isset($_SESSION['profil'])){
+        if(isset($_SESSION['profil']) || (isset($test) && $test)){
         ?>
         <div id="ModificationProfil">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
@@ -201,7 +209,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
     <!-- Programation des menu !-->
     <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
         <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
-            <h1 class="text-light text-center border border-warning">Menu</h1>
+            <h1 class="text-light text-center border border-primary">Menu</h1>
             <div class="col-10 bg-light mx-auto">
                 <!-- Automatiser la gestion du tableau!-->
                 <?php 
@@ -214,7 +222,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                     */
                     
                     $entre=false;
-                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
+                    $req = $BD->query("SELECT Date, COUNT(DISTINCT Repas) AS 'NbRepas', DATEDIFF(Date, NOW()) AS 'DiffDate' from historique_aliment where Date>=NOW() AND ID_Profil=".$Profil['ID']." GROUP BY Date LIMIT 3"); // pour savoir quel jour il faut seulement obtenir la différente entre NOW et date
                     $i=0; // moduler le $i pour adapter le moment des menus
                     while($ligne = $req->fetch()){ 
                         if($i==0){ $entre=true; ?>
@@ -224,10 +232,11 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <div class="row">
                     <?php } ?>
                     <div class="col-12 col-lg-6">
-                        <h3 class="text-center" style="text-decoration:underline;">
-                            <?php 
-                        $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date='".$ligne['Date']."'");
-                            ?>
+                        <h3 class="text-center" style="text-decoration:underline; Color:blue;">
+                            <?php echo $ligne['Date']; ?>
+
+                            <?php $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date='".$ligne['Date']."' ORDER BY Repas");?>
+
                         </h3>
                         <div class="row">
                             <?php while($ligne2= $req2->fetch()){ ?>
@@ -259,17 +268,11 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                             <?php } $req2->closeCursor(); ?>
                         </div>
                     </div>
-                    <?php
-                        $i++;
-                        }
-                    $req->closeCursor();
-                    if ($entre){
-                        ?> </div>
-                <?php           
-                    } else {
+                    <?php $i++;}    $req->closeCursor(); if ($entre){ ?>
+                </div>
+                <?php  } else {
                         echo "Vous n'avez aucun menu c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
-                    }
-                    ?>
+                    } ?>
 
             </div>
 

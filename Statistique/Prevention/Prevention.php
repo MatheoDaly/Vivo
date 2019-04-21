@@ -24,7 +24,7 @@ Moindre carre !
 */
 session_start();
 
-$test=false;
+$test=true;
 // Variable :
 if(isset($_SESSION['profil'])){
     $Profil=$_SESSION['profil'];
