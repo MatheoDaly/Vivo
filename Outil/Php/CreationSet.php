@@ -36,7 +36,7 @@ while($ligne=$req->fetch()){
         }
     echo "Set historique crée";
     }
-//setHistorique($BD, '');
+//setHistorique($BD, 'F');
 
 //####################Reseignement liste concentration : $liste=array("Calorie", "Proteine", "Glucide", "Alcool")
 
@@ -80,7 +80,7 @@ $ListsMoyenneAsso=array(2500, 5, 14, 36, 2);
     for($k=0;$k<$nbVar;$k++){
         
     for($i=0;$i<15;$i++){
-        $q = "INSERT INTO statistique VALUES (2, null, '".$liste[$k]."', ".rand($ListsMoyenneAsso[$k]*0.8 ,$ListsMoyenneAsso[$k]*1.2).", ".$moment."(NOW(), INTERVAL ".$i." DAY), 5)";
+        $q = "INSERT INTO statistique VALUES (2, null, '".$liste[$k]."', ".rand($ListsMoyenneAsso[$k]*0.8 ,$ListsMoyenneAsso[$k]*1.2).", ".$moment."(NOW(), INTERVAL ".$i." DAY), 1)";
         echo $q;
         echo '<br/>';
             $BD->query($q);

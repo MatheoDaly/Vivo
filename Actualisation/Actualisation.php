@@ -41,6 +41,7 @@ if(isset($Profil)){
 INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
 INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
 WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
+    echo $q."<br>";
     $req= $BD->query($q);
     while($ligne = $req->fetch()){
         $BD->query("INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )");
@@ -72,7 +73,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas";
-
+    echo $q;
     $req = $BD->query($q);
     
     while($ligne = $req->fetch())
@@ -80,7 +81,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         // ajout automatiser des concentrations
     for($i=0;$i<sizeof($NomConcentration['Nom']); $i++){   
     //ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id)
-        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'],$ligne[$NomConcentration['Nom'][$i]], $ligne['Date'],$Profil["ID"]);
+        ajoutConcentration($NomConcentration['id'][$i],$BD,$ligne['NumeroRepas'],$ligne[$NomConcentration['Nom'][$i]], $ligne['Date'],$Profil["ID"]);
     }
     } $req->closeCursor();
     
@@ -93,14 +94,14 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
             $temps="date";
         } else if ($i>1){
             $calcul = "AVG(TauxCumule)";
-            if ($i==2) $temps="WEEK(date), MONTH(date), YEAR(date)";
-            if ($i==3) $temps="MONTH(date), YEAR(date)";
-            if ($i==4) $temps="YEAR(date)";
+            if ($i==2) {$temps="WEEK(date), MONTH(date), YEAR(date)";$distance=" WEEK(NOW())=WEEK(date) ";}
+            if ($i==3) {$temps="MONTH(date), YEAR(date)";$distance=" MONTH(NOW())=MONTH(date) ";}
+            if ($i==4) {$temps="YEAR(date)";$distance=" YEAR(NOW())=YEAR(date) ";}
         }
-        $q="SELECT id_Concentration AS 'Nom', date, ".$calcul." AS concentration
+        $q="SELECT id_Concentration AS 'Nom', MAX(date) AS 'date', ".$calcul." AS concentration
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
-    AND type = ".$i." GROUP BY ".$temps." , Nom ";
+    AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom ";
         echo $q.'<br>';
     $req = $BD->query($q);
         
@@ -145,18 +146,20 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
 ###########################################################################################################################
 
 
-function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
+function ajoutConcentration ($type, $BD, $Repas, $taux, $date, $id){
         // A revoir l'optimisation
-        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
+        $q = "INSERT INTO statistique VALUES (1, ".$Repas.", ".$type.", ".$taux.", '".$date."', ".$id.")";
+        echo $q."<br>";
         $req1 = $BD->query($q);
-        //$req1->closeCursor();
+        $req1->closeCursor();
     }
 
 function ajoutAliment ($type, $BD, $Repas, $concentration, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
+        echo $q."<br>";
         $req1 = $BD->query($q);
-        $req1->closeCursor();
+    $req1->closeCursor();
     }
 
 ?>
