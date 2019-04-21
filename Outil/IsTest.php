@@ -1,13 +1,14 @@
 <?php
 
-$test=true;
-$testStats=true;
+// permet les tests généraux tel que mettre un profil par défaut et premettre ces modification 
+$testGene=true;
+// Ici permete de génére des statistique pour utiliser 
 session_start();
 
-if(isset($_SESSION['profil'])){
-    include("../Actualisation/Actualisation.php");
+if(isset($_SESSION['profil']) && !$testGene){
     $Profil=$_SESSION['profil'];
-} else if($test) {
+} else if($testGene) {
+    session_destroy();
     $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
 }
 

@@ -41,7 +41,6 @@ if(isset($Profil)){
 INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
 INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
 WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
-    echo $q;
     $req= $BD->query($q);
     while($ligne = $req->fetch()){
         $BD->query("INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )");
@@ -73,18 +72,17 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas";
-    echo $q;
+
     $req = $BD->query($q);
-    
     
     while($ligne = $req->fetch())
     {
         // ajout automatiser des concentrations
     for($i=0;$i<sizeof($NomConcentration['Nom']); $i++){   
-        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'],$ligne[$NomConcentration['Nom'][$i]], ligne['Date'],$Profil["ID"]);
+    //ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id)
+        ajoutConcentration($NomConcentration['Nom'][$i],$BD,$ligne['NumeroRepas'],$ligne[$NomConcentration['Nom'][$i]], $ligne['Date'],$Profil["ID"]);
     }
-    }
-    $req->closeCursor();
+    } $req->closeCursor();
     
     
 ###################################### Ne s'occupe que de SUM pour jour mais Moyenne apresv #######################################
@@ -103,10 +101,12 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
     AND type = ".$i." GROUP BY ".$temps." , Nom ";
+        echo $q.'<br>';
     $req = $BD->query($q);
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
+            echo '<br>'.$q.'<br>';
             $req1 = $BD->prepare($q);
             $req1->execute(array(
             'Nom'=>$ligne['Nom'],
@@ -149,7 +149,7 @@ function ajoutConcentration ($type, $BD, $Repas, $concentration, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
         $req1 = $BD->query($q);
-        $req1->closeCursor();
+        //$req1->closeCursor();
     }
 
 function ajoutAliment ($type, $BD, $Repas, $concentration, $date, $id){
