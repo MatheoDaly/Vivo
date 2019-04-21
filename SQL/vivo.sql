@@ -1,5 +1,6 @@
 -- phpMyAdmin SQL Dump
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
@@ -11,10 +12,18 @@
 -- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
+=======
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+>>>>>>> Stashed changes
 -- Host: localhost:3306
 -- Generation Time: Apr 13, 2019 at 05:04 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.2.1
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -2636,6 +2645,7 @@ INSERT INTO `aliments` (`alim_grp_code`, `alim_ssgrp_code`, `alim_ssssgrp_code`,
 
 --
 -- Table structure for table `allergie`
+<<<<<<< Updated upstream
 --
 
 CREATE TABLE `allergie` (
@@ -2671,6 +2681,43 @@ CREATE TABLE `allergie_profil` (
 -- Table structure for table `article`
 --
 
+=======
+--
+
+CREATE TABLE `allergie` (
+  `Nom` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allergie_aliment`
+--
+
+CREATE TABLE `allergie_aliment` (
+  `id_Aliment` int(11) NOT NULL,
+  `id_Allergie` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allergie_profil`
+--
+
+CREATE TABLE `allergie_profil` (
+  `id_Profil` int(11) NOT NULL,
+  `id_Allergie` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article`
+--
+
+>>>>>>> Stashed changes
 CREATE TABLE `article` (
   `Nom` varchar(50) NOT NULL,
   `Url` varchar(255) NOT NULL,
@@ -2719,8 +2766,13 @@ INSERT INTO `concentration` (`id`, `Nom`, `ChampsAliment`) VALUES
 CREATE TABLE `est_ingredient_de` (
   `id_recette` int(11) NOT NULL,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   `id_aliment` int(11) NOT NULL,
   KEY `id_recette` (`id_recette`)
+=======
+  `alim_code` int(11) NOT NULL,
+  `quantite` float DEFAULT NULL
+>>>>>>> Stashed changes
 =======
   `alim_code` int(11) NOT NULL,
   `quantite` float DEFAULT NULL
@@ -4408,6 +4460,7 @@ INSERT INTO `objectif_profil` (`id_Profil`, `id_Objectif`, `valeur_type`) VALUES
 
 --
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 -- Structure de la table `preference`
 --
 
@@ -4431,6 +4484,29 @@ CREATE TABLE `preferance` (
 --
 
 CREATE TABLE `preference` (
+=======
+-- Table structure for table `preferance`
+--
+
+CREATE TABLE `preferance` (
+>>>>>>> Stashed changes
+  `id_Aliment` int(11) NOT NULL,
+  `id_Profil` int(11) NOT NULL,
+  `pref` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+<<<<<<< Updated upstream
+-- Table structure for table `profil`
+--
+
+=======
+-- Table structure for table `preference`
+--
+
+CREATE TABLE `preference` (
   `id_Aliment` int(11) NOT NULL,
   `id_Profil` int(11) NOT NULL,
   `pref` int(11) NOT NULL
@@ -4442,6 +4518,7 @@ CREATE TABLE `preference` (
 -- Table structure for table `profil`
 --
 
+>>>>>>> Stashed changes
 CREATE TABLE `profil` (
   `id` int(11) NOT NULL,
   `prenom` varchar(30) NOT NULL,
@@ -4479,9 +4556,14 @@ CREATE TABLE `recette_plat` (
   `kcal` float DEFAULT NULL,
   `protéines` float DEFAULT NULL,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   `Id_User_Crea` int(11) NOT NULL,
   PRIMARY KEY (`Id_Recette`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+  `Id_User_Crea` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+>>>>>>> Stashed changes
 =======
   `Id_User_Crea` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
