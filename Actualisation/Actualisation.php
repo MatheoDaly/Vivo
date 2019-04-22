@@ -92,10 +92,11 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         if($i==1) { // repas 
             $calcul = "SUM(TauxCumule)";
             $temps="date";
+            $distance="DATE(NOW())=date";
         } else if ($i>1){
             $calcul = "AVG(TauxCumule)";
-            if ($i==2) {$temps="WEEK(date), MONTH(date), YEAR(date)";$distance=" WEEK(NOW())=WEEK(date) ";}
-            if ($i==3) {$temps="MONTH(date), YEAR(date)";$distance=" MONTH(NOW())=MONTH(date) ";}
+            if ($i==2) {$temps="WEEK(date), MONTH(date), YEAR(date)";$distance=" WEEK(NOW())=WEEK(date) AND YEAR(NOW())=YEAR(date) ";}
+            if ($i==3) {$temps="MONTH(date), YEAR(date)";$distance=" MONTH(NOW())=MONTH(date) AND YEAR(NOW())=YEAR(date) ";}
             if ($i==4) {$temps="YEAR(date)";$distance=" YEAR(NOW())=YEAR(date) ";}
         }
         $q="SELECT id_Concentration AS 'Nom', MAX(date) AS 'date', ".$calcul." AS concentration
@@ -104,6 +105,8 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
     AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom ";
         echo $q.'<br>';
     $req = $BD->query($q);
+        
+    $q="DELETE FROM statistique WHERE type=".($i+1);// revoir avec les distance supérieur 
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
