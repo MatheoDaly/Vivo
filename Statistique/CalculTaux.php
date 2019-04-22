@@ -25,7 +25,7 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-    echo json_encode(CalculTaux(1, $BD, 1));
+    // echo json_encode(CalculTaux(1, $BD, 2));
 
 
 
@@ -38,7 +38,7 @@ function CalculTaux ($id, $BD, $type){
     if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
 $q="SELECT concentration.Nom,NumRepas,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where date=DATE(NOW()) AND ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas";
-        echo $q;
+       // echo $q;
     $req = $BD->query($q);
     $taux=array();
     $valeur=array();
@@ -68,7 +68,7 @@ else if($type == 2) {
     $time="day";
     $diff="-7";
     $lim="7";
-    //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
+    //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7)), array(0, 12, 14)));
 } 
 else if($type == 3) {
     $time="WEEK";
@@ -91,7 +91,7 @@ else if($type == 4) {
 
 if($type>1){
     $q= "SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 ORDER by Nom,date LIMIT ".$lim;
-    echo $q;
+   // echo $q;
 $req = $BD->query($q);
     $taux=array();
     $valeur=array();
@@ -113,7 +113,7 @@ $req = $BD->query($q);
             $Concentration=array();
         } 
         //print_r($valeur);
-        print_r($Concentration);
+        //print_r($Concentration);
     }
 // Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
     return $taux;
@@ -123,7 +123,7 @@ $req->closeCursor();
 
 
 if(isset($_POST['today'])){
-echo json_encode(camembert("calorie", $BD, $id)); 
+echo json_encode(camembert("Mes calories aujourd'hui", $BD, $id)); 
 } 
 //echo json_encode(camembert("calorie", $BD, 1)); 
 
