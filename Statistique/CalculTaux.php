@@ -25,7 +25,7 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-    echo json_encode(CalculTaux(1, $BD, 5));
+    echo json_encode(CalculTaux(1, $BD, 1));
 
 
 
@@ -37,21 +37,29 @@ function CalculTaux ($id, $BD, $type){
     //Probleme avec semaine et années
     if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
-$q="SELECT concentration.Nom,NumRepas,sum(TauxCumule) from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where  ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas";
+$q="SELECT concentration.Nom,NumRepas,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where date=DATE(NOW()) AND ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas";
         echo $q;
     $req = $BD->query($q);
     $taux=array();
     $valeur=array();
     $molecule=array();
     $heure=array();
+    $nom="";
+    $entre=true;
     while ($ligne= $req->fetch()){
-        array_push($valeur, $ligne['sum(TauxCumule)']);
+        array_push($valeur, $ligne['TauxCumule']);
         array_push($molecule, $ligne['Nom']);
         array_push($molecule, $valeur);
         array_push($taux, $molecule);
-        array_push($heure, $ligne['NumRepas']);
-        $valeur=array();
+        if($entre || $nom==$ligne['Nom'])
+        {
+            $nom=$ligne['Nom'];
+            $entre=false;
+            array_push($heure, $ligne['NumRepas']);
+        }
+            $valeur=array();
         $molecule=array();
+        
     }
     array_push($taux, $heure);
     return $taux;
@@ -87,18 +95,25 @@ if($type>1){
 $req = $BD->query($q);
     $taux=array();
     $valeur=array();
-    $molecule=array();
+    $Concentration=array();
     $nom='';
+    $frist=true;
     while ($ligne= $req->fetch()){
         array_push($valeur, $ligne['TauxCumule']);
+        //if ($frist){
+        //    $frist=false;
+        //    $nom=$ligne['Nom'];
+       // }  else 
         if($nom!=$ligne['Nom']){
             $nom=$ligne['Nom'];
-            array_push($molecule, $ligne['Nom']);
-            array_push($molecule, $valeur);
-            array_push($taux, $molecule);
+            array_push($Concentration, $ligne['Nom']);
+            array_push($Concentration, $valeur);
+            array_push($taux, $Concentration);
             $valeur=array();
-            $molecule=array();
-        }
+            $Concentration=array();
+        } 
+        //print_r($valeur);
+        print_r($Concentration);
     }
 // Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
     return $taux;
@@ -110,7 +125,7 @@ $req->closeCursor();
 if(isset($_POST['today'])){
 echo json_encode(camembert("calorie", $BD, $id)); 
 } 
-echo json_encode(camembert("calorie", $BD, 1)); 
+//echo json_encode(camembert("calorie", $BD, 1)); 
 
 //-------------Fonction qui prends type 
 
@@ -121,7 +136,7 @@ $nom = array();
 
 $q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_code=historique_aliment.ID_ingredient
 WHERE historique_aliment.Date = DATE(NOW()) AND historique_aliment.ID_Profil=".$id;
-    echo $q;
+    //echo $q;
 $req = $BD->query($q);
     
     while($ligne=$req->fetch()){
