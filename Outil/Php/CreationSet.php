@@ -42,7 +42,7 @@ while($ligne=$req->fetch()){
 
 function setRepas($BD,$nbVar, $moment){
     if($moment=="F"){
-        $moment='DATEADD';
+        $moment='DATE_ADD';
     } else {
         $moment='SUBDATE';
     }
@@ -54,21 +54,23 @@ $liste=array(5, 2, 1, 3);
 $ListsMoyenneAsso=array(2500, 5, 14, 36, 2);
     for($k=0;$k<$nbVar;$k++){
         
-    for($i=0;$i<100;$i++){
+    for($i=-1;$i<100;$i++){
             if($i%3 == 0){
                 $j++;
             } 
-            $BD->query("INSERT INTO statistique VALUES (1, ".(($i%3)+1).", '".$liste[$k]."', ".rand($ListsMoyenneAsso[$k]*0.5 ,$ListsMoyenneAsso[$k]*1.5).", ".$moment."(NOW(), INTERVAL ".$j." DAY), 1)");
+        $q = "INSERT INTO statistique VALUES (1, ".(($i%3)+1).", '".$liste[$k]."', ".rand($ListsMoyenneAsso[$k]*0.5 ,$ListsMoyenneAsso[$k]*1.5).", ".$moment."(NOW(), INTERVAL ".$j." DAY), 1)";
+        echo $q;
+            $BD->query($q);
             
         }
     }
     echo "Set repas crée";
 }
-//setRepas($BD, 4, "P");
+//setRepas($BD, 4, "F");
 
 function setJour($BD,$nbVar, $moment){
     if($moment=="F"){
-        $moment='DATEADD';
+        $moment='DATE_ADD';
     } else {
         $moment='SUBDATE';
     }
