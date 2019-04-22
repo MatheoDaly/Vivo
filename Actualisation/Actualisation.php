@@ -126,10 +126,10 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
     // Faire une fonction php pour qu'elle ne s'active qu'en debut de mois + prendre en compte la derniere connexion
     
     // Supprimes les statistiques des deux derniers mois pour les repas et jours
-    $BD->query("DELETE FROM statistique WHERE type IN(1, 2) AND (MONTH(SUBDATE(NOW(), INTERVAL 1 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 2 MONTH))<YEAR(date)) AND ID_Profil = ".$Profil['ID']);
+    $BD->query("DELETE FROM statistique WHERE type IN(1, 2) AND SUBDATE(DATE(NOW()),INTERVAL 2 MONTH)>date AND ID_Profil = ".$Profil['ID']);
     
     // Six mois apres on supprime les semaines
-    $BD->query("DELETE FROM statistique WHERE type = 3 AND (MONTH(SUBDATE(NOW(), INTERVAL 6 MONTH)) < MONTH(date) OR YEAR(SUBDATE(NOW(), INTERVAL 6 MONTH))<YEAR(date)) AND ID_Profil = ".$Profil['ID']);
+    $BD->query("DELETE FROM statistique WHERE type = 3 AND SUBDATE(DATE(NOW()), INTERVAL 6 MONTH) > date AND ID_Profil = ".$Profil['ID']);
     
     
     // Suite des fonction : recupere une liste d'aliment et historique aliment pour un profil donnee 
