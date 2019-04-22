@@ -99,6 +99,10 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
             if ($i==3) {$temps="MONTH(date), YEAR(date)";$distance=" MONTH(NOW())=MONTH(date) AND YEAR(NOW())=YEAR(date) ";}
             if ($i==4) {$temps="YEAR(date)";$distance=" YEAR(NOW())=YEAR(date) ";}
         }
+    $q="DELETE FROM statistique WHERE ID_Profil = ".$Profil["ID"]." AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom";
+        echo $q.'<br>';
+    $BD->query($q); 
+        
         $q="SELECT id_Concentration AS 'Nom', MAX(date) AS 'date', ".$calcul." AS concentration
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
@@ -106,7 +110,6 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         echo $q.'<br>';
     $req = $BD->query($q);
         
-    $q="DELETE FROM statistique WHERE type=".($i+1);// revoir avec les distance supérieur 
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
