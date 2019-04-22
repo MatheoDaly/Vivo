@@ -73,6 +73,7 @@ session_start();
   <div class="row text-center p-3 mx-auto">
 
       <?php
+      $_SESSION['Rec_Plat']=array();
       echo('<br/>');
       echo('<a href="tempo_stop.php">Annuler</a>');
       echo('<form method="GET" action="toto.php" >');
@@ -95,118 +96,34 @@ session_start();
          echo('<br/>');
          }
          //ATTETION !!! : le modèle de la checkbox doit suivre le schema suivant : <input type="checkbox" name="nom recette" id="id recette"><label for="id recette">nom recette</label>
+         for ($i=0; $i < sizeof($_SESSION["Plat_Rec"] ); $i++) {
+          $avecnb = $_SESSION["Plat_Rec"][$i]['nbAl']."¨".$_SESSION["Plat_Rec"][$i]['nom_aliment'];
+        //  echo $avecnb;
 
-      $tabali = $_SESSION['Rec_Plat'];
-      for ($i=0; $i < sizeof($tabali); $i++) {
+          echo ('<input name="');
+          echo ($avecnb);
+          echo('" type="checkbox" value="');
+          echo($_SESSION["Plat_Rec"][$i]['id_aliment']);
+          echo('" id="');
+          echo($_SESSION["Plat_Rec"][$i]['id_aliment']);
+          echo('">');
+          echo('<label for="');
+          echo($_SESSION["Plat_Rec"][$i]['id_aliment']);
+          echo('">');
+          echo($_SESSION["Plat_Rec"][$i]['nom_aliment']);
+          echo('</label>');
+          echo('<br/>');
+         }
 
-
-    echo('<br/>');
-    echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
-    echo('<br/>');
-    echo('<a href="rechercheAliment.php">Créer une recette</a>');
-    echo('<br/>');
-    echo('<a href="tempo_stop.php">Annuler</a>');
-    echo('<form method="GET" action="toto.php" >');
-    $bd = getBD();
-    $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");
-    while ( $prd_top5 = $top5->fetchObject() ){
-      $avecNB1 = strval("1"."¨".$prd_top5->nom);
-      echo ('<input name="');
-      echo ($avecNB1);
-      echo('" type="checkbox" value="');
-      echo($prd_top5->Id_Recette);
-      echo('" id="');
-      echo($prd_top5->Id_Recette);
-      echo('">');
-      echo('<label for="');
-      echo($prd_top5->Id_Recette);
-      echo('">');
-      echo($prd_top5->nom);
-      echo('</label>');
-      echo('<a href="page_recette.php?id_recette=');
-      echo($prd_top5->Id_Recette);
-      echo('">');
-      echo(' Voir recette ');
-      echo('</a>');
-      echo('<br/>');
-    }
-    //ATTETION !!! : le modèle de la checkbox doti suivre le schema suivant : <input type="checkbox" name="nom recette" id="id recette"><label for="id recette">nom recette</label>
-
-    $tabali = $_SESSION['Rec_Plat'];
-    for ($i=0; $i < sizeof($tabali); $i++) {
-
-      $avecNB = strval($tabali[$i]['nb'])."¨".$tabali[$i]['nom'];
-      echo ('<input name="');
-      echo ($avecNB);
-      echo('" type="checkbox" value="');
-      echo($tabali[$i]['id']);
-      echo('" id="');
-      echo($tabali[$i]['id']);
-      echo('">');
-      echo('<label for="');
-      echo($tabali[$i]['id']);
-      echo('">');
-      echo($tabali[$i]['nom']);
-      echo('</label>');
-
-       echo('<br/>');
-        // echo $tabali[$i]['nb'];
-       $avecNB = '';
-      }
       echo('<input type=submit value="envoyer">');
       echo('</form>');
+      print_r($_SESSION["Plat_Rec"] );
       ?>
     </div>
-    <?php
-    $bd = getBD();
-        if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
-          if(empty($_GET['Menu'])){
-            echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
-          }else {
-            $input=$_GET['Menu'];
-            //$input = preg_replace("#[^0-9a-z]#i","",$input);
-            $reponse = $bd->query( "SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' " );
-            if ($_GET['option']== "Lipide"){
-              $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
-            }else if ($_GET['option']== "Calorie") {
-              $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
-            }
-            if(!isset($_SESSION['Rec_Plat'])){
-              $_SESSION['Rec_Plat'] = array();
-            }
-          }
-          while($result = $reponse->fetch()){
-            echo('<form method="GET" action="ajoutAlimInd.php">');
-            echo($result['alim_nom_fr']);
-            echo('<br />');
-            echo('<div class="rechAlim">');
-            echo('<input type="hidden" name="id_aliment" value="');
-            $a = $result['alim_code'];
-            echo($a);
-            echo('">');
-            echo('<input type="hidden" name="nom_aliment" value="');
-            $nom = $result['alim_nom_fr'];
-            echo($nom);
-            echo('">');
-            echo('<input type="number" name="nbAl">');
-            echo('<input type="submit" name="choix" value="Choisir">');
-            echo('</div>');
-            echo('</form>');
-          }
-          $reponse-> closeCursor();
-        }
-         ?>
+
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
       <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
        <div class="form-group col-6 mx-auto">
-         <?php
-      echo('<br/>');
-      // echo $tabali[$i]['nb'];
-      $avecNB = '';
-    }
-    echo('<input type=submit value="envoyer">');
-    echo('</form>');
-    ?>
   </div>
   <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
     <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
@@ -215,8 +132,8 @@ session_start();
         <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
       </div>
       <div class="form-check">
-        <input type="radio" name="al" value="Aliment">
-        <input type="radio" name="re" value="Recette">
+        <input type="radio" name="type" value="Aliment" checked>
+        <input type="radio" name="type" value="Recette">
         <p>Options de recherche : </p>
         <label class="form-ckeck-label" for="popularite">Popularité : </label>
         <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
@@ -224,10 +141,7 @@ session_start();
         <input type="radio" name="option" id="calorie"value="Calorie">
       </div>
 
-        <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
-      </form>
-    </div>
-    <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+
 
       <input type="submit" class="btn btn-primary" name="submit1" value="Rechercher">
     </form>
@@ -237,8 +151,12 @@ session_start();
     <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
     <?php
 
-
-    if(isset($_GET['submit']) && isset($_GET['al']) && isset($_GET['Menu'])){
+    if (isset($_GET['submit1'])){
+      echo('def');
+    }else{
+      echo('pas def');
+    }
+    if(isset($_GET['submit1']) && $_GET['type']=='Aliment' && isset($_GET['Menu'])){
       echo($_GET['Menu']);
       if(empty($_GET['Menu'])){
         echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
@@ -284,7 +202,7 @@ session_start();
           }
 
           while($result = $reponse->fetch()){
-            echo('<form method="GET" action="ajoutAlimInd.php">');
+            echo('<form method="GET" action="test.php">');
             echo($result['alim_nom_fr']);
             echo('<br />');
             echo('<div class="rechAlim">');
@@ -322,7 +240,7 @@ session_start();
       }
     }
     //////////////////////////////////////////////////////////////////////////////////////
-    elseif (isset($_GET['submit']) && (isset($_GET['re']) && isset($_GET['Menu']))) {
+    elseif (isset($_GET['submit1']) && ($_GET['type']=='Recette' && isset($_GET['Menu']))) {
       echo($_GET['Menu']);
       if(empty($_GET['Menu'])){
         echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
@@ -331,11 +249,66 @@ session_start();
         //$input = preg_replace("#[^0-9a-z]#i","",$input);
         $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%'");
         if ($_GET['option']== "Lipide"){
-          $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY Lipides_g100g");
+          $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY protéines");
         }elseif ($_GET['option']== "Calorie") {
-          $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
+          $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY kcal");
         }
+
+
+
+
+
+
         $_SESSION['Rec_Plat']=array();
+
+        //  DEPLACEMENT DE CHOIX_ALIMENT.php
+        $bd = getBD();
+        if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
+
+          if(empty($_GET['Menu'])){
+            echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
+          }else {
+            $input=$_GET['Menu'];
+            //$input = preg_replace("#[^0-9a-z]#i","",$input);
+            $reponse = $bd->query( "SELECT * FROM recette_plat WHERE nom LIKE '%$input%' " );
+
+
+
+            if ($_GET['option']== "Lipide"){
+              $reponse = $bd->query("SELECT * FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY protéines");
+            }else if ($_GET['option']== "Calorie") {
+              $reponse = $bd->query("SELECT * FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY kcal");
+          }
+
+            if(!isset($_SESSION['Rec_Plat'])){
+              $_SESSION['Rec_Plat'] = array();
+            }
+          }
+
+          while($result = $reponse->fetch()){
+            echo('<form method="GET" action="test.php">');
+            echo($result['nom']);
+            echo('<br />');
+            echo('<div class="rechAlim">');
+            echo('<input type="hidden" name="id_aliment" value="');
+            $a = $result['Id_Recette'];
+            echo($a);
+            echo('">');
+            echo('<input type="hidden" name="nom_aliment" value="');
+            $nom = $result['nom'];
+            echo($nom);
+            echo('">');
+            echo('<input type="number" name="nbAl">');
+            echo('<input type="submit" name="choix" value="Choisir">');
+
+            echo('</div>');
+            echo('</form>');
+          }
+          $reponse-> closeCursor();
+        }
+
+        //  DEPLACEMENT DE CHOIX_ALIMENT.php
+
       }
     }
         //  DEPLACEMENT DE CHOIX_ALIMENT.php
