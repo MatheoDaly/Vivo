@@ -16,7 +16,7 @@ $(function () {
         $.post('CalculTaux.php', {
             type: $('select').val()
         }, function (data) {
-            //alert(data);
+            alert(data);
             if (JSON.parse(data).length == 0) {
                 alert("Pas de repas encore effectuer !");
                 //$(location).attr('href', '../Profil/Profil.php');
@@ -27,12 +27,12 @@ $(function () {
         $.post('CalculTaux.php', {
             today: 1
         }, function (data) {
+            alert(JSON.parse(data));
             if (JSON.parse(data)[1].length == 0) {
                 $("#Ronds").remove();
                 $("#1").remove();
             }
-            //alert(data);
-            //afficheCamebert(data);
+            afficheCamebert(JSON.parse(data));
         });
         commence = false;
     }

@@ -7,11 +7,6 @@ include("../Outil/php/AccesBD.php");
 $BD=getBD();
 //include("../Actualisation/Actualisation.php");
 
-
-if($testGene==true){
-} else {    
-}
-
 if($testStats==true){
         include("../Outil/Php/CreationSet.php");
         setHistorique($BD, 'F');

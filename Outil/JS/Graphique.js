@@ -1,9 +1,9 @@
- function AfficheGraph(list, type) {
+ function AfficheGraph(list, type, isHour) {
 
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
          data: {
-             labels: ListeCalendrier(type),
+             labels: ListeCalendrier(type, isHour),
              datasets: GenereTraitGraph(list)
          },
          options: {
@@ -56,7 +56,7 @@
      };
  }
 
- function ListeCalendrier(Choix) {
+ function ListeCalendrier(Choix, liste) {
      if (Choix == 1)
          return ["Matin", "Midi", "Soir"];
      else if (Choix == 2)
