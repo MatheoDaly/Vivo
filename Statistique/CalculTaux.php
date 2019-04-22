@@ -25,7 +25,7 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-   // echo json_encode(CalculTaux(1, $BD, 2));
+    echo json_encode(CalculTaux(1, $BD, 5));
 
 
 
@@ -37,46 +37,53 @@ function CalculTaux ($id, $BD, $type){
     //Probleme avec semaine et années
     if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
-    $req = $BD->query("SELECT DATE( NOW() ),concentration.Nom,NumRepas,sum(TauxCumule) from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas");
-
+$q="SELECT concentration.Nom,NumRepas,sum(TauxCumule) from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where  ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas";
+        echo $q;
+    $req = $BD->query($q);
     $taux=array();
     $valeur=array();
     $molecule=array();
+    $heure=array();
     while ($ligne= $req->fetch()){
         array_push($valeur, $ligne['sum(TauxCumule)']);
-        if($ligne['NumRepas']==3){ // bizarre comme if ?
-            array_push($molecule, $ligne['Nom']);
-            array_push($molecule, $valeur);
-            array_push($taux, $molecule);
-            $valeur=array();
-            $molecule=array();
-        }
+        array_push($molecule, $ligne['Nom']);
+        array_push($molecule, $valeur);
+        array_push($taux, $molecule);
+        array_push($heure, $ligne['NumRepas']);
+        $valeur=array();
+        $molecule=array();
     }
+    array_push($taux, $heure);
     return $taux;
     }
 else if($type == 2) {
     $time="day";
     $diff="-7";
+    $lim="7";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7))));
 } 
 else if($type == 3) {
     $time="WEEK";
     $diff="-5";
+    $lim="5";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6)),array("Glucide", array(2, 0, 5, 8, 6, 2))));
 } 
 else if($type == 4) {
     $time="MONTH";
     $diff="-6";
+    $lim="6";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6))));
 } else if($type == 5) {
     $time="year";
     $diff="-3";
+    $lim="3";
+    
     //echo json_encode(array(array("Calorie", array(1, 2, 3))));
 } 
 
 if($type>1){
-    $q= "SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 ORDER by Nom,date";
-    //echo $q;
+    $q= "SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 ORDER by Nom,date LIMIT ".$lim;
+    echo $q;
 $req = $BD->query($q);
     $taux=array();
     $valeur=array();
@@ -103,6 +110,7 @@ $req->closeCursor();
 if(isset($_POST['today'])){
 echo json_encode(camembert("calorie", $BD, $id)); 
 } 
+echo json_encode(camembert("calorie", $BD, 1)); 
 
 //-------------Fonction qui prends type 
 
@@ -113,7 +121,7 @@ $nom = array();
 
 $q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_code=historique_aliment.ID_ingredient
 WHERE historique_aliment.Date = DATE(NOW()) AND historique_aliment.ID_Profil=".$id;
-    //echo $q;
+    echo $q;
 $req = $BD->query($q);
     
     while($ligne=$req->fetch()){

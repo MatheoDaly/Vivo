@@ -86,17 +86,15 @@ $BD=GetBD();
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="col-4">
-                    <div class="row">Mon nombre de jours avant mon poids idéal est :<span id='poidsJr'></span></div>
-                    <div class="row">Je pese actuellement <?php echo $Profil['poids']." kg"; ?> </div>
-                    <div class="row">Je veux atteindre <?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
+                    <div class="row"><span id='poidsJr'></span><br></div>
+                    <div class="row">Je pese actuellement :<?php echo "<span id='poidsActuel'> ".$Profil['poids']." </span> kg"; ?> </div>
+                    <div class="row">Je veux atteindre :<?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
                                             FROM objectif_profil
                                             INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
                                             WHERE objectif.type='poids'
                                             AND objectif_profil.id_Profil=".$Profil['ID']);
                                             $val = $objectif_poids-> fetch();
-                                            echo $val['val']." kg";
-                        $objectif_poids->closeCursor();
-                        ?></div>
+                                            echo "<span id='poidsVoulu'> ".$val['val']."</span>"; $objectif_poids->closeCursor();?> kg </div>
                 </div>
             </div>
 

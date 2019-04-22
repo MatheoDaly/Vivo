@@ -21,14 +21,15 @@ $BD=getBD();
 }
 
     // Partie statistique : ici moindres carrées de l'évolution de la masse graisseuse
-    
-    $req = $BD->query("SELECT COUNT(DISTINCT Date) AS 'i'
+    $q = "SELECT COUNT(DISTINCT Date) AS 'i'
     FROM  statistique 
     INNER JOIN concentration ON concentration.id = statistique.id_Concentration 
     where concentration.Nom='Calorie'  
     AND ID_Profil=".$Profil["ID"]." 
     AND type=2 
-    AND DATEDIFF(DATE(NOW()), date)<10"); 
+    AND DATEDIFF(DATE(NOW()), date)<10";
+    //echo $q;
+    $req = $BD->query($q);
     $i=$req->fetch();
     if($i['i']<7){
         $req->closeCursor();
@@ -36,13 +37,15 @@ $BD=getBD();
     } else {
         $req->closeCursor();
         // revoir la regression linéaire
-        $req =$BD->query("SELECT AVG(TauxCumule*DATEDIFF(date,DATE(NOW()))) AS 'XY-', AVG(DATEDIFF(date, DATE(NOW()))) AS 'X-',AVG(DATEDIFF(date,DATE(NOW()))*DATEDIFF(date, DATE(NOW()))) AS 'X2-', AVG(TauxCumule) AS 'Y-', STD(DATEDIFF(date,DATE(NOW()))) AS 'SigX',STD(TauxCumule) AS 'SigY'  
+        $q = "SELECT AVG(TauxCumule*DATEDIFF(date,DATE(NOW()))) AS 'XY-', AVG(DATEDIFF(date, DATE(NOW()))) AS 'X-',AVG(DATEDIFF(date,DATE(NOW()))*DATEDIFF(date, DATE(NOW()))) AS 'X2-', AVG(TauxCumule) AS 'Y-', STD(DATEDIFF(date,DATE(NOW()))) AS 'SigX',STD(TauxCumule) AS 'SigY'  
         FROM  statistique
         INNER JOIN concentration ON concentration.id = statistique.id_Concentration 
         where concentration.Nom='Calorie' 
-        AND ID_Profil=".$Profil['ID'] ."
+        AND ID_Profil=".$Profil['ID']."
         AND type=2 
-        AND DATEDIFF(date, DATE(NOW())) BETWEEN -10 AND 0"); 
+        AND DATEDIFF(date, DATE(NOW())) BETWEEN -10 AND 0";
+        //echo $q;
+        $req =$BD->query($q); 
         
         while($Regre=$req->fetch()){
             
@@ -55,14 +58,6 @@ $BD=getBD();
         $b=($b-2500)/9;
             
         echo json_encode(array($m, $b,pow($coeff,2)));
-            /*
-            if($m<0){
-            echo 'Vous etes en voie pour perdre du poids !';
-        } else {
-            echo "<br/>Tu prend du poids denis";
-            echo "il te faudra si tu continue comme cela ".((3400-$b)/$m).' jours'; 
-        }
-            */
         }
     }
     
