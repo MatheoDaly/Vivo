@@ -21,7 +21,7 @@ $(function () {
                 //$(location).attr('href', '../Profil/Profil.php');
             }
             alert((data));
-            var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+            var Graphique = AfficheGraph(JSON.parse(data), 6);
 
         });
         $.post('CalculTaux.php', {
@@ -47,7 +47,7 @@ $(function () {
                 $('#graphique').html('<canvas id="lineChart"></canvas>');
                 alert(data);
 
-                var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+                var Graphique = AfficheGraph(JSON.parse(data), 6);
             });
         }
     });
