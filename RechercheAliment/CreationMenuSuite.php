@@ -10,11 +10,11 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-=======
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
->>>>>>> Stashed changes
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="../style.css">
   <title>ok</title>
@@ -55,13 +55,13 @@ session_start();
         <h1 class="border border-warning text-center">Création de menu</h1>
         <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
         <div class="col-10 bg-light mx-auto text-dark rounded" id="labelName" style="padding:20px;">
-<<<<<<< Updated upstream
+
           </div>
         </div>
         <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
           <h1 class="border border-warning text-center">Statistiques</h1>
-=======
->>>>>>> Stashed changes
+
+
         </div>
       </div>
       <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
@@ -71,7 +71,7 @@ session_start();
   </div>
   <h1 class="text-center">Nos recettes au top !</h1>
   <div class="row text-center p-3 mx-auto">
-<<<<<<< Updated upstream
+
       <?php
       echo('<br/>');
       echo('<a href="tempo_stop.php">Annuler</a>');
@@ -98,8 +98,8 @@ session_start();
 
       $tabali = $_SESSION['Rec_Plat'];
       for ($i=0; $i < sizeof($tabali); $i++) {
-=======
-    <?php
+
+
     echo('<br/>');
     echo('<a href="Choix_Aliment.php">Choisir ses aliments</a>');
     echo('<br/>');
@@ -134,7 +134,7 @@ session_start();
 
     $tabali = $_SESSION['Rec_Plat'];
     for ($i=0; $i < sizeof($tabali); $i++) {
->>>>>>> Stashed changes
+
       $avecNB = strval($tabali[$i]['nb'])."¨".$tabali[$i]['nom'];
       echo ('<input name="');
       echo ($avecNB);
@@ -148,7 +148,7 @@ session_start();
       echo('">');
       echo($tabali[$i]['nom']);
       echo('</label>');
-<<<<<<< Updated upstream
+
        echo('<br/>');
         // echo $tabali[$i]['nb'];
        $avecNB = '';
@@ -199,7 +199,7 @@ session_start();
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
       <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
        <div class="form-group col-6 mx-auto">
-=======
+         <?php
       echo('<br/>');
       // echo $tabali[$i]['nb'];
       $avecNB = '';
@@ -211,7 +211,7 @@ session_start();
   <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
     <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
       <div class="form-group col-6 mx-auto">
->>>>>>> Stashed changes
+
         <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
       </div>
       <div class="form-check">
@@ -223,17 +223,17 @@ session_start();
         <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
         <input type="radio" name="option" id="calorie"value="Calorie">
       </div>
-<<<<<<< Updated upstream
+
         <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
       </form>
     </div>
     <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
-=======
+
       <input type="submit" class="btn btn-primary" name="submit1" value="Rechercher">
     </form>
   </div>
   <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
->>>>>>> Stashed changes
+
     <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
     <?php
 
@@ -252,11 +252,11 @@ session_start();
           $reponse = $bd->query("SELECT alim_nom_fr FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
         }
 
-<<<<<<< Updated upstream
 
 
-=======
->>>>>>> Stashed changes
+
+
+
         $_SESSION['Rec_Plat']=array();
 
         //  DEPLACEMENT DE CHOIX_ALIMENT.php
@@ -322,7 +322,7 @@ session_start();
       }
     }
     //////////////////////////////////////////////////////////////////////////////////////
-    elseif (isset($_GET['submit']) && isset($_GET['re'] && isset($_GET['Menu']))) {
+    elseif (isset($_GET['submit']) && (isset($_GET['re']) && isset($_GET['Menu']))) {
       echo($_GET['Menu']);
       if(empty($_GET['Menu'])){
         echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
@@ -336,15 +336,16 @@ session_start();
           $reponse = $bd->query("SELECT nom FROM recette_plat WHERE nom LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
         }
         $_SESSION['Rec_Plat']=array();
-
+      }
+    }
         //  DEPLACEMENT DE CHOIX_ALIMENT.php
 
-<<<<<<< Updated upstream
+
     ?>
       </div>
   <script src="app.js">
 
-=======
+  <?php
 
         $bd = getBD();
         if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
@@ -394,6 +395,7 @@ session_start();
   </div>
   <script src="app.js">
 
->>>>>>> Stashed changes
+
   </script>
 </body>
+</html>
