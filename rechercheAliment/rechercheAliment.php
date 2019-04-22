@@ -42,7 +42,7 @@ session_start();
 
 <body>
    <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
-    <form method="get" action="recherche_aliment.php" autocomplete="on" id="optionForm">
+    <form method="get" action="rechercheAliment.php" autocomplete="on" id="optionForm">
      <div class="form-group col-6 mx-auto">
       <input type="text"  class="form-control" name="Alim" placeholder="Laissez-vous guider par vos envies !">
       </div>
@@ -58,7 +58,7 @@ session_start();
       <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
     </form>
   </div>
-  
+
   <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
     <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
 
@@ -72,25 +72,25 @@ session_start();
       $input=$_GET['Alim'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
       $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
-                            WHERE regime_profil.id_Profil=profil.id 
-                            AND regime_profil.id_Regime=regime.id 
-                            AND profil.id = 1  
+                            WHERE regime_profil.id_Profil=profil.id
+                            AND regime_profil.id_Regime=regime.id
+                            AND profil.id = 1
                             AND regime_sans_aliment.id_Regime = regime.id
                             AND regime_sans_aliment.id_Aliment = aliments.alim_code
                             AND alim_nom_fr LIKE '%$input%'");
       if ($_GET['option']== "Lipide"){
         $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
-                                WHERE regime_profil.id_Profil=profil.id 
-                                AND regime_profil.id_Regime=regime.id 
-                                AND profil.id = 1 
+                                WHERE regime_profil.id_Profil=profil.id
+                                AND regime_profil.id_Regime=regime.id
+                                AND profil.id = 1
                                 AND regime_sans_aliment.id_Regime = regime.id
                                 AND regime_sans_aliment.id_Aliment = aliments.alim_code
                                 AND alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
       }elseif ($_GET['option']== "Calorie") {
         $reponse = $bd->query("SELECT aliments.alim_nom_fr, aliments.alim_code, regime.Nom FROM regime,regime_profil, profil, aliments, regime_sans_aliment
-                                WHERE regime_profil.id_Profil=profil.id 
-                                AND regime_profil.id_Regime=regime.id 
-                                AND profil.id = 1 
+                                WHERE regime_profil.id_Profil=profil.id
+                                AND regime_profil.id_Regime=regime.id
+                                AND profil.id = 1
                                 AND regime_sans_aliment.id_Regime = regime.id
                                 AND regime_sans_aliment.id_Aliment = aliments.alim_code
                                 AND alim_nom_fr LIKE '%$input%' ORDER BY Energie_Règlement_UE_N°_11692011_kcal100g");
@@ -150,7 +150,7 @@ session_start();
     </div>
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="rechercheAliment.js" type="text/javascript"></script>
-    
+
 </body>
 
 </html>
