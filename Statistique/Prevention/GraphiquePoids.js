@@ -18,7 +18,7 @@ $(document).ready(function () {
                 } else {
                     str = "gagné";
                 }
-                AfficheGraph([["Poids " + str + " (en gramme)", creaPrev(dt)]], 2);
+                AfficheGraph([[1, 2, 3, 4, 5, 6, 7], ["Poids " + str + " (en gramme)", creaPrev(dt)]], 6);
                 var jrPoids = (3400 - dt[1]) / dt[0];
                 $("#poidsJr").text(encouragement(jrPoids, diff));
             } else {

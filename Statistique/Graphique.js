@@ -12,7 +12,6 @@ var l = ['Consommation calorie', ["Chips", "French Fries", "Gras bien Gras", "Ch
 $(function () {
     var Graphique;
     if (commence) {
-        alert($('select').val());
         $.post('CalculTaux.php', {
             type: $('select').val()
         }, function (data) {
@@ -21,13 +20,14 @@ $(function () {
                 alert("Pas de repas encore effectuer !");
                 //$(location).attr('href', '../Profil/Profil.php');
             }
-            var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+            alert((data));
+            var Graphique = AfficheGraph(JSON.parse(data), 6);
 
         });
         $.post('CalculTaux.php', {
             today: 1
         }, function (data) {
-            alert(JSON.parse(data));
+            //alert(JSON.parse(data));
             if (JSON.parse(data)[1].length == 0) {
                 $("#Ronds").remove();
                 $("#1").remove();
@@ -39,13 +39,15 @@ $(function () {
     // Jquery pour graphique
     $('select').on('change', function () {
         //verifie s'il existe et si c'est un nombre
+        $("#lineChart").remove();
         if ($(this).val() != '' && !(isNaN($(this).val()))) {
             $.post('CalculTaux.php', {
                 type: $(this).val()
             }, function (data) {
+                $('#graphique').html('<canvas id="lineChart"></canvas>');
                 alert(data);
 
-                var Graphique = AfficheGraph(JSON.parse(data), $("select").val());
+                var Graphique = AfficheGraph(JSON.parse(data), 6);
             });
         }
     });

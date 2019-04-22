@@ -1,10 +1,9 @@
- function AfficheGraph(list, type, isHour) {
-
+ function AfficheGraph(list, type) {
      return new Chart(document.getElementById("lineChart").getContext('2d'), {
          type: 'line',
          data: {
-             labels: ListeCalendrier(type, isHour),
-             datasets: GenereTraitGraph(list)
+             labels: ListeCalendrier(type, list[0]),
+             datasets: GenereTraitGraph(type, list)
          },
          options: {
              responsive: true
@@ -13,10 +12,15 @@
  }
  //-----------------------------------------------Fonction de construction du graphique----------------------------------
 
- function GenereTraitGraph(listeDeListe) {
+ function GenereTraitGraph(type, listeDeListe) {
      //Ne veux pas recevoir de tableau mais effectue, un tableau pour les caracter et un pour les nombres
      dataset = Array();
-     for (var i = 0; i < listeDeListe.length; i++) {
+     if (type == 6) {
+         var j = 1;
+     } else {
+         var j = 0;
+     }
+     for (var i = j; i < listeDeListe.length; i++) {
          dataset.push(TraitGraph(listeDeListe[i][0], listeDeListe[i][1]));
 
      }
@@ -67,6 +71,8 @@
          return ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin"];
      else if (Choix == 5)
          return ["2015", "2016", "2017", "2018", "2019"];
+     else if (Choix == 6)
+         return liste;
  }
 
 
