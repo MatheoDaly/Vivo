@@ -25,7 +25,7 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-    // echo json_encode(CalculTaux(1, $BD, 2));
+    // echo json_encode(CalculTaux(1, $BD, 4));
 
 
 
@@ -41,85 +41,103 @@ $q="SELECT concentration.Nom,NumRepas,TauxCumule from statistique INNER JOIN con
        // echo $q;
     $req = $BD->query($q);
     $taux=array();
+    array_push($taux, null);
     $valeur=array();
     $molecule=array();
     $heure=array();
     $nom="";
     $entre=true;
     while ($ligne= $req->fetch()){
-        array_push($valeur, $ligne['TauxCumule']);
-        array_push($molecule, $ligne['Nom']);
-        array_push($molecule, $valeur);
-        array_push($taux, $molecule);
-        if($entre || $nom==$ligne['Nom'])
+        array_push($valeur, $ligne['TauxCumule']); // ->n*m
+        
+        if($entre || $nom==$ligne['Nom']) // -> m
         {
             $nom=$ligne['Nom'];
+            $nom1=$ligne['Nom'];
             $entre=false;
             array_push($heure, $ligne['NumRepas']);
         }
-            $valeur=array();
-        $molecule=array();
+        if ($nom1!=$ligne['Nom']){   
+            $nom1=$ligne['Nom'];
+        array_push($molecule, $ligne['Nom']); // ->N
+        array_push($molecule, $valeur);// ->n
+        array_push($taux, $molecule); // ->n
+        $valeur=array(); // -> n
+        $molecule=array(); // -> n
+        }
         
     }
-    array_push($taux, $heure);
+    $taux[0]= $heure;
     return $taux;
     }
 else if($type == 2) {
     $time="day";
     $diff="-7";
     $lim="7";
+    $date="DAY(date)";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6, 7)), array(0, 12, 14)));
 } 
 else if($type == 3) {
     $time="WEEK";
     $diff="-5";
     $lim="5";
+    $date="WEEK(date)";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6)),array("Glucide", array(2, 0, 5, 8, 6, 2))));
 } 
 else if($type == 4) {
     $time="MONTH";
     $diff="-6";
     $lim="6";
+    $date="MONTH(date)";
     //echo json_encode(array(array("Calorie", array(1, 2, 3, 4, 5, 6))));
 } else if($type == 5) {
     $time="year";
     $diff="-3";
     $lim="3";
+    $date="YEAR(date)";
     
     //echo json_encode(array(array("Calorie", array(1, 2, 3))));
 } 
 
 if($type>1){
-    $q= "SELECT date,concentration.Nom,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 ORDER by Nom,date LIMIT ".$lim;
-   // echo $q;
-$req = $BD->query($q);
+    $q= "SELECT DISTINCT ".$date." AS date,concentration.Nom, TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 GROUP BY date ORDER by Nom,date LIMIT ".$lim;
+    //echo $q;
+    $req = $BD->query($q);
     $taux=array();
-    $valeur=array();
-    $Concentration=array();
-    $nom='';
-    $frist=true;
+    $heure=array();
+    array_push($taux, array());
+    $i=0;
+    $nom="";
+    $nom1="";
+    $entre=true;
     while ($ligne= $req->fetch()){
-        array_push($valeur, $ligne['TauxCumule']);
-        //if ($frist){
-        //    $frist=false;
-        //    $nom=$ligne['Nom'];
-       // }  else 
-        if($nom!=$ligne['Nom']){
+        if($nom1!=$ligne['Nom']){
+            $i++;
+            array_push($taux, array());
+            array_push($taux[$i], $ligne['Nom']); // ->n
+            array_push($taux[$i], array());
+        }
+            array_push($taux[$i][1] , $ligne['TauxCumule']); // ->n*m        
+        if($entre || $nom==$ligne['Nom'])
+        {
             $nom=$ligne['Nom'];
-            array_push($Concentration, $ligne['Nom']);
-            array_push($Concentration, $valeur);
-            array_push($taux, $Concentration);
-            $valeur=array();
-            $Concentration=array();
-        } 
-        //print_r($valeur);
-        //print_r($Concentration);
+            $nom1=$ligne['Nom'];
+            $entre=false;
+            array_push($heure, $ligne['date']);
+        }
+        //echo '<br>';
+        //print_r($taux);
+        //echo '<br>';
+        
+    }
+    $taux[0]= $heure;
+    return $taux;
     }
 // Ici tu le fais afficher deux fois si je prend le premier en compte or les données que je recois son mauvais !
     return $taux;
 $req->closeCursor();
 }
-}
+
 
 
 if(isset($_POST['today'])){
@@ -146,7 +164,7 @@ $req = $BD->query($q);
     
     }
     
-    return $graph=array('calorie',$nom, $stats);
+    return $graph=array($type,$nom, $stats);
     
 }
 

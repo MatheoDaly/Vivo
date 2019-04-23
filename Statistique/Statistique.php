@@ -71,7 +71,7 @@ $cheminIcon='../Image/IconProgess/';
             <br>
             <label for="type">Mon graphique selon :</label>
             <select name='type' class="custom-select">
-                <option value='1' selected>Mes repas du jours</option>
+                <option value='1' selected>Mes repas du jours selon les heures</option>
                 <option value='2'>Mes différentes concentration durant les 15 derniers jours</option>
                 <option value='3'>Mes différentes concentration durant les 5 derniers semaines</option>
                 <option value='4'>Mes différentes concentration durant les 6 derniers mois</option>
