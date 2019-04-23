@@ -71,7 +71,7 @@ session_start();
   </div>
   <h1 class="text-center">Nos recettes au top !</h1>
   <div class="row text-center p-3 mx-auto">
-
+<a href="rechercheAliment.php">Créer une recette</a>
       <?php
       $_SESSION['Rec_Plat']=array();
       echo('<br/>');
@@ -132,7 +132,10 @@ session_start();
         <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
       </div>
       <div class="form-check">
+        Aliment
         <input type="radio" name="type" value="Aliment" checked>
+        <br/>
+        Recette
         <input type="radio" name="type" value="Recette">
         <p>Options de recherche : </p>
         <label class="form-ckeck-label" for="popularite">Popularité : </label>

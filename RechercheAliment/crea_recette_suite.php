@@ -21,7 +21,7 @@ $_SESSION['nom_recette'] = $nomR;
 
 $idr1= $bd->query("SELECT * FROM recette_plat WHERE nom = '$nomR'");
 $rep = $idr1->fetch();
-echo($rep);
+
 
 
 $idr2 = $rep['Id_Recette'];
