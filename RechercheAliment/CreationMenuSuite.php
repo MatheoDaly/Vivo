@@ -52,7 +52,15 @@ session_start();
   <div class="container">
     <div class="row">
       <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded" style="padding:20px;">
-        <h1 class="border border-warning text-center">Création de menu</h1>
+        <h1 class="border border-warning text-center">Création du menu
+          <?php
+          if (!isset($_SESSION["nomMenu"])){
+            $_SESSION["nomMenu"] = $_GET['nomMenu'];
+          }
+
+          echo($_SESSION["nomMenu"]);
+           ?>
+        </h1>
         <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
         <div class="col-10 bg-light mx-auto text-dark rounded" id="labelName" style="padding:20px;">
 
@@ -73,10 +81,11 @@ session_start();
   <div class="row text-center p-3 mx-auto">
 <a href="rechercheAliment.php">Créer une recette</a>
       <?php
+
       $_SESSION['Rec_Plat']=array();
       echo('<br/>');
       echo('<a href="tempo_stop.php">Annuler</a>');
-      echo('<form method="GET" action="toto.php" >');
+      echo('<form method="GET" action="integrationMenu.php" >');
          $bd = getBD();
          $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");
          while ( $prd_top5 = $top5->fetchObject() ){
@@ -114,8 +123,7 @@ session_start();
           echo('</label>');
           echo('<br/>');
          }
-
-      echo('<input type=submit value="envoyer">');
+      echo('<input type="submit" value="envoyer">');
       echo('</form>');
       print_r($_SESSION["Plat_Rec"] );
       ?>

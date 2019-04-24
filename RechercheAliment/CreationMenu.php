@@ -51,8 +51,8 @@ session_start();
 
           <form method='get' action="CreationMenuSuite.php">
             <div class="form-group">
-              <label for="nbMenu">Veuillez indiquer le nombre de recettes pour votre menu</label>
-              <input type='number' class="form-control" name='nbRP'>
+              <label for="nbMenu">Veuillez indiquer le nom de votre menu</label>
+              <input type='text' class="form-control" name='nomMenu'>
             </div>
             <?php
             echo("<input type='submit' class='btn btn-primary' name='valNbMenu2' value='Continuer'>"); // On valide le nombre de plats

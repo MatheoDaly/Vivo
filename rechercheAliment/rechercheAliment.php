@@ -102,8 +102,16 @@ session_start();
 
       while($result = $reponse->fetch()){
         echo '<div class="row"><div class="col-6">';
-        echo('<form method="GET" action="ajouter.php">');
+        echo('<form method="GET" action="ajoutAlimRecette.php">');
         echo('<div class="form-group col-6 border border-warning p-2 rounded"><label for ="nbAlim">'.$result['alim_nom_fr'].'</label><input type="number" class="form-control" name="nbAlim" placeholder="Combien en voulez-vous ?"></div>');
+        $nom = $result['alim_nom_fr'];
+        echo('<input type="hidden" name="nom_aliment" value="');
+        echo($nom);
+        echo('">');
+        $id_al = $result['alim_code'];
+        echo('<input type="hidden" name="id_aliment" value="');
+        echo($id_al);
+        echo('">');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir pour la recette">');
         echo('</form></div>');
         echo '<div class="col-6">';
@@ -146,6 +154,7 @@ session_start();
 
 
   ?>
+    <a href="crea_recette_suite.php">Retour</a>
     <a href="crea_recette_suite.php">Valider</a>
     </div>
     <script src="../Outil/JS/jquery-3.3.1.min.js" type="text/javascript"></script>
