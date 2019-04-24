@@ -25,10 +25,11 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
         'genre' => $_POST['genre'],
         'poids' => $_POST['poids'],
         'taille' => $_POST['taille'],
-        'mdp' => $_POST['mdp']
+        'mdp' => $_POST['mdp'],
         'NiveauSportif'=>$_POST['lvlSport']
         ));
         $rep->closeCursor();
+        
                 // ----------------------------------------------------------------------------------------------------------------------
         echo 'Inscrit';
 
