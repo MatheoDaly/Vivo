@@ -7,9 +7,14 @@ function include(fileName) {
 include("../Outil/JS/Graphique.js");
 
 $(document).ready(function () {
-    $.get('communicationGraphique.php', function (data) {
-        JSON.parse(data);
+    $.post('communicationGraphique.php', {
+        today: 1
+    }, function (data) {
+        //alert(JSON.parse(data));
+        if (JSON.parse(data)[1].length == 0) {
+            $("#graph").remove();
+        }
+        afficheCamembert(JSON.parse(data));
     });
-
-
-})
+    commence = false;
+});

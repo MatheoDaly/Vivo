@@ -32,7 +32,7 @@ $(function () {
                 $("#Ronds").remove();
                 $("#1").remove();
             }
-            afficheCamebert(JSON.parse(data));
+            afficheCamembert(JSON.parse(data));
         });
         commence = false;
     }

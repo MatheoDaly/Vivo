@@ -102,7 +102,7 @@
 
 
 
- function afficheCamebert(listeDeListe) {
+ function afficheCamembert(listeDeListe) {
      // Fonction qui avec une liste de liste  resort un obj json avec des couleurs aleas, et les données associer, et le label de la liste
      liste = Newtab(listeDeListe);
      return new Chart(document.getElementById("Rond"), {
