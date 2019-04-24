@@ -1,6 +1,6 @@
 <?php
 session_start();
-$test=false;
+$test=true;
 if($test){
 $_SESSION['Rec_Plat']=array(array("id"=>1,"nom"=>"Chips","nb", "nbAli"=>2, "calorie"=>2000));
 }

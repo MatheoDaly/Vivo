@@ -6,15 +6,8 @@ Plus effectuer quand aliment est apprecier faire qu'il passe en preferance..
 
 
 */
-session_start();
+include("../Outil/IsTest.php");
 
-
-// Variable :
-if(isset($_SESSION['profil'])){
-    $Profil=$_SESSION['profil'];
-} else {
-    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
-}
 // Cela sert de reperage ! => $Profil = array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
 $cheminPhoto='../Image/PhotoProfil/';
 $cheminIcon='../Image/IconProgess/';

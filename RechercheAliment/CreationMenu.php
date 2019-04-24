@@ -11,6 +11,9 @@ session_start();
     <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
     <title>Creation de menu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script type="text/javascript" src="Camember.js"></script>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -63,7 +66,7 @@ session_start();
                 </div>
             </div>
             <div id="graph" class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
-                <h1 class="border border-warning text-center">Statistiques</h1>
+                <h1 class="border border-warning text-center">Calories générées</h1>
                 <div id="Ronds" width="400" height="400" class="row">
                     <canvas id="Rond" class="bg-white"></canvas>
                 </div>
