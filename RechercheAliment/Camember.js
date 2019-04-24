@@ -11,7 +11,7 @@ $(document).ready(function () {
         today: 1
     }, function (data) {
         var dt = JSON.parse(data);
-        alert(dt);
+        //alert(dt);
         if (dt[1].length == 0) {
             $("#graph").remove();
         }

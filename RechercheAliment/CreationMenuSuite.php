@@ -8,79 +8,81 @@ session_start();
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../style.css">
-  <title>ok</title>
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <title>ok</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script type="text/javascript" src="Camember.js"></script>
 </head>
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <a class="navbar-brand" href="../index.html">Vivo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        Pour une bonne santé vivez VIVO !
-      </span>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="../index.html">Vivo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Profil/Profil.php">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Pour une bonne santé vivez VIVO !
+            </span>
+        </div>
+    </nav>
 </header>
+
 <body>
-  <br/>
-  <div class="container">
-    <div class="row">
-      <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded" style="padding:20px;">
-        <h1 class="border border-warning text-center">Création du menu
-          <?php
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded" style="padding:20px;">
+                <h1 class="border border-warning text-center">Création du menu
+                    <?php
           if (!isset($_SESSION["nomMenu"])){
             $_SESSION["nomMenu"] = $_GET['nomMenu'];
           }
 
           echo($_SESSION["nomMenu"]);
            ?>
-        </h1>
-        <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
-        <div class="col-10 bg-light mx-auto text-dark rounded" id="labelName" style="padding:20px;">
+                </h1>
+                <p>Un menu représente ce que vous voulez manger à un moment précis de la journée (petit déjeuner, repas du midi, colation, etc...). Il est composé de Plats, et un plat se définit (ou non) par une recette.</p>
+                <div class="col-10 bg-light mx-auto text-dark rounded" id="labelName" style="padding:20px;">
 
-          </div>
+                </div>
+            </div>
+            <div id="graph" class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
+                <h1 class="border border-warning text-center">Calories générées</h1>
+                <div id="Ronds" width="400" height="400" class="row">
+                    <canvas id="Rond" class="bg-white"></canvas>
+                </div>
+            </div>
         </div>
-        <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
-          <h1 class="border border-warning text-center">Statistiques</h1>
-
-
-        </div>
-      </div>
-      <div class="col-10 col-lg-5 bg-dark mx-auto text-light rounded" style="padding:20px;">
-        <h1 class="border border-warning text-center">Statistiques</h1>
-      </div>
     </div>
-  </div>
-  <h1 class="text-center">Nos recettes au top !</h1>
-  <div class="row text-center p-3 mx-auto">
-<a href="rechercheAliment.php">Créer une recette</a>
-      <?php
+    </div>
+    <h1 class="text-center">Nos recettes au top !</h1>
+    <div class="row text-center p-3 mx-auto">
+        <a href="rechercheAliment.php">Créer une recette</a>
+        <?php
 
       $_SESSION['Rec_Plat']=array();
       echo('<br/>');
@@ -130,37 +132,37 @@ session_start();
     </div>
 
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
-      <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
-       <div class="form-group col-6 mx-auto">
-  </div>
-  <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
-    <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
-      <div class="form-group col-6 mx-auto">
+        <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
+            <div class="form-group col-6 mx-auto">
+            </div>
+            <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
+                <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
+                    <div class="form-group col-6 mx-auto">
 
-        <input type="text"  class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
-      </div>
-      <div class="form-check">
-        Aliment
-        <input type="radio" name="type" value="Aliment" checked>
-        <br/>
-        Recette
-        <input type="radio" name="type" value="Recette">
-        <p>Options de recherche : </p>
-        <label class="form-ckeck-label" for="popularite">Popularité : </label>
-        <input class="form-check-label" type="radio" name="option" id = "popularite"value="Popularité" checked>
-        <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
-        <input type="radio" name="option" id="calorie"value="Calorie">
-      </div>
+                        <input type="text" class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
+                    </div>
+                    <div class="form-check">
+                        Aliment
+                        <input type="radio" name="type" value="Aliment" checked>
+                        <br />
+                        Recette
+                        <input type="radio" name="type" value="Recette">
+                        <p>Options de recherche : </p>
+                        <label class="form-ckeck-label" for="popularite">Popularité : </label>
+                        <input class="form-check-label" type="radio" name="option" id="popularite" value="Popularité" checked>
+                        <label class="form-ckeck-label" for="calorie">Calorie (croissant) : </label>
+                        <input type="radio" name="option" id="calorie" value="Calorie">
+                    </div>
 
 
 
-      <input type="submit" class="btn btn-primary" name="submit1" value="Rechercher">
-    </form>
-  </div>
-  <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
+                    <input type="submit" class="btn btn-primary" name="submit1" value="Rechercher">
+                </form>
+            </div>
+            <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
 
-    <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
-    <?php
+                <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
+                <?php
 
     if (isset($_GET['submit1'])){
       echo('def');
@@ -326,10 +328,9 @@ session_start();
 
 
     ?>
-      </div>
-  <script src="app.js">
-
-  <?php
+            </div>
+            <script src="app.js">
+                <?php
 
         $bd = getBD();
         if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
@@ -376,10 +377,11 @@ session_start();
           $reponse-> closeCursor();
     }
     ?>
-  </div>
-  <script src="app.js">
+                    <
+                    /div> <
+                script src = "app.js" >
 
-
-  </script>
+            </script>
 </body>
+
 </html>
