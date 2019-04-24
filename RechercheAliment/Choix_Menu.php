@@ -83,6 +83,7 @@ include_once "Fonctions_alim.php";
                 <input type="radio" name="option" id="calorie" value="Calorie">
             </div>
             <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
+            <button class="btn btn-primary"><a href="CreationMenu.php" class="text-white">Crée mon menu</a></button>
         </form>
     </div>
     <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
