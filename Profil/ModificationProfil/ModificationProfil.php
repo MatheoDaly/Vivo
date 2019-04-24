@@ -14,10 +14,10 @@ function insertBD ($post, $BD,$champs, $id, $num, $existe){
         
 if ($num==1){
     $q="UPDATE profil SET ".$champs."  = ".$post." WHERE id =".$id;
-    $BD->query("UPDATE profil SET ".$champs."  = ".$post." WHERE id =".$id);
+    $BD->query($q);
 } else if ($num==0){
     $q="UPDATE profil SET ".$champs."  = '".$post."' WHERE id =".$id;
-    $BD->query("UPDATE profil SET ".$champs."  = '".$post."' WHERE id =".$id);
+    $BD->query($q);
 }
     return 1;
     }
@@ -42,6 +42,17 @@ if(isset($_POST['poids'])){
 if(isset($_POST['taille'])){   
     $Modifier=insertBD ($_POST['taille'], $BD,"taille", $Profil['ID'], 1, $Profil['taille']);
     $_SESSION['profil']['taille']=$_POST["taille"];
+}
+
+if(isset($_POST['lvlSport'])){   
+    $Modifier=insertBD ($_POST['lvlSport'], $BD,"NiveauSportif", $Profil['ID'], 1, $Profil['NiveauSportif']);
+    $_SESSION['profil']['NiveauSportif']=$_POST["lvlSport"];
+}
+
+if(isset($_POST['Objectif'])){
+    $q="UPDATE profil SET valeur_type = ".$_POST['Objectif']." WHERE id =".$id;
+    $BD->query($q);
+    
 }
 
 echo $Modifier;
