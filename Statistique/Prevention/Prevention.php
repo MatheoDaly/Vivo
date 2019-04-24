@@ -158,6 +158,10 @@ $BD=GetBD();
                 <?php }$req->closeCursor();?>
             </div>
         </div>
+        <hr>
+        <button class="col-3 btn btn-light">
+            <a href="../Statistique.php">Revenir ?</a>
+        </button>
     </div>
 
 
