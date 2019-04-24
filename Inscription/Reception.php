@@ -5,6 +5,8 @@
 include('../Outil/Php/AccesBd.php');
 if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& isset($_POST['genre'])&& isset($_POST['email'])&&
   isset($_POST['utilisateur'])
+   &&
+  isset($_POST['lvlSport'])
   && isset($_POST['mdp'])){
 
 
@@ -14,7 +16,7 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
     if(($req->fetch())==false){// verifier que son mail n'existe pas
         $req->closeCursor();
         // ----------------------------------------------------------------------------------------------------------------------
-        $rep = $BD->prepare('INSERT INTO profil (prenom, utilisateur, email, genre, poids, taille, mdp, url_photo) VALUES(:prenom, :utilisateur, :email, :genre, :poids, :taille, :mdp, "")');
+        $rep = $BD->prepare('INSERT INTO profil (prenom, utilisateur, email, genre, poids, taille, mdp, 	NiveauSportif , url_photo) VALUES(:prenom, :utilisateur, :email, :genre, :poids, :taille, :mdp, :NiveauSportif, "")');
 
         $rep->execute(array(
         'prenom' => $_POST['prenom'],
@@ -24,6 +26,7 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
         'poids' => $_POST['poids'],
         'taille' => $_POST['taille'],
         'mdp' => $_POST['mdp']
+        'NiveauSportif'=>$_POST['lvlSport']
         ));
         $rep->closeCursor();
                 // ----------------------------------------------------------------------------------------------------------------------
