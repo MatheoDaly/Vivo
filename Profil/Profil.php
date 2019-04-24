@@ -1,5 +1,6 @@
 <?php
 $testStats=false;
+$test=true;
 
 include("../Outil/IsTest.php");
 
@@ -92,25 +93,34 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                 Télécharger une nouvelle photo de profil :
                             </strong>
                         </label>
-                        <input type="file" name="photo">
+                        <input type="file" class="btn btn-dark" name="photo">
                         <input type="hidden" name="change" value="yes">
-                        <input type="submit">
+                        <input class="btn btn-primary" type="submit">
                     </form>
+                    <hr>
                     <form id="VariableProfil">
                         <div class="row">
-                            <div class="col-6 d-flex flex-column">
+                            <div class="p-1 col-6 d-flex flex-column">
                                 Pseudo :
                                 <input type="text" name="pseudo" value="<?php echo $Profil["user"]; ?>">
                                 Prenom :
                                 <input type="text" name="prenom" value="<?php echo $Profil["prenom"]; ?>">
                             </div>
-                            <div class="col-6 d-flex flex-column">
+                            <div class="p-1 col-6 d-flex flex-column">
                                 Poids :
                                 <input type="number" name="poids" value="<?php echo $Profil["poids"]; ?>">
                                 Taille :
                                 <input type="number" name="taille" value="<?php echo $Profil["taille"]; ?>">
                             </div>
-                            <input type="button" class="submit" value="Validez">
+                            <div class="p-1 col-6 d-flex flex-column">
+                                Niveau Sportif :
+                                <input type="number" name="lvlSport" value="<?php echo $Profil["poids"]; ?>">
+                            </div>
+                            <div class="p-1 col-6 d-flex flex-column">
+                                Objectif poids :
+                                <input type="number" name="Objectif" value="">
+                            </div>
+                            <input type="button" class="submit btn btn-primary col-12" value="Validez">
                         </div>
 
                     </form>
@@ -126,7 +136,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <div class="col-12 col-sm-5">
                     <?php 
                     // refaire le vrai calculde l'IMC
-                    echo "C'est moi, ".$Profil['prenom']." !</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg ! </br>J'ai un IMC de : ".($Profil["poids"]/(($Profil["taille"]/100)^2))." </br>  Je possede : ".$Profil["point"]." points";
+                    echo "C'est moi, ".$Profil['prenom']." !</br> Mes mesures : ".$Profil["taille"].' cm, et '.$Profil["poids"]." kg ! </br>J'ai un IMC de : ".($Profil["poids"]/(($Profil["taille"]/100)^2));
                     
                     
                     ?>
