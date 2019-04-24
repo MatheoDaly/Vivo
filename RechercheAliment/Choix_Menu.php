@@ -1,25 +1,6 @@
 <?php
 session_start();
-<<<<<<< Updated upstream
 include_once "../Outil/PHP/AccesBD.php";
-=======
-
-
-include_once "../Outil/PHP/AccesBD.php";
-
-if (isset($_POST['date'])&&isset($_POST['heure'])&&isset($_POST['id_menue'])){
-    //($date, $heure, $id_menu, $id_profil)
-    for($i=0; $_POST["nbtypeMenue"]>$i; $i++){
-        ajouter($_POST['date'.toString($i)], $_POST['heure'.toString($i)],$_POST[''.toString($i)] ,$_SESSION['profil']['ID']);
-    }
-
-    echo ('check');
-} else if (!isset($_POST['date'])&&!isset($_POST['id_profil'])&&!isset($_POST['heure'])&&!isset($_POST['id_menue'])) {
-
-//include_once "../Outil/PHP/AccesBD.ph";
-include_once "AccesBD_rechAl.php";
-
->>>>>>> Stashed changes
 include_once "Fonctions_alim.php";
 ?>
 
@@ -109,28 +90,12 @@ include_once "Fonctions_alim.php";
 
         <form id='EnvoieMenue'>
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
             <?php if(isset($_GET['submit']) || isset($_GET['Menu'])){
-
+    
      if(empty($_GET['Menu'])){
-<<<<<<< Updated upstream
-=======
-
-
-                    //ça c'est la fonction
-
-
-
-  if(isset($_GET['submit']) || isset($_GET['Menu'])){
-    if(empty($_GET['Menu'])){
-
->>>>>>> Stashed changes
       echo('<meta http-equiv="refresh" content="0;URL=Choix_Menu.php">');
     }else {
-
+     
          $input=$_GET['Menu'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
       $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%'");
@@ -141,19 +106,13 @@ include_once "Fonctions_alim.php";
       }
       $_SESSION['Rec_Plat']=array();
         $i=0;
-<<<<<<< Updated upstream
          
          
-=======
-
-
-
->>>>>>> Stashed changes
       while($result = $reponse->fetch()){?>
             <!--##########################################################!-->
             <div class="row">
                 <div class="col-6">
-                    <div class="form-group col-10 border bg-primary p-2 rounded">
+                    <div class="form-group col-10 border border-warning p-2 rounded">
                         <label for="nbMenu"><?php echo $result['Nom'];?></label>
                         <input type="checkbox" class="form-control" name="Menu<?php echo $i; ?>" value="<?php echo $result["Id_Menu"]; ?>">
                     </div>
@@ -174,29 +133,6 @@ include_once "Fonctions_alim.php";
 
             </div>
             <input type="button" id="ajout3" class="btn btn-primary" value="Choisir">
-<<<<<<< Updated upstream
-=======
-            <?php
-      while($result = $reponse->fetch()){
-        echo '<div class ="row">';
-        echo '<div class="col-6">';
-        echo('<div class="form-group col-10 border border-warning p-2 rounded"><label for ="nbMenu">'.$result['Nom'].'</label><input type="checkbox" class="form-control" name="Menu'.$i.'" value="'.$result["Id_Menu"].'" ></div>');
-        echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></div>');
-        if(isset($_SESSION['Rec_Plat'])){
-          ajoutAlimInd($result['Nom']);
-        }else{
-          $_SESSION['Rec_Plat']= $result['Nom'];
-        }
-          ?>
-            <label for="date">Choisissez un jour où le manger !</label>
-            <div class="input-group date p-2" data-provide="datepicker">
-                <input type="date" name="date<?php echo $i; ?>" value="" class="form-control"></div>
-            <div class="p-2">
-                <label for="nbMenu">Choisissez une heure !</label>
-                <input type="number" class="form-control" name="nbMenu<?php echo $i; ?>" min="0" max="1000" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
-                <input type="button" id="ajout3" class="btn btn-primary" value="Choisir"></div>
-
->>>>>>> Stashed changes
 
             <input type="hidden" name="nbtypeMenue" id="nbtypeMenue" value="<?php echo $i; ?>">
 
@@ -207,29 +143,4 @@ include_once "Fonctions_alim.php";
 
 </body>
 
-<<<<<<< Updated upstream
-=======
-
-
-
-<?php } else {
-
-
- echo ('No check');
-}
-//--------------------------------------------Partie fonction
-
-function ajouter($date, $heure, $id_menu, $id_profil){
-
-$q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
-$bdd = getBD();
-$bdd->query($q);
-
-}
-
-
-?>
-
-
->>>>>>> Stashed changes
 </html>
