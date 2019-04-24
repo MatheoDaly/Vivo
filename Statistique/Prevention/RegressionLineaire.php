@@ -20,6 +20,18 @@ include('../../Outil/Php/AccesBD.php');
 $BD=getBD();
 }
 
+switch($Profil['genre'].$Profil['NiveauSportif']){
+        // Ici on adapte notre regession linéaire à notre personne
+    case 'M2': $coeff=2600; break;
+    case 'M3': $coeff=2900; break;
+    case 'F1': $coeff=1800; break;
+    case 'F2': $coeff=2000; break;
+    case 'F3': $coeff=2250; break;  
+    default: $coeff=2350; break;
+}
+
+
+
     // Partie statistique : ici moindres carrées de l'évolution de la masse graisseuse
     $q = "SELECT COUNT(DISTINCT Date) AS 'i'
     FROM  statistique 
@@ -52,12 +64,12 @@ $BD=getBD();
         $covXY=  $Regre['XY-']-$Regre['X-']*$Regre['Y-'];
         $m= $covXY/($Regre['X2-']-pow($Regre['X-'],2));// probleme ici !
         $b= $Regre['Y-']-($m*$Regre['X-'] );
-        $coeff= $covXY/(pow($Regre['SigY'],2)*pow($Regre['SigX'],2));
+        $coeffR= $covXY/(pow($Regre['SigY'],2)*pow($Regre['SigX'],2));
         
         $m/=9;
-        $b=($b-2500)/9;
+        $b=($b-$coeff)/9;
             
-        echo json_encode(array($m, $b,pow($coeff,2)));
+        echo json_encode(array($m, $b,pow($coeffR,2)));
         }
     }
     
