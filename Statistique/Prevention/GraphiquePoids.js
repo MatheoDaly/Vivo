@@ -12,7 +12,7 @@ $(document).ready(function () {
                 var dt = JSON.parse(data);
                 var str = '';
                 var diff = (parseInt($("#poidsActuel").text()) - parseInt($("#poidsVoulu").text()));
-                alert(diff);
+                //alert(diff);
                 if (dt[0] < 0) {
                     str = "perdu";
                 } else {

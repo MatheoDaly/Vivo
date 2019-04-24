@@ -80,7 +80,7 @@ $BD=GetBD();
 
     <div class="container justify-content-center rounded" id="TableProfil">
         <div>
-            <h1>Ma prevention</h1>
+            <h1 class="text-light">Ma prevention</h1>
             <div id="graphique" class="row bg-white rounded">
                 <div class="col-8" id='graph'>
                     <canvas id="lineChart"></canvas>
@@ -98,61 +98,65 @@ $BD=GetBD();
                 </div>
             </div>
 
-            <?php
-                $req = $BD->query("SELECT concentration.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
+            <?php $req = $BD->query("SELECT concentration.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
                 INNER JOIN concentration ON statistique.id_Concentration= concentration.id
                 INNER JOIN seuil ON seuil.Id_Concentration =  concentration.id
-                INNER JOIN article ON concentration.Nom = article.LienSeuil
+                INNER JOIN seuil_article ON seuil.ID= seuil_article.id_seuil
+                INNER JOIN article ON seuil_article.article = article.id
                 WHERE seuil.InfSup='S'
                 AND seuil.Taux<statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
                 AND statistique.ID_Profil=".$Profil['ID']."
                 GROUP BY statistique.id_Concentration");
-                while($ligne= $req->fetch()){
-                    
-                ?>
-            <h2>Mes exces</h2>
+            ?>
+            <h2 class="text-light">Mes exces</h2>
             <div class="row bg-white rounded">
-                Ce que nous remarquons que cette semaine :
+                <div class="col-12">
+                    Ce que nous remarquons que cette semaine :
+                </div>
+                <?php while($ligne= $req->fetch()){ ?>
                 <div class="col-8">
-                    La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
+                    <strong>
+                        La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle : ".$ligne['Risque']; ?>
+                    </strong>
+                </div>
                 <div class="col-4">
-                    Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
+                    Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a>
+                </div>
+                <?php }$req->closeCursor();?>
             </div>
-            <?php 
-                }
-                $req->closeCursor();
-                ?>
+
             <?php
                 $req = $BD->query("SELECT concentration.Nom AS 'Concentration',MIN(statistique.TauxCumule), article.Url AS 'ref', article.Nom AS 'article', seuil.Risque as 'Risque'
                 FROM statistique
                 INNER JOIN concentration ON statistique.id_Concentration= concentration.id
                 INNER JOIN seuil ON seuil.Id_Concentration =  concentration.id
-                INNER JOIN article ON concentration.Nom = article.LienSeuil
+                INNER JOIN seuil_article ON seuil.ID= seuil_article.id_seuil
+                INNER JOIN article ON seuil_article.article = article.id
                 WHERE seuil.InfSup='I'
                 AND seuil.Taux>statistique.TauxCumule
                 AND statistique.type=2
                 AND SUBDATE(NOW(), INTERVAL 7 DAY)<statistique.date
                 AND statistique.ID_Profil=".$Profil['ID']."
-                GROUP BY statistique.id_Concentration");
-                while($ligne= $req->fetch()){
-                    
-                ?>
+                GROUP BY statistique.id_Concentration");?>
             <!-- ######################################## Debut Manque et exces ######################################### !-->
-            <h2>Mes manques</h2>
+            <h2 class="text-light">Mes manques</h2>
             <div class="row bg-white rounded">
-                Ce que nous remarquons que cette semaine :
+                <div class="col-12">
+                    Ce que nous remarquons que cette semaine :
+                </div>
+                <?php while($ligne= $req->fetch()){?>
                 <div class="col-8">
-                    La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle de ".$ligne['Risque']; ?></div>
+                    <strong>
+                        La concentration de <?php echo $ligne['Concentration']." : Risque eventuelle : ".$ligne['Risque']; ?>
+                    </strong>
+                </div>
                 <div class="col-4">
                     Plus d'infos via l'article <a href="<?php echo $ligne['ref']; ?>"><?php echo $ligne['article']; ?></a></div>
+                <?php }$req->closeCursor();?>
             </div>
-            <?php 
-                }
-                $req->closeCursor();
-                ?>
         </div>
     </div>
 

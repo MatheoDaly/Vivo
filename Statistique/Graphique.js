@@ -15,12 +15,12 @@ $(function () {
         $.post('CalculTaux.php', {
             type: $('select').val()
         }, function (data) {
-            alert(data);
+            //alert(data);
             if (JSON.parse(data).length == 0) {
                 alert("Pas de repas encore effectuer !");
                 //$(location).attr('href', '../Profil/Profil.php');
             }
-            alert((data));
+            //alert((data));
             var Graphique = AfficheGraph(JSON.parse(data), 6);
 
         });
@@ -45,7 +45,7 @@ $(function () {
                 type: $(this).val()
             }, function (data) {
                 $('#graphique').html('<canvas id="lineChart"></canvas>');
-                alert(data);
+                //alert(data);
 
                 var Graphique = AfficheGraph(JSON.parse(data), 6);
             });

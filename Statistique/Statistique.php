@@ -63,12 +63,23 @@ $cheminIcon='../Image/IconProgess/';
     </header>
     <div class="container d-flex flex-column justify-content-center rounded" id="TableProfil">
 
+        <h1 class="text-light">Mon graphique</h1>
+        <hr>
         <div class="container-fluid bg-light rounded">
-            <h1>Mon graphique
-            </h1>
-            <hr>
-            <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
+            <button class="btn-light btn">
+                <a href="Prevention/Prevention.php">Tu as envie de voir nos preventions personnalisés ?</a>
+            </button>
             <br>
+        </div>
+        <hr>
+        <div class="container-fluid bg-white rounded">
+            <h2>Souhaites tu connaître la repartition en calories aujourd'hui ?</h2>
+            <div id="Ronds" width="400" height="400" class="row">
+                <canvas id="Rond" class="bg-white"></canvas>
+            </div>
+            <hr id="1">
+            <h2>Veux tu voir la variation de tes taux au fur et à mesure du temps ?</h2>
+            <hr id="1">
             <label for="type">Mon graphique selon :</label>
             <select name='type' class="custom-select">
                 <option value='1' selected>Mes repas du jours selon les heures</option>
@@ -78,15 +89,8 @@ $cheminIcon='../Image/IconProgess/';
                 <option value='5'>Mes différentes concentration durant les 5 derniers années</option>
             </select>
             <br />
-        </div>
-        <hr>
-        <div class="container-fluid bg-light rounded">
-            <div id="graphique" class="row">
+            <div id="graphique" class="row bg-white">
                 <canvas id="lineChart"></canvas>
-            </div>
-            <hr id="1">
-            <div id="Ronds" width="400" height="400" class="row">
-                <canvas id="Rond"></canvas>
             </div>
         </div>
     </div>
