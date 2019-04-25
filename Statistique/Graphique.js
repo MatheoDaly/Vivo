@@ -27,12 +27,18 @@ $(function () {
         $.post('CalculTaux.php', {
             today: 1
         }, function (data) {
-            //alert(JSON.parse(data));
-            if (JSON.parse(data)[1].length == 0) {
+            if (data[0] != "[" || data[(data.length - 1)] != "]") {
                 $("#Ronds").remove();
                 $("#1").remove();
+            } else {
+                var dt = JSON.parse(data);
+                if (dt[1][0] != null) {
+                    afficheCamembert(dt);
+                } else {
+                    $("#1").remove();
+                    $("#Ronds").remove();
+                }
             }
-            afficheCamembert(JSON.parse(data));
         });
         commence = false;
     }
