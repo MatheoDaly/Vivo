@@ -56,7 +56,7 @@ $(function () {
                     if (data == 'Inscrit') {
                         //redirection vers profil
                         alert('Vous etes inscrit !');
-                        $(location).attr('href', '../Profil/Profil.php');
+                        $(location).attr('href', '../Connection/connexion.php');
                     } else if (data == 'Existe') {
                         alert("Inscription compromise, vous avez un profil !");
                         $(location).attr('href', '../Connection/connexion.php');
