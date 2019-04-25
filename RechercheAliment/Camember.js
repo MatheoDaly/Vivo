@@ -10,11 +10,13 @@ $(document).ready(function () {
     $.post('communicationGraphique.php', {
         today: 1
     }, function (data) {
-        var dt = JSON.parse(data);
-        //alert(dt);
-        if (dt[1].length == 0) {
+        if (data[0] != "[" || data[(data.length - 1)] != "]") {
             $("#graph").remove();
+        } else {
+            var dt = JSON.parse(data);
+            if (dt[1][0] != null) afficheCamembert(dt);
+            else
+                $("#graph").remove();
         }
-        afficheCamembert(dt);
     });
 });

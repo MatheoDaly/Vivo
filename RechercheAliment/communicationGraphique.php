@@ -19,7 +19,7 @@ $nom = array();
 
     for($i=0; $i<sizeof($list); $i++){
      array_push($nom, $list[$i]["nom"]);
-     array_push($stats, $list[$i][$type]*$list[$i]["nbAl"]);
+     array_push($stats, $list[$i][$type]*$list[$i]["nb"]);
     }
     
     return $graph=array('calorie',$nom, $stats);
