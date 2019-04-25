@@ -1,6 +1,5 @@
 <?php
 $testStats=false;
-$test=true;
 $visiteur=true;
 
 include("../Outil/IsTest.php");
