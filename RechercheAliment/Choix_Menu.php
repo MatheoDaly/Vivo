@@ -1,5 +1,6 @@
 <?php
 session_start();
+//include_once "AccesBD_rechAl.php";
 include_once "../Outil/PHP/AccesBD.php";
 include_once "Fonctions_alim.php";
 ?>
@@ -92,11 +93,11 @@ include_once "Fonctions_alim.php";
         <form id='EnvoieMenue'>
 
             <?php if(isset($_GET['submit']) || isset($_GET['Menu'])){
-    
+
      if(empty($_GET['Menu'])){
       echo('<meta http-equiv="refresh" content="0;URL=Choix_Menu.php">');
     }else {
-     
+
          $input=$_GET['Menu'];
       //$input = preg_replace("#[^0-9a-z]#i","",$input);
       $reponse = $bd->query("SELECT * FROM menu WHERE menu.Nom LIKE '%$input%'");
@@ -107,8 +108,8 @@ include_once "Fonctions_alim.php";
       }
       $_SESSION['Rec_Plat']=array();
         $i=0;
-         
-         
+
+
       while($result = $reponse->fetch()){?>
             <!--##########################################################!-->
             <div class="row">
