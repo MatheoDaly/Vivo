@@ -14,7 +14,7 @@ $(function () {
                     if (data == 'Connecter') {
                         //redirection vers profil
                         alert('Vous etes connecter !');
-                        $(location).attr('href', '../Connection/connexion.php');
+                        $(location).attr('href', '../Profil/Profil.php');
                     } else if (data == 'Non inscrit') {
                         alert("Connexion compromise, vous n'avez pas de profil !");
                         $(location).attr('href', '../Inscription/inscription.html');
