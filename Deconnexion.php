@@ -4,7 +4,7 @@
 <head>
     <title>Déconnexion</title>
 
-    <meta http-equiv="refresh" content="1; URL=index.php">
+    <meta http-equiv="refresh" content="1; URL=index.html">
 </head>
 
 <body>
