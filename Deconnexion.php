@@ -16,8 +16,7 @@
 <?php
 
 if (isset($_POST['deco']) && $_POST['deco']==1 ){
-    unset()
-    session_destroy($_SESSION['profil']);
-    
+    unset($_SESSION['profil']);
+    session_destroy();
 }
 ?>
