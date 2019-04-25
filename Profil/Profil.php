@@ -38,14 +38,14 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
     <!-- ################NavBar############### !-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="../index.html">Vivo</a>
+            <a class="navbar-brand" href="../index.php">Vivo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="../Profil/Profil.php">Profil</a>
@@ -54,11 +54,18 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                         <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Inscription/inscription.html">Inscription</a>
+                        <a class="nav-link" href="../Inscription/inscription.php">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
+                        <a class="nav-link" id="disconnect" href="../Connection/connexion.php">Connexion</a>
                     </li>
+                    <?php
+                        if(isset($_SESSION['profil']) && !$testGene){
+                            echo '<li class="nav-item">';
+                            echo    '<a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>';
+                            echo '</li>';
+                        }
+                    ?>
 
                 </ul>
                 <span class="navbar-text">
