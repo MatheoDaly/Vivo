@@ -52,7 +52,7 @@ if(isset($_POST['lvlSport'])){
 if(isset($_POST['Objectif'])){
     $q="UPDATE objectif_profil SET valeur_type = ".$_POST['Objectif']." WHERE id_Objectif=1 and id_Profil =".$Profil['ID'];
     $BD->query($q);
-    
+    $Modifier=1;
 }
 
 echo $Modifier;
