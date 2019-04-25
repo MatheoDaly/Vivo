@@ -29,6 +29,12 @@ if(isset($_POST['prenom'])&& isset($_POST['taille'])&& isset($_POST['poids'])&& 
         'NiveauSportif'=>$_POST['lvlSport']
         ));
         $rep->closeCursor();
+        // Crée un objectif qui est sont poids
+        $req = $BD->query("SELECT MAX(id) AS id FROM `profil`");
+        $ligne =$req->fetch();
+        $BD->query("INSERT INTO objectif_profil VALUE (".$ligne['id'].",1, ".$_POST['lvlSport'].")"); 
+        $rep->closeCursor();
+        
         
                 // ----------------------------------------------------------------------------------------------------------------------
         echo 'Inscrit';

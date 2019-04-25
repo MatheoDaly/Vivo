@@ -41,9 +41,9 @@ function creaPrev(data) {
 
 function encouragement(nb, diff) {
     if (nb * diff < 0.0) { // Ici on verifie qu'il suit ces principe et donc que s'il perd, il va pour perdre donc deux coeff egaux qu'ils soient négatif ou positif, leur multiplication est positive
-        return "Allez cherche de la motivation par vos proche la vie n'est jamais un combat seul ! Ayez confiance en vous !";
+        return "Allez cherche de la motivation par vos proche, la vie n'est jamais un combat seul ! Ayez confiance en vous !";
     } else if (nb > 0.0 && nb < 30.0) {
-        return "Bientot une quete accompli soyez fière d'etre proche de la fin ! Il vous reste moins d'un mois !";
+        return "Bientôt une quête accompli, soyez fière d'être proche de la fin ! Il vous reste moins d'un mois, si vous continuez comme ça !";
     } else {
         return "Agile de corps et d'esprit, vous vivez parfaitement Vivo, continuer ainsi avec nous, nous croyons en vous !";
     }
