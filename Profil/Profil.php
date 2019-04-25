@@ -80,7 +80,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
         <!-- ################ Modification profil ############### !-->
         <?php 
-        if(isset($_SESSION['profil']) || (isset($test) && $test)){
+        if(isset($_SESSION['profil']) || ($testGene)){
         ?>
         <div id="ModificationProfil">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
@@ -190,21 +190,21 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                 }
                             ?>
                     </div>
-                    <div class="row">
-                        <?php 
-                            // ici on introduit le concepte de point !
-                            ?>
-
-                    </div>
 
                 </div>
             </div>
         </div>
 
         <!--  Intermediare !-->
+        <?php if(isset($_SESSION['profil']) || ($testGene)){ ?>
         <div>
-            <input type="button" class="btn btn-primary" name="BtnStat" value="Consultation de mes statistiques">
-        </div>s
+            <button class="btn btn-primary">
+                <a class="text-white" href="../Statistique/Statistique.php">
+                    Consultation de mes statistiques
+                </a>
+            </button>
+        </div>
+        <?php } ?>
     </div>
     <!-- menu  personnaliser des profil !-->
 
@@ -265,7 +265,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                         AND Date='".$ligne["Date"]."'
                                         AND ID_Profil=".$Profil['ID']); // requete archi lourd -> integre le nom à la table historique_aliment ?
                                     while($ligne1 = $req1->fetch()){
-                                        echo "<li>".$ligne1["Nom"]." :".$ligne1["quantite"]." grammes</li>";
+                                        echo "<li>".$ligne1["Nom"]." : ".$ligne1["quantite"]." x100 grammes</li>";
                                     }
                                     $req1->closeCursor();
                                     ?>
@@ -295,7 +295,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                         ID_Profil = ".$Profil['ID']." GROUP BY Nom
                                         ");
                 while($ligne = $req->fetch()){
-                    echo "<li>".$ligne["Nom"]." :".$ligne["Quant"]."</li>";
+                    echo "<li>".$ligne["Nom"]." :".$ligne["Quant"]." x100 grammes</li>";
                 }
                 $req->closeCursor();
                 ?>

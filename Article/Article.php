@@ -65,9 +65,7 @@ $BD=GetBD();
                     <img src="../Image/Article/Article<?php echo $i%2; $i++; ?>.png" style="width:150px; height:150px" alt="Article<?php echo $i%2; ?>">
                 </a><br />
             </div>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </div>
     </div>
 

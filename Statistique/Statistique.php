@@ -8,10 +8,6 @@ Plus effectuer quand aliment est apprecier faire qu'il passe en preferance..
 */
 include("../Outil/IsTest.php");
 
-// Cela sert de reperage ! => $Profil = array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic');
-$cheminPhoto='../Image/PhotoProfil/';
-$cheminIcon='../Image/IconProgess/';
-
 ?>
 <!Doctype HTML>
 <html>
@@ -71,7 +67,7 @@ $cheminIcon='../Image/IconProgess/';
                 <canvas id="Rond" class="bg-white"></canvas>
             </div>
             <hr id="1">
-            <h4>Veux tu voir la variation de tes macronutriments, au fur et à mesure du temps ?</h4>
+            <h4>Veux-tu voir la variation de tes macronutriments, au fur et à mesure du temps ?</h4>
             <hr id="1">
             <label for="type">Mon graphique selon :</label>
             <select name='type' class="custom-select">
