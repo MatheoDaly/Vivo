@@ -56,7 +56,7 @@ $cheminIcon='../Image/IconProgess/';
     </header>
     <div class="container d-flex flex-column justify-content-center rounded" id="TableProfil">
 
-        <h1 class="text-light">Mon graphique</h1>
+        <h1 class="text-light"></h1>
         <hr>
         <div class="container-fluid bg-light rounded">
             <button class="btn-light btn">
@@ -66,12 +66,12 @@ $cheminIcon='../Image/IconProgess/';
         </div>
         <hr>
         <div class="container-fluid bg-white rounded">
-            <h2>Souhaites tu connaître la repartition en calories aujourd'hui ?</h2>
+            <h4>Souhaites tu connaître la repartition en calories aujourd'hui ?</h4>
             <div id="Ronds" width="400" height="400" class="row">
                 <canvas id="Rond" class="bg-white"></canvas>
             </div>
             <hr id="1">
-            <h2>Veux tu voir la variation de tes taux au fur et à mesure du temps ?</h2>
+            <h4>Veux tu voir la variation de tes macronutriments, au fur et à mesure du temps ?</h4>
             <hr id="1">
             <label for="type">Mon graphique selon :</label>
             <select name='type' class="custom-select">
