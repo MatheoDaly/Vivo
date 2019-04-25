@@ -1,6 +1,6 @@
 <?php
 $testStats=false;
-$visiteur=true;
+$Visiteur=true;
 
 include("../Outil/IsTest.php");
 
@@ -276,8 +276,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                     <?php $i++;}    $req->closeCursor(); if ($entre){ ?>
                 </div>
                 <?php  } else {
-                        echo "Vous n'avez aucun menu c'est dommage ! </br> Allez vite vous en faire un, via :<a href='#'> Menue</a>";
+                        echo "Vous n'avez aucun menu c'est dommage ! </br> Allez vite vous en faire un, via :<a href='../RechercheAliment/Choix_Menu.php'> Menue</a>";
                     } ?>
+                <a href='../RechercheAliment/Choix_Menu.php'></a>
 
             </div>
 

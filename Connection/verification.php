@@ -21,7 +21,6 @@ if(isset($_POST['email'])
         }else {
             $_SESSION['profil']=array('ID'=>$Profil['id'], 'prenom'=>$Profil['prenom'], 'mail'=>$Profil['email'], 'poids'=>$Profil['poids'], 'taille'=>$Profil['taille'], 'user'=>$Profil['utilisateur'],'genre'=>$Profil['genre'], 'mdp'=>$Profil['mdp'], 'photo'=>'NoPic', 'actualisation'=>$Profil['DateActue'],'NiveauSportif'=>$Profil['NiveauSportif']);
         }
-            setcookie('email', $_POST['email'], time()*(3600*24*24));
             setcookie('mdp', $_POST['mdp'], time()*(3600*24*24));
         
         echo 'Connecter';
@@ -31,6 +30,7 @@ if(isset($_POST['email'])
         echo 'Non inscrit';
 
     }
+            setcookie('email', $_POST['email'], time()*(3600*24*24));
 }
 
 
