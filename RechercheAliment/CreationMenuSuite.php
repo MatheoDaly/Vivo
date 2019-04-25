@@ -164,11 +164,6 @@ session_start();
                 <h2 class="text-center m-3">Quelque chose vous intéresse ?</h2>
                 <?php
 
-    if (isset($_GET['submit1'])){
-      echo('def');
-    }else{
-      echo('pas def');
-    }
     if(isset($_GET['submit1']) && $_GET['type']=='Aliment' && isset($_GET['Menu'])){
       echo($_GET['Menu']);
       if(empty($_GET['Menu'])){

@@ -22,7 +22,7 @@
  $nom = $_SESSION['nomMenu'];
  echo($nom);
  $bd = getBD();
- $query = "INSERT INTO `menu`(`Id_Menu`, `Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (4,1,1,'$nom')";
+ $query = "INSERT INTO `menu`(`Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (1,1,'$nom')";
  echo($query);
  $bd->exec($query);
  print_r($_SESSION['alimentC']);
