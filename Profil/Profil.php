@@ -79,8 +79,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
     <div class="container justify-content-center rounded" id="TableProfil">
         <div class="row">
-            <div id="avatar" class="col-sm-10" style="display:block; margin:auto;">
-                <img class="independant w-20 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
+            <div id="avatar" class="col-3" style="display:block; margin:auto;">
+                <img class="independant img-responsive w-100 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>"> 
+                
             </div>
         </div>
 
