@@ -56,15 +56,14 @@ $BD=GetBD();
         <div class="row">
             <?php
             $req=$BD->query("SELECT * FROM article");
+            $i=0;
             while($ligne=$req->fetch()){ 
             ?>
-            <div class="col-4 bg-white rounded">
+            <div class="col-5 bg-white rounded m-1 p-3">
                 <a href="<?php echo $ligne["Url"]; ?>">
                     <?php echo $ligne["Nom"]; ?>
+                    <img src="../Image/Article/Article<?php echo $i%2; $i++; ?>.png" style="width:150px; height:150px" alt="Article<?php echo $i%2; ?>">
                 </a><br />
-                <?php if(null!=$ligne["LienSeuil"]){
-                echo "Peux concerné ".$ligne["LienSeuil"];
-            }?>
             </div>
             <?php
             }
