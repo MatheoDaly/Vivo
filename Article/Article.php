@@ -34,9 +34,6 @@ $BD=GetBD();
                 <li class="nav-item">
                     <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                </li>
             </ul>
             <span class="navbar-text">
                 Pour une bonne santé vivez VIVO !
@@ -48,11 +45,8 @@ $BD=GetBD();
 <body>
 
 
+    <h1 style="text-align:center;">Mes articles</h1>
     <div class="container justify-content-center rounded" id="TableProfil">
-        <div class="bg-white rounded row">
-            <h2>Mes articles</h2>
-        </div>
-        <hr>
         <div class="row">
             <?php
             $req=$BD->query("SELECT * FROM article");

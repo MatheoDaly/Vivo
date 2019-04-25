@@ -39,8 +39,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Connection/connexion.php">Connexion</a>
                 </li>
-
                 <?php } ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="Article/Article.php">Nos articles</a>
+                </li>
 
             </ul>
             <span class="navbar-text">

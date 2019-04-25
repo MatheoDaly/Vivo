@@ -60,6 +60,9 @@ $BD=GetBD();
                 <li class="nav-item active">
                     <a class="nav-link" href="../../Statistique/Statistique.php">Statistique</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Article/Article.php">Nos articles</a>
+                </li>
             </ul>
             <span class="navbar-text">
                 Pour une bonne santé vivez VIVO !
@@ -70,10 +73,10 @@ $BD=GetBD();
 
 <body>
 
+    <h1 style="text-align:center;">Ma prevention</h1>
 
     <div class="container justify-content-center rounded" id="TableProfil">
         <div>
-            <h1 class="text-light">Ma prevention</h1>
             <div id="graphique" class="row bg-white rounded">
                 <div class="col-8" id='graph'>
                     <hr>
@@ -81,10 +84,10 @@ $BD=GetBD();
                     <hr>
 
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="text-align:center;">
                     <div class="row"><span id='poidsJr'></span><br></div>
-                    <div class="row">Je pese actuellement :<?php echo "<span id='poidsActuel'> ".$Profil['poids']." </span> kg"; ?> </div>
-                    <div class="row">Je veux atteindre :<?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
+                    <div class="row">Je pese actuellement :<br><?php echo "<span id='poidsActuel'> ".$Profil['poids']." </span> kg"; ?> </div>
+                    <div class="row">Je veux atteindre :<br><?php $objectif_poids=$BD->query("SELECT objectif_profil.valeur_type AS 'val'
                                             FROM objectif_profil
                                             INNER JOIN objectif ON objectif.id=objectif_profil.id_Objectif
                                             WHERE objectif.type='poids'

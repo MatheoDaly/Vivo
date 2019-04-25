@@ -47,7 +47,9 @@ include("../Outil/IsTest.php");
                             echo '</li>';
                         }
                     ?>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Article/Article.php">Nos articles</a>
+                    </li>
                 </ul>
                 <span class="navbar-text">
                     Pour une bonne santé vivez VIVO !
@@ -55,9 +57,9 @@ include("../Outil/IsTest.php");
             </div>
         </nav>
     </header>
+    <h1 style="text-align:center;">Ma consommation </h1>
     <div class="container d-flex flex-column justify-content-center rounded" id="TableProfil">
 
-        <h1 class="text-light"></h1>
         <hr>
         <div class="container-fluid bg-light rounded">
             <button class="btn-light btn">

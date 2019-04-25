@@ -61,7 +61,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                         <a class="nav-link" id="disconnect" href="../Connection/connexion.php">Connexion</a>
                     </li>
                     <?php } ?>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Article/Article.php">Nos articles</a>
+                    </li>
                 </ul>
                 <span class="navbar-text">
                     Pour une bonne santé vivez VIVO !

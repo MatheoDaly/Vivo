@@ -20,6 +20,11 @@ include('../../Outil/Php/AccesBD.php');
 $BD=getBD();
 }
 
+if(isset($_SESSION['lineaire'])){
+    echo $_SESSION['lineaire'];
+} else {
+    
+
 switch($Profil['genre'].$Profil['NiveauSportif']){
         // Ici on adapte notre regession linéaire à notre personne
     case 'M2': $coeff=2600; break;
@@ -68,11 +73,12 @@ switch($Profil['genre'].$Profil['NiveauSportif']){
         
         $m/=9;
         $b=($b-$coeff)/9;
-            
+    $_SESSION['lineaire']=json_encode(array($m, $b,pow($coeffR,2)));
         echo json_encode(array($m, $b,pow($coeffR,2)));
         }
     }
     
+}
     // Si son coeff de corealation est trop faible nous pouvons dire que la personne a une alimentation non reguliere et donc qui peut etre mauvaise pour son corps
     
     ?>
