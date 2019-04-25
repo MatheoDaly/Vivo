@@ -52,7 +52,7 @@ $(function () {
             $.post("Reception.php",
                 $('form').serialize(),
                 function (data) {
-                    alert(data);
+                    //alert(data);
                     if (data == 'Inscrit') {
                         //redirection vers profil
                         alert('Vous etes inscrit !');
