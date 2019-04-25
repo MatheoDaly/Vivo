@@ -40,15 +40,6 @@ include("../Outil/IsTest.php");
                     <li class="nav-item active">
                         <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Inscription/inscription.php">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="disconnect" href="../Connection/connexion.php">Connexion</a>
-                    </li>
                     <?php
                         if(isset($_SESSION['profil']) && !$testGene){
                             echo '<li class="nav-item">';

@@ -21,8 +21,12 @@ Type :
 ###############################################################################################################################
 
 //Aide mémoire : $Profil=array($Profil['id'], $Profil['prenom'], $Profil['email'], $Profil['poids'], $Profil['taille'], $Profil['utilisateur'], $Profil['genre'], $Profil['mdp'], 'NoPic', True);
-include("../Outil/IsTest.php");
-$testStats=false;
+
+if(!isset($Visiteur)){   
+    include("../Outil/IsTest.php");
+    include('../Outil/Php/AccesBD.php');
+    $BD = getBD();
+}
 
 
 if(isset($Profil)){
@@ -32,16 +36,12 @@ if(isset($Profil)){
     
 ############################# fonction menu_Profil -> Historique_Aliment  ###########################################################
 ##################################
-    if(!$testStats){   
-    include('../Outil/Php/AccesBD.php');
-    $BD = getBD();
-    }
     
     $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.alim_code AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu
 INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
 INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
 WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
-    echo $q."<br>";
+    //echo $q."<br>";
     $req= $BD->query($q);
     while($ligne = $req->fetch()){
         $BD->query("INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )");
@@ -73,7 +73,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
         AND Date BETWEEN ".$Profil["actualisation"]." AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas";
-    echo $q;
+    // echo $q;
     $req = $BD->query($q);
     
     while($ligne = $req->fetch())
@@ -100,20 +100,20 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
             if ($i==4) {$temps="YEAR(date)";$distance=" YEAR(NOW())=YEAR(date) ";}
         }
     $q="DELETE FROM statistique WHERE ID_Profil = ".$Profil["ID"]." AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom";
-        echo $q.'<br>';
+        // echo $q.'<br>';
     $BD->query($q); 
         
         $q="SELECT id_Concentration AS 'Nom', MAX(date) AS 'date', ".$calcul." AS concentration
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
     AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom ";
-        echo $q.'<br>';
+        // echo $q.'<br>';
     $req = $BD->query($q);
         
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
-            echo '<br>'.$q.'<br>';
+            //echo '<br>'.$q.'<br>';
             $req1 = $BD->prepare($q);
             $req1->execute(array(
             'Nom'=>$ligne['Nom'],
@@ -155,7 +155,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
 function ajoutConcentration ($type, $BD, $Repas, $taux, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", ".$type.", ".$taux.", '".$date."', ".$id.")";
-        echo $q."<br>";
+        // echo $q."<br>";
         $req1 = $BD->query($q);
         $req1->closeCursor();
     }
@@ -163,7 +163,7 @@ function ajoutConcentration ($type, $BD, $Repas, $taux, $date, $id){
 function ajoutAliment ($type, $BD, $Repas, $concentration, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
-        echo $q."<br>";
+        // echo $q."<br>";
         $req1 = $BD->query($q);
     $req1->closeCursor();
     }

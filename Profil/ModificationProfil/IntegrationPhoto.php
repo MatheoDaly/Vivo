@@ -23,8 +23,6 @@ if(isset($_SESSION['profil'])){
         $BD->query("UPDATE profil SET url_photo  = '".$_SESSION['profil']['ID'].".".$ext."' WHERE id =".$_SESSION['profil']['ID']);
         $_SESSION['profil']['photo']=$_SESSION['profil']['ID'].".".$ext;
         $Profil['photo']=$_SESSION['profil']['ID'].".".$ext;
-   } else {
-       
-       echo 'Image, non télécharger !';
    } 
+//else {echo 'Image, non télécharger !';} 
 ?>

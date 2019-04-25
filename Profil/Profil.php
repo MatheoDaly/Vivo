@@ -1,4 +1,5 @@
 <?php
+
 $testStats=false;
 $Visiteur=true;
 
@@ -6,7 +7,7 @@ include("../Outil/IsTest.php");
 
 include("../Outil/php/AccesBD.php");
 $BD=getBD();
-//include("../Actualisation/Actualisation.php");
+include("../Actualisation/Actualisation.php");
 
 if($testStats==true){
         include("../Outil/Php/CreationSet.php");
@@ -47,25 +48,19 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                     <li class="nav-item">
                         <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                    </li>
+                    <?php
+                        if(isset($_SESSION['profil'])){
+                            echo '<li class="nav-item">';
+                            echo    '<a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>';
+                            echo '</li>';
+                        } else {?>
                     <li class="nav-item">
                         <a class="nav-link" href="../Inscription/inscription.php">Inscription</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="disconnect" href="../Connection/connexion.php">Connexion</a>
                     </li>
-                    <?php
-                        if(isset($_SESSION['profil']) && !$testGene){
-                            echo '<li class="nav-item">';
-                            echo    '<a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>';
-                            echo '</li>';
-                        }
-                    ?>
+                    <?php } ?>
 
                 </ul>
                 <span class="navbar-text">
@@ -80,8 +75,8 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
     <div class="container justify-content-center rounded" id="TableProfil">
         <div class="row">
             <div id="avatar" class="col-3" style="display:block; margin:auto;">
-                <img class="independant img-responsive w-100 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>"> 
-                
+                <img class="independant img-responsive w-100 rounded-circle" src="../Image/PhotoProfil/<?php if ($Profil['photo']=='NoPic'){echo 'avatar.png';} else  {echo $Profil['photo'];}?>" alt="<?php if ($Profil['photo']=='NoPic'){echo $Profil["prenom"];} ?>">
+
             </div>
         </div>
 
