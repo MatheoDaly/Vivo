@@ -18,7 +18,7 @@ $(function () {
             //alert(data);
             if (JSON.parse(data).length == 0) {
                 alert("Pas de repas encore effectuer !");
-                //$(location).attr('href', '../Profil/Profil.php');
+                $(location).attr('href', '../Profil/Profil.php');
             }
             //alert((data));
             var Graphique = AfficheGraph(JSON.parse(data), 6);

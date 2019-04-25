@@ -116,7 +116,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                 <input type="number" name="taille" value="<?php echo $Profil["taille"]; ?>">
                             </div>
                             <div class="p-1 col-6 d-flex flex-column">
-                                Niveau Sportif :
+                                Niveau Sportif : (1, 2, 3)
                                 <input type="number" name="lvlSport" value="<?php echo $Profil["poids"]; ?>">
                             </div>
                             <div class="p-1 col-6 d-flex flex-column">

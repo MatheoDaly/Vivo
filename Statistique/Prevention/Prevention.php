@@ -22,15 +22,8 @@ Bulle js des repas et menue
 Moindre carre !
 
 */
-session_start();
 
-$test=true;
-// Variable :
-if(isset($_SESSION['profil'])){
-    $Profil=$_SESSION['profil'];
-} else {
-    $Profil=array('ID'=>1, 'prenom'=>'Paul', 'mail'=>'Paul@jeMangeTrop.com', 'poids'=>120, 'taille'=>170, 'user'=>'GrosPaul','genre'=>'M', 'mdp'=>'CestPasDeMaFaute', 'photo'=>'NoPic', 'actualisation'=>'20-03-2019','point'=>0);
-}
+include("../../Outil/IsTest.php");
 
 include('../../Outil/Php/AccesBD.php');
 $BD=GetBD();
@@ -83,7 +76,10 @@ $BD=GetBD();
             <h1 class="text-light">Ma prevention</h1>
             <div id="graphique" class="row bg-white rounded">
                 <div class="col-8" id='graph'>
-                    <canvas id="lineChart"></canvas>
+                    <hr>
+                    <canvas style="height:150px; width:200px" id="lineChart"></canvas>
+                    <hr>
+
                 </div>
                 <div class="col-4">
                     <div class="row"><span id='poidsJr'></span><br></div>

@@ -8,7 +8,7 @@ $(document).ready(function () {
     $.get('RegressionLineaire.php',
         function (data) {
             //alert(data);
-            if (data != 'No Check') {
+            if (!(data[0] != "[" || data[(data.length - 1)] != "]")) {
                 var dt = JSON.parse(data);
                 var str = '';
                 var diff = (parseInt($("#poidsActuel").text()) - parseInt($("#poidsVoulu").text()));

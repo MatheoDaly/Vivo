@@ -22,10 +22,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="Profil/Profil.php">Profil</a>
                 </li>
+                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="Statistique/Statistique.php">Statistique</a>
                 </li>
