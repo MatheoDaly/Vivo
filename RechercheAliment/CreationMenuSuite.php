@@ -237,7 +237,7 @@ session_start();
             while($result = $reponse->fetch()){
             echo '<div class="row"><div class="col-6">';
               echo('<form method="GET" action="test.php">');
-              echo('<div class="form-group col-6 border border-warning p-2 rounded">');
+              echo('<div class="form-group col-12 col-sm-6 border border-warning p-2 rounded">');
               echo($result['alim_nom_fr']);
               echo('<br />');
               echo('<input type="hidden" name="id_aliment" value="');
