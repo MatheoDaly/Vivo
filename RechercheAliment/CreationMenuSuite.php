@@ -78,8 +78,34 @@ session_start();
       </div>
     </div>
   </div>
-</div>
 <h1 class="text-center">Nos recettes au top !</h1>
+    <div class="row text-center p-3 mx-auto">
+        <?php
+  $bd = getBD();
+  $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");
+  $i = 1;
+  while($ligne = $top5 ->fetch()){
+    if($i == 1){
+      echo '<div class="col-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
+    }else if($i ==2){
+      echo '<div class="col-2 bg-info text-light p-3 mx-auto m-2 rounded">';
+    }else if($i ==3){
+      echo '<div class="col-2 bg-light p-3 m-2 mx-auto rounded">';
+    }else if($i ==4){
+      echo '<div class="col-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
+    }else if($i ==5){
+      echo '<div class="col-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
+    }
+    echo '#'.$i;
+    echo('<form method="GET" action="CreationMenu.php">');
+    echo('<div class="form-group"><label for ="nbMenu">'.$ligne['nom'].'</label></div>');
+    echo('</form></div>');
+    $i++;
+  }
+  $top5 ->CloseCursor();
+  ?>
+    </div>
+    
 <div class="row text-center p-3 mx-auto">
   <a href="rechercheAliment.php">Créer une recette</a>
   <?php
@@ -376,9 +402,11 @@ session_start();
       $reponse-> closeCursor();
     }
     ?>
-    </div> <script src = "app.js" >
 
+        
     </script>
+    </form>
+    </div>
   </body>
 
   </html>
