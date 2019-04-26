@@ -43,22 +43,27 @@
         <div class="container bg-white rounded text-center">
             <form class="row p-2">
 
-                <p class="col-5">
-                    <strong>
-                        Mail :
-                    </strong>
-                </p>
-                <p class="col-5">
-                    <strong>
-                        Mot de passe :
-                    </strong>
-                </p>
 
-                <input class="col-6 rounded" type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" />
-                <input class="col-6 rounded" type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}?>" />
+                <div class="col-6 rounded">
+                    <p class="col-12">
+                        <strong>
+                            Mail :
+                        </strong>
+                    </p>
+                    <input class="col-12 rounded" type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" />
+                </div>
+                <div class="col-6 rounded">
+                    <p class="col-12">
+                        <strong>
+                            Mot de passe :
+                        </strong>
+                    </p>
+                    <input class="col-12 rounded" type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}?>" />
+                </div>
 
                 <p class="col-12 m-2">
-                    <input type="button" id='submit' class="btn btn-primary" value="Envoyer" />
+                    <button class="btn btn-primary"><a href="../Inscription/inscription.php" class="text-white">S'inscrire ?</a></button>
+                    <input type="button" id='submit' class="btn btn-primary" value="Se connecter ?" />
                 </p>
             </form>
         </div>
