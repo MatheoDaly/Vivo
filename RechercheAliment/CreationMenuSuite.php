@@ -153,7 +153,7 @@ session_start();
       echo('<br/>');
     }
   }
-  echo('<input type="submit" value="envoyer">');
+  echo('<input type="submit" class="btn btn-primary" value="envoyer">');
   echo('</form>');
 
   ?>
@@ -333,11 +333,11 @@ session_start();
               echo($nom);
               echo('">');
               echo('<input type="number" name="nbAl">');
-              echo('<input type="submit" name="choix" value="Choisir">');
+              echo('<input type="submit" class="btn btn-primary" name="choix" value="Choisir">');
               echo('</div>');
               echo('</form>');
               echo('<form method="GET" action="page_recette.php">');
-              echo('<input type="submit" name="choix" value="Voir recette">');
+              echo('<input type="submit" class="btn btn-primary" name="choix" value="Voir recette">');
               echo('<input type="hidden" name="id_aliment" value="');
               echo($a);
               echo('">');
@@ -395,7 +395,7 @@ session_start();
         echo($nom);
         echo('">');
         echo('<input type="number" name="nbAl">');
-        echo('<input type="submit" name="choix" value="Choisir">');
+        echo('<input type="submit" class="btn btn-primary"  name="choix" value="Choisir">');
 
         echo('</div>');
         echo('</form>');
