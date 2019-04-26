@@ -1,11 +1,10 @@
- <?php
+<?php
  session_start();
  include_once 'AccesBD_rechAl.php';
  $aliments_choisit = array();
  $i = 0;
  $j = 0;
  $nbs = null;
-
  foreach ($_GET as $key => $value) {
    $returnValue = preg_match('\'[0-9]*\'', $key, $nb);
    $nbs[$i]= $nb[0];
@@ -17,7 +16,6 @@
  }
  $_SESSION['alimentC']=$aliments_choisit;
   //$_SESSION['alimentC'][0]['proteine'] = 1; //POUR MODIF UNE CASE DE LALIMENT, FAIRE BOUCLE FOR DE 0 A sizeof($_SESSION['alimentC'])
-
  $nom = $_SESSION['nomMenu'];
  $bd = getBD();
  $query = "INSERT INTO `menu`(`Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (1,1,'$nom')";
