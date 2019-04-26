@@ -86,15 +86,15 @@ session_start();
   $i = 1;
   while($ligne = $top5 ->fetch()){
     if($i == 1){
-      echo '<div class="col-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
+      echo '<div class="col-6 col-sm-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
     }else if($i ==2){
-      echo '<div class="col-2 bg-info text-light p-3 mx-auto m-2 rounded">';
+      echo '<div class="col-6 col-sm-2 bg-info text-light p-3 mx-auto m-2 rounded">';
     }else if($i ==3){
-      echo '<div class="col-2 bg-light p-3 m-2 mx-auto rounded">';
+      echo '<div class="col-6 col-sm-2 bg-light p-3 m-2 mx-auto rounded">';
     }else if($i ==4){
-      echo '<div class="col-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
+      echo '<div class="col-6 col-sm-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
     }else if($i ==5){
-      echo '<div class="col-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
+      echo '<div class="col-6 col-sm-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
     }
     echo '#'.$i;
     echo('<form method="GET" action="CreationMenu.php">');
