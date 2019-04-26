@@ -6,6 +6,7 @@ if(!isset($_GET["choix"]))
     $_SESSION["Plat_Rec"] = array();
 }
 
+
 if(isset($_GET["choix"])) //quand bouton choix est cliqué
 {
 

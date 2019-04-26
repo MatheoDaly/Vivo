@@ -107,12 +107,12 @@ session_start();
     </div>
     
 <div class="row text-center p-3 mx-auto">
-  <a href="rechercheAliment.php">Créer une recette</a>
+    <p>La recette de vos rêves n'existe pas ? <a href="rechercheAliment.php"> créez votre recette</a><br/>
+    Il n'est jamais trop tard pour revenir en arrière, <a href='tempo_stop.php'>Annulez votre création</a></p>
   <?php
 
   $_SESSION['Rec_Plat']=array();
   echo('<br/>');
-  echo('<a href="tempo_stop.php">Annuler</a>');
   echo('<form method="GET" action="integrationMenu.php" >');
   $bd = getBD();
   $top5 = $bd->query("SELECT * FROM recette_plat LIMIT 5");

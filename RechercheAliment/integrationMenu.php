@@ -34,6 +34,7 @@
    $i+=1;
  }
 unset($_SESSION['alimentC']);
+unset($_SESSION["nomMenu"]);
 echo ('<meta http-equiv="refresh" content="5; URL=Choix_Menu.php">');
  //$import = $bd->query($query);
   ?>
