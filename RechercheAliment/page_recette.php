@@ -11,6 +11,7 @@ session_start();
     <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
 </head>
 
 <header>
@@ -43,18 +44,22 @@ session_start();
 
 <body>
         <a href="CreationMenuSuite.php">Retour</a>
+<div class="container">
+        <div class="row">
+            <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded" style="padding:20px;">
+                
 <?php
   $id = $_GET['id_aliment'];
   $bd=getBD();
   $line = $bd->query("SELECT * FROM Recette_Plat WHERE Id_Recette = $id");
   $res = $line->fetch();
-  echo($res['nom']);
+  echo('<h1 class="border border-warning text-center">'.$res['nom'].'</h1>');
   echo('<br/>');
   echo($res['instructions']);
   echo('<br/>');
-  echo('Apport calorique:');
+  echo('Apport calorique: ');
   echo($res['kcal']);
-  echo('kcal');
+  echo(' kcal');
   echo('<br/>');
   // Maintenant on va chercher les ingrédients
   $query = "SELECT * FROM aliments,est_ingredient_de,recette_plat WHERE recette_plat.Id_Recette = $id AND alim_code = id_aliment AND est_ingredient_de.id_recette = recette_plat.Id_Recette ";
@@ -65,7 +70,9 @@ session_start();
   //$res-> closeCursor();
  ?>
 
-
+            </div>
+    </div>
+    </div>
 </body>
 
 </html>
