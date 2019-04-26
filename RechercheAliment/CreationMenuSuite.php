@@ -235,10 +235,11 @@ session_start();
             }
 
             while($result = $reponse->fetch()){
+            echo '<div class="row"><div class="col-6">';
               echo('<form method="GET" action="test.php">');
+              echo('<div class="form-group col-6 border border-warning p-2 rounded">');
               echo($result['alim_nom_fr']);
               echo('<br />');
-              echo('<div class="rechAlim">');
               echo('<input type="hidden" name="id_aliment" value="');
               $a = $result['alim_code'];
               echo($a);
@@ -247,11 +248,11 @@ session_start();
               $nom = $result['alim_nom_fr'];
               echo($nom);
               echo('">');
-              echo('<input type="number" name="nbAl">');
-              echo('<input type="submit" name="choix" value="Choisir">');
+              echo('<input type="number" class="form-control" placeholder="Combien en voulez-vous ?" name="nbAl"></div>');
+              echo('<input type="submit" class="btn btn-primary" name="choix" value="Choisir">');
 
-              echo('</div>');
-              echo('</form>');
+              echo('</form></div>');
+              echo '</div>' ;
             }
             $reponse-> closeCursor();
           }
