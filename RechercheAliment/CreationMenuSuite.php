@@ -197,9 +197,6 @@ session_start();
               $input=$_GET['Menu'];
               //$input = preg_replace("#[^0-9a-z]#i","",$input);
               $reponse = $bd->query( "SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' " );
-
-
-
               if ($_GET['option']== "Lipide"){
                 $reponse = $bd->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' ORDER BY Lipides_g100g");
               }else if ($_GET['option']== "Calorie") {
@@ -310,8 +307,13 @@ session_start();
               echo('">');
               echo('<input type="number" name="nbAl">');
               echo('<input type="submit" name="choix" value="Choisir">');
-
               echo('</div>');
+              echo('</form>');
+              echo('<form method="GET" action="page_recette.php">');
+              echo('<input type="submit" name="choix" value="Voir recette">');
+              echo('<input type="hidden" name="id_aliment" value="');
+              echo($a);
+              echo('">');
               echo('</form>');
             }
             $reponse-> closeCursor();
