@@ -25,7 +25,7 @@ $BD = getBD();
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
     echo json_encode(CalculTaux($id, $BD, $_POST['type']));
 }
-    // echo json_encode(CalculTaux(1, $BD, 4));
+    //echo json_encode(CalculTaux(1, $BD, 4));
 
 
 
@@ -113,6 +113,7 @@ if($type>1){
     while ($ligne= $req->fetch()){
         if($nom1!=$ligne['Nom']){
             $i++;
+            $nom1=$ligne['Nom'];
             array_push($taux, array());
             array_push($taux[$i], $ligne['Nom']); // ->n
             array_push($taux[$i], array());

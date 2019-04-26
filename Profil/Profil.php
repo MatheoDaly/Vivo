@@ -201,10 +201,15 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
         <!--  Intermediare !-->
         <?php if(isset($_SESSION['profil']) || ($testGene)){ ?>
-        <div>
-            <button class="btn btn-primary">
+        <div class="col-12">
+            <button class="col-6 btn btn-primary">
                 <a class="text-white" href="../Statistique/Statistique.php">
-                    Consultation de mes statistiques
+                    Vue sur ma consommation
+                </a>
+            </button>
+            <button class="col-5 btn btn-primary">
+                <a class="text-white" href="../RechercheAliment/Choix_Menu.php">
+                    Crée son menu ?
                 </a>
             </button>
         </div>
