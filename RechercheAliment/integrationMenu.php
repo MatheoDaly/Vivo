@@ -7,7 +7,7 @@
  $nbs = null;
 
  foreach ($_GET as $key => $value) {
-   $returnValue = preg_match('\'[0-9]*\'', $key, $nb, PREG_UNMATCHED_AS_NULL);
+   $returnValue = preg_match('\'[0-9]*\'', $key, $nb);
    $nbs[$i]= $nb[0];
    $aliments_choisit[$i] = array(preg_replace('/[0-9]*¨/', '', $key) => $value );
    $aliments_choisit[$i]['nb'] = $nbs[$i];
@@ -17,34 +17,25 @@
  }
  $_SESSION['alimentC']=$aliments_choisit;
   //$_SESSION['alimentC'][0]['proteine'] = 1; //POUR MODIF UNE CASE DE LALIMENT, FAIRE BOUCLE FOR DE 0 A sizeof($_SESSION['alimentC'])
- print_r($_SESSION['alimentC']);
 
  $nom = $_SESSION['nomMenu'];
- echo($nom);
  $bd = getBD();
  $query = "INSERT INTO `menu`(`Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (1,1,'$nom')";
- echo($query);
  $bd->exec($query);
- print_r($_SESSION['alimentC']);
  $i=0;
  while($i<sizeof($_SESSION['alimentC'])){
-   echo('test');
    $tempo = $_SESSION['alimentC'][$i];
-   //echo('ici');
-   //print_r($tempo);
-   echo('voila:');
-   //echo(current($tempo));
    $id_alim = current($tempo); // On prend la première valeur du tableau
    //echo($id_alim);
    //$nb = $_SESSION['Recette'][$i]['nb'];
    //$data = $bd->query("SELECT * FROM aliments WHERE alim_code = $id_alim ");
    //echo("INSERT INTO `est_ingredient_de`(`id_recette`, `alim_code`,`quantite`) VALUES ($idr2,$id_alim,$nb)");
-   echo("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
+   //echo("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
    $bd->exec("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
    //$dataEi = $bd->query("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
    $i+=1;
  }
 unset($_SESSION['alimentC']);
-echo ('<meta http-equiv="refresh" content="20; URL=Choix_Menu.php">');
+echo ('<meta http-equiv="refresh" content="5; URL=Choix_Menu.php">');
  //$import = $bd->query($query);
   ?>
