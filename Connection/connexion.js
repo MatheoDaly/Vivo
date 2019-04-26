@@ -16,14 +16,16 @@ $(function () {
                         alert('Vous etes connecter !');
                         $(location).attr('href', '../Profil/Profil.php');
                     } else if (data == 'Non inscrit') {
-                        alert("Connexion compromise, vous n'avez pas de profil !");
-                        $(location).attr('href', '../Inscription/inscription.html');
+                        alert("Vous n'avez aucun compte chez nous");
+                        $(location).attr('href', '../Inscription/Inscription.php');
+                    } else if (data == 'Mauvais mdp') {
+                        alert("Mauvais mot de passe");
                     } else {
                         alert('Connexion compromise');
                     }
 
                 }
-            )
+            );
 
         }
     });
