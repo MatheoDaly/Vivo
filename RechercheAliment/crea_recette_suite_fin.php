@@ -17,10 +17,10 @@ while($i<sizeof($_SESSION['Recette'])){
   $nb = $_SESSION['Recette'][$i]['nb'];
   $data = $bd->query("SELECT * FROM aliments WHERE alim_code = $id_alim ");
   //echo("INSERT INTO `est_ingredient_de`(`id_recette`, `alim_code`,`quantite`) VALUES ($idr2,$id_alim,$nb)");
-  $dataEi = $bd->query("INSERT INTO `est_ingredient_de`(`id_recette`, `alim_code`,`quantite`) VALUES ($idr2,$id_alim)");
+  $dataEi = $bd->query("INSERT INTO `est_ingredient_de`(`id_recette`, `alim_code`,`quantite`) VALUES ('".$idr2."','".$id_alim."')");
   $i+=1;
 }
-echo('<meta http-equiv="refresh" content="0; URL=CreationMenuSuite.php">');
+echo('<meta http-equiv="refresh" content="50; URL=CreationMenuSuite.php">');
 
 
  ?>
