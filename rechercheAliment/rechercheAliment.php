@@ -152,13 +152,16 @@ session_start();
   $i=0;
   while($i<sizeof($_SESSION['Recette'])){
     $panier = $_SESSION['Recette'][$i]['nom'];
-    echo '<li class="list-group-item">'.$panier.'<img src="../Image/Icon/icons8-approbation-48.png" class="w-5"/></li>';
+    $poids = $_SESSION['Recette'][$i]['nb'];
+    echo '<li class="list-group-item">'.$panier.' ('.$poids.' g)<img src="../Image/Icon/icons8-approbation-48.png" class="w-5"/></li>';
     $i=$i+1;
   }
       echo '</ul>';
-  }
-
+  }          
   ?>
+       <form method="GET" action="videPanier.php">
+        <button class="btn btn-info">Vider mon panier</button>
+        </form>
         </div>
       </div>
     <a href="crea_recette_suite.php">Retour</a>

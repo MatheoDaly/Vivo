@@ -22,7 +22,7 @@ while($i<sizeof($_SESSION['Recette'])){
   $dataEi = $bd->query($ingr);
   $i+=1;
 }
-//unset($_SESSION['Recette']);
+unset($_SESSION['Recette']);
 echo('<meta http-equiv="refresh" content="50; URL=CreationMenuSuite.php">');
 
 
