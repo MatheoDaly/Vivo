@@ -23,7 +23,7 @@ while($i<sizeof($_SESSION['Recette'])){
   $i+=1;
 }
 unset($_SESSION['Recette']);
-echo('<meta http-equiv="refresh" content="50; URL=CreationMenuSuite.php">');
+echo('<meta http-equiv="refresh" content="0; URL=CreationMenuSuite.php">');
 
 
 
