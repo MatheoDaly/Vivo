@@ -130,8 +130,9 @@ session_start();
     }
 
   }
-  echo('<div class="creaRecette">');
     ?>
+    <div class ="row">
+    <div class="col-5 m-1">
     <form action="crea_recette_suite.php" method="get">
         <?php
   echo('<input type="text" class = "form-control" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
@@ -141,12 +142,13 @@ session_start();
         </textarea>
         <input type='submit' class = "btn btn-primary" value='Valider la recette'>
     </form>
+        </div>
+        <div class="col-5 m-1">
     <?php
-  echo('</div>');
   if (isset($_SESSION['Recette'])){
   
   echo('Vous avez choisit : ');
-  echo '<ul class="list-group col-6 text-dark">';
+  echo '<ul class="list-group text-dark">';
   $i=0;
   while($i<sizeof($_SESSION['Recette'])){
     $panier = $_SESSION['Recette'][$i]['nom'];
@@ -157,7 +159,8 @@ session_start();
   }
 
   ?>
-   
+        </div>
+      </div>
     <a href="crea_recette_suite.php">Retour</a>
     <a href="crea_recette_suite.php">Valider</a>
     </div>
