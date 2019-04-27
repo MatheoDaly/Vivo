@@ -6,6 +6,8 @@
 // pas besoin de js on utilisera une inclusion du code php via la fonction include !
 /*
 
+############################################################## Le booléan $testgene dans Istest.php à l'interieur d'outil permet de voir toutes les requetes actives d'un coups
+
 
 ############################### Minimiser le nombre d'appelle de la page En attente de racordement !
 Type :
