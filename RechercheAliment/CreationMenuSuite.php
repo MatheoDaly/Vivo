@@ -193,7 +193,7 @@ session_start();
       <?php
 
       if(isset($_GET['submit1']) && $_GET['type']=='Aliment' && isset($_GET['Menu'])){
-        echo($_GET['Menu']);
+        echo('<p>Vous avez recherché : '.$_GET['Menu'].'</p>');
         if(empty($_GET['Menu'])){
           echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
         }else {
