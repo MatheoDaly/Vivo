@@ -124,18 +124,21 @@ include_once "Fonctions_alim.php";
 
                 <?php if(isset($_SESSION['Rec_Plat'])){ ajoutAlimInd($result['Nom']); }else{  $_SESSION['Rec_Plat']= $result['Nom'];  }  ?>
 
+                
+                <div class="col-5">
                 <label for="date">Choisissez un jour où le manger !</label>
-                <div class="input-group date p-2" data-provide="datepicker">
+                <div class="input-group col-7 date p-2" data-provide="datepicker">
                     <input type="date" name="date<?php echo $i; ?>" value="" class="form-control"></div>
-                <div class="p-2">
+                <div class="col-5 p-2">
                     <label for="nbMenu">Choisissez une heure !</label>
                     <input type="number" class="form-control" name="heure<?php echo $i; ?>" placeholder="Format européen (e.g., 13, 18, 09, 24)" />
                 </div>
+                </div>
+            </div>
                 <?php $i++; } ?>
                 <!--##########################################################!-->
 
 
-            </div>
             <input type="button" id="ajout3" class="btn btn-primary" value="Choisir">
 
             <input type="hidden" name="nbtypeMenue" id="nbtypeMenue" value="<?php echo $i; ?>">
