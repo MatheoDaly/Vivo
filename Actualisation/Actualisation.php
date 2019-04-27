@@ -29,7 +29,7 @@ if(!isset($Visiteur)){
 }
 
 
-if(isset($Profil)){
+if(isset($Profil) || $testGene){
 
     // met à jout les données statistique, c'est ici que la magie opère !
     
@@ -37,7 +37,7 @@ if(isset($Profil)){
 ############################# fonction menu_Profil -> Historique_Aliment  ###########################################################
 ##################################
     
-    $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.alim_code AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu
+    $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.id_aliment AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu
 INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
 INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
 WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
