@@ -18,7 +18,7 @@ function setHistorique($BD, $moment){
     
     $nbVar=10;
     //$nbVar est entre 1 et 4 variable à ajouté depend de la taille de liste !
-$req = $BD->query('SELECT alim_code AS "c" FROM `aliments` LIMIT '.$nbVar);
+$req = $BD->query('SELECT alim_code AS "c" FROM `aliments`ORDER BY RAND() LIMIT '.$nbVar);
 $liste=array();
     
 while($ligne=$req->fetch()){
@@ -36,7 +36,7 @@ while($ligne=$req->fetch()){
         }
     echo "Set historique crée";
     }
-//setHistorique($BD, 'F');
+//setHistorique($BD, 'P');
 
 //####################Reseignement liste concentration : $liste=array("Calorie", "Proteine", "Glucide", "Alcool")
 
