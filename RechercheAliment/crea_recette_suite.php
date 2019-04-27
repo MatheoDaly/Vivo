@@ -42,15 +42,12 @@ while($i<sizeof($_SESSION['Recette'])){
   }
   $i+=1;
 }
-echo $nomR;
-echo $instr;
-echo $sumKcal;
-echo $sumProt;
+
 //echo("INSERT INTO `recette_plat`(`nom`,`instructions`,`kcal`, `protéines`,`Id_User_Crea`) VALUES ('$nomR','$instr',$sumKcal,$sumProt,1)");
 $q = "INSERT INTO `recette_plat`(`nom`, `instructions`,`kcal`, `protéines`,`Id_User_Crea`) VALUES ('".$nomR."','".$instr."','".$sumKcal."','".$sumProt."','1')";
 $insert = $bd->query($q);
 
-echo('<meta http-equiv="refresh" content="50; URL=crea_recette_suite_fin.php">');
+echo('<meta http-equiv="refresh" content="0; URL=crea_recette_suite_fin.php">');
 
 
  ?>
