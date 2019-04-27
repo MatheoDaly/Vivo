@@ -75,6 +75,8 @@ include_once "Fonctions_alim.php";
     </div>
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
         <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
+          <img src="../Image/Icon/icons8-serveur-64.png"/>
+           <h2>Recherchez un Menu !</h2>
             <div class="form-group col-6 mx-auto">
                 <input type="text" class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
             </div>
