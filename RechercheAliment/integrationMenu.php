@@ -20,6 +20,11 @@
  $bd = getBD();
  $query = "INSERT INTO `menu`(`Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (1,1,'$nom')";
  $bd->exec($query);
+$q = "SELECT MAX(Id_Menu) AS id FROM menu";
+ $req = $bd->exec($q);
+$ligne=$req->fetch();
+$idMenu=$ligne['id'];
+$req->closeCursor();
  $i=0;
  while($i<sizeof($_SESSION['alimentC'])){
    $tempo = $_SESSION['alimentC'][$i];
@@ -29,7 +34,7 @@
    //$data = $bd->query("SELECT * FROM aliments WHERE alim_code = $id_alim ");
    //echo("INSERT INTO `est_ingredient_de`(`id_recette`, `alim_code`,`quantite`) VALUES ($idr2,$id_alim,$nb)");
    //echo("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
-   $bd->exec("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
+   $bd->exec("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES ($idMenu,$id_alim)");
    //$dataEi = $bd->query("INSERT INTO `compose`(`id_menu`, `id_recette`) VALUES (1,$id_alim)");
    $i+=1;
  }
