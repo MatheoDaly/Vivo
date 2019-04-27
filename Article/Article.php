@@ -61,17 +61,18 @@ $BD=GetBD();
 </header>
 
 <body>
-
-
-    <h1 style="text-align:center;">Mes articles</h1>
-    <div class="container justify-content-center rounded" id="TableProfil">
-        <div class="row">
+    <div class="col-10 mx-auto text-center">
+        <img src="../Image/Icon/icons8-nouvelles-128.png"/>
+        <h1 style="text-align:center;">Mes articles</h1>
+    </div>
+    <div class="container text-center rounded" id="TableProfil">
+        <div class="row p-3 mx-auto">
             <?php
             $req=$BD->query("SELECT * FROM article");
             $i=0;
             while($ligne=$req->fetch()){ 
             ?>
-            <div class="col-5 bg-white rounded m-1 p-3">
+            <div class="col-5 bg-white rounded text-center m-1 p-3">
                 <a href="<?php echo $ligne["Url"]; ?>">
                     <?php echo $ligne["Nom"]; ?>
                     <img src="../Image/Article/Article<?php echo $i%2; $i++; ?>.png" style="width:150px; height:150px" alt="Article<?php echo $i%2; ?>">
