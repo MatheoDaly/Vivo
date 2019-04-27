@@ -4,36 +4,13 @@ $(document).ready(function () {
             $('#EnvoieMenue').serialize(),
             function (data) {
                 alert(data); //$('#ajout3').animate({backgroundColor: green}, 1000);
-                if (data == "check") {}
+                if (data == 1) {
+                    alert('Votre menu a bien été enregistré');
+                } else {
+                    alert("Votre menu n'a pas été enregistré");
+
+                }
             });
 
     });
 });
-
-
-// reflechir a la création dynamique de clés !
-function creationSet() {
-    data = {};
-    name = [];
-    for (var i = 0; i < $('#nbtypeMenue').val(); i++) {
-        name.push("date" + i);
-    }
-
-    for (var i = 0; i < $('#nbtypeMenue').val(); i++) {
-        //($date, $heure, $id_menu, $id_profil)
-        data.push({
-            'name': $("#date" + i).val(),
-            "heure": $("#heure" + i).val(),
-            "idMenu": $("#Menu" + i).val()
-        });
-    }
-    return data;
-}
-
-/*
-("date" + toString(i)): $("#date" + i).val(),
-            ("heure" + toString(i)): $("#heure" + i).val(),
-            ("idMenu" + toString(i)): $("#Menu" + i).val()
-
-
-*/
