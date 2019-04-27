@@ -16,7 +16,7 @@ $(function () {
             type: $('select').val()
         }, function (data) {
             //alert(data);
-            if (JSON.parse(data).length == 0) {
+            if (data == "[[]]") {
                 alert("Pas de repas encore effectuer !");
                 $(location).attr('href', '../Profil/Profil.php');
             }
