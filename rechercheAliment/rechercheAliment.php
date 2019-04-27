@@ -8,12 +8,12 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="StyleBis.css" type="text/css">
+    <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="../index.html">Vivo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,6 +43,8 @@ session_start();
 <body>
    <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
     <form method="get" action="rechercheAliment.php" autocomplete="on" id="optionForm">
+    <img src="../Image/Icon/icons8-ingr%C3%A9dients-96.png" class="w-30"/>
+       <h2>Recherchez un Aliment !</h2>
      <div class="form-group col-6 mx-auto">
       <input type="text"  class="form-control" name="Alim" placeholder="Laissez-vous guider par vos envies !">
       </div>
@@ -132,26 +134,27 @@ session_start();
     ?>
     <form action="crea_recette_suite.php" method="get">
         <?php
-  echo('<input type="text" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
+  echo('<input type="text" class = "form-control" name="nomRecette" id="nomRecette" placeholder="Nom de la recette">');
   ?>
-        <textarea name="instructions" rows="10" id="instructions" cols="85">
+        <textarea name="instructions"  class="form-control"rows="10" id="instructions" cols="85">
  Composer votre recette:
         </textarea>
-        <input type='submit' value='Valider la recette'>
+        <input type='submit' class = "btn btn-primary" value='Valider la recette'>
     </form>
     <?php
   echo('</div>');
-
-  print_r($_SESSION['Recette']);
-  echo('Vous avez choisi');
+  if (isset($_SESSION['Recette'])){
+  
+  echo('Vous avez choisit : ');
+  echo '<ul class="list-group col-6 text-dark">';
   $i=0;
   while($i<sizeof($_SESSION['Recette'])){
     $panier = $_SESSION['Recette'][$i]['nom'];
-    echo $panier;
-    echo('<br/>');
+    echo '<li class="list-group-item">'.$panier.'</li>';
     $i=$i+1;
   }
-
+      echo '</ul>';
+  }
 
   ?>
     <a href="crea_recette_suite.php">Retour</a>
