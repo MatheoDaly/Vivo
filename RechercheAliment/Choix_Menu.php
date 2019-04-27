@@ -17,7 +17,7 @@ include_once "Fonctions_alim.php";
     <script src="Choix_Menu.js" type="text/javascript"></script>
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="../index.html">Vivo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,24 +52,26 @@ include_once "Fonctions_alim.php";
     $top5 = $bd->query("SELECT * FROM menu ORDER BY menu.Popularité LIMIT 5");
     $i = 1;
     while($ligne = $top5 ->fetch()){
-        if($i == 1){
-            echo '<div class="col-6 col-md-2 bg-primary text-light p-3  rounded">';
-        }else if($i ==2){
-            echo '<div class="col-6 col-md-2 bg-info text-light p-3 rounded">';
-        }else if($i ==3){
-            echo '<div class="col-6 col-md-2 bg-light p-3 rounded">';
-        }else if($i ==4){
-            echo '<div class="col-6 col-md-2 bg-secondary text-light p-3 rounded">';
-        }else if($i ==5){
-            echo '<div class="col-6 col-md-2 bg-dark text-light p-3 rounded">';
-        }
+    if($i == 1){
+      echo '<div class="col-6 col-sm-2 bg-primary text-light p-3 mx-auto m-2  rounded">';
+    }else if($i ==2){
+      echo '<div class="col-6 col-sm-2 bg-info text-light p-3 mx-auto m-2 rounded">';
+    }else if($i ==3){
+      echo '<div class="col-6 col-sm-2 bg-light p-3 m-2 mx-auto rounded">';
+    }else if($i ==4){
+      echo '<div class="col-6 col-sm-2 bg-secondary text-light mx-auto p-3 m-2 rounded">';
+    }else if($i ==5){
+      echo '<div class="col-6 col-sm-2 bg-dark text-light mx-auto p-3 m-2 rounded">';
+    }
         echo '#'.$i;
         echo('<form method="GET" action="Choix_Aliment.php">');
         echo('<div class="form-group"><label for ="nbMenu">'.$ligne['Nom'].'</label><input type="number" class="form-control" name="nbMenu" placeholder="Combien en voulez-vous ?"></div>');
         echo('<input type="submit" class="btn btn-primary" name="ajout2" value="Choisir"></form></div>');
         $i++;
     }
-    $top5 ->CloseCursor(); ?>
+    $top5 ->CloseCursor(); 
+        
+        ?>
     </div>
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
         <form method="get" action="Choix_Menu.php" autocomplete="on" id="optionForm">
