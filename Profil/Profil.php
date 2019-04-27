@@ -5,14 +5,16 @@ $Visiteur=true;
 
 include("../Outil/IsTest.php");
 
-include("../Outil/php/AccesBD.php");
-$BD=getBD();
-if ($testGene || isset($_SESSION['profil']))  include("../Actualisation/Actualisation.php");
 
 if($testStats==true){
         include("../Outil/Php/CreationSet.php");
         setHistorique($BD, 'F');
+} else {   
+include("../Outil/php/AccesBD.php");
+$BD=getBD();
 }
+
+if ($testGene || isset($_SESSION['profil']))  include("../Actualisation/Actualisation.php");
 
 if(isset($_POST['change']) && $_POST['change']=='yes'){
  include("ModificationProfil/IntegrationPhoto.php");

@@ -43,7 +43,7 @@ if(isset($Profil) || $testGene){
 INNER JOIN recette_plat ON compose.id_recette = recette_plat.Id_Recette
 INNER JOIN est_ingredient_de ON recette_plat.Id_Recette = est_ingredient_de.id_recette
 WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actualisation"]."' AND NOW()";
-    if($testGene) echo $q."<br>";
+    if(isset($testGene) && $testGene) echo $q."<br>";
     $req= $BD->query($q);
     while($ligne = $req->fetch()){
         $BD->query("INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )");
@@ -75,7 +75,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
         WHERE historique_aliment.ID_Profil = ".$Profil["ID"]."
         AND Date BETWEEN '".$Profil["actualisation"]."' AND NOW()
         GROUP BY historique_aliment.Date, historique_aliment.Repas";
-    if($testGene) echo $q;
+    if(isset($testGene) && $testGene) echo $q;
     $req = $BD->query($q);
     
     while($ligne = $req->fetch())
@@ -102,20 +102,20 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
             if ($i==4) {$temps="YEAR(date)";$distance=" YEAR(NOW())=YEAR(date) ";}
         }
     $q="DELETE FROM statistique WHERE ID_Profil = ".$Profil["ID"]." AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom";
-        if($testGene) echo $q.'<br>';
+        if(isset($testGene) && $testGene) echo $q.'<br>';
     $BD->query($q); 
         
         $q="SELECT id_Concentration AS 'Nom', MAX(date) AS 'date', ".$calcul." AS concentration
     FROM statistique
     WHERE ID_Profil = ".$Profil["ID"]."
     AND type = ".$i." AND ".$distance." GROUP BY ".$temps." , Nom ";
-        if($testGene) echo $q.'<br>';
+        if(isset($testGene) && $testGene) echo $q.'<br>';
     $req = $BD->query($q);
         
         
         while($ligne = $req->fetch()){
             $q="INSERT INTO statistique VALUES (".($i+1).", null, :Nom, :concentration, :Date, :ID)";
-            if($testGene) echo '<br>'.$q.'<br>';
+            if(isset($testGene) && $testGene) echo '<br>'.$q.'<br>';
             $req1 = $BD->prepare($q);
             $req1->execute(array(
             'Nom'=>$ligne['Nom'],
@@ -157,7 +157,7 @@ WHERE menu_profil.id_profil=".$Profil["ID"]." and date BETWEEN '".$Profil["actua
 function ajoutConcentration ($type, $BD, $Repas, $taux, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", ".$type.", ".$taux.", '".$date."', ".$id.")";
-        if($testGene) echo $q."<br>";
+        if(isset($testGene) && $testGene) echo $q."<br>";
         $req1 = $BD->query($q);
         $req1->closeCursor();
     }
@@ -165,7 +165,7 @@ function ajoutConcentration ($type, $BD, $Repas, $taux, $date, $id){
 function ajoutAliment ($type, $BD, $Repas, $concentration, $date, $id){
         // A revoir l'optimisation
         $q = "INSERT INTO statistique VALUES (1, ".$Repas.", '".$type."', ".$concentration.", '".$date."', ".$id.")";
-        if($testGene) echo $q."<br>";
+        if(isset($testGene) && $testGene) echo $q."<br>";
         $req1 = $BD->query($q);
     $req1->closeCursor();
     }
