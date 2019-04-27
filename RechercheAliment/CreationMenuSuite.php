@@ -235,7 +235,7 @@ session_start();
             }
 
             while($result = $reponse->fetch()){
-            echo '<div class="row"><div class="col-6">';
+              echo '<div class="row"><div class="col-6">';
               echo('<form method="GET" action="test.php">');
               echo('<div class="form-group col-12 col-sm-6 border border-warning p-2 rounded">');
               echo($result['alim_nom_fr']);
@@ -250,8 +250,17 @@ session_start();
               echo('">');
               echo('<input type="number" class="form-control" placeholder="Combien en voulez-vous ?" name="nbAl"></div>');
               echo('<input type="submit" class="btn btn-primary" name="choix" value="Choisir">');
-
               echo('</form></div>');
+              echo '<div class="col-6">';
+              $regime = $bd ->query('SELECT DISTINCT regime.Nom, regime.urlRegime FROM regime_sans_aliment, regime WHERE regime_sans_aliment.id_Aliment ='.$result['alim_code'].' AND regime.id = regime_sans_aliment.id_Regime');
+              while($ligne = $regime ->fetch()){
+                echo '<img src="../Image/Regime/'.$ligne['urlRegime'].'">';
+                echo $ligne['Nom'];
+                }
+              echo '</div>';
+              $regime->closeCursor();
+
+              
               echo '</div>' ;
             }
             $reponse-> closeCursor();
