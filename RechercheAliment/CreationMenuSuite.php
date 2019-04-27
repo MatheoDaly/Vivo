@@ -329,7 +329,9 @@ session_start();
             }
 
             while($result = $reponse->fetch()){
+              echo '<div class="row"><div class="col-6">';
               echo('<form method="GET" action="test.php">');
+              echo('<div class="form-group col-12 col-sm-10 border border-warning p-2 rounded">');
               echo($result['nom']);
               echo('<br />');
               echo('<div class="rechAlim">');
@@ -341,16 +343,18 @@ session_start();
               $nom = $result['nom'];
               echo($nom);
               echo('">');
-              echo('<input type="number" name="nbAl">');
+              echo('<input type="number" class="form-control" placeholder="Combien en voulez-vous ?" name="nbAl">');
               echo('<input type="submit" class="btn btn-primary" name="choix" value="Choisir">');
-              echo('</div>');
+              echo('</div></div>');
               echo('</form>');
+              echo'</form></div>';
+              echo '<div class="col-5">';
               echo('<form method="GET" action="page_recette.php">');
               echo('<input type="submit" class="btn btn-primary" name="choix" value="Voir recette">');
               echo('<input type="hidden" name="id_aliment" value="');
               echo($a);
               echo('">');
-              echo('</form>');
+              echo('</form></diV></div>');
             }
             $reponse-> closeCursor();
           }
