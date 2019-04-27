@@ -157,11 +157,14 @@ session_start();
     $i=$i+1;
   }
       echo '</ul>';
-  }          
-  ?>
-       <form method="GET" action="videPanier.php">
-        <button class="btn btn-info">Vider mon panier</button>
-        </form>
+  }      
+            
+    if(!empty($_SESSION['Recette'])){
+        echo'<form method="GET" action="videPanier.php">';
+        echo'<button class="btn btn-info">Vider mon panier</button>';
+        echo'</form>';
+    }
+    ?>
         </div>
       </div>
     <a href="crea_recette_suite.php">Retour</a>
