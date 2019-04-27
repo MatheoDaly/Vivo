@@ -18,8 +18,7 @@ body {
 .creaRecette {
 
    position: fixed;
-   top: 100px;
-   bottom: 100px;
+   top: 150px;
    right: 300px;
    left: 600px;
 }
