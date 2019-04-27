@@ -227,7 +227,8 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
     <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
         <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
             <h1 class="text-light text-center border border-primary">Menu</h1>
-            <div class="col-10 bg-light mx-auto">
+            <div style="height: 500px; overflow-y: scroll;">
+            <div class="col-10 bg-light mx-auto rounded ">
                 <!-- Automatiser la gestion du tableau!-->
                 <?php 
                     /* j'execute ma requete, je recupere le nombre de ligne pour ferme le tableau
@@ -293,6 +294,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <a href='../RechercheAliment/Choix_Menu.php'></a>
 
             </div>
+        </div>
 
         </div>
         <?php if($entre){ ?>
