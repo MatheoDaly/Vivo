@@ -45,7 +45,7 @@ if(isset($Profil) || $testGene){
     while($ligne = $req->fetch()){
         $q="INSERT INTO historique_aliment VALUE (".$ligne['heure'].",".$ligne['CodeAli'].",".$ligne['Quant'].", ".$Profil["ID"].",'".$ligne['Date']."' )";
         if(isset($testGene) && $testGene) echo $q."<br>";
-        $BD->query();
+        $BD->query($q);
         
     } $req->closeCursor();
     $q="UPDATE menu_profil SET isAdd=1 where id_profil=".$Profil["ID"];
