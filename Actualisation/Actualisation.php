@@ -51,6 +51,9 @@ if(isset($Profil) || $testGene){
     $q="UPDATE menu_profil SET isAdd=1 where id_profil=".$Profil["ID"];
     if(isset($testGene) && $testGene) echo $q."<br>";
     $BD->query($q);
+    $q="DELETE From menu_profil where date<DATE(NOW()) AND id_profil=".$Profil["ID"]; //
+    if(isset($testGene) && $testGene) echo $q."<br>";
+    $BD->query($q);
     
     
     
