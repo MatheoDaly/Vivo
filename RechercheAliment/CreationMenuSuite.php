@@ -175,6 +175,9 @@ session_start();
           <br />
           Recette
           <input type="radio" name="type" value="Recette">
+          <br />
+          Afficher toutes les recettes
+          <input type="radio" name="type" value="AllRecettes">
           <p>Options de recherche : </p>
           <label class="form-ckeck-label" for="popularite">Popularité : </label>
           <input class="form-check-label" type="radio" name="option" id="popularite" value="Popularité" checked>
@@ -185,7 +188,6 @@ session_start();
 
 
         <input type="submit" class="btn btn-primary" name="submit1" value="Rechercher">
-        <input type="submit" class="btn btn-primary" name="submit2" value="Afficher toutes les recettes">
       </form>
     </div>
     <div class="bg-dark text-light col-10 mx-auto rounded p-3 mt-3">
@@ -367,7 +369,7 @@ session_start();
       //  DEPLACEMENT DE CHOIX_ALIMENT.php
 
         
-         elseif (isset($_GET['submit2']) && (isset($_GET['Menu']))){
+         elseif (isset($_GET['submit1']) && ($_GET['type']=='AllRecette' && isset($_GET['Menu']))) {
           echo($_GET['Menu']);
         if(empty($_GET['Menu'])){
           echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
@@ -390,7 +392,7 @@ session_start();
 
           //  DEPLACEMENT DE CHOIX_ALIMENT.php
           $bd = getBD();
-          if(isset($_GET['submit2']) || isset($_GET['Menu']) ){
+          if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
 
             if(empty($_GET['Menu'])){
               echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
