@@ -161,12 +161,12 @@ session_start();
 
 <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
   <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
-    <div class="form-group col-6 mx-auto">
-    </div>
     <div class="partie_recherche bg-light rounded col-10 mx-auto text-center p-3">
       <form method="get" action="CreationMenuSuite.php" autocomplete="on" id="optionForm">
-        <div class="form-group col-6 mx-auto">
-            <h2>Recherchez un Aliment, ou une Recette !</h2>
+      <img src="../Image/Icon/icons8-ingr%C3%A9dients-96.png" class="w-30"/>
+      <img src="../Image/Icon/icons8-manuel-utilisateur-96.png" class="w-30"/>
+       <h2>Recherchez un Aliment, ou une Recette !</h2>
+        <div class="form-group col-6 mx-auto">           
           <input type="text" class="form-control" name="Menu" placeholder="Laissez-vous guider par vos envies !">
         </div>
         <div class="form-check">
