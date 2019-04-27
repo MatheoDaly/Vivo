@@ -52,12 +52,23 @@
 <body>
     <img src="Image/head.png" class="img-responsive w-100" />
     <div class="container-fluid" style="background-color: rgb(5, 164, 180); width: 100%; margin: 0;">
-        <a href="Connection/connexion.php">
-            <div class="row padding-left">
-                <img src="Image/avatar-1295406_640.png" class="img-responsive" style="margin-top: 50px;" />
-                <h3 style="color: white; margin-top: 50px">Accédez à votre profil</h3>
-            </div>
-        </a>
+       <?php 
+        if(isset($_SESSION['profil']) && !$testGene){
+            echo '<a href ="Profil/Profil.php">';
+            echo '<div class="row padding-left">';
+            echo '<img src="Image/avatar-1295406_640.png" class="img-responsive" style="margin-top: 50px;" />';
+            echo '<h3 style="color: white; margin-top: 50px">Accédez à votre profil</h3>';
+            echo '</div>';
+        echo '</a>';
+        }else{
+            echo '<a href="Connection/connexion.php">';
+            echo '<div class="row padding-left">';
+            echo '<img src="Image/avatar-1295406_640.png" class="img-responsive" style="margin-top: 50px;" />';
+            echo '<h3 style="color: white; margin-top: 50px">Connectez vous à votre profil</h3>';
+            echo '</div>';
+            echo '</a>';  
+        }
+            ?>
         <div class="row justify-content-end">
             <h3 style="color: white; margin-right: 100px;">Suivez nous sur...</h3>
         </div>
