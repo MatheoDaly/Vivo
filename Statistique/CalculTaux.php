@@ -1,31 +1,28 @@
 <?php
 
-session_start();
+
+include(   "../Outil/IsTest.php");
 
 $testStats=false;
 if($testStats){   
 include("../Outil/Php/CreationSet.php");
 setHistorique($BD, 'P');
+} else {   
+include('../Outil/Php/AccesBd.php');
+$BD = getBD();
 }
 
-if(isset($_SESSION["profil"])){
-$id=$_SESSION["profil"]['ID'];
-} else {
-$id=1;
-}
 ## J'ai fini la dynamique du tableau !
 // Cela me sert seulement pour teste ma fonction en js
 // je veux un format retour tel que echo json_ecode(array(array("Ma concentration", array(Valeur1, Valeur2, Valeur3, etc))))
 // Retourne moi bien le meme nombre de donnees pour chaque types !
-include('../Outil/Php/AccesBd.php');
-$BD = getBD();
 
 
 
 if (isset($_POST['type']) && $_POST['type']<6 && $_POST['type']>0){
-    echo json_encode(CalculTaux($id, $BD, $_POST['type']));
+    echo json_encode(CalculTaux($Profil['ID'], $BD, $_POST['type']));
 }
-    //echo json_encode(CalculTaux(1, $BD, 4));
+    if(isset($testGene) && $testGene) echo json_encode(CalculTaux(1, $BD, 4));
 
 
 
@@ -38,7 +35,7 @@ function CalculTaux ($id, $BD, $type){
     if($type == 1){
     // tu recupere l'id via la session ! // la fin a parti de group by et inutile car Actualisation t'as deaj prepare les données !
 $q="SELECT concentration.Nom,NumRepas,TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where date=DATE(NOW()) AND ID_Profil=".$id." AND type=".$type." GROUP by NumRepas,Nom ORDER by Nom, NumRepas";
-       // echo $q;
+       if(isset($testGene) && $testGene) echo $q;
     $req = $BD->query($q);
     $taux=array();
     array_push($taux, null);
@@ -101,7 +98,7 @@ else if($type == 4) {
 
 if($type>1){
     $q= "SELECT DISTINCT ".$date." AS date,concentration.Nom, TauxCumule from statistique INNER JOIN concentration ON concentration.id=statistique.id_Concentration where ID_Profil=".$id." AND type=".$type." and TIMESTAMPDIFF(".$time.",NOW(),date) BETWEEN ".$diff." and 0 GROUP BY date ORDER by Nom,date LIMIT ".$lim;
-    //echo $q;
+    if(isset($testGene) && $testGene) echo $q;
     $req = $BD->query($q);
     $taux=array();
     $heure=array();
@@ -126,9 +123,9 @@ if($type>1){
             $entre=false;
             array_push($heure, $ligne['date']);
         }
-        //echo '<br>';
-        //print_r($taux);
-        //echo '<br>';
+        if(isset($testGene) && $testGene) echo '<br>';
+        if(isset($testGene) && $testGene) print_r($taux);
+        if(isset($testGene) && $testGene) echo '<br>';
         
     }
     $taux[0]= $heure;
@@ -142,7 +139,7 @@ $req->closeCursor();
 
 
 if(isset($_POST['today'])){
-echo json_encode(camembert("Mes calories aujourd'hui", $BD, $id)); 
+echo json_encode(camembert("Mes calories aujourd'hui", $BD, $Profil['ID'])); 
 } 
 //echo json_encode(camembert("calorie", $BD, 1)); 
 
@@ -155,7 +152,7 @@ $nom = array();
 
 $q="SELECT aliments.alim_nom_fr AS 'Nom',historique_aliment.quantite*aliments.Energie_Règlement_UE_N°_11692011_kcal100g AS 'calorie' FROM `historique_aliment` INNER JOIN aliments ON aliments.alim_code=historique_aliment.ID_ingredient
 WHERE historique_aliment.Date = DATE(NOW()) AND historique_aliment.ID_Profil=".$id;
-    //echo $q;
+    if(isset($testGene) && $testGene)  echo $q;
 $req = $BD->query($q);
     
     while($ligne=$req->fetch()){
