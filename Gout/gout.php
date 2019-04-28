@@ -150,8 +150,9 @@ if(isset($_GET['submit'])){
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded">
+            <div class="col-10 col-lg-5 m-3 mx-auto text-light rounded text-center p-5" style="background-color: rgba(0, 0, 0, 0.6);">
                 <div>
+                   <img src="../Image/Icon/icons8-ingr%C3%A9dients-96.png">
                     <h1>Mes régimes</h1>
 
                     <form method="get" action="Gout.php">
@@ -169,6 +170,7 @@ if(isset($_GET['submit'])){
 
                 </div>
                 <div>
+                   <img src="../Image/Icon/icons8-lol-100.png">
                     <h1>Aliment Préférés</h1>
 
                     <form method="get" action="Gout.php">
@@ -186,6 +188,7 @@ if(isset($_GET['submit'])){
 
                 </div>
                 <div>
+                   <img src="../Image/Icon/icons8-en-col%C3%A8re-100.png">
                     <h1>Aliment detestés</h1>
 
                     <form method="get" action="Gout.php">
@@ -203,7 +206,7 @@ if(isset($_GET['submit'])){
 
                 </div>
             </div>
-            <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded"    >
+            <div class="col-10 col-lg-6 mx-auto text-light rounded m-3 p-5" style="background-color: rgba(0, 0, 0, 0.6);">
                 <div>
                     <h1>Régimes disponibles</h1>
                     <form method="get" action="Gout.php">
@@ -222,10 +225,10 @@ if(isset($_GET['submit'])){
                 <div>
                     <h1>Aliments disponibles</h1>
                     <div class="partie_recherche">
-                    <form method="get" action="Gout.php" autocomplete="off" id="optionForm">
+                    <form class="form-group col-6" method="get" action="Gout.php" autocomplete="off" id="optionForm">
                       <br/>
-                      <input type="text" name="Alim">
-                      <input type="submit" name="submit" value="Rechercher">
+                      <input type="text" class="form-control" name="Alim">
+                      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
                     </form>
                     <?php
                       if(isset($_GET['Alim'])){
