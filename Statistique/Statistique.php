@@ -22,6 +22,7 @@ include("../Outil/IsTest.php");
     echo ' de '.$Profil["prenom"];
     }
         ?></title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
 
 </head>
 
