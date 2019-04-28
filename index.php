@@ -1,4 +1,7 @@
 <!doctype html>
+<?php
+include("Outil/IsTest.php");
+?>
 <html lang="fr">
 
 <head>
