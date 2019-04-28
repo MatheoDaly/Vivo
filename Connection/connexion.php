@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.css" />
     <link href="../Outil/Style/Style.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
 
 </head>
 <header>
