@@ -134,7 +134,6 @@ if(isset($_GET['submit'])){
                 <li class="nav-item">
                     <a class="nav-link" href="../Article/Article.php">Nos articles</a>
                 </li>
-                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                 </li>
@@ -144,14 +143,6 @@ if(isset($_GET['submit'])){
                 <li class="nav-item">
                     <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
                 </li>
-                <?php } else { ?>
-                <li class="nav-item">
-                    <a class="nav-link active" href="../Inscription/inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Connection/connexion.php">Connexion</a>
-                </li>
-                <?php } ?>
                 
 
             </ul>
