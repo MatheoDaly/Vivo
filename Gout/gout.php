@@ -172,7 +172,7 @@ if(isset($_GET['submit'])){
                     <h1>Aliment Préférés</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=0)");
+                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=0)");
                     $i=0;
                     while($ligne = $req->fetch()){
                         echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
@@ -189,7 +189,7 @@ if(isset($_GET['submit'])){
                     <h1>Aliment detestés</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=1)");
+                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
                                 echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
