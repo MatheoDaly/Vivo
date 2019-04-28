@@ -30,7 +30,7 @@ if(isset($_GET['submit'])){
             while(!$fin){
                 if(isset($_GET[$j])){
                     $pref=0;
-                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
+                    $req=$BD->query("INSERT INTO preferance (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
                     $fin=true;
                 }
                 $j+=1;
@@ -47,7 +47,7 @@ if(isset($_GET['submit'])){
             while(!$fin){
                 if(isset($_GET[$j])){
                     $pref=1;
-                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
+                    $req=$BD->query("INSERT INTO preferance (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
                     $fin=true;
                 }
                 $j+=1;
@@ -83,7 +83,7 @@ if(isset($_GET['submit'])){
                 while(!$fin){
                     if(isset($_GET[$j])){
                         $pref=$_GET['type']-2;
-                        $req=$BD->query("DELETE FROM preference WHERE id_Profil=".$Profil['ID']." and id_Aliment=".$_GET[$j]." and pref=".$pref."");
+                        $req=$BD->query("DELETE FROM preferance WHERE id_Profil=".$Profil['ID']." and id_Aliment=".$_GET[$j]." and pref=".$pref."");
                         $fin=true;
                     }
                     $j+=1;
