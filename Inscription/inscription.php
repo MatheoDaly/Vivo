@@ -3,6 +3,7 @@
 
 <head>
     <title>Vivo</title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="../Outil/Style/Style.css" rel="stylesheet">
@@ -10,7 +11,7 @@
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.php">Vivo</a>
+        <a class="navbar-brand" href="../index.php">Vivo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
