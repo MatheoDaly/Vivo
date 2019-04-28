@@ -12,14 +12,14 @@ if(isset($_POST["nbtypeMenue"])){
             $add=ajouter($_POST['date'.((string)$i)], $_POST['heure'.((string)$i)], $_POST['Menu'.((string)$i)],$Profil['ID'], $BD);
         }
     }
-}
 echo $add;
+}
 //--------------------------------------------Partie fonction
 
 function ajouter($date, $heure, $id_menu, $id_profil,$BD){
 
 $q = "INSERT INTO menu_profil(date, heure, id_menu, id_profil) VALUES ('".$date."','".$heure."', '".$id_menu."', '".$id_profil."');";
-echo $q;
+//echo $q;
 $BD = getBD();
 $BD->query($q);
 return 1;

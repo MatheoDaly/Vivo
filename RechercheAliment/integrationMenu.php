@@ -20,8 +20,8 @@
  $bd = getBD();
  $query = "INSERT INTO `menu`(`Id_Profil_Crea`, `Popularité`, `Nom`) VALUES (1,1,'$nom')";
  $bd->exec($query);
-$q = "SELECT MAX(Id_Menu) AS id FROM menu";
- $req = $bd->exec($q);
+$q = "SELECT MAX(Id_Menu) id FROM menu";
+ $req = $bd->query($q);
 $ligne=$req->fetch();
 $idMenu=$ligne['id'];
 $req->closeCursor();

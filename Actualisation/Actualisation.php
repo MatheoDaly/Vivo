@@ -39,7 +39,7 @@ if(isset($Profil) || $testGene){
 ############################# fonction menu_Profil -> Historique_Aliment  ###########################################################
 ##################################
     
-    $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.id_aliment AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu INNER JOIN est_ingredient_de ON compose.id_recette = est_ingredient_de.id_recette WHERE menu_profil.id_profil=".$Profil["ID"]." and isAdd!=1 AND date>=DATE(NOW())";
+    $q= "SELECT est_ingredient_de.quantite AS 'Quant', est_ingredient_de.id_aliment AS 'CodeAli', menu_profil.date AS 'Date', menu_profil.heure 'heure' FROM menu_profil INNER JOIN compose ON compose.id_menu = menu_profil.Id_Menu INNER JOIN est_ingredient_de ON compose.id_recette = est_ingredient_de.id_recette WHERE menu_profil.id_profil=".$Profil["ID"]." and isAdd IS NULL AND date>=DATE(NOW())";
     if(isset($testGene) && $testGene) echo $q."<br>";
     $req= $BD->query($q);
     while($ligne = $req->fetch()){

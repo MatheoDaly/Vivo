@@ -2,7 +2,8 @@
 //manque change id=1 avec id=$_SESSION['profil']['id']
 include("../Outil/php/AccesBD.php");
 //include_once "Fonctions_alim.php";
-session_start();
+include("../Outil/IsTest.php");
+
 $BD=getBD();
 if(isset($_GET['submit'])){
     //Ajouter
@@ -13,7 +14,7 @@ if(isset($_GET['submit'])){
             $fin=false;
             while(!$fin){
                 if(isset($_GET[$j])){
-                    $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`) VALUES ('1', '".$_GET[$j]."')");
+                    $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`) VALUES (".$Profil['ID'].", '".$_GET[$j]."')");
                     $fin=true;
                 }
                 $j+=1;
@@ -29,7 +30,7 @@ if(isset($_GET['submit'])){
             while(!$fin){
                 if(isset($_GET[$j])){
                     $pref=0;
-                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES ('1', '".$_GET[$j]."', ".$pref.")");
+                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
                     $fin=true;
                 }
                 $j+=1;
@@ -46,7 +47,7 @@ if(isset($_GET['submit'])){
             while(!$fin){
                 if(isset($_GET[$j])){
                     $pref=1;
-                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES ('1', '".$_GET[$j]."', ".$pref.")");
+                    $req=$BD->query("INSERT INTO preference (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
                     $fin=true;
                 }
                 $j+=1;
@@ -65,7 +66,7 @@ if(isset($_GET['submit'])){
                 $fin=false;
                 while(!$fin){
                     if(isset($_GET[$j])){
-                        $req=$BD->query("DELETE FROM regime_profil WHERE id_Profil=1 and id_Regime=".$_GET[$j]);
+                        $req=$BD->query("DELETE FROM regime_profil WHERE id_Profil=".$Profil['ID']." and id_Regime=".$_GET[$j]);
                         $fin=true;
                     }
                     $j+=1;
@@ -82,7 +83,7 @@ if(isset($_GET['submit'])){
                 while(!$fin){
                     if(isset($_GET[$j])){
                         $pref=$_GET['type']-2;
-                        $req=$BD->query("DELETE FROM preference WHERE id_Profil=1 and id_Aliment=".$_GET[$j]." and pref=".$pref."");
+                        $req=$BD->query("DELETE FROM preference WHERE id_Profil=".$Profil['ID']." and id_Aliment=".$_GET[$j]." and pref=".$pref."");
                         $fin=true;
                     }
                     $j+=1;
@@ -99,7 +100,7 @@ if(isset($_GET['submit'])){
             $fin=false;
             while(!$fin){
                 if(isset($_GET[$j])){
-                    $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`,'start','end') VALUES ('1', '".$_GET[$j]."', '".$_GET['start']."', '".$_GET['end']."')");
+                    $req=$BD->query("INSERT INTO regime_profil (`id_Profil`, `id_Regime`,'start','end') VALUES (".$Profil['ID'].", '".$_GET[$j]."', '".$_GET['start']."', '".$_GET['end']."')");
                     $fin=true;
                 }
                 $j+=1;
@@ -128,7 +129,7 @@ if(isset($_GET['submit'])){
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="../index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
@@ -152,7 +153,7 @@ if(isset($_GET['submit'])){
                     <a class="nav-link" href="../Connection/connexion.php">Connexion</a>
                 </li>
                 <?php } ?>
-                
+
 
             </ul>
             <span class="navbar-text">
@@ -167,11 +168,11 @@ if(isset($_GET['submit'])){
         <div class="row">
             <div class="col-10 col-lg-5 m-3 mx-auto text-light rounded text-center p-5" style="background-color: rgba(0, 0, 0, 0.6);">
                 <div>
-                   <img src="../Image/Icon/icons8-ingr%C3%A9dients-96.png">
+                    <img src="../Image/Icon/icons8-ingr%C3%A9dients-96.png">
                     <h1>Mes régimes</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT * FROM regime WHERE id in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
+                        <?php $req=$BD->query("SELECT * FROM regime WHERE id in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
                         echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>'."\n";
@@ -179,17 +180,17 @@ if(isset($_GET['submit'])){
                     }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="1">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
+                        <input type="hidden" name="type" value="1">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
 
                 </div>
                 <div>
-                   <img src="../Image/Icon/icons8-lol-100.png">
+                    <img src="../Image/Icon/icons8-lol-100.png">
                     <h1>Aliment Préférés</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=0)");
+                        <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=0)");
                     $i=0;
                     while($ligne = $req->fetch()){
                         echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
@@ -197,17 +198,17 @@ if(isset($_GET['submit'])){
                         }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="2">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
+                        <input type="hidden" name="type" value="2">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
 
                 </div>
                 <div>
-                   <img src="../Image/Icon/icons8-en-col%C3%A8re-100.png">
+                    <img src="../Image/Icon/icons8-en-col%C3%A8re-100.png">
                     <h1>Aliment detestés</h1>
 
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=1)");
+                        <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=".$Profil['ID']." and pref=1)");
                     $i=0;
                     while($ligne = $req->fetch()){
                                 echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
@@ -215,8 +216,8 @@ if(isset($_GET['submit'])){
                             }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="3">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
+                        <input type="hidden" name="type" value="3">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Eliminer">
                     </form>
 
                 </div>
@@ -225,7 +226,7 @@ if(isset($_GET['submit'])){
                 <div>
                     <h1>Régimes disponibles</h1>
                     <form method="get" action="Gout.php">
-                    <?php $req=$BD->query("SELECT * FROM regime WHERE id NOT in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
+                        <?php $req=$BD->query("SELECT * FROM regime WHERE id NOT in (SELECT id_Regime FROM regime_profil WHERE id_profil=".$Profil['ID'].")");
                     $i=0;
                     while($ligne = $req->fetch()){
                                 echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['id'].'"> '.$ligne['Nom'].'</p>'."\n";
@@ -233,26 +234,26 @@ if(isset($_GET['submit'])){
                             }
                     $req->closeCursor();
                     ?>
-                    <input type="hidden" name="type" value="1">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Ajouter">
+                        <input type="hidden" name="type" value="1">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ajouter">
                     </form>
                 </div>
                 <div>
                     <h1>Aliments disponibles</h1>
                     <div class="partie_recherche">
-                    <form class="form-group col-6" method="get" action="Gout.php" autocomplete="off" id="optionForm">
-                      <br/>
-                      <input type="text" class="form-control" name="Alim">
-                      <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
-                    </form>
-                    <?php
+                        <form class="form-group col-6" method="get" action="Gout.php" autocomplete="off" id="optionForm">
+                            <br />
+                            <input type="text" class="form-control" name="Alim">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Rechercher">
+                        </form>
+                        <?php
                       if(isset($_GET['Alim'])){
                         if(empty($_GET['Alim'])){
                           echo('<meta http-equiv="refresh" content="0;URL=Gout.php">');
                         }else {
                             ?>
-                            <form method="get" action="Gout.php">
-                             <?php
+                        <form method="get" action="Gout.php">
+                            <?php
                               $input=$_GET['Alim'];
                               //$input = preg_replace("#[^0-9a-z]#i","",$input);
                               $reponse = $BD->query("SELECT * FROM aliments WHERE alim_nom_fr LIKE '%$input%' and alim_grp_code!=1 limit 5");
@@ -266,8 +267,8 @@ if(isset($_GET['submit'])){
                             <input type="hidden" name="type" value="2">
                             <input type="submit" class="btn btn-primary" name="submit" value="pref">
                             <input type="submit" class="btn btn-primary" name="submit" value="deteste">
-                            </form>
-                            <?php
+                        </form>
+                        <?php
                             }
                           }
                             ?>

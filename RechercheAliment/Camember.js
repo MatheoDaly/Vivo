@@ -10,6 +10,7 @@ $(document).ready(function () {
     $.post('communicationGraphique.php', {
         today: 1
     }, function (data) {
+        alert(data);
         if (data[0] != "[" || data[(data.length - 1)] != "]") {
             $("#graph").remove();
         } else {

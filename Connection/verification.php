@@ -22,7 +22,6 @@ if(isset($_POST['email'])
             $_SESSION['profil']=array('ID'=>$Profil['id'], 'prenom'=>$Profil['prenom'], 'mail'=>$Profil['email'], 'poids'=>$Profil['poids'], 'taille'=>$Profil['taille'], 'user'=>$Profil['utilisateur'],'genre'=>$Profil['genre'], 'mdp'=>$Profil['mdp'], 'photo'=>'NoPic', 'actualisation'=>$Profil['DateActue'],'NiveauSportif'=>$Profil['NiveauSportif']);
         }
             setcookie('mdp', $_POST['mdp'], time()*(3600*24*24));
-        
         echo 'Connecter';
             
         } else {
