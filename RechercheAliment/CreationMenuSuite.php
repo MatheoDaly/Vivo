@@ -190,8 +190,6 @@ session_start();
           Recette
           <input type="radio" name="type" value="Recette">
           <br />
-          Afficher toutes les recettes
-          <input type="radio" name="type" value="AllRecettes">
           <p>Options de recherche : </p>
           <label class="form-ckeck-label" for="popularite">Popularité : </label>
           <input class="form-check-label" type="radio" name="option" id="popularite" value="Popularité" checked>
@@ -382,87 +380,6 @@ session_start();
       }
       //  DEPLACEMENT DE CHOIX_ALIMENT.php
 
-        
-         elseif (isset($_GET['submit1']) && ($_GET['type']=='AllRecette' && isset($_GET['Menu']))) {
-          echo($_GET['Menu']);
-        if(empty($_GET['Menu'])){
-          echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
-        }else {
-          $input=$_GET['Menu'];
-          //$input = preg_replace("#[^0-9a-z]#i","",$input);
-          $reponse = $bd->query("SELECT nom FROM recette_plat");
-          if ($_GET['option']== "Lipide"){
-            $reponse = $bd->query("SELECT nom FROM recette_plat ORDER BY protéines");
-          }elseif ($_GET['option']== "Calorie") {
-            $reponse = $bd->query("SELECT nom FROM recette_plat ORDER BY kcal");
-          }
-
-
-
-
-
-
-          $_SESSION['Rec_Plat']=array();
-
-          //  DEPLACEMENT DE CHOIX_ALIMENT.php
-          $bd = getBD();
-          if(isset($_GET['submit1']) || isset($_GET['Menu']) ){
-
-            if(empty($_GET['Menu'])){
-              echo('<meta http-equiv="refresh" content="0;URL=CreationMenuSuite.php">');
-            }else {
-              $input=$_GET['Menu'];
-              //$input = preg_replace("#[^0-9a-z]#i","",$input);
-              $reponse = $bd->query( "SELECT * FROM recette_plat" );
-
-
-
-              if ($_GET['option']== "Lipide"){
-                $reponse = $bd->query("SELECT * FROM recette_plat ORDER BY protéines");
-              }else if ($_GET['option']== "Calorie") {
-                $reponse = $bd->query("SELECT * FROM recette_plat WHERE ORDER BY kcal");
-              }
-
-              if(!isset($_SESSION['Rec_Plat'])){
-                $_SESSION['Rec_Plat'] = array();
-              }
-            }
-
-            while($result = $reponse->fetch()){
-              echo '<div class="row"><div class="col-6">';
-              echo('<form method="GET" action="test.php">');
-              echo('<div class="form-group col-12 col-sm-10 border border-warning p-2 rounded">');
-              echo($result['nom']);
-              echo('<br />');
-              echo('<div class="rechAlim">');
-              echo('<input type="hidden" name="id_aliment" value="');
-              $a = $result['Id_Recette'];
-              echo($a);
-              echo('">');
-              echo('<input type="hidden" name="nom_aliment" value="');
-              $nom = $result['nom'];
-              echo($nom);
-              echo('">');
-              echo('<input type="number" class="form-control" placeholder="Combien en voulez-vous ?" name="nbAl">');
-              echo('<input type="submit" class="btn btn-primary" name="choix" value="Choisir">');
-              echo('</div></div>');
-              echo('</form>');
-              echo'</form></div>';
-              echo '<div class="col-5">';
-              echo('<form method="GET" action="page_recette.php">');
-              echo('<input type="submit" class="btn btn-primary" name="choix" value="Voir recette">');
-              echo('<input type="hidden" name="id_aliment" value="');
-              echo($a);
-              echo('">');
-              echo('</form></diV></div>');
-            }
-            $reponse-> closeCursor();
-          }
-
-          //  DEPLACEMENT DE CHOIX_ALIMENT.php
-
-        }
-      }
 
       ?>
     </div>
