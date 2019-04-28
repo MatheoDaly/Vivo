@@ -251,12 +251,14 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <div class="row">
                     <?php } ?>
                     <div class="col-12 col-lg-6">
-                        <h3 class="text-center" style="text-decoration:underline; Color:blue;">
+                       <div class="p-2 m-2 rounded" style="background-image: linear-gradient(to bottom right, cyan, grey);">
+                        <h3 class="text-center">
                             <?php echo $ligne['Date']; ?>
 
                             <?php $req2 = $BD->query("SELECT DISTINCT Repas from historique_aliment where ID_Profil=".$Profil['ID']." AND Date='".$ligne['Date']."' ORDER BY Repas");?>
 
                         </h3>
+                        </div>
                         <div class="row">
                             <?php while($ligne2= $req2->fetch()){ ?>
                             <div class="col-12 col-lg-6">
