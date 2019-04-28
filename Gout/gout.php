@@ -152,7 +152,7 @@ if(isset($_GET['submit'])){
         <div class="row">
             <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded">
                 <div>
-                    <h1>Mes regimes</h1>
+                    <h1>Mes régimes</h1>
 
                     <form method="get" action="Gout.php">
                     <?php $req=$BD->query("SELECT * FROM regime WHERE id in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
@@ -169,7 +169,7 @@ if(isset($_GET['submit'])){
 
                 </div>
                 <div>
-                    <h1>Aliment Préférét</h1>
+                    <h1>Aliment Préférés</h1>
 
                     <form method="get" action="Gout.php">
                     <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=0)");
@@ -186,7 +186,7 @@ if(isset($_GET['submit'])){
 
                 </div>
                 <div>
-                    <h1>Aliment detesté</h1>
+                    <h1>Aliment detestés</h1>
 
                     <form method="get" action="Gout.php">
                     <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preference WHERE id_Profil=1 and pref=1)");
@@ -205,7 +205,7 @@ if(isset($_GET['submit'])){
             </div>
             <div class="col-10 col-lg-6 bg-dark mx-auto text-light rounded"    >
                 <div>
-                    <h1>Regime disponible</h1>
+                    <h1>Régimes disponibles</h1>
                     <form method="get" action="Gout.php">
                     <?php $req=$BD->query("SELECT * FROM regime WHERE id NOT in (SELECT id_Regime FROM regime_profil WHERE id_profil=1)");
                     $i=0;
@@ -220,7 +220,7 @@ if(isset($_GET['submit'])){
                     </form>
                 </div>
                 <div>
-                    <h1>Aliment disponible</h1>
+                    <h1>Aliments disponibles</h1>
                     <div class="partie_recherche">
                     <form method="get" action="Gout.php" autocomplete="off" id="optionForm">
                       <br/>
