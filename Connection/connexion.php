@@ -51,8 +51,11 @@
 </header>
 
 <body>
-    <h1 style="text-align:center;">Connection</h1>
-    <div id="Table" class="container rounded mx-auto">
+   <div class="text-center">
+       <img src="../Image/Icon/icons8-connexion-96.png"/>
+   </div>
+    <h1 style="text-align:center;">Connexion</h1>
+    <div class="container rounded mx-auto" style="background-color: rgba(0, 0, 0, 0.6);">
         <br>
         <div class="container bg-white rounded text-center">
             <form class="row p-2">
@@ -64,7 +67,7 @@
                             Mail :
                         </strong>
                     </p>
-                    <input class="col-12 rounded" type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" />
+                    <input class="col-12 rounded form-control" type="email" id="m" name="email" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" />
                 </div>
                 <div class="col-6 rounded">
                     <p class="col-12">
@@ -72,7 +75,7 @@
                             Mot de passe :
                         </strong>
                     </p>
-                    <input class="col-12 rounded" type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}?>" />
+                    <input class="col-12 rounded form-control" type="password" id="mdp" name="mdp" value="<?php if(isset($_COOKIE['mdp'])){echo $_COOKIE['mdp'];}?>" />
                 </div>
 
                 <p class="col-12 m-2">
