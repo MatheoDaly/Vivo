@@ -106,7 +106,7 @@ session_start();
   ?>
     </div>
     
-<div class="row text-center p-3 mx-auto">
+<div class="row text-center p-3 mx-auto text-light" style="background-color: rgba(0, 0, 0, 0.6);">
     <p>La recette de vos rêves n'existe pas ? <a href="rechercheAliment.php"> créez votre recette</a><br/>
     Il n'est jamais trop tard pour revenir en arrière, <a href='tempo_stop.php'>Annulez votre création</a></p>
   <?php
