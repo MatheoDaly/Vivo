@@ -61,7 +61,7 @@
             echo '</div>';
         echo '</a>';
         }else{
-            echo '<a href="Connection/connexion.php">';
+            echo '<a href="Connection/connexion.php" style="text-decoration:none;">';
             echo '<div class="row padding-left">';
             echo '<img src="Image/avatar-1295406_640.png" class="img-responsive" style="margin-top: 50px;" />';
             echo '<h3 style="color: white; margin-top: 50px">Connectez vous à votre profil</h3>';
@@ -84,24 +84,26 @@
             </div>
         </div>
         <div class="row justify-content-sm-center">
-            <div class="col-6">
+            <a href ="Inscription/inscription.php" style="text-decoration:none;"><div class="col-6 padding-right">
                 <h3 style="text-align: center; color: white">Inscrivez-vous dès maintenant !</h3>
                 <h4 style="text-align: center; color: white">Une inscription rapide et garantie sans spam</h4>
                 <h4 style="text-align: center; color: white">Commencez votre nouvelle vie dès aujourd'hui !</h4>
                 <img src="Image/sign-up-1922238_1280.png" class="img-responsive center-div" style="width: 100%" />
-            </div>
+                </div></a>
         </div>
     </div>
     <div class="container-fluid" style="background-image:linear-gradient(#10C4DB, #09B0C2); width: 100%; margin: 0;">
+        <a href="RechercheAliment/Choix_Menu.php" style="text-decoration:none;">
         <div class="row justify-content-end">
-            <div class="col-sm-6 col-xs-12 col-md-3 padding-right">
+           <div class="col-sm-6 col-xs-12 col-md-3 padding-right">
                 <img src="Image/list-2389219_640.png" class="img-responsive center-div" style="margin-top: 100px; width: 70%" />
                 <h3 style="text-align: center">Des menus personnalisés</h3>
                 <h4 style="text-align: center; color: white">Des menus personnalisables pour chacuns !</h4>
                 <h4 style="text-align: center; color: white">Choisissez vos préférences alimentaires !</h4>
                 <h4 style="text-align: center; color: white">Choisissez vos objectifs de poids ! </h4>
             </div>
-        </div>
+            </div></a>
+            <a href ="RechercheAliment/CreationMenu.php" style="text-decoration:none;">
         <div class="row justify-content-start padding-left">
             <div class="col-sm-6 col-xs-12 col-md-3">
                 <img src="Image/battle-3550533_640.png" class="img-responsive center-div" style="width: 70%" />
@@ -110,7 +112,7 @@
                 <h4 style="text-align: center; color: white">Calories automatiquement calculées !</h4>
                 <h4 style="text-align: center; color: white">Macro-nutriments journaliers mis à jour ! </h4>
             </div>
-        </div>
+                </div></a>
     </div>
     <div class="container-fluid" style="background-color: #12CBE4; width: 100%; margin: 0;">
         <div class="row justify-content-center">
