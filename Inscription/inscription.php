@@ -49,11 +49,13 @@
         </div>
     </nav>
 </header>
-
+<div class="text-center">
+    <img src="../Image/Icon/icons8-inscription-96.png"/>
+</div>
 <h1 style="text-align:center;">Inscription</h1>
 
 <body>
-    <div class="d-flex flex-column rounded bg-dark text-dark" style="margin: 50px; padding-top: 25px; padding-bottom: 100px;">
+    <div class="d-flex flex-column rounded text-dark" style="margin: 50px; padding-top: 25px; padding-bottom: 100px; background-color: rgba(0, 0, 0, 0.6);">
         <hr>
         <div class="col-10 bg-light mx-auto ">
             <form method="post" action="../Profil/Profil.php">
