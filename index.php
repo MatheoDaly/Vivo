@@ -19,10 +19,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
+               <li class="nav-item">
+                    <a class="nav-link" href="index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Article/Article.php">Nos articles</a>
+                </li>
+                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="Profil/Profil.php">Profil</a>
                 </li>
-                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="Statistique/Statistique.php">Statistique</a>
                 </li>
@@ -37,9 +43,7 @@
                     <a class="nav-link" href="Connection/connexion.php">Connexion</a>
                 </li>
                 <?php } ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="Article/Article.php">Nos articles</a>
-                </li>
+                
 
             </ul>
             <span class="navbar-text">
