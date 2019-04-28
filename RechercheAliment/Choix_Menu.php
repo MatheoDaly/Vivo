@@ -31,23 +31,12 @@ include_once "Fonctions_alim.php";
                 <li class="nav-item">
                     <a class="nav-link" href="../Article/Article.php">Nos articles</a>
                 </li>
-                <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
-                </li>
-                <?php } else { ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Inscription/inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="../Connection/connexion.php">Connexion</a>
-                </li>
-                <?php } ?>
-                
-
+                </li>      
             </ul>
             <span class="navbar-text">
                 Pour une bonne santé vivez VIVO !
