@@ -91,15 +91,18 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
             </div>
         </div>
-
+        <br>
         <!-- ################ Modification profil ############### !-->
         <?php 
         if(isset($_SESSION['profil']) || ($testGene)){
         ?>
         <div id="ModificationProfil">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
-                Modifiez mon profil
-            </button>
+            <div class="row">
+                <button class="btn btn-primary col-6" type="button" data-toggle="collapse" data-target="#ZoneModif" aria-expanded="false" aria-controls="ZoneModif">
+                    Modifiez mon profil
+                </button>
+                <button class="btn btn-primary col-6"><a href="../Gout/gout.php" class="text-white">Accéder à mes préférences</a></button>
+            </div>
             <div id="ZoneModif" class="collapse">
                 <div class="card card-body">
                     <form method="post" id="TelePhoto" action="Profil.php" enctype="multipart/form-data">
@@ -219,19 +222,16 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 </div>
             </div>
         </div>
-        <form action="../Gout/gout.php">
-            <button class="btn btn-primary">Accéder à mes préférences</button>
-        </form>
 
         <!--  Intermediare !-->
         <?php if(isset($_SESSION['profil']) || ($testGene)){ ?>
-        <div class="col-12">
+        <div class="row">
             <button class="col-6 btn btn-primary">
                 <a class="text-white" href="../Statistique/Statistique.php">
                     Vue sur ma consommation
                 </a>
             </button>
-            <button class="col-5 btn btn-primary">
+            <button class="col-6 btn btn-primary">
                 <a class="text-white" href="../RechercheAliment/Choix_Menu.php">
                     Crée son menu ?
                 </a>
