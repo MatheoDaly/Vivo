@@ -200,6 +200,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 </div>
             </div>
         </div>
+        <form action="../Gout/gout.php">
+            <button class="btn btn-primary">Accéder à mes préférences</button>
+        </form>
 
         <!--  Intermediare !-->
         <?php if(isset($_SESSION['profil']) || ($testGene)){ ?>
