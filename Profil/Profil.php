@@ -251,7 +251,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                 <div class="row">
                     <?php } ?>
                     <div class="col-12 col-lg-6">
-                       <div class="p-2 m-2 rounded" style="background-image: linear-gradient(to bottom right, cyan, grey);">
+                       <div class="p-2 m-2 rounded text-light" style="background-image: linear-gradient(to bottom right, cyan, blue);">
                         <h3 class="text-center">
                             <?php echo $ligne['Date']; ?>
 
@@ -262,7 +262,8 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                         <div class="row">
                             <?php while($ligne2= $req2->fetch()){ ?>
                             <div class="col-12 col-lg-6">
-                                <h4 class="text-center" style="text-decoration:underline;">
+                               <div class="border border-primary rounded">
+                                <h4 class="text-center">
                                     <?php switch($ligne2['Repas']){
                                             case 9: echo 'Matin'; break;
                                             case 13: echo "Midi"; break;
@@ -270,7 +271,8 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                             default: echo "Repas de ".$ligne2['Repas']." heures"; break;} 
                                         ?>
                                 </h4>
-                                <ul class="liste">
+                                </div>
+                                <ul class="liste" style="list-style-image: url('../Image/Icon/icons8-repas-48.png')">
                                     <?php
                                     
                                     $req1=$BD->query("SELECT aliments.alim_nom_fr AS 'Nom', quantite 
