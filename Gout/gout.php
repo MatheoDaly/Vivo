@@ -31,11 +31,11 @@ if(isset($_GET['submit'])){
                 if(isset($_GET[$j])){
                     $pref=0;
                     $req=$BD->query("INSERT INTO preferance (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
+                     $req->closeCursor();
                     $fin=true;
                 }
                 $j+=1;
             }
-            $req->closeCursor();
             $i+=1;
         }
     }
@@ -48,11 +48,11 @@ if(isset($_GET['submit'])){
                 if(isset($_GET[$j])){
                     $pref=1;
                     $req=$BD->query("INSERT INTO preferance (`id_Profil`, `id_Aliment`, pref) VALUES (".$Profil['ID'].", '".$_GET[$j]."', ".$pref.")");
+                    $req->closeCursor();
                     $fin=true;
                 }
                 $j+=1;
             }
-            $req->closeCursor();
             $i+=1;
         }
     }
@@ -139,25 +139,8 @@ if(isset($_GET['submit'])){
                     <a class="nav-link" href="../Profil/Profil.php">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
-                </li>
-<<<<<<< HEAD
-                <?php } else { ?>
-                <li class="nav-item">
-                    <a class="nav-link active" href="../Inscription/inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Connection/connexion.php">Connexion</a>
-                </li>
-                <?php } ?>
-
-=======
-                
->>>>>>> refs/remotes/origin/master
-
+               </li>
             </ul>
             <span class="navbar-text">
                 Pour une bonne santé vivez VIVO !
@@ -193,7 +176,7 @@ if(isset($_GET['submit'])){
                     <h1>Aliment Préférés</h1>
 
                     <form method="get" action="Gout.php">
-                        <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=1 and pref=0)");
+                        <?php $req=$BD->query("SELECT alim_code,alim_nom_fr FROM aliments WHERE alim_code in (SELECT id_Aliment FROM preferance WHERE id_Profil=".$Profil['ID']." and pref=0)");
                     $i=0;
                     while($ligne = $req->fetch()){
                         echo '<p><input type="checkbox" name="'.$i.'" value="'.$ligne['alim_code'].'"> '.$ligne['alim_nom_fr'].'</p>'."\n";
