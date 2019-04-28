@@ -31,9 +31,6 @@
                     <a class="nav-link" href="Profil/Profil.php">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Statistique/Statistique.php">Statistique</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" id="disconnect" href="Deconnexion.php">Deconnexion</a>
                 </li>
                 <?php } else { ?>
