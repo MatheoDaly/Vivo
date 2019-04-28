@@ -225,8 +225,9 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
     <!-- Programation des menu !-->
     <div id="ProgMenu" class=" rounded row d-flex justify-content-between">
-        <div class=" col-10 col-lg-6 bg-dark rounded" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
+        <div class=" col-10 col-lg-6 bg-dark rounded text-center" style="margin: 50px; padding-top: 25px; padding-bottom: 25px;">
             <h1 class="text-light text-center border border-primary">Menu</h1>
+            <img src="../Image/Icon/icons8-calendrier-64.png"/>
             <div style="height: 500px; overflow-y: scroll;">
             <div class="col-10 bg-light mx-auto rounded ">
                 <!-- Automatiser la gestion du tableau!-->
@@ -298,9 +299,12 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
 
         </div>
         <?php if($entre){ ?>
-        <div class="col-10 col-lg-4 bg-light" style="margin: 25px;">
+        <div class="col-10 col-lg-4 bg-light  rounded" style="margin: 50px; height: 700px; overflow-y: scroll;">
+          <div class="text-center">
+           <img src="../Image/Icon/icons8-liste-64.png"/>
+            </div>
             <h3 class="text-center">Liste de courses</h3>
-            <ul>
+            <ul style="list-style-image: url('../Image/Icon/icons8-pomme-48.png')">
                 <?php 
                 $req = $BD->query("SELECT aliments.alim_nom_fr AS 'Nom', SUM(quantite) AS 'Quant'
                                         FROM historique_aliment
@@ -309,7 +313,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
                                         ID_Profil = ".$Profil['ID']." GROUP BY Nom
                                         ");
                 while($ligne = $req->fetch()){
-                    echo "<li>".$ligne["Nom"]." :".$ligne["Quant"]." x100 grammes</li>";
+                    echo "<li class = 'm-1'>".$ligne["Nom"]." :".$ligne["Quant"]." x100 grammes</li>";
                 }
                 $req->closeCursor();
                 ?>
