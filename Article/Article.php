@@ -17,7 +17,8 @@ $BD=GetBD();
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Profil/Profil.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- adapatation pour internet exploreur car graphique !-->
-    <title>Article</title>
+    <title>Vivo</title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
 
 </head>
 <header>
