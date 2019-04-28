@@ -10,6 +10,7 @@
     <link href="Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="index.css" rel="stylesheet" type="text/css">
     <title>Vivo</title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
