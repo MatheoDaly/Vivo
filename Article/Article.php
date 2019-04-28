@@ -8,6 +8,7 @@
 
 include('../Outil/Php/AccesBD.php');
 $BD=GetBD();
+include("../Outil/IsTest.php");
 ?>
 <!Doctype HTML>
 <html>
@@ -38,9 +39,6 @@ $BD=GetBD();
                 <?php if(isset($_SESSION['profil']) && !$testGene){ ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="../Profil/Profil.php">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Statistique/Statistique.php">Statistique</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="disconnect" href="../Deconnexion.php">Deconnexion</a>
