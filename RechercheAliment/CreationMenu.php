@@ -10,6 +10,7 @@ session_start();
     <meta charset="utf-8">
     <link rel="stylesheet" href="Style_RechAl.css" type="text/css">
     <title>Creation de menu</title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
