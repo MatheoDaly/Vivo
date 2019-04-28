@@ -32,6 +32,7 @@ if(isset($_POST['change']) && $_POST['change']=='yes'){
     <link href="../Outil/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="Profil.css" rel="stylesheet">
     <title><?php echo $Profil["prenom"]; ?></title>
+    <link rel="icon" type="image/png" href="../Image/Icon/icons8-aliments-sains-96.png" />
 
 
 </head>
