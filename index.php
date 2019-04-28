@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Accueil</a>
+                    <a class="nav-link active" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Article/Article.php">Nos articles</a>
